@@ -15,10 +15,12 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "clsx": "^1.1.1",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.16",

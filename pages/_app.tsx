@@ -5,8 +5,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../src/createEmotionCache";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
+import { PaletteMode } from "@mui/material";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -16,30 +16,24 @@ export const ColorModeContext = React.createContext({
 
 export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const [mode, setMode] = React.useState<"light" | "dark">("light");
-
+  const [mode, setMode] = React.useState<PaletteMode>("light");
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => {
-          console.log(prevMode);
-          return prevMode === "light" ? "dark" : "light";
-        });
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
     []
   );
 
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? "dark" : mode,
-        },
-      }),
-    [mode]
-  );
+  const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
+    palette: { mode },
+    typography: {
+      fontFamily: ["Montserrat", "sans-serif"].join(","),
+    },
+  });
+
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -48,6 +42,7 @@ export default function MyApp(props: any) {
       </Head>
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
       </ColorModeContext.Provider>
