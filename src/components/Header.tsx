@@ -28,23 +28,23 @@ export default function Header() {
       <div style={{ flexGrow: 1 }} />
       <Stack direction="row" gap={3} alignItems={"center"}>
         <Stack direction="row" gap={6} alignItems={"center"}>
-          <Link href={"#Brands"} color="inherit" hoverStyle>
+          <Link href={"/brands"} color="inherit" hoverStyle>
             Brands
           </Link>
           <Link href={"#Drops"} color="inherit" hoverStyle>
             Drops
           </Link>
-          <Link href={"#Resources"} color="inherit" hoverStyle>
+          <Link href={"resources"} color="inherit" hoverStyle>
             Resources
           </Link>
         </Stack>
-        <IconButton sx={{ ml: "16px" }} size="small">
+        <IconButton sx={{ ml: "16px" }} size="small" href="/wallets">
           <BsWallet />
         </IconButton>
-        <IconButton size="small">
+        <IconButton size="small" href="/closet">
           <BsDoorOpen />
         </IconButton>
-        <IconButton size="small">
+        <IconButton size="small" href="/bag">
           <BsHandbag />
         </IconButton>
         <IconButton size="small">
