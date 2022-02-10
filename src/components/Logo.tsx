@@ -16,8 +16,8 @@ const Logo: React.FC<Props> = (props) => {
           src="/logo.svg"
           alt="Fashion-verse logo"
           layout="fixed"
-          height="32px"
-          width="32px"
+          height={props.size}
+          width={props.size}
         />
         {props.withText && props.children}
       </Box>

@@ -1,5 +1,6 @@
 import Logo from "../components/Logo";
 import Link from "../components/Link";
+import { styled } from "@mui/system";
 import {
   Container,
   Grid,
@@ -20,6 +21,20 @@ import {
   BsYoutube,
 } from "react-icons/bs";
 
+const NavIconButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === "dark"
+      ? "rgba(255,255,255,0.08)"
+      : "rgba(0,0,0,0.04)",
+  padding: theme.spacing(1),
+  color: theme.palette.primary.main,
+}));
+
+const BlueAvatar = styled(Avatar)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: "white",
+}));
+
 export default function Footer() {
   return (
     <Container maxWidth="md">
@@ -33,7 +48,7 @@ export default function Footer() {
         </Grid>
         <Grid item xs={5}>
           <Stack>
-            <Typography variant="subtitle1">
+            <Typography variant="subtitle1" color="textSecondary">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
               modi incidunt molestiae, debitis quisquam culpa veritatis magni
               sequi id, harum quos commodi!
@@ -43,9 +58,9 @@ export default function Footer() {
             >
               <ListItem disableGutters>
                 <ListItemAvatar>
-                  <Avatar>
+                  <BlueAvatar>
                     <BsEnvelope />
-                  </Avatar>
+                  </BlueAvatar>
                 </ListItemAvatar>
                 <ListItemText
                   primary="Support email"
@@ -55,9 +70,9 @@ export default function Footer() {
               </ListItem>
               <ListItem disableGutters>
                 <ListItemAvatar>
-                  <Avatar>
+                  <BlueAvatar>
                     <BsGeoAlt />
-                  </Avatar>
+                  </BlueAvatar>
                 </ListItemAvatar>
                 <ListItemText
                   primary="Company address"
@@ -69,7 +84,13 @@ export default function Footer() {
           </Stack>
         </Grid>
         <Grid item xs={2}>
-          <Typography variant="h6">About</Typography>
+          <Typography
+            variant="h6"
+            color="textSecondary"
+            sx={{ fontWeight: 600 }}
+          >
+            About
+          </Typography>
           <List dense={true}>
             {ABOUT_LINKS.map(({ id, label, href }) => (
               <ListItem key={id} disableGutters>
@@ -84,7 +105,13 @@ export default function Footer() {
           </List>
         </Grid>
         <Grid item xs={2}>
-          <Typography variant="h6">Support</Typography>
+          <Typography
+            variant="h6"
+            color="textSecondary"
+            sx={{ fontWeight: 600 }}
+          >
+            Support
+          </Typography>
           <List dense={true}>
             {SUPPORT_LINKS.map(({ id, label, href }) => (
               <ListItem key={id} disableGutters>
@@ -103,22 +130,22 @@ export default function Footer() {
           container
           justifyContent={"space-between"}
           alignItems={"center"}
-          sx={{ borderTop: "2px solid #ccc", mt: 2, pt: 2 }}
+          sx={{ borderTop: "2px solid #ccc", my: 2, pt: 2 }}
         >
           <Grid item>
             <Stack direction="row" gap={2}>
-              <IconButton size="small" href="#">
+              <NavIconButton size="small">
                 <BsTwitter />
-              </IconButton>
-              <IconButton size="small" href="#">
+              </NavIconButton>
+              <NavIconButton size="small">
                 <BsInstagram />
-              </IconButton>
-              <IconButton size="small" href="#">
+              </NavIconButton>
+              <NavIconButton size="small">
                 <BsYoutube />
-              </IconButton>
+              </NavIconButton>
             </Stack>
           </Grid>
-          <Grid item sx={{ mb: 4 }}>
+          <Grid item>
             <Typography variant="caption">
               {"© " + new Date().getFullYear() + ". All rights reserved"}
             </Typography>

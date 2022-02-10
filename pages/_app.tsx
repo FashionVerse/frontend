@@ -20,7 +20,7 @@ export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   let themeMode: PaletteMode = "dark";
   if (typeof window !== "undefined") {
-    let themeMode = localStorage.getItem("THEME_MODE");
+    themeMode = localStorage.getItem("THEME_MODE") as PaletteMode;
   }
   const [mode, setMode] = React.useState<PaletteMode>(themeMode);
   const colorMode = React.useMemo(
@@ -37,7 +37,15 @@ export default function MyApp(props: any) {
   }, [mode]);
 
   const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
-    palette: { mode },
+    palette: {
+      mode,
+      primary: {
+        main: "#22CAFF",
+      },
+      secondary: {
+        main: "#0266C1",
+      },
+    },
     typography: {
       fontFamily: ["Montserrat", "sans-serif"].join(","),
       button: {

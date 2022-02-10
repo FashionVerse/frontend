@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Stack, Typography } from "@mui/material";
+import { Stack, styled, Typography } from "@mui/material";
 import { ColorModeContext } from "../../pages/_app";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -14,6 +14,15 @@ import {
 import Logo from "./Logo";
 import Link from "./Link";
 
+const NavIconButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === "dark"
+      ? "rgba(255,255,255,0.08)"
+      : "rgba(0,0,0,0.04)",
+  padding: theme.spacing(1),
+  color: theme.palette.primary.main,
+}));
+
 export default function Header() {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
@@ -21,7 +30,7 @@ export default function Header() {
   return (
     <Stack direction="row" alignItems="center" sx={{ mt: 3 }}>
       <Logo size="48px" withText>
-        <Typography sx={{ ml: "12px" }} variant="h6">
+        <Typography sx={{ ml: "12px" }} variant="h5">
           <strong>FASHION</strong>VERSE
         </Typography>
       </Logo>
@@ -29,34 +38,41 @@ export default function Header() {
       <Stack direction="row" gap={3} alignItems={"center"}>
         <Stack direction="row" gap={6} alignItems={"center"}>
           <Link href={"/brands"} color="inherit" hoverStyle>
-            Brands
+            <Typography variant="h6">Brands</Typography>
           </Link>
           <Link href={"#Drops"} color="inherit" hoverStyle>
-            Drops
+            <Typography variant="h6">Drops</Typography>
           </Link>
-          <Link href={"resources"} color="inherit" hoverStyle>
-            Resources
+          <Link href={"/resources"} color="inherit" hoverStyle>
+            <Typography variant="h6">Resources</Typography>
           </Link>
         </Stack>
-        <IconButton sx={{ ml: "16px" }} size="small" href="/wallets">
-          <BsWallet />
-        </IconButton>
-        <IconButton size="small" href="/closet">
-          <BsDoorOpen />
-        </IconButton>
-        <IconButton size="small" href="/bag">
-          <BsHandbag />
-        </IconButton>
-        <IconButton size="small">
+        <Link href={"/wallets"} color="inherit" noLinkStyle>
+          <NavIconButton sx={{ ml: "16px" }} size="small">
+            <BsWallet />
+          </NavIconButton>
+        </Link>
+        <Link href={"#closet"} color="inherit" noLinkStyle>
+          <NavIconButton size="small">
+            <BsDoorOpen />
+          </NavIconButton>
+        </Link>
+        <Link href={"/bag"} color="inherit" noLinkStyle>
+          <NavIconButton size="small">
+            <BsHandbag />
+          </NavIconButton>
+        </Link>
+
+        <NavIconButton size="small">
           <BsHeart />
-        </IconButton>
-        <IconButton onClick={colorMode.toggleColorMode} size="small">
+        </NavIconButton>
+        <NavIconButton onClick={colorMode.toggleColorMode} size="small">
           {theme.palette.mode === "dark" ? (
             <BsBrightnessHigh />
           ) : (
             <BsMoonStars />
           )}
-        </IconButton>
+        </NavIconButton>
       </Stack>
     </Stack>
   );

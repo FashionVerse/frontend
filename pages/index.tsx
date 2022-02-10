@@ -10,13 +10,18 @@ import {
   Stack,
   Typography,
   Grid,
-  Paper,
   IconButton,
 } from "@mui/material";
 import { BiRocket } from "react-icons/bi";
 import Slider from "../src/components/Slider";
 import GridCard, { GridCardProps } from "../src/components/GridCard";
 import { BsDiscord, BsTwitter } from "react-icons/bs";
+import { styled } from "@mui/system";
+
+const GradientButton = styled(Button)(({ theme }) => ({
+  background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
+  color: "white",
+}));
 
 export default function Index() {
   return (
@@ -41,15 +46,19 @@ export default function Index() {
             </Typography>
             <i>COLLECTION</i>
           </Typography>
-          <Typography sx={{ mt: 3 }} variant="h4" align="center">
-            Build your first digital <br /> wardrobe
+          <Typography
+            sx={{ mt: 3, fontSize: "2.5rem" }}
+            variant="h4"
+            align="center"
+          >
+            Build your First Digital <br /> Wardrobe
           </Typography>
         </div>
         <Box
           sx={{
             width: "50%",
-            minWIdth: "240px",
-            maxWidth: "400px",
+            minWidth: "300px",
+            maxWidth: "540px",
             aspectRatio: "1/1",
             position: "relative",
             display: "flex",
@@ -69,7 +78,7 @@ export default function Index() {
       {/* Drops */}
       <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
         <Typography variant="h3" color="primary" component="span">
-          LATEST&nbsp;
+          <b>LATEST</b>&nbsp;
         </Typography>
         DROPS
       </Typography>
@@ -83,34 +92,36 @@ export default function Index() {
         justifyContent="space-between"
         alignItems="center"
         direction={"row"}
-        sx={{ margin: "128px 64px 80px" }}
+        sx={{ margin: "128px 64px 64px" }}
       >
         <Typography variant="h3">
           OUR PARTNER&nbsp;
           <Typography variant="h3" color="primary" component="span">
-            BRANDS
+            <b>BRANDS</b>
           </Typography>
         </Typography>
-        <Button
+        <GradientButton
           variant="contained"
           color="primary"
           size="large"
-          sx={{ borderRadius: "12px", px: "36px", py: "16px" }}
+          sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
           startIcon={<BiRocket />}
         >
-          <Typography variant="h6">Explore All</Typography>
-        </Button>
+          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+            Explore All
+          </Typography>
+        </GradientButton>
       </Stack>
       <Slider
         slideArray={DROPS.map((props) => (
-          <GridCard {...props} key={props.id} />
+          <GridCard {...props} key={props.id + "-ahsdkh"} />
         ))}
       />
       {/* Advisors */}
       <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
         OUR&nbsp;
         <Typography variant="h3" color="primary" component="span">
-          ADVISORS
+          <b>ADVISORS</b>
         </Typography>
       </Typography>
       <Grid container justifyContent="space-evenly" spacing={12}>
@@ -135,10 +146,15 @@ export default function Index() {
       </Grid>
       {/* Community */}
       <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
-        <Typography variant="h3" color="primary" component="span">
-          JOIN&nbsp;
+        <Typography
+          variant="h3"
+          color="primary"
+          component="span"
+          sx={{ fontWeight: 300 }}
+        >
+          <b>JOIN</b>&nbsp;
         </Typography>
-        THE <b>FV</b>COMMUNITY
+        <b>FV</b>COMMUNITY
       </Typography>
       <Stack
         direction="row"
@@ -148,10 +164,10 @@ export default function Index() {
         sx={{ mb: 20 }}
       >
         <IconButton size="large">
-          <BsTwitter fontSize={"2em"} />
+          <BsTwitter fontSize={"2em"} color="#1DA1F2" />
         </IconButton>
         <IconButton size="large">
-          <BsDiscord fontSize={"2em"} />
+          <BsDiscord fontSize={"2em"} color="#738ADB" />
         </IconButton>
       </Stack>
       <Footer />
@@ -163,8 +179,86 @@ const DROPS: GridCardProps[] = [
   {
     id: "abc123",
     title: "STREET WEAR",
-    subtitle: "caption here",
-    avatarSrc: "/logo.svg",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "h7jaus9",
+    title: "STREET WEAR",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "7haj8ka",
+    title: "STREET WEAR",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "h8ak9ja",
+    title: "STREET WEAR",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
       alt: "grid image",

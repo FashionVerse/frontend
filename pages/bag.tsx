@@ -25,7 +25,7 @@ export default function Bag() {
           mb: 10,
         }}
       >
-        CHECKOUT
+        <b>CHECKOUT</b>
       </Typography>
       <Container maxWidth="md">
         <Paper

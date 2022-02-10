@@ -2,6 +2,19 @@ import * as React from "react";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { Button, Container, Typography, Grid, Paper } from "@mui/material";
+import { styled } from "@mui/system";
+
+const GradientButton = styled(Button)(({ theme }) => ({
+  background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
+  color: "white",
+  borderRadius: "999px",
+  minWidth: "220px",
+}));
+
+const BlueShadowPaper = styled(Paper)(({ theme }) => ({
+  boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 50.3961px -50.3961px 50.3961px rgba(149, 149, 149, 0.095), inset -50.3961px 50.3961px 50.3961px rgba(255, 255, 255, 0.095)`,
+  background: theme.palette.mode === "dark" ? "#121212" : "#FFF",
+}));
 
 export default function Resources() {
   return (
@@ -13,12 +26,12 @@ export default function Resources() {
         color="primary"
         sx={{ mt: 16, mb: 10 }}
       >
-        RESOURCES
+        <b>RESOURCES</b>
       </Typography>
       <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
         {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
           <Grid item xs={12} sm={12} md={5} key={id}>
-            <Paper
+            <BlueShadowPaper
               elevation={8}
               sx={{
                 maxWidth: "360px",
@@ -31,21 +44,20 @@ export default function Resources() {
                 alignItems: "center",
               }}
             >
-              <Button
+              <GradientButton
                 href={href}
                 variant="contained"
                 color="primary"
                 size="large"
-                sx={{ borderRadius: "999px", px: "48px" }}
               >
                 <Typography variant="h6">
                   <b>{buttonText}</b>
                 </Typography>
-              </Button>
+              </GradientButton>
               <Typography variant="h6" align="center" sx={{ mt: 4 }}>
                 {description}
               </Typography>
-            </Paper>
+            </BlueShadowPaper>
           </Grid>
         ))}
       </Grid>
@@ -57,30 +69,28 @@ export default function Resources() {
 const RESOURCE_INFO = [
   {
     id: "ajaskas",
-    buttonText: "Get Started",
-    href: "/get-started",
+    buttonText: "Getting Started",
+    href: "/getting-started",
     description:
-      "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+      "Learn how to set up your wallet, browse through the platform, and purchase your first piece of digital clothing",
   },
   {
     id: "ajaskas",
-    buttonText: "Get Started",
+    buttonText: "Designer Collaborations",
     href: "/get-started",
     description:
-      "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+      "A fashion designer? Learn more about our collaboration policies and launch your digital brand with us!",
   },
   {
     id: "ajaskas",
-    buttonText: "Get Started",
+    buttonText: "About FashionVerse",
     href: "/get-started",
-    description:
-      "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+    description: "Find out more about our mission, roadmap, team, and progress",
   },
   {
     id: "ajaskas",
-    buttonText: "Get Started",
+    buttonText: "GENESIS COLLECTION",
     href: "/get-started",
-    description:
-      "lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
+    description: "Browse through the details of our genesis collection",
   },
 ];

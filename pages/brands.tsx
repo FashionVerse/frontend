@@ -14,7 +14,7 @@ export default function Brands() {
         color="primary"
         sx={{ mt: 16, mb: 10 }}
       >
-        BRANDS
+        <b>BRANDS</b>
       </Typography>
       <Grid container spacing={12} sx={{ mb: 16 }}>
         {BRANDS_DATA.map((props) => (
@@ -40,8 +40,8 @@ const BRANDS_DATA: GridCardProps[] = [
   {
     id: "abc123",
     title: "STREET WEAR",
-    subtitle: "caption here",
-    avatarSrc: "/logo.svg",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
       alt: "grid image",
@@ -64,10 +64,10 @@ const BRANDS_DATA: GridCardProps[] = [
     },
   },
   {
-    id: "uj71ha",
+    id: "h7jaus9",
     title: "STREET WEAR",
-    subtitle: "caption here",
-    avatarSrc: "/logo.svg",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
       alt: "grid image",
@@ -90,10 +90,10 @@ const BRANDS_DATA: GridCardProps[] = [
     },
   },
   {
-    id: "h7a9s",
+    id: "7haj8ka",
     title: "STREET WEAR",
-    subtitle: "caption here",
-    avatarSrc: "/logo.svg",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
       alt: "grid image",
@@ -116,36 +116,10 @@ const BRANDS_DATA: GridCardProps[] = [
     },
   },
   {
-    id: "0al7sh",
+    id: "h8ak9ja",
     title: "STREET WEAR",
-    subtitle: "caption here",
-    avatarSrc: "/logo.svg",
-    topLeftImage: {
-      src: "/3d.png",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "/3d.png",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "/3d.png",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "/3d.png",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "ha8jj38",
-    title: "STREET WEAR",
-    subtitle: "caption here",
-    avatarSrc: "/logo.svg",
+    subtitle: "CAPTION HERE",
+    avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
       alt: "grid image",

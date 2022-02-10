@@ -81,6 +81,19 @@ function Arrow(props: {
   onClick: (e: any) => void;
 }) {
   if (props.left) {
-    return <BsArrowLeftCircle fontSize="4em" onClick={props.onClick} />;
-  } else return <BsArrowRightCircle fontSize="4em" onClick={props.onClick} />;
+    return (
+      <BsArrowLeftCircle
+        fontSize="4em"
+        color="#22CAFF"
+        onClick={props.onClick}
+      />
+    );
+  } else
+    return (
+      <BsArrowRightCircle
+        fontSize="4em"
+        color="#22CAFF"
+        onClick={props.onClick}
+      />
+    );
 }

@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { BsHeart } from "react-icons/bs";
+import { styled, alpha, useTheme } from "@mui/system";
 
 type GridImageProps = {
   bgColor?: string;
@@ -31,6 +32,21 @@ export type GridCardProps = {
   id: string;
 };
 
+const GridCardContainer = styled(Paper)(({ theme }) => ({
+  width: "100%",
+  borderRadius: "18px",
+  padding: "12px",
+  paddingBottom: "0px",
+  background:
+    theme.palette.mode === "dark"
+      ? `rgba( 255, 255, 255, 0.2 )`
+      : alpha(theme.palette.primary.light, 0.2),
+  backdropFilter: `blur( 8px )`,
+  WebkitBackdropFilter: `blur( 8px )`,
+  marginTop: "12px",
+  marginBottom: "12px",
+}));
+
 const GridCard = (props: GridCardProps) => {
   const {
     topLeftImage,
@@ -41,20 +57,13 @@ const GridCard = (props: GridCardProps) => {
     title,
     subtitle,
   } = props;
+
+  const {
+    palette: { mode },
+  } = useTheme();
+
   return (
-    <Paper
-      sx={{
-        width: "100%",
-        borderRadius: "18px",
-        padding: "12px",
-        paddingBottom: "0px",
-        background: `rgba( 255, 255, 255, 0.2 )`,
-        backdropFilter: `blur( 8px )`,
-        WebkitBackdropFilter: `blur( 8px )`,
-        marginTop: "12px",
-        marginBottom: "12px",
-      }}
-    >
+    <GridCardContainer>
       <Stack justifyContent={"space-between"}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
@@ -143,7 +152,7 @@ const GridCard = (props: GridCardProps) => {
             disablePadding
             secondaryAction={
               <IconButton edge="end" aria-label="delete">
-                <BsHeart />
+                <BsHeart color="red" />
               </IconButton>
             }
           >
@@ -153,12 +162,17 @@ const GridCard = (props: GridCardProps) => {
             <ListItemText
               primary={title}
               secondary={subtitle}
-              //   primaryTypographyProps={{ variant: "" }}
+              primaryTypographyProps={{ variant: "h6", fontWeight: 600 }}
+              secondaryTypographyProps={{
+                variant: "caption",
+                color: mode === "dark" ? "primary" : "secondary",
+                mt: -0.8,
+              }}
             />
           </ListItem>
         </List>
       </Stack>
-    </Paper>
+    </GridCardContainer>
   );
 };
 

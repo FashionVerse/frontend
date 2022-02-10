@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useKeenSlider } from "keen-slider/react";
-import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
-import { Box } from "@mui/material";
+import { BsArrowLeftCircle, BsArrowRightCircle, BsHeart } from "react-icons/bs";
+import { SiEthereum } from "react-icons/si";
+import { Box, Button, Stack, IconButton } from "@mui/material";
 
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
@@ -31,8 +32,14 @@ export default function HeroSlider() {
           />
         )}
         <div ref={sliderRef} className="keen-slider">
-          {SLIDES.map(({ alt, href, id, src }) => (
-            <div className="keen-slider__slide flex-center" key={id}>
+          {SLIDES.map(({ alt, price, id, src }) => (
+            <Stack
+              className="keen-slider__slide"
+              key={id}
+              alignItems="center"
+              justifyContent="center"
+              gap={2}
+            >
               <Image
                 src={src}
                 alt={alt}
@@ -41,7 +48,20 @@ export default function HeroSlider() {
                 width={"180px"}
                 className="m-auto"
               />
-            </div>
+              <Stack direction="row" gap={1}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  color="primary"
+                  startIcon={<SiEthereum />}
+                >
+                  {price + " ETH"}
+                </Button>
+                <IconButton size="small">
+                  <BsHeart color="red" />
+                </IconButton>
+              </Stack>
+            </Stack>
           ))}
         </div>
         {loaded && instanceRef.current && (
@@ -66,8 +86,21 @@ function Arrow(props: {
   onClick: (e: any) => void;
 }) {
   if (props.left) {
-    return <BsArrowLeftCircle fontSize="2em" onClick={props.onClick} />;
-  } else return <BsArrowRightCircle fontSize="2em" onClick={props.onClick} />;
+    return (
+      <BsArrowLeftCircle
+        fontSize="2.5em"
+        color="#22CAFF"
+        onClick={props.onClick}
+      />
+    );
+  } else
+    return (
+      <BsArrowRightCircle
+        fontSize="2.5em"
+        color="#22CAFF"
+        onClick={props.onClick}
+      />
+    );
 }
 
 const SLIDES = [
@@ -76,11 +109,13 @@ const SLIDES = [
     href: "#",
     src: "/clothing-item.png",
     alt: "fashion item",
+    price: 19.5,
   },
   {
     id: "likja3",
     href: "#",
-    src: "/logo.svg",
+    src: "/clothing-item-2.png",
     alt: "fashion item",
+    price: 10,
   },
 ];

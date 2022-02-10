@@ -14,7 +14,7 @@ export default function Wallets() {
         color="primary"
         sx={{ mt: 16, mb: 10 }}
       >
-        CHECKOUT
+        <b>CONNECT A WALLET</b>
       </Typography>
       <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
         {WALLETS.map(({ id, href, name, src, alt }) => (
