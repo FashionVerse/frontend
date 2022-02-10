@@ -1,0 +1,8 @@
+.flex-center {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.m-auto {
+  margin: auto;
+}

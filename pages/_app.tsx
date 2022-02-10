@@ -7,6 +7,8 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
+import "../src/styles.css";
+import "keen-slider/keen-slider.min.css";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -30,6 +32,9 @@ export default function MyApp(props: any) {
     palette: { mode },
     typography: {
       fontFamily: ["Montserrat", "sans-serif"].join(","),
+      button: {
+        textTransform: "none",
+      },
     },
   });
 

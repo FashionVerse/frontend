@@ -16,11 +16,13 @@
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "clsx": "^1.1.1",
+    "keen-slider": "^6.6.3",
     "next": "latest",
     "prop-types": "latest",
-    "react": "latest",
+    "react": "^17.0.2",
     "react-dom": "latest",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "swipe-js-iso": "^2.1.5"
   },
   "devDependencies": {
     "@types/node": "^17.0.16",
