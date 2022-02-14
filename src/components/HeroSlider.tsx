@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useKeenSlider } from "keen-slider/react";
-import { BsArrowLeftCircle, BsArrowRightCircle, BsHeart } from "react-icons/bs";
+import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { SiEthereum } from "react-icons/si";
 import { Box, Button, Stack, IconButton } from "@mui/material";
 
@@ -57,9 +57,6 @@ export default function HeroSlider() {
                 >
                   {price + " ETH"}
                 </Button>
-                <IconButton size="small">
-                  <BsHeart color="red" />
-                </IconButton>
               </Stack>
             </Stack>
           ))}

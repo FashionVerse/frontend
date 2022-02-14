@@ -51,7 +51,7 @@ export default function Slider({ slideArray }: SliderProps) {
               className="keen-slider__slide"
               sx={{
                 minHeight: "300px",
-                minWdith: "240px",
+                minWidth: "240px",
                 padding: "0px 12px",
               }}
             >
@@ -83,7 +83,7 @@ function Arrow(props: {
   if (props.left) {
     return (
       <BsArrowLeftCircle
-        fontSize="4em"
+        fontSize="3em"
         color="#22CAFF"
         onClick={props.onClick}
       />
@@ -91,7 +91,7 @@ function Arrow(props: {
   } else
     return (
       <BsArrowRightCircle
-        fontSize="4em"
+        fontSize="3em"
         color="#22CAFF"
         onClick={props.onClick}
       />

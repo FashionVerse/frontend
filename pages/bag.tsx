@@ -11,6 +11,12 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { BsTrash } from "react-icons/bs";
+import { styled } from "@mui/material/styles";
+
+const BlueShadowPaper = styled(Paper)(({ theme }) => ({
+  boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 30.3961px -30.3961px 30.3961px rgba(149, 149, 149, 0.095), inset -30.3961px 30.3961px 30.3961px rgba(255, 255, 255, 0.095)`,
+  background: theme.palette.mode === "dark" ? "#121212" : "#FFF",
+}));
 
 export default function Bag() {
   return (
@@ -28,17 +34,16 @@ export default function Bag() {
         <b>CHECKOUT</b>
       </Typography>
       <Container maxWidth="md">
-        <Paper
+        <BlueShadowPaper
           sx={{
             borderRadius: "32px",
             mb: 16,
           }}
-          variant="outlined"
         >
           <Stack gap={4} sx={{ px: 12, py: 6 }}>
             <CheckoutCard />
           </Stack>
-        </Paper>
+        </BlueShadowPaper>
       </Container>
       <Footer />
     </Container>

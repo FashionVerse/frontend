@@ -70,27 +70,27 @@ const RESOURCE_INFO = [
   {
     id: "ajaskas",
     buttonText: "Getting Started",
-    href: "/getting-started",
+    href: "#",
     description:
       "Learn how to set up your wallet, browse through the platform, and purchase your first piece of digital clothing",
   },
   {
     id: "ajaskas",
     buttonText: "Designer Collaborations",
-    href: "/get-started",
+    href: "#",
     description:
       "A fashion designer? Learn more about our collaboration policies and launch your digital brand with us!",
   },
   {
     id: "ajaskas",
     buttonText: "About FashionVerse",
-    href: "/get-started",
+    href: "https://glib-party-b08.notion.site/The-FashionVerse-Inc-Community-81d0d0a9e79e4db3964987511170e2c1",
     description: "Find out more about our mission, roadmap, team, and progress",
   },
   {
     id: "ajaskas",
     buttonText: "GENESIS COLLECTION",
-    href: "/get-started",
+    href: "https://docs.google.com/document/d/1s9yWrtnbdsu-LX0KZ5ledULVFwHYWxQOslSxiLtoJiQ/edit",
     description: "Browse through the details of our genesis collection",
   },
 ];

@@ -15,8 +15,9 @@ import {
 import { BiRocket } from "react-icons/bi";
 import Slider from "../src/components/Slider";
 import GridCard, { GridCardProps } from "../src/components/GridCard";
-import { BsDiscord, BsTwitter } from "react-icons/bs";
+import { BsDiscord, BsMedium, BsTwitter } from "react-icons/bs";
 import { styled } from "@mui/system";
+import AdvisorCard, { AdvisorCardProps } from "../src/components/AdvisorCard";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -106,6 +107,7 @@ export default function Index() {
           size="large"
           sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
           startIcon={<BiRocket />}
+          href="/brands"
         >
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
             Explore All
@@ -124,23 +126,17 @@ export default function Index() {
           <b>ADVISORS</b>
         </Typography>
       </Typography>
-      <Grid container justifyContent="space-evenly" spacing={12}>
-        {ADVISORS.map(({ src, alt, id }) => (
+      <Grid container spacing={12}>
+        {ADVISORS.map((props) => (
           <Grid
-            key={id}
+            key={props.id}
             item
             xs={12}
             sm={6}
             md={4}
             sx={{ display: "flex", justifyContent: "center" }}
           >
-            <Image
-              src={src}
-              alt={alt}
-              layout="intrinsic"
-              height={"200px"}
-              width={"200px"}
-            />
+            <AdvisorCard {...props} />
           </Grid>
         ))}
       </Grid>
@@ -152,9 +148,9 @@ export default function Index() {
           component="span"
           sx={{ fontWeight: 300 }}
         >
-          <b>JOIN</b>&nbsp;
+          <b>JOIN THE</b>&nbsp;
         </Typography>
-        <b>FV</b>COMMUNITY
+        <b>FV</b> COMMUNITY
       </Typography>
       <Stack
         direction="row"
@@ -163,11 +159,26 @@ export default function Index() {
         justifyContent="center"
         sx={{ mb: 20 }}
       >
-        <IconButton size="large">
+        <IconButton
+          size="large"
+          href="https://twitter.com/FashionVerseInc"
+          target="_blank"
+        >
           <BsTwitter fontSize={"2em"} color="#1DA1F2" />
         </IconButton>
-        <IconButton size="large">
+        <IconButton
+          size="large"
+          href="https://discord.gg/SPmtYrBq"
+          target="_blank"
+        >
           <BsDiscord fontSize={"2em"} color="#738ADB" />
+        </IconButton>
+        <IconButton
+          size="large"
+          href="https://medium.com/@FashionVerse"
+          target="_blank"
+        >
+          <BsMedium fontSize={"2em"} color="#D1D1D1" />
         </IconButton>
       </Stack>
       <Footer />
@@ -178,8 +189,8 @@ export default function Index() {
 const DROPS: GridCardProps[] = [
   {
     id: "abc123",
-    title: "STREET WEAR",
-    subtitle: "CAPTION HERE",
+    title: "Street Wear",
+    subtitle: "Fashion for everyday",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
@@ -204,8 +215,8 @@ const DROPS: GridCardProps[] = [
   },
   {
     id: "h7jaus9",
-    title: "STREET WEAR",
-    subtitle: "CAPTION HERE",
+    title: "Vintage",
+    subtitle: "Feeling old school?",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
@@ -230,8 +241,8 @@ const DROPS: GridCardProps[] = [
   },
   {
     id: "7haj8ka",
-    title: "STREET WEAR",
-    subtitle: "CAPTION HERE",
+    title: "Work Wear",
+    subtitle: "Fashion at work",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
@@ -256,8 +267,86 @@ const DROPS: GridCardProps[] = [
   },
   {
     id: "h8ak9ja",
-    title: "STREET WEAR",
-    subtitle: "CAPTION HERE",
+    title: "Party Wear",
+    subtitle: "Glam and Glitter",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "jk9a3ha",
+    title: "Evening Wear",
+    subtitle: "Fashionable evenings",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "9ajus2h",
+    title: "Ethnic",
+    subtitle: "Fashion for the cultured",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "/3d.png",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "ka9kai34",
+    title: "Limitless",
+    subtitle: "Boundless fashion",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
       src: "/3d.png",
@@ -311,8 +400,46 @@ const DROPS: GridCardProps[] = [
   }
 */
 
-const ADVISORS = [
-  { id: "klaose", src: "/advisor.png", alt: "advisor brand" },
-  { id: "laokssa", src: "/advisor.png", alt: "advisor brand" },
-  { id: "hjau7sa2", src: "/advisor.png", alt: "advisor brand" },
+const ADVISORS: AdvisorCardProps[] = [
+  {
+    id: "klaose",
+    src: "/placeholder.png",
+    alt: "advisor brand",
+    name: "Shivam Sharma",
+    title: "Blockchain and Smart Contracts Advisor",
+    background: "Blockchain Engineer at Polygon",
+  },
+  {
+    id: "j7hausa",
+    src: "/placeholder.png",
+    alt: "advisor brand",
+    name: "Ari Lightman",
+    title: "Web3 and NFT Advisor",
+    background: "Carnegie Mellon Professor of Digital Media and Marketing",
+  },
+  {
+    id: "jk8hay62ua",
+    src: "/placeholder.png",
+    alt: "advisor brand",
+    name: "Baek Kim",
+    title: "Business and Web3 Strategy Advisor",
+    background: "Partner at Hashed and Carnegie Mellon grad",
+  },
+  {
+    id: "kl8j26ags",
+    src: "/placeholder.png",
+    alt: "advisor brand",
+    name: "JP Ren",
+    title: "Business Strategy Advisor",
+    background: "Y Combinator Alum and Snapjoy Co-Founder",
+  },
+  {
+    id: "l03fg7h",
+    src: "/placeholder.png",
+    alt: "advisor brand",
+    name: "Oliver Quin",
+    title: "Technical Advisor",
+    background:
+      "Software Engineer at Syndicate Protocol and Carnegie Mellon grad",
+  },
 ];

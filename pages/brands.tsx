@@ -16,7 +16,7 @@ export default function Brands() {
       >
         <b>BRANDS</b>
       </Typography>
-      <Grid container spacing={12} sx={{ mb: 16 }}>
+      <Grid container spacing={8} sx={{ mb: 16 }}>
         {BRANDS_DATA.map((props) => (
           <Grid item xs={12} sm={6} md={4} key={props.id}>
             <Box

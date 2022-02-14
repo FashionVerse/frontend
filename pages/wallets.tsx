@@ -39,7 +39,9 @@ export default function Wallets() {
                 height={"300px"}
                 width={"300px"}
               />
-              <Typography variant="h5">{name}</Typography>
+              <Typography variant="h5" sx={{ mt: 2 }}>
+                {name}
+              </Typography>
             </Paper>
           </Grid>
         ))}

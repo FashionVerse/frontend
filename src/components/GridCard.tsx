@@ -9,10 +9,8 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  IconButton,
 } from "@mui/material";
 import Image from "next/image";
-import { BsHeart } from "react-icons/bs";
 import { styled, alpha, useTheme } from "@mui/system";
 
 type GridImageProps = {
@@ -148,14 +146,7 @@ const GridCard = (props: GridCardProps) => {
           </Grid>
         </Grid>
         <List sx={{ width: "100%", maxWidth: 360 }}>
-          <ListItem
-            disablePadding
-            secondaryAction={
-              <IconButton edge="end" aria-label="delete">
-                <BsHeart color="red" />
-              </IconButton>
-            }
-          >
+          <ListItem disablePadding>
             <ListItemAvatar>
               <Avatar src={avatarSrc} />
             </ListItemAvatar>

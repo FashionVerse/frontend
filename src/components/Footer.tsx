@@ -39,44 +39,33 @@ export default function Footer() {
   return (
     <Container maxWidth="md">
       <Grid container justifyContent={"space-between"}>
-        <Grid item xs={12} sx={{ mb: 4 }}>
-          <Logo size="56px" withText>
-            <Typography sx={{ ml: "12px" }} variant="h5">
-              <strong>FASHION</strong>VERSE
-            </Typography>
-          </Logo>
-        </Grid>
         <Grid item xs={5}>
           <Stack>
-            <Typography variant="subtitle1" color="textSecondary">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              modi incidunt molestiae, debitis quisquam culpa veritatis magni
-              sequi id, harum quos commodi!
+            <Logo size="56px" withText>
+              <Typography sx={{ ml: "12px" }} variant="h5">
+                <strong>FASHION</strong>VERSE
+              </Typography>
+            </Logo>
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+              gutterBottom
+              sx={{ mt: 2 }}
+            >
+              The Fashion, Inc. is an NFT marketplace for 3D digital clothing
+              that enables the user to build an avatar wearable digital closet,
+              often interlinked with physical fashion utility.
             </Typography>
             <List
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             >
               <ListItem disableGutters>
-                <ListItemAvatar>
-                  <BlueAvatar>
-                    <BsEnvelope />
-                  </BlueAvatar>
+                <ListItemAvatar sx={{ mr: -1, mt: 1, ml: 0.5 }}>
+                  <BsEnvelope style={{ fontSize: "2rem" }} />
                 </ListItemAvatar>
                 <ListItemText
                   primary="Support email"
-                  secondary="lorem@ipsum.com"
-                  primaryTypographyProps={{ variant: "caption" }}
-                />
-              </ListItem>
-              <ListItem disableGutters>
-                <ListItemAvatar>
-                  <BlueAvatar>
-                    <BsGeoAlt />
-                  </BlueAvatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Company address"
-                  secondary="15 Yemen road, Yemen"
+                  secondary="community@thefashionverse.io"
                   primaryTypographyProps={{ variant: "caption" }}
                 />
               </ListItem>
@@ -128,23 +117,10 @@ export default function Footer() {
         <Grid
           item
           container
-          justifyContent={"space-between"}
+          justifyContent={"center"}
           alignItems={"center"}
           sx={{ borderTop: "2px solid #ccc", my: 2, pt: 2 }}
         >
-          <Grid item>
-            <Stack direction="row" gap={2}>
-              <NavIconButton size="small">
-                <BsTwitter />
-              </NavIconButton>
-              <NavIconButton size="small">
-                <BsInstagram />
-              </NavIconButton>
-              <NavIconButton size="small">
-                <BsYoutube />
-              </NavIconButton>
-            </Stack>
-          </Grid>
           <Grid item>
             <Typography variant="caption">
               {"© " + new Date().getFullYear() + ". All rights reserved"}
