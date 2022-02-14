@@ -14,13 +14,12 @@ export default function Slider({ slideArray }: SliderProps) {
     initial: 0,
     breakpoints: {
       "(min-width: 400px)": {
-        slides: { perView: 2, spacing: 5 },
+        slides: { perView: 2, spacing: 2 },
       },
       "(min-width: 1000px)": {
-        slides: { perView: 3, spacing: 10 },
+        slides: { perView: 3, spacing: 4 },
       },
     },
-    slides: { perView: 1 },
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel);
     },
@@ -31,7 +30,14 @@ export default function Slider({ slideArray }: SliderProps) {
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          position: "relative",
+          pl: "32px",
+        }}
+      >
         {loaded && instanceRef.current && (
           <Arrow
             left
@@ -44,17 +50,10 @@ export default function Slider({ slideArray }: SliderProps) {
         <div
           ref={sliderRef}
           className="keen-slider"
-          style={{ minHeight: "300px", margin: "0px 16px" }}
+          style={{ margin: "0px 16px" }}
         >
           {slideArray.map((slideContent) => (
-            <Box
-              className="keen-slider__slide"
-              sx={{
-                minHeight: "300px",
-                minWidth: "240px",
-                padding: "0px 12px",
-              }}
-            >
+            <Box className="keen-slider__slide" sx={{ padding: "0px 12px" }}>
               {slideContent}
             </Box>
           ))}
@@ -86,6 +85,7 @@ function Arrow(props: {
         fontSize="3em"
         color="#22CAFF"
         onClick={props.onClick}
+        style={{ position: "absolute", top: "40%", left: 0 }}
       />
     );
   } else
@@ -94,6 +94,7 @@ function Arrow(props: {
         fontSize="3em"
         color="#22CAFF"
         onClick={props.onClick}
+        style={{ position: "absolute", top: "40%", right: 0 }}
       />
     );
 }

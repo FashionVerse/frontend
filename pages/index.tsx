@@ -1,4 +1,5 @@
 import * as React from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";

@@ -22,6 +22,7 @@ const AdvisorCardContainer = styled(Card)(({ theme }) => ({
       : alpha(theme.palette.primary.light, 0.2),
   backdropFilter: `blur( 8px )`,
   WebkitBackdropFilter: `blur( 8px )`,
+  borderRadius: "1rem",
 }));
 
 export default function AdvisorCard(props: AdvisorCardProps) {

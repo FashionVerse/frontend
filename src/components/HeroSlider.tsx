@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useKeenSlider } from "keen-slider/react";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
@@ -11,6 +11,7 @@ export default function HeroSlider() {
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     loop: true,
+    slides: { perView: 1 },
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel);
     },
@@ -20,8 +21,15 @@ export default function HeroSlider() {
   });
 
   return (
-    <Box sx={{ position: "relative", maxWidth: "320px", margin: "auto" }}>
-      <Box sx={{ display: "flex", alignItems: "center", maxWidth: "320px" }}>
+    <Box sx={{ position: "relative", margin: "auto", maxWidth: "320px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          maxWidth: "320px",
+          position: "relative",
+        }}
+      >
         {loaded && instanceRef.current && (
           <Arrow
             left
@@ -34,11 +42,12 @@ export default function HeroSlider() {
         <div ref={sliderRef} className="keen-slider">
           {SLIDES.map(({ alt, price, id, src }) => (
             <Stack
-              className="keen-slider__slide"
               key={id}
-              alignItems="center"
-              justifyContent="center"
-              gap={2}
+              className="keen-slider__slide"
+              sx={{
+                alignItems: "center",
+                gap: "12px",
+              }}
             >
               <Image
                 src={src}
@@ -88,6 +97,7 @@ function Arrow(props: {
         fontSize="2.5em"
         color="#22CAFF"
         onClick={props.onClick}
+        style={{ position: "absolute", top: "40%", left: 0 }}
       />
     );
   } else
@@ -96,6 +106,7 @@ function Arrow(props: {
         fontSize="2.5em"
         color="#22CAFF"
         onClick={props.onClick}
+        style={{ position: "absolute", top: "40%", right: 0 }}
       />
     );
 }
