@@ -3,8 +3,14 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { Container, Typography, Grid, Box } from "@mui/material";
 import GridCard, { GridCardProps } from "../src/components/GridCard";
+import CheckBoxSelect, { SelectState } from "../src/components/CheckBoxSelect";
 
 export default function Brands() {
+  const [drop, setDrop] = React.useState<SelectState>({
+    options: DROP_DATA,
+    selected: "",
+  });
+
   return (
     <Container>
       <Header />
@@ -17,6 +23,9 @@ export default function Brands() {
         <b>BRANDS</b>
       </Typography>
       <Grid container spacing={8} sx={{ mb: 16 }}>
+        <Grid item xs={12} sx={{ ml: 2 }}>
+          <CheckBoxSelect state={drop} setState={setDrop} label="Drop" />
+        </Grid>
         {BRANDS_DATA.map((props) => (
           <Grid item xs={12} sm={6} md={4} key={props.id}>
             <Box
@@ -141,4 +150,14 @@ const BRANDS_DATA: GridCardProps[] = [
       bgColor: "#E5E5F0",
     },
   },
+];
+
+const DROP_DATA = [
+  " Streetwear",
+  "Vintage",
+  "Workwear",
+  "Partywear",
+  "Eveningwear",
+  "Ethnic",
+  "Limitless",
 ];

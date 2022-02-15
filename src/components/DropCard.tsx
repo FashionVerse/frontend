@@ -23,6 +23,8 @@ export interface DropCardProps {
   brandImage: string;
   rarity: number;
   price: number;
+  hideAddToBag?: boolean;
+  hidePrice?: boolean;
 }
 
 const DropCardContainer = styled(Card)(({ theme }) => ({
@@ -85,26 +87,30 @@ export default function DropCard(props: DropCardProps) {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: props.hideAddToBag ? "center" : "space-between",
           alignItems: "center",
           gap: "16px",
           mt: 1,
         }}
       >
-        <Stack alignItems="center" direction="row">
-          <SiEthereum fontSize="1rem" />
-          <Typography variant="h6" sx={{ ml: "4px" }}>
-            {props.price}
-          </Typography>
-        </Stack>
-        <Stack alignItems="center">
-          <IconButton size="small">
-            <BsHandbag />
-          </IconButton>
-          <Typography variant="caption" sx={{ fontSize: "8px" }}>
-            Add to bag
-          </Typography>
-        </Stack>
+        {!props.hidePrice && (
+          <Stack alignItems="center" direction="row">
+            <SiEthereum fontSize="1rem" />
+            <Typography variant="h6" sx={{ ml: "4px" }}>
+              {props.price}
+            </Typography>
+          </Stack>
+        )}
+        {!props.hideAddToBag && (
+          <Stack alignItems="center">
+            <IconButton size="small">
+              <BsHandbag />
+            </IconButton>
+            <Typography variant="caption" sx={{ fontSize: "8px" }}>
+              Add to bag
+            </Typography>
+          </Stack>
+        )}
       </Box>
     </DropCardContainer>
   );

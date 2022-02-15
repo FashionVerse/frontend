@@ -8,13 +8,33 @@ import {
   Box,
   ImageList,
   ImageListItem,
+  Stack,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import DropCard, { DropCardProps } from "../../src/components/DropCard";
+import CheckBoxSelect, {
+  SelectState,
+} from "../../src/components/CheckBoxSelect";
 
 export default function DropPage() {
   const router = useRouter();
   const { dropName } = router.query;
+  const [rarity, setRarity] = React.useState<SelectState>({
+    options: RARITY_DATA,
+    selected: "",
+  });
+  const [price, setPrice] = React.useState<SelectState>({
+    options: PRICE_DATA,
+    selected: "",
+  });
+  const [brand, setBrand] = React.useState<SelectState>({
+    options: BRAND_DATA,
+    selected: "",
+  });
+  const [collection, setCollection] = React.useState<SelectState>({
+    options: COLLECTION_DATA,
+    selected: "",
+  });
 
   function ImageGallery() {
     return (
@@ -25,16 +45,8 @@ export default function DropPage() {
         rowHeight={121}
       >
         {itemData.map((item) => (
-          <ImageListItem
-            key={item.img}
-            cols={item.cols || 1}
-            rows={item.rows || 1}
-          >
-            <img
-              {...srcset(item.img, 121, item.rows, item.cols)}
-              alt={item.title}
-              loading="lazy"
-            />
+          <ImageListItem key={item.img} cols={1} rows={1}>
+            <img {...srcset(item.img, 121)} alt={item.title} loading="lazy" />
           </ImageListItem>
         ))}
       </ImageList>
@@ -63,6 +75,23 @@ export default function DropPage() {
           </b>
         </Typography>
         <Grid container spacing={8} sx={{ mb: 16 }}>
+          <Grid item xs={12}>
+            <Stack direction="row" gap={2} sx={{ px: 1 }}>
+              <CheckBoxSelect
+                state={rarity}
+                setState={setRarity}
+                label="Rarity"
+              />
+              <CheckBoxSelect state={price} setState={setPrice} label="Price" />
+              <CheckBoxSelect state={brand} setState={setBrand} label="Brand" />
+              <div style={{ flexGrow: 1 }} />
+              <CheckBoxSelect
+                state={collection}
+                setState={setCollection}
+                label="Collection"
+              />
+            </Stack>
+          </Grid>
           {DROP_DATA.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
@@ -96,14 +125,11 @@ const itemData = [
   {
     img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
     title: "Hats",
-    cols: 2,
   },
   {
     img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
     title: "Honey",
     author: "@arwinneil",
-    rows: 2,
-    cols: 2,
   },
   {
     img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
@@ -116,8 +142,6 @@ const itemData = [
   {
     img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
     title: "Mushrooms",
-    rows: 2,
-    cols: 2,
   },
   {
     img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
@@ -130,7 +154,22 @@ const itemData = [
   {
     img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
     title: "Bike",
-    cols: 2,
+  },
+  {
+    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
+    title: "Fern",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
+    title: "Mushrooms",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
+    title: "Tomato basil",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+    title: "Hats",
   },
 ];
 
@@ -145,4 +184,53 @@ const DROP_DATA: DropCardProps[] = [
     price: 12,
     rarity: 15,
   },
+  {
+    id: "asndka62va",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
+  {
+    id: "as6a0a82asd",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
+  {
+    id: "jda67kajbs",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
+  {
+    id: "asda79qkajs72",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
 ];
+const RARITY_DATA = ["Semi rare", "Ultra rare", "Super rare", "Extremely rare"];
+const PRICE_DATA = [
+  "< 0.05 eth",
+  "> 0.05 & <= 0.2 eth",
+  "> 0.2 eth & <= 0.5 eth",
+  "> 0.5 eth",
+];
+const BRAND_DATA = ["Sieke", "Alibas", "Gape"];
+const COLLECTION_DATA = ["Sports", "Exotic", "Casuals"];

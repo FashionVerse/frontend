@@ -28,6 +28,7 @@ export type GridCardProps = {
   title: string;
   subtitle: string;
   id: string;
+  noBrand?: boolean;
 };
 
 const GridCardContainer = styled(Paper)(({ theme }) => ({
@@ -146,11 +147,13 @@ const GridCard = (props: GridCardProps) => {
             </Box>
           </Grid>
         </Grid>
-        <List sx={{ width: "100%", maxWidth: 360 }}>
+        <List sx={{ width: "100%", maxWidth: 360, pl: props.noBrand ? 1 : 0 }}>
           <ListItem disablePadding>
-            <ListItemAvatar>
-              <Avatar src={avatarSrc} />
-            </ListItemAvatar>
+            {!props.noBrand && (
+              <ListItemAvatar>
+                <Avatar src={avatarSrc} />
+              </ListItemAvatar>
+            )}
             <ListItemText
               primary={title}
               secondary={subtitle}

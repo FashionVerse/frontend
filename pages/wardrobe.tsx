@@ -11,9 +11,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import WardrobeCard, {
-  WardrobeCardProps,
-} from "../src/components/WardRobeCard";
+import DropCard, { DropCardProps } from "../src/components/DropCard";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -22,6 +20,8 @@ const GradientButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Wardrobe() {
+  const [activePage, setActivePage] = React.useState<"nfts" | "avatar">("nfts");
+
   return (
     <Container>
       <Header />
@@ -39,40 +39,98 @@ export default function Wardrobe() {
           variant="contained"
           aria-label="outlined primary button group"
         >
-          <GradientButton>
-            <Typography variant="body1">VIEW CLOTHES</Typography>
+          <GradientButton onClick={() => setActivePage("nfts")}>
+            <Typography variant="body1">VIEW FASHION NFTS</Typography>
           </GradientButton>
-          <GradientButton>
+          <GradientButton onClick={() => setActivePage("avatar")}>
             <Typography variant="body1">VIEW AVATAR</Typography>
           </GradientButton>
         </ButtonGroup>
       </Stack>
-      <Grid container spacing={8} sx={{ mb: 16 }}>
-        {WardrobeItems.map((props) => (
-          <Grid item xs={12} sm={6} md={4} key={props.id}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <WardrobeCard {...props} />
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
+      {activePage === "nfts" ? (
+        <Grid container spacing={8} sx={{ mb: 16 }}>
+          {DROP_DATA.map((props) => (
+            <Grid item xs={12} sm={6} md={4} key={props.id}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <DropCard {...props} hideAddToBag />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Container
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "60vh",
+          }}
+        >
+          <Typography variant="h3" color="textSecondary">
+            Coming Soon...
+          </Typography>
+        </Container>
+      )}
       <Footer />
     </Container>
   );
 }
 
-const WardrobeItems: WardrobeCardProps[] = [
+const DROP_DATA: DropCardProps[] = [
   {
-    id: "asda123r",
-    name: "Leather jacket",
-    description: "lorem ipsum dolor sit",
+    id: "ausdkbbsk",
     src: "/3d.png",
-    alt: "Fashion item",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
+  {
+    id: "asndka62va",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
+  {
+    id: "as6a0a82asd",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
+  {
+    id: "jda67kajbs",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
+  },
+  {
+    id: "asda79qkajs72",
+    src: "/3d.png",
+    alt: "piece image",
+    brandName: "Nike",
+    brandImage: "/placeholder.png",
+    pieceName: "Leather jacket",
+    price: 12,
+    rarity: 15,
   },
 ];

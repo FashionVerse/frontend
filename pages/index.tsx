@@ -86,7 +86,7 @@ export default function Index() {
       </Typography>
       <Slider
         slideArray={DROPS.map((props) => (
-          <GridCard {...props} key={props.id} />
+          <GridCard {...props} noBrand key={props.id} />
         ))}
       />
       {/* Brands */}
