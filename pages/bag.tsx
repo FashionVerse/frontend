@@ -85,7 +85,7 @@ function CheckoutCard({ quantity, ...dropCardProps }: CheckoutCardProps) {
   return (
     <Grid container gap={2}>
       <Grid item xs={5}>
-        <DropCard {...dropCardProps} hideAddToBag hidePrice />
+        <DropCard {...dropCardProps} hideAddToBag hidePrice fashionItem />
       </Grid>
       <Grid
         item
@@ -141,7 +141,9 @@ const CHECKOUT_DATA: CheckoutCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
-    quantity: 1,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "asndka62va",
@@ -152,7 +154,9 @@ const CHECKOUT_DATA: CheckoutCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
-    quantity: 1,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "as6a0a82asd",
@@ -163,7 +167,9 @@ const CHECKOUT_DATA: CheckoutCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
-    quantity: 1,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "jda67kajbs",
@@ -174,7 +180,9 @@ const CHECKOUT_DATA: CheckoutCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
-    quantity: 1,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "asda79qkajs72",
@@ -185,6 +193,8 @@ const CHECKOUT_DATA: CheckoutCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
-    quantity: 1,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
 ];

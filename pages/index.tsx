@@ -179,7 +179,7 @@ export default function Index() {
           href="https://medium.com/@FashionVerse"
           target="_blank"
         >
-          <BsMedium fontSize={"2em"} color="#D1D1D1" />
+          <BsMedium fontSize={"2em"} color="#515151" />
         </IconButton>
       </Stack>
       <Footer />

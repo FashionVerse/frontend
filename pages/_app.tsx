@@ -56,7 +56,12 @@ export default function MyApp(props: any) {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Component {...pageProps} />
+          <div
+            className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
+            style={{ marginTop: "-24px", paddingTop: "24px" }}
+          >
+            <Component {...pageProps} />
+          </div>
         </ThemeProvider>
       </ColorModeContext.Provider>
     </CacheProvider>

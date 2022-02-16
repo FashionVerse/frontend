@@ -13,27 +13,7 @@ import {
   Avatar,
   IconButton,
 } from "@mui/material";
-import {
-  BsEnvelope,
-  BsGeoAlt,
-  BsInstagram,
-  BsTwitter,
-  BsYoutube,
-} from "react-icons/bs";
-
-const NavIconButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "dark"
-      ? "rgba(255,255,255,0.08)"
-      : "rgba(0,0,0,0.04)",
-  padding: theme.spacing(1),
-  color: theme.palette.primary.main,
-}));
-
-const BlueAvatar = styled(Avatar)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  color: "white",
-}));
+import { BsEnvelope } from "react-icons/bs";
 
 export default function Footer() {
   return (
@@ -56,9 +36,7 @@ export default function Footer() {
               that enables the user to build an avatar wearable digital closet,
               often interlinked with physical fashion utility.
             </Typography>
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
+            <List sx={{ width: "100%", maxWidth: 360 }}>
               <ListItem disableGutters>
                 <ListItemAvatar sx={{ mr: -1, mt: 1, ml: 0.5 }}>
                   <BsEnvelope style={{ fontSize: "2rem" }} />

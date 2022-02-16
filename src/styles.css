@@ -1,0 +1,35 @@
+.bg-style-light {
+  background-color: "transparent";
+  background-position: fixed;
+  background-image: radial-gradient(
+      circle at top right,
+      #22caff,
+      #eeeeee 20%,
+      transparent 50%
+    ),
+    radial-gradient(circle at center, #5ed8fd50, #eeeeee 40%, transparent 70%),
+    radial-gradient(
+      circle at bottom left,
+      #22caff,
+      #eeeeee 20%,
+      transparent 50%
+    );
+}
+
+.bg-style-dark {
+  background-color: "transparent";
+  background-position: fixed;
+  background-image: radial-gradient(
+      circle at top right,
+      #22caff,
+      #222222 20%,
+      transparent 50%
+    ),
+    radial-gradient(circle at center, #5ed8fd50, #222222 40%, transparent 70%),
+    radial-gradient(
+      circle at bottom left,
+      #22caff,
+      #222222 20%,
+      transparent 50%
+    );
+}

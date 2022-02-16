@@ -3,7 +3,6 @@ import Image from "next/image";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -13,6 +12,7 @@ import { styled, alpha } from "@mui/system";
 import { BsHandbag } from "react-icons/bs";
 import { SiEthereum } from "react-icons/si";
 import { IconButton } from "@mui/material";
+import EnlargedFashionCard from "./EnlargedFashionCard";
 
 export interface DropCardProps {
   id: string;
@@ -25,9 +25,13 @@ export interface DropCardProps {
   price: number;
   hideAddToBag?: boolean;
   hidePrice?: boolean;
+  fashionItem?: boolean;
+  description: string;
+  noOfPieces: number;
+  collectionName: string;
 }
 
-const DropCardContainer = styled(Card)(({ theme }) => ({
+export const DropCardContainer = styled(Card)(({ theme }) => ({
   maxWidth: "375px",
   background:
     theme.palette.mode === "dark"
@@ -40,78 +44,89 @@ const DropCardContainer = styled(Card)(({ theme }) => ({
 }));
 
 export default function DropCard(props: DropCardProps) {
+  const [enlarged, setEnlarged] = React.useState(false);
   return (
-    <DropCardContainer>
-      <Box
-        sx={{
-          minWidth: "300px",
-          aspectRatio: "1/1",
-          position: "relative",
-          borderRadius: "1rem",
-          backgroundColor: "white",
-        }}
-      >
-        <Image
-          src={props.src}
-          alt={props.alt}
-          layout="fill"
-          objectFit="contain"
-        />
-      </Box>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mt: 2 }}
-      >
-        <ListItem disablePadding>
-          <ListItemAvatar sx={{ mr: -1 }}>
-            <Avatar
-              src={props.brandImage}
-              sx={{ height: "36px", width: "36px" }}
-            />
-          </ListItemAvatar>
-          <ListItemText
-            primary={props.pieceName}
-            secondary={props.brandName}
-            secondaryTypographyProps={{ style: { marginTop: "-2px" } }}
+    <>
+      <DropCardContainer>
+        <Box
+          sx={{
+            minWidth: "300px",
+            aspectRatio: "1/1",
+            position: "relative",
+            borderRadius: "1rem",
+            backgroundColor: "white",
+          }}
+          onClick={() => setEnlarged(true)}
+        >
+          <Image
+            src={props.src}
+            alt={props.alt}
+            layout="fill"
+            objectFit="contain"
           />
-        </ListItem>
-        <Stack justifyContent="center" alignItems="center" sx={{ mr: 1 }}>
-          <Typography variant="caption">Rare</Typography>
-          <Typography variant="caption" sx={{ mt: "-2px" }}>
-            {props.price}
-          </Typography>
-        </Stack>
-      </Stack>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: props.hideAddToBag ? "center" : "space-between",
-          alignItems: "center",
-          gap: "16px",
-          mt: 1,
-        }}
-      >
-        {!props.hidePrice && (
-          <Stack alignItems="center" direction="row">
-            <SiEthereum fontSize="1rem" />
-            <Typography variant="h6" sx={{ ml: "4px" }}>
+        </Box>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ mt: 2 }}
+        >
+          <ListItem disablePadding>
+            <ListItemAvatar sx={{ mr: -1 }}>
+              <Avatar
+                src={props.brandImage}
+                sx={{ height: "36px", width: "36px" }}
+              />
+            </ListItemAvatar>
+            <ListItemText
+              primary={props.pieceName}
+              secondary={props.brandName}
+              secondaryTypographyProps={{ style: { marginTop: "-2px" } }}
+            />
+          </ListItem>
+          <Stack justifyContent="center" alignItems="center" sx={{ mr: 1 }}>
+            <Typography variant="caption">Rare</Typography>
+            <Typography variant="caption" sx={{ mt: "-2px" }}>
               {props.price}
             </Typography>
           </Stack>
-        )}
-        {!props.hideAddToBag && (
-          <Stack alignItems="center">
-            <IconButton size="small">
-              <BsHandbag />
-            </IconButton>
-            <Typography variant="caption" sx={{ fontSize: "8px" }}>
-              Add to bag
-            </Typography>
-          </Stack>
-        )}
-      </Box>
-    </DropCardContainer>
+        </Stack>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: props.hideAddToBag ? "center" : "space-between",
+            alignItems: "center",
+            gap: "16px",
+            mt: 1,
+          }}
+        >
+          {!props.hidePrice && (
+            <Stack alignItems="center" direction="row">
+              <SiEthereum fontSize="1rem" />
+              <Typography variant="h6" sx={{ ml: "4px" }}>
+                {props.price}
+              </Typography>
+            </Stack>
+          )}
+          {!props.hideAddToBag && (
+            <Stack alignItems="center">
+              <IconButton size="small">
+                <BsHandbag />
+              </IconButton>
+              <Typography variant="caption" sx={{ fontSize: "8px" }}>
+                Add to bag
+              </Typography>
+            </Stack>
+          )}
+        </Box>
+      </DropCardContainer>
+      {props.fashionItem && (
+        <EnlargedFashionCard
+          state={enlarged}
+          setState={setEnlarged}
+          {...props}
+        />
+      )}
+    </>
   );
 }

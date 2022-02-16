@@ -21,7 +21,7 @@ const NavIconButton = styled(IconButton)(({ theme }) => ({
       ? "rgba(255,255,255,0.08)"
       : "rgba(0,0,0,0.04)",
   padding: theme.spacing(1),
-  color: theme.palette.primary.main,
+  filter: `drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))`,
 }));
 
 export default function Header() {
@@ -47,20 +47,21 @@ export default function Header() {
           sx={{ mr: 4, fontSize: "1.2rem" }}
         >
           <Link href={"/brands"} color="inherit" hoverStyle>
-            <Typography>Brands</Typography>
+            <Typography sx={{ fontWeight: 600 }}>Brands</Typography>
           </Link>
           <ListMenu items={DropsNavs}>
             <Typography
               sx={{
                 cursor: "pointer",
                 ":hover": { transform: "scale(1.125)" },
+                fontWeight: 600,
               }}
             >
               Drops
             </Typography>
           </ListMenu>
           <Link href={"/resources"} color="inherit" hoverStyle>
-            <Typography>Resources</Typography>
+            <Typography sx={{ fontWeight: 600 }}>Resources</Typography>
           </Link>
         </Stack>
         <Tooltip title="Wallet Connect">

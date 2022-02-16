@@ -101,7 +101,7 @@ export default function DropPage() {
                   justifyContent: "center",
                 }}
               >
-                <DropCard {...props} />
+                <DropCard {...props} fashionItem />
               </Box>
             </Grid>
           ))}
@@ -183,6 +183,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "asndka62va",
@@ -193,6 +196,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "as6a0a82asd",
@@ -203,6 +209,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "jda67kajbs",
@@ -213,6 +222,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "asda79qkajs72",
@@ -223,6 +235,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
 ];
 const RARITY_DATA = ["Semi rare", "Ultra rare", "Super rare", "Extremely rare"];
