@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useKeenSlider } from "keen-slider/react";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { SiEthereum } from "react-icons/si";
-import { Box, Button, Stack, IconButton } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 
-export default function HeroSlider() {
+export default function LandingPageDisplay() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({

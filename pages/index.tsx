@@ -1,9 +1,8 @@
 import * as React from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
-import HeroSlider from "../src/components/HeroSlider";
+import LandingPageDisplay from "../src/components/LandingPageDisplay";
 import {
   Box,
   Button,
@@ -74,7 +73,7 @@ export default function Index() {
             priority
             loading="eager"
           />
-          <HeroSlider />
+          <LandingPageDisplay />
         </Box>
       </Stack>
       {/* Drops */}
@@ -116,7 +115,7 @@ export default function Index() {
         </GradientButton>
       </Stack>
       <Slider
-        slideArray={DROPS.map((props) => (
+        slideArray={BRANDS.map((props) => (
           <GridCard {...props} key={props.id + "-ahsdkh"} />
         ))}
       />
@@ -194,22 +193,22 @@ const DROPS: GridCardProps[] = [
     subtitle: "Fashion for everyday",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
       bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?denim",
       alt: "grid image",
       bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?glam",
       alt: "grid image",
       bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?glamour",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },
@@ -220,22 +219,22 @@ const DROPS: GridCardProps[] = [
     subtitle: "Feeling old school?",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?shirt",
       alt: "grid image",
       bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?dress",
       alt: "grid image",
       bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?color",
       alt: "grid image",
       bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },
@@ -246,22 +245,22 @@ const DROPS: GridCardProps[] = [
     subtitle: "Fashion at work",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?glam",
       alt: "grid image",
       bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?shirt",
       alt: "grid image",
       bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?color",
       alt: "grid image",
       bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },
@@ -272,22 +271,22 @@ const DROPS: GridCardProps[] = [
     subtitle: "Glam and Glitter",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
       bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?dress",
       alt: "grid image",
       bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?design",
       alt: "grid image",
       bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?clothing",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },
@@ -298,22 +297,22 @@ const DROPS: GridCardProps[] = [
     subtitle: "Fashionable evenings",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?pant",
       alt: "grid image",
       bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?trouser",
       alt: "grid image",
       bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?pretty",
       alt: "grid image",
       bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?clothing",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },
@@ -324,22 +323,22 @@ const DROPS: GridCardProps[] = [
     subtitle: "Fashion for the cultured",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?scarf",
       alt: "grid image",
       bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?hoodie",
       alt: "grid image",
       bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?shoes",
       alt: "grid image",
       bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },
@@ -350,61 +349,191 @@ const DROPS: GridCardProps[] = [
     subtitle: "Boundless fashion",
     avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?jeans",
       alt: "grid image",
       bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
       bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?clothes",
       alt: "grid image",
       bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "/3d.png",
+      src: "https://source.unsplash.com/random/900×700/?clothing",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },
   },
 ];
 
-/*
+const BRANDS: GridCardProps[] = [
   {
-    id: "",
-    title: "",
-    subtitle: "",
-    avatarSrc:"",
+    id: "asdhkjasd3ad",
+    title: "Limitless",
+    subtitle: "Boundless fashion",
+    avatarSrc: "/designer.jpg",
     topLeftImage: {
-      src: "",
-      alt: "",
-      bgColor: "",
+      src: "https://source.unsplash.com/random/900×700/?nike",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
     },
     topRightImage: {
-      src: "",
-      alt: "",
-      bgColor: "",
+      src: "https://source.unsplash.com/random/900×700/?gap",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
     },
     bottomLeftImage: {
-      src: "",
-      alt: "",
-      bgColor: "",
+      src: "https://source.unsplash.com/random/900×700/?adidas",
+      alt: "grid image",
+      bgColor: "#FEECE5",
     },
     bottomRightImage: {
-      src: "",
-      alt: "",
-      bgColor: "",
-    }
-  }
-*/
+      src: "https://source.unsplash.com/random/900×700/?cr7",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "naksjadidjadw",
+    title: "Vintage",
+    subtitle: "Feeling old school?",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?company",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?logo",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?pattern",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?facebook",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "hsyaiajskaiaasasd",
+    title: "Work Wear",
+    subtitle: "Fashion at work",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?designer",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?levis",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?denims",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?puma",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "hajsuaiaosakassd",
+    title: "Evening Wear",
+    subtitle: "Fashionable evenings",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?brand",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?logo",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?branded",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?company",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "hsbahsjsakajsas",
+    title: "Ethnic",
+    subtitle: "Fashion for the cultured",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?scarf",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?hoodie",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?shoes",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?fashion",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+  {
+    id: "laoaksiajajasndads",
+    title: "Party Wear",
+    subtitle: "Glam and Glitter",
+    avatarSrc: "/designer.jpg",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?fashion",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?dress",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?design",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?clothing",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
+  },
+];
 
 const ADVISORS: AdvisorCardProps[] = [
   {
     id: "klaose",
-    src: "/placeholder.png",
+    src: "https://source.unsplash.com/random/900×700/?person",
     alt: "advisor brand",
     name: "Shivam Sharma",
     title: "Blockchain and Smart Contracts Advisor",
@@ -412,7 +541,7 @@ const ADVISORS: AdvisorCardProps[] = [
   },
   {
     id: "j7hausa",
-    src: "/placeholder.png",
+    src: "https://source.unsplash.com/random/900×700/?hispanic",
     alt: "advisor brand",
     name: "Ari Lightman",
     title: "Web3 and NFT Advisor",
@@ -420,7 +549,7 @@ const ADVISORS: AdvisorCardProps[] = [
   },
   {
     id: "jk8hay62ua",
-    src: "/placeholder.png",
+    src: "https://source.unsplash.com/random/900×700/?actress",
     alt: "advisor brand",
     name: "Baek Kim",
     title: "Business and Web3 Strategy Advisor",
@@ -428,7 +557,7 @@ const ADVISORS: AdvisorCardProps[] = [
   },
   {
     id: "kl8j26ags",
-    src: "/placeholder.png",
+    src: "https://source.unsplash.com/random/900×700/?actor",
     alt: "advisor brand",
     name: "JP Ren",
     title: "Business Strategy Advisor",
@@ -436,7 +565,7 @@ const ADVISORS: AdvisorCardProps[] = [
   },
   {
     id: "l03fg7h",
-    src: "/placeholder.png",
+    src: "https://source.unsplash.com/random/900×700/?asian",
     alt: "advisor brand",
     name: "Oliver Quin",
     title: "Technical Advisor",
