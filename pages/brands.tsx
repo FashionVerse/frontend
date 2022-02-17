@@ -3,45 +3,55 @@ import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { Container, Typography, Grid, Box } from "@mui/material";
 import GridCard, { GridCardProps } from "../src/components/GridCard";
-import CheckBoxSelect, { SelectState } from "../src/components/CheckBoxSelect";
+import CheckBoxSelect from "../src/components/CheckBoxSelect";
+import { useForm, FormProvider } from "react-hook-form";
+import { useRouter } from "next/router";
 
 export default function Brands() {
-  const [drop, setDrop] = React.useState<SelectState>({
-    options: DROP_DATA,
-    selected: "",
+  const methods = useForm({
+    defaultValues: {
+      drops: DROP_NAME_DATA,
+    },
   });
 
+  const router = useRouter();
+
   return (
-    <Container>
-      <Header />
-      <Typography
-        variant="h3"
-        align="center"
-        color="primary"
-        sx={{ mt: 16, mb: 10 }}
-      >
-        <b>BRANDS</b>
-      </Typography>
-      <Grid container spacing={8} sx={{ mb: 16 }}>
-        <Grid item xs={12} sx={{ ml: 2 }}>
-          <CheckBoxSelect state={drop} setState={setDrop} label="Drop" />
-        </Grid>
-        {BRANDS_DATA.map((props) => (
-          <Grid item xs={12} sm={6} md={4} key={props.id}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <GridCard {...props} />
-            </Box>
+    <FormProvider {...methods}>
+      <Container>
+        <Header />
+        <Typography
+          variant="h3"
+          align="center"
+          color="primary"
+          sx={{ mt: 16, mb: 10 }}
+        >
+          <b>BRANDS</b>
+        </Typography>
+        <Grid container spacing={8} sx={{ mb: 16 }}>
+          <Grid item xs={12} sx={{ ml: 3 }}>
+            <CheckBoxSelect formStateName="drops" label="Drop" />
           </Grid>
-        ))}
-      </Grid>
-      <Footer />
-    </Container>
+          {BRANDS_DATA.map((props) => (
+            <Grid item xs={12} sm={6} md={4} key={props.id}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onClick={() => {
+                  router.push("/brands/" + props.title);
+                }}
+              >
+                <GridCard {...props} />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+        <Footer />
+      </Container>
+    </FormProvider>
   );
 }
 
@@ -152,12 +162,12 @@ const BRANDS_DATA: GridCardProps[] = [
   },
 ];
 
-const DROP_DATA = [
-  " Streetwear",
-  "Vintage",
-  "Workwear",
-  "Partywear",
-  "Eveningwear",
-  "Ethnic",
-  "Limitless",
+const DROP_NAME_DATA = [
+  { value: "Streetwear", id: "jakais7ja" },
+  { value: "Vintage", id: "hayjsu812" },
+  { value: "Limitless", id: "asd81ja" },
+  { value: "Workwear", id: "jad1da7ja" },
+  { value: "Partywear", id: "po8nabsad" },
+  { value: "Ethnic", id: "hays7has" },
+  { value: "Eveningwear", id: "971bnada" },
 ];

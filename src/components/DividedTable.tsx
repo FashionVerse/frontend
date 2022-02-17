@@ -35,22 +35,28 @@ export default function DividedTable(props: DividedTableProps) {
     <Grid container justifyContent="center">
       <Grid item xs sx={{ textAlign: "center", mx: "16px", border: "none" }}>
         <Stack alignItems="center" justifyContent="center">
-          <Typography variant="body1">{props.title1}</Typography>
-          <Typography variant="body2">{props.subtitle1}</Typography>
+          <Typography variant="body1" gutterBottom>
+            <b>{props.title1}</b>
+          </Typography>
+          <Typography variant="subtitle1">{props.subtitle1}</Typography>
         </Stack>
       </Grid>
       <BlueDivider orientation="vertical" flexItem />{" "}
       <Grid item xs sx={{ textAlign: "center", mx: "16px", border: "none" }}>
         <Stack alignItems="center" justifyContent="center">
-          <Typography variant="body1">{props.title2}</Typography>
-          <Typography variant="body2">{props.subtitle2}</Typography>
+          <Typography variant="body1" gutterBottom>
+            <b>{props.title2}</b>
+          </Typography>
+          <Typography variant="subtitle1">{props.subtitle2}</Typography>
         </Stack>
       </Grid>
       <BlueDivider orientation="vertical" flexItem />
       <Grid item xs sx={{ textAlign: "center", mx: "16px", border: "none" }}>
         <Stack alignItems="center" justifyContent="center">
-          <Typography variant="body1">{props.title3}</Typography>
-          <Typography variant="body2">{props.subtitle3}</Typography>
+          <Typography variant="body1" gutterBottom>
+            <b>{props.title3}</b>
+          </Typography>
+          <Typography variant="subtitle1">{props.subtitle3}</Typography>
         </Stack>
       </Grid>
     </Grid>

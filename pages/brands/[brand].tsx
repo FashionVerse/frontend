@@ -26,11 +26,16 @@ export default function BrandPage() {
         sx={{ width: "100%", height: "100%" }}
         variant="quilted"
         cols={4}
-        rowHeight={121}
+        rowHeight={140}
       >
         {itemData.map((item) => (
           <ImageListItem key={item.img} cols={4} rows={4}>
-            <img {...srcset(item.img, 121)} alt={item.title} loading="lazy" />
+            <img
+              {...srcset(item.img, 400)}
+              alt={item.title}
+              loading="eager"
+              style={{ objectFit: "fill" }}
+            />
           </ImageListItem>
         ))}
       </ImageList>
@@ -53,9 +58,11 @@ export default function BrandPage() {
             bottom: "-120px",
             left: "50%",
             transform: "translate(-50%, 0)",
-            backgroundColor: "red",
+            overflow: "hidden",
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1533827432537-70133748f5c8)",
           }}
-        ></Box>
+        />
       </Box>
       <Container>
         <Typography
@@ -66,7 +73,7 @@ export default function BrandPage() {
         >
           <b>
             {/* Should ideally be this {brand} */}
-            {"XYZ BRAND NAME"}
+            {"BRAND NAME HERE"}
           </b>
         </Typography>
         <Grid container spacing={8} sx={{ mb: 16 }}>
@@ -154,6 +161,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "asndka62va",
@@ -164,6 +174,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "as6a0a82asd",
@@ -174,6 +187,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "jda67kajbs",
@@ -184,6 +200,9 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
   {
     id: "asda79qkajs72",
@@ -194,18 +213,24 @@ const DROP_DATA: DropCardProps[] = [
     pieceName: "Leather jacket",
     price: 12,
     rarity: 15,
+    description: "lorem ipsum dolor sit",
+    noOfPieces: 12,
+    collectionName: "Street Wear",
   },
 ];
 
 const DESIGNERS = [
-  { name: "Designer name", description: "asds ads asd asd asd asdas asdasdas" },
+  {
+    name: "Joseph Joestar",
+    description: "Creates bizzare designs inspired by ancient gods",
+  },
 ];
 
 const DividerTableData: DividedTableProps = {
-  title1: "title",
-  subtitle1: "desc here",
-  title2: "title",
-  subtitle2: "desc here",
-  title3: "title",
-  subtitle3: "desc here",
+  title1: "COLLECTION",
+  subtitle1: "Tundra Burst",
+  title2: "DROP CATEGORY",
+  subtitle2: "Exotic Wear",
+  title3: "PIECES",
+  subtitle3: "Only 20 in-store",
 };

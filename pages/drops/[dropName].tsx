@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useForm, FormProvider } from "react-hook-form";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
 import {
@@ -12,29 +13,19 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import DropCard, { DropCardProps } from "../../src/components/DropCard";
-import CheckBoxSelect, {
-  SelectState,
-} from "../../src/components/CheckBoxSelect";
+import CheckBoxSelect, { Option } from "../../src/components/CheckBoxSelect";
 
 export default function DropPage() {
   const router = useRouter();
+  const methods = useForm({
+    defaultValues: {
+      rarity: RARITY_DATA,
+      price: PRICE_DATA,
+      brand: BRAND_DATA,
+      collection: COLLECTION_DATA,
+    },
+  });
   const { dropName } = router.query;
-  const [rarity, setRarity] = React.useState<SelectState>({
-    options: RARITY_DATA,
-    selected: "",
-  });
-  const [price, setPrice] = React.useState<SelectState>({
-    options: PRICE_DATA,
-    selected: "",
-  });
-  const [brand, setBrand] = React.useState<SelectState>({
-    options: BRAND_DATA,
-    selected: "",
-  });
-  const [collection, setCollection] = React.useState<SelectState>({
-    options: COLLECTION_DATA,
-    selected: "",
-  });
 
   function ImageGallery() {
     return (
@@ -54,61 +45,55 @@ export default function DropPage() {
   }
 
   return (
-    <Container maxWidth={false} disableGutters>
-      <Container>
-        <Header />
-      </Container>
-      <Box sx={{ mt: 6, mb: 3 }}>
-        <ImageGallery />
-      </Box>
+    <FormProvider {...methods}>
+      <Container maxWidth={false} disableGutters>
+        <Container>
+          <Header />
+        </Container>
+        <Box sx={{ mt: 6, mb: 3 }}>
+          <ImageGallery />
+        </Box>
 
-      <Container>
-        <Typography
-          variant="h3"
-          align="center"
-          color="primary"
-          sx={{ mt: 16, mb: 10 }}
-        >
-          <b>
-            {/* Should ideally be this {dropName} */}
-            {"STREET WEAR"}
-          </b>
-        </Typography>
-        <Grid container spacing={8} sx={{ mb: 16 }}>
-          <Grid item xs={12}>
-            <Stack direction="row" gap={2} sx={{ px: 1 }}>
-              <CheckBoxSelect
-                state={rarity}
-                setState={setRarity}
-                label="Rarity"
-              />
-              <CheckBoxSelect state={price} setState={setPrice} label="Price" />
-              <CheckBoxSelect state={brand} setState={setBrand} label="Brand" />
-              <div style={{ flexGrow: 1 }} />
-              <CheckBoxSelect
-                state={collection}
-                setState={setCollection}
-                label="Collection"
-              />
-            </Stack>
-          </Grid>
-          {DROP_DATA.map((props) => (
-            <Grid item xs={12} sm={6} md={4} key={props.id}>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <DropCard {...props} fashionItem />
-              </Box>
+        <Container>
+          <Typography
+            variant="h3"
+            align="center"
+            color="primary"
+            sx={{ mt: 16, mb: 10 }}
+          >
+            <b>
+              {/* Should ideally be this {dropName} */}
+              {"STREET WEAR"}
+            </b>
+          </Typography>
+          <Grid container spacing={8} sx={{ mb: 16 }}>
+            <Grid item xs={12}>
+              <Stack direction="row" gap={2} sx={{ px: 1 }}>
+                <CheckBoxSelect formStateName="rarity" label="Rarity" />
+                <CheckBoxSelect formStateName="price" label="Price" />
+                <div style={{ flexGrow: 1 }} />
+                <CheckBoxSelect formStateName="brand" label="Brand" />
+                <CheckBoxSelect formStateName="collection" label="Colection" />
+              </Stack>
             </Grid>
-          ))}
-        </Grid>
+            {DROP_DATA.map((props) => (
+              <Grid item xs={12} sm={6} md={4} key={props.id}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <DropCard {...props} fashionItem />
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+        <Footer />
       </Container>
-      <Footer />
-    </Container>
+    </FormProvider>
   );
 }
 
@@ -240,12 +225,27 @@ const DROP_DATA: DropCardProps[] = [
     collectionName: "Street Wear",
   },
 ];
-const RARITY_DATA = ["Semi rare", "Ultra rare", "Super rare", "Extremely rare"];
-const PRICE_DATA = [
-  "< 0.05 eth",
-  "> 0.05 & <= 0.2 eth",
-  "> 0.2 eth & <= 0.5 eth",
-  "> 0.5 eth",
+const RARITY_DATA: Option[] = [
+  { value: "Semi rare", id: "123kjaasd" },
+  { value: "Ultra rare", id: "asdasioqdoj" },
+  { value: "Super rare", id: "asdaiuqas" },
+  { value: "Extremely rare", id: "98ujkacc" },
 ];
-const BRAND_DATA = ["Sieke", "Alibas", "Gape"];
-const COLLECTION_DATA = ["Sports", "Exotic", "Casuals"];
+
+const PRICE_DATA: Option[] = [
+  { value: "< 0.05 eth", id: "osndaok" },
+  { value: "> 0.05 & <= 0.2 eth", id: "oichaiu" },
+  { value: "> 0.2 eth & <= 0.5 eth", id: "afhjasd" },
+  { value: "> 0.5 eth", id: "yuvaeibask" },
+];
+const BRAND_DATA = [
+  { value: "Sieke", id: "oansdin" },
+  { value: "Alibas", id: "avwdhjdasjd" },
+  { value: "Gape", id: "7b2212sx" },
+];
+
+const COLLECTION_DATA = [
+  { value: "Sports", id: "jakais7ja" },
+  { value: "Exotic", id: "hayus8as" },
+  { value: "Casuals", id: "gh3yyahsa" },
+];
