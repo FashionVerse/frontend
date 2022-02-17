@@ -6,9 +6,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import { PaletteMode } from "@mui/material";
+import { PaletteMode, Typography } from "@mui/material";
+import { useWindowSize } from "../src/useWindowSize";
 import "../src/styles.css";
 import "keen-slider/keen-slider.min.css";
+import { Box } from "@mui/system";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -47,6 +49,7 @@ export default function MyApp(props: any) {
   });
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const { width } = useWindowSize();
 
   return (
     <CacheProvider value={emotionCache}>
@@ -60,7 +63,25 @@ export default function MyApp(props: any) {
             className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
             style={{ marginTop: "-24px", paddingTop: "24px" }}
           >
-            <Component {...pageProps} />
+            {!width || width > 1279 ? (
+              <Component {...pageProps} />
+            ) : (
+              <Box
+                sx={{
+                  height: "100vh",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography variant="h6" align="center">
+                  FashionVerse works best on devices with a viewport width
+                  larger than 1280px. Please re-size or switch devices to launch
+                  FashionVerse.
+                </Typography>
+              </Box>
+            )}
           </div>
         </ThemeProvider>
       </ColorModeContext.Provider>
