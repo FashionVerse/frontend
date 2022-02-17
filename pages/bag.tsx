@@ -10,10 +10,13 @@ import {
   Stack,
   IconButton,
 } from "@mui/material";
-import DropCard, { DropCardProps } from "../src/components/DropCard";
+import FashionItemCard, {
+  FashionItemCardProps,
+} from "../src/components/FashionItemCard";
 import { BsTrash, BsDashSquare, BsPlusSquare } from "react-icons/bs";
 import { styled } from "@mui/material/styles";
 import { SiEthereum } from "react-icons/si";
+import { produce } from "immer";
 
 const BlueShadowPaper = styled(Paper)(({ theme }) => ({
   boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 30.3961px -30.3961px 30.3961px rgba(149, 149, 149, 0.095), inset -30.3961px 30.3961px 30.3961px rgba(255, 255, 255, 0.095)`,
@@ -26,11 +29,90 @@ const GradientButton = styled(Button)(({ theme }) => ({
   padding: "12px 18px",
 }));
 
+interface CheckoutCardProps extends FashionItemCardProps {
+  quantity: number;
+}
+function toFixedIfNecessary(value, dp) {
+  return +parseFloat(value).toFixed(dp);
+}
+
 export default function Bag() {
-  const totalCost = CHECKOUT_DATA.map((c) => c.price).reduce(
-    (a, b) => a + b,
-    0
-  );
+  const [data, setData] = React.useState<CheckoutCardProps[]>(CHECKOUT_DATA);
+
+  const totalCost = data
+    .map((c) => c.price * c.quantity)
+    .reduce((a, b) => a + b, 0);
+
+  function CheckoutCard({ quantity, ...rest }: CheckoutCardProps) {
+    return (
+      <Grid container gap={2}>
+        <Grid item xs={5}>
+          <FashionItemCard {...rest} hideAddToBag hidePrice expandable />
+        </Grid>
+        <Grid item container direction="column" justifyContent="center" xs={6}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Stack direction="row" alignItems="center" justifyContent="center">
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  setData(
+                    produce((state) => {
+                      const idx = state.findIndex((s) => s.id === rest.id);
+                      if (state[idx].quantity > 1)
+                        state[idx].quantity = state[idx].quantity - 1;
+                    })
+                  );
+                }}
+              >
+                <BsDashSquare />
+              </IconButton>
+              <Typography sx={{ px: 2 }} variant="h6">
+                {quantity}
+              </Typography>
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  setData(
+                    produce((state) => {
+                      const idx = state.findIndex((s) => s.id === rest.id);
+                      state[idx].quantity = state[idx].quantity + 1;
+                    })
+                  );
+                }}
+              >
+                <BsPlusSquare />
+              </IconButton>
+            </Stack>
+            <Typography
+              variant="h5"
+              sx={{ display: "flex", alignItems: "center", gap: "4px" }}
+            >
+              {rest.price}
+              <SiEthereum fontSize="1.25rem" />
+            </Typography>
+            <Button
+              color="error"
+              startIcon={<BsTrash />}
+              onClick={() => {
+                setData(
+                  produce((state) => {
+                    state = state.filter((s) => s.id !== rest.id);
+                    return state;
+                  })
+                );
+              }}
+            >
+              Remove
+            </Button>
+          </Stack>
+        </Grid>
+      </Grid>
+    );
+  }
 
   return (
     <Container>
@@ -54,7 +136,7 @@ export default function Bag() {
           }}
         >
           <Stack gap={4} sx={{ px: 4, py: 6 }}>
-            {CHECKOUT_DATA.map((props) => (
+            {data.map((props) => (
               <CheckoutCard {...props} />
             ))}
           </Stack>
@@ -66,7 +148,7 @@ export default function Bag() {
           >
             <Stack gap={2}>
               <Typography variant="h5">
-                {"Total Cost: " + totalCost + " ETH"}
+                {"Total Cost: " + toFixedIfNecessary(totalCost, 4) + " ETH"}
               </Typography>
               <GradientButton color="primary" sx={{ borderRadius: "12px" }}>
                 <Typography variant="h5">Purchase</Typography>
@@ -81,120 +163,59 @@ export default function Bag() {
   );
 }
 
-function CheckoutCard({ quantity, ...dropCardProps }: CheckoutCardProps) {
-  return (
-    <Grid container gap={2}>
-      <Grid item xs={5}>
-        <DropCard {...dropCardProps} hideAddToBag hidePrice fashionItem />
-      </Grid>
-      <Grid
-        item
-        container
-        direction="column"
-        // alignItems="center"
-        justifyContent="center"
-        xs={6}
-      >
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Stack direction="row" alignItems="center" justifyContent="center">
-            <IconButton color="primary">
-              <BsDashSquare />
-            </IconButton>
-            <Typography sx={{ px: 2 }} variant="h6">
-              {quantity}
-            </Typography>
-            <IconButton color="primary">
-              <BsPlusSquare />
-            </IconButton>
-          </Stack>
-          <Typography
-            variant="h5"
-            sx={{ display: "flex", alignItems: "center", gap: "4px" }}
-          >
-            {dropCardProps.price}
-            <SiEthereum fontSize="1.25rem" />
-          </Typography>
-          <Button color="error" startIcon={<BsTrash />}>
-            Remove
-          </Button>
-        </Stack>
-      </Grid>
-    </Grid>
-  );
-}
-
-interface CheckoutCardProps extends DropCardProps {
-  quantity: number;
-}
-
 const CHECKOUT_DATA: CheckoutCardProps[] = [
   {
-    id: "ausdkbbsk",
-    src: "/3d.png",
-    alt: "piece image",
-    brandName: "Nike",
-    brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
-    collectionName: "Street Wear",
-  },
-  {
-    id: "asndka62va",
-    src: "/3d.png",
-    alt: "piece image",
-    brandName: "Nike",
-    brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
-    collectionName: "Street Wear",
-  },
-  {
     id: "as6a0a82asd",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?trousers",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Trousers",
+    price: 0.04,
+    rarity: 13,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 25,
     collectionName: "Street Wear",
+    rarityCategory: "Semi-rare",
+    expandable: true,
+    quantity: 1,
+    hideAddToBag: true,
+    hidePrice: true,
   },
   {
     id: "jda67kajbs",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?caps",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Caps & Hats",
+    price: 0.25,
+    rarity: 28,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 5,
     collectionName: "Street Wear",
+    rarityCategory: "Ultra-rare",
+    expandable: true,
+    quantity: 1,
+    hideAddToBag: true,
+    hidePrice: true,
   },
   {
     id: "asda79qkajs72",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?shoes",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Shoes",
+    price: 0.01,
+    rarity: 8,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 25,
     collectionName: "Street Wear",
+    rarityCategory: "Semi-rare",
+    expandable: true,
+    quantity: 2,
+    hideAddToBag: true,
+    hidePrice: true,
   },
 ];

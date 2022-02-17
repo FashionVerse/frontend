@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { styled, alpha } from "@mui/system";
+import { styled, alpha, useTheme } from "@mui/system";
 
 export interface AdvisorCardProps {
   src: string;
@@ -26,6 +26,9 @@ const AdvisorCardContainer = styled(Card)(({ theme }) => ({
 }));
 
 export default function AdvisorCard(props: AdvisorCardProps) {
+  const {
+    palette: { mode },
+  } = useTheme();
   return (
     <AdvisorCardContainer>
       <CardMedia
@@ -38,7 +41,10 @@ export default function AdvisorCard(props: AdvisorCardProps) {
         <Typography variant="h5" sx={{ fontWeight: 600 }} component="div">
           {props.name}
         </Typography>
-        <Typography variant="subtitle1" color="primary">
+        <Typography
+          variant="subtitle1"
+          color={mode === "dark" ? "primary" : "secondary"}
+        >
           {props.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">

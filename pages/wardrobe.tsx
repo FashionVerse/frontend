@@ -11,7 +11,9 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import DropCard, { DropCardProps } from "../src/components/DropCard";
+import FashionItemCard, {
+  FashionItemCardProps,
+} from "../src/components/FashionItemCard";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -49,7 +51,7 @@ export default function Wardrobe() {
       </Stack>
       {activePage === "nfts" ? (
         <Grid container spacing={8} sx={{ mb: 16 }}>
-          {DROP_DATA.map((props) => (
+          {YOUR_NFTS.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{
@@ -58,7 +60,7 @@ export default function Wardrobe() {
                   justifyContent: "center",
                 }}
               >
-                <DropCard {...props} hideAddToBag fashionItem />
+                <FashionItemCard {...props} hideAddToBag expandable />
               </Box>
             </Grid>
           ))}
@@ -82,70 +84,47 @@ export default function Wardrobe() {
   );
 }
 
-const DROP_DATA: DropCardProps[] = [
-  {
-    id: "ausdkbbsk",
-    src: "/3d.png",
-    alt: "piece image",
-    brandName: "Nike",
-    brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
-    collectionName: "Street Wear",
-  },
-  {
-    id: "asndka62va",
-    src: "/3d.png",
-    alt: "piece image",
-    brandName: "Nike",
-    brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
-    collectionName: "Street Wear",
-  },
+const YOUR_NFTS: FashionItemCardProps[] = [
   {
     id: "as6a0a82asd",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?trousers",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Trousers",
+    price: 0.04,
+    rarity: 13,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 25,
     collectionName: "Street Wear",
+    rarityCategory: "Semi-rare",
   },
   {
     id: "jda67kajbs",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?caps",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Caps & Hats",
+    price: 0.25,
+    rarity: 28,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 5,
     collectionName: "Street Wear",
+    rarityCategory: "Ultra-rare",
   },
   {
     id: "asda79qkajs72",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?shoes",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Shoes",
+    price: 0.01,
+    rarity: 8,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 25,
     collectionName: "Street Wear",
+    rarityCategory: "Semi-rare",
   },
 ];

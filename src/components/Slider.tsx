@@ -12,6 +12,7 @@ export default function Slider({ slideArray }: SliderProps) {
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
+    loop: true,
     breakpoints: {
       "(min-width: 400px)": {
         slides: { perView: 2, spacing: 2 },

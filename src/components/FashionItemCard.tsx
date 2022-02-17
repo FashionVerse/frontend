@@ -14,7 +14,7 @@ import { SiEthereum } from "react-icons/si";
 import { IconButton } from "@mui/material";
 import EnlargedFashionCard from "./EnlargedFashionCard";
 
-export interface DropCardProps {
+export interface FashionItemCardProps {
   id: string;
   src: string;
   alt: string;
@@ -22,16 +22,17 @@ export interface DropCardProps {
   brandName: string;
   brandImage: string;
   rarity: number;
+  rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
   price: number;
   hideAddToBag?: boolean;
   hidePrice?: boolean;
-  fashionItem?: boolean;
+  expandable?: boolean;
   description: string;
   noOfPieces: number;
   collectionName: string;
 }
 
-export const DropCardContainer = styled(Card)(({ theme }) => ({
+export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
   maxWidth: "375px",
   background:
     theme.palette.mode === "dark"
@@ -43,17 +44,18 @@ export const DropCardContainer = styled(Card)(({ theme }) => ({
   borderRadius: "16px",
 }));
 
-export default function DropCard(props: DropCardProps) {
+export default function FashionItemCard(props: FashionItemCardProps) {
   const [enlarged, setEnlarged] = React.useState(false);
   return (
     <>
-      <DropCardContainer>
+      <FashionItemCardContainer>
         <Box
           sx={{
             minWidth: "300px",
             aspectRatio: "1/1",
             position: "relative",
             borderRadius: "1rem",
+            overflow: "hidden",
             backgroundColor: "white",
           }}
           onClick={() => setEnlarged(true)}
@@ -62,7 +64,7 @@ export default function DropCard(props: DropCardProps) {
             src={props.src}
             alt={props.alt}
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
           />
         </Box>
         <Stack
@@ -85,9 +87,9 @@ export default function DropCard(props: DropCardProps) {
             />
           </ListItem>
           <Stack justifyContent="center" alignItems="center" sx={{ mr: 1 }}>
-            <Typography variant="caption">Rare</Typography>
+            <Typography variant="caption">Rarity</Typography>
             <Typography variant="caption" sx={{ mt: "-2px" }}>
-              {props.price}
+              {props.rarity}
             </Typography>
           </Stack>
         </Stack>
@@ -119,8 +121,8 @@ export default function DropCard(props: DropCardProps) {
             </Stack>
           )}
         </Box>
-      </DropCardContainer>
-      {props.fashionItem && (
+      </FashionItemCardContainer>
+      {props.expandable && (
         <EnlargedFashionCard
           state={enlarged}
           setState={setEnlarged}

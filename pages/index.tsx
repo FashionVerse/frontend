@@ -85,7 +85,13 @@ export default function Index() {
       </Typography>
       <Slider
         slideArray={DROPS.map((props) => (
-          <GridCard {...props} noBrand key={props.id} />
+          // Hard coded link to drop
+          <GridCard
+            {...props}
+            noBrand
+            key={props.id}
+            href="/drops/street-wear"
+          />
         ))}
       />
       {/* Brands */}
@@ -191,7 +197,7 @@ const DROPS: GridCardProps[] = [
     id: "abc123",
     title: "Street Wear",
     subtitle: "Fashion for everyday",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
@@ -217,7 +223,7 @@ const DROPS: GridCardProps[] = [
     id: "h7jaus9",
     title: "Vintage",
     subtitle: "Feeling old school?",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?shirt",
       alt: "grid image",
@@ -243,7 +249,7 @@ const DROPS: GridCardProps[] = [
     id: "7haj8ka",
     title: "Work Wear",
     subtitle: "Fashion at work",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?glam",
       alt: "grid image",
@@ -269,7 +275,7 @@ const DROPS: GridCardProps[] = [
     id: "h8ak9ja",
     title: "Party Wear",
     subtitle: "Glam and Glitter",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?fashion",
       alt: "grid image",
@@ -295,7 +301,7 @@ const DROPS: GridCardProps[] = [
     id: "jk9a3ha",
     title: "Evening Wear",
     subtitle: "Fashionable evenings",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?pant",
       alt: "grid image",
@@ -321,7 +327,7 @@ const DROPS: GridCardProps[] = [
     id: "9ajus2h",
     title: "Ethnic",
     subtitle: "Fashion for the cultured",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?scarf",
       alt: "grid image",
@@ -347,7 +353,7 @@ const DROPS: GridCardProps[] = [
     id: "ka9kai34",
     title: "Limitless",
     subtitle: "Boundless fashion",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?jeans",
       alt: "grid image",
@@ -376,7 +382,7 @@ const BRANDS: GridCardProps[] = [
     id: "asdhkjasd3ad",
     title: "Limitless",
     subtitle: "Boundless fashion",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?nike",
       alt: "grid image",
@@ -402,7 +408,7 @@ const BRANDS: GridCardProps[] = [
     id: "naksjadidjadw",
     title: "Vintage",
     subtitle: "Feeling old school?",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?company",
       alt: "grid image",
@@ -428,7 +434,7 @@ const BRANDS: GridCardProps[] = [
     id: "hsyaiajskaiaasasd",
     title: "Work Wear",
     subtitle: "Fashion at work",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?designer",
       alt: "grid image",
@@ -454,7 +460,7 @@ const BRANDS: GridCardProps[] = [
     id: "hajsuaiaosakassd",
     title: "Evening Wear",
     subtitle: "Fashionable evenings",
-    avatarSrc: "/designer.jpg",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
     topLeftImage: {
       src: "https://source.unsplash.com/random/900×700/?brand",
       alt: "grid image",
@@ -472,58 +478,6 @@ const BRANDS: GridCardProps[] = [
     },
     bottomRightImage: {
       src: "https://source.unsplash.com/random/900×700/?company",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "hsbahsjsakajsas",
-    title: "Ethnic",
-    subtitle: "Fashion for the cultured",
-    avatarSrc: "/designer.jpg",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?scarf",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?hoodie",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?shoes",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?fashion",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "laoaksiajajasndads",
-    title: "Party Wear",
-    subtitle: "Glam and Glitter",
-    avatarSrc: "/designer.jpg",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?fashion",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?dress",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?design",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?clothing",
       alt: "grid image",
       bgColor: "#E5E5F0",
     },

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { styled, alpha, useTheme } from "@mui/system";
+import { useRouter } from "next/router";
 
 type GridImageProps = {
   bgColor?: string;
@@ -29,6 +30,7 @@ export type GridCardProps = {
   subtitle: string;
   id: string;
   noBrand?: boolean;
+  href?: string;
 };
 
 const GridCardContainer = styled(Paper)(({ theme }) => ({
@@ -62,8 +64,12 @@ const GridCard = (props: GridCardProps) => {
     palette: { mode },
   } = useTheme();
 
+  const router = useRouter();
+
   return (
-    <GridCardContainer>
+    <GridCardContainer
+      onClick={() => (props.href ? router.push(props.href) : null)}
+    >
       <Stack justifyContent={"space-between"}>
         <Grid container spacing={1}>
           <Grid item xs={6}>

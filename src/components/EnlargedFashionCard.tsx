@@ -3,18 +3,21 @@ import Image from "next/image";
 import Dialog from "@mui/material/Dialog";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { DropCardContainer, DropCardProps } from "./DropCard";
+import {
+  FashionItemCardContainer,
+  FashionItemCardProps,
+} from "./FashionItemCard";
 import { Stack } from "@mui/material";
 import { SiEthereum } from "react-icons/si";
 import { BsHandbag } from "react-icons/bs";
 import { IconButton } from "@mui/material";
 
-export interface CardDialogProps extends DropCardProps {
+export interface CardDialogProps extends FashionItemCardProps {
   open: boolean;
   onClose: () => void;
 }
 
-export interface EnlargedFashionCardProps extends DropCardProps {
+export interface EnlargedFashionCardProps extends FashionItemCardProps {
   state: boolean;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -28,7 +31,7 @@ function CardDialog(props: CardDialogProps) {
       onClose={onClose}
       PaperProps={{ sx: { borderRadius: "16px" } }}
     >
-      <DropCardContainer sx={{ maxWidth: "none", minWidth: "440px" }}>
+      <FashionItemCardContainer sx={{ maxWidth: "none", minWidth: "440px" }}>
         <Box
           sx={{
             minWidth: "300px",
@@ -36,13 +39,14 @@ function CardDialog(props: CardDialogProps) {
             position: "relative",
             borderRadius: "1rem",
             backgroundColor: "white",
+            overflow: "hidden",
           }}
         >
           <Image
             src={props.src}
             alt={props.alt}
             layout="fill"
-            objectFit="contain"
+            objectFit="cover"
           />
         </Box>
         <Stack
@@ -61,9 +65,9 @@ function CardDialog(props: CardDialogProps) {
               <b>{props.brandName}</b>
             </Typography>
           </Stack>
-          <Stack>
+          <Stack sx={{ textAlign: "right" }}>
             <Typography variant="caption">
-              <b>{"RARE"}</b>
+              <b>{props.rarityCategory}</b>
             </Typography>
             <Typography variant="caption" color="textSecondary">
               {"No. of pieces - " + props.rarity}
@@ -93,7 +97,7 @@ function CardDialog(props: CardDialogProps) {
             </Typography>
           </Stack>
         </Stack>
-      </DropCardContainer>
+      </FashionItemCardContainer>
     </Dialog>
   );
 }

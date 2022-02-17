@@ -12,7 +12,9 @@ import {
   Stack,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import DropCard, { DropCardProps } from "../../src/components/DropCard";
+import FashionItemCard, {
+  FashionItemCardProps,
+} from "../../src/components/FashionItemCard";
 import CheckBoxSelect, { Option } from "../../src/components/CheckBoxSelect";
 
 export default function DropPage() {
@@ -33,11 +35,11 @@ export default function DropPage() {
         sx={{ width: "100%", height: "100%" }}
         variant="quilted"
         cols={4}
-        rowHeight={121}
+        rowHeight={180}
       >
         {itemData.map((item) => (
           <ImageListItem key={item.img} cols={1} rows={1}>
-            <img {...srcset(item.img, 121)} alt={item.title} loading="lazy" />
+            <img {...srcset(item.img, 180)} alt={item.title} loading="eager" />
           </ImageListItem>
         ))}
       </ImageList>
@@ -85,7 +87,7 @@ export default function DropPage() {
                     justifyContent: "center",
                   }}
                 >
-                  <DropCard {...props} fashionItem />
+                  <FashionItemCard {...props} expandable />
                 </Box>
               </Grid>
             ))}
@@ -108,123 +110,128 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 
 const itemData = [
   {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
+    img: "https://source.unsplash.com/random/900×700/?clothing",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-    author: "@arwinneil",
+    img: "https://source.unsplash.com/random/900×700/?fashion",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
+    img: "https://source.unsplash.com/random/900×700/?pants",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
+    img: "https://source.unsplash.com/random/900×700/?trousers",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
+    img: "https://source.unsplash.com/random/900×700/?people",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
+    img: "https://source.unsplash.com/random/900×700/?branded",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
+    img: "https://source.unsplash.com/random/900×700/?designers",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
+    img: "https://source.unsplash.com/random/900×700/?global",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
+    img: "https://source.unsplash.com/random/900×700/?logo",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
+    img: "https://source.unsplash.com/random/900×700/?insignia",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
+    img: "https://source.unsplash.com/random/900×700/?clothing",
+    title: "random",
   },
   {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
+    img: "https://source.unsplash.com/random/900×700/?bags",
+    title: "random",
   },
 ];
 
-const DROP_DATA: DropCardProps[] = [
+const DROP_DATA: FashionItemCardProps[] = [
   {
     id: "ausdkbbsk",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?hoodies",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Hoodie",
+    price: 0.02,
+    rarity: 20,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 4,
     collectionName: "Street Wear",
+    rarityCategory: "Super-rare",
   },
   {
     id: "asndka62va",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?shirts",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Shirt",
+    price: 0.12,
+    rarity: 50,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 1,
     collectionName: "Street Wear",
+    rarityCategory: "Extremely-rare",
   },
   {
     id: "as6a0a82asd",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?trousers",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Trousers",
+    price: 0.04,
+    rarity: 13,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 25,
     collectionName: "Street Wear",
+    rarityCategory: "Semi-rare",
   },
   {
     id: "jda67kajbs",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?caps",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Caps & Hats",
+    price: 0.25,
+    rarity: 28,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 5,
     collectionName: "Street Wear",
+    rarityCategory: "Ultra-rare",
   },
   {
     id: "asda79qkajs72",
-    src: "/3d.png",
+    src: "https://source.unsplash.com/random/900×700/?shoes",
     alt: "piece image",
-    brandName: "Nike",
+    brandName: "Spikey",
     brandImage: "/placeholder.png",
-    pieceName: "Leather jacket",
-    price: 12,
-    rarity: 15,
+    pieceName: "Shoes",
+    price: 0.01,
+    rarity: 8,
     description: "lorem ipsum dolor sit",
-    noOfPieces: 12,
+    noOfPieces: 25,
     collectionName: "Street Wear",
+    rarityCategory: "Semi-rare",
   },
 ];
+
 const RARITY_DATA: Option[] = [
   { value: "Semi rare", id: "123kjaasd" },
   { value: "Ultra rare", id: "asdasioqdoj" },
