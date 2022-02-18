@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import { PaletteMode, Typography } from "@mui/material";
+import { Container, PaletteMode, Typography } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
@@ -47,6 +47,15 @@ export default function MyApp(props: any) {
       },
       fontSize: 16,
     },
+    // components: {
+    //   MuiContainer: {
+    //     styleOverrides: {
+    //       root: {
+    //         backgroundColor: "",
+    //       },
+    //     },
+    //   },
+    // },
   });
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
@@ -60,33 +69,44 @@ export default function MyApp(props: any) {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <div
-            className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
-            style={{
-              marginTop: "-24px",
-              paddingTop: "24px",
+          <Container
+            maxWidth={false}
+            disableGutters
+            sx={{
+              backgroundImage:
+                mode === "dark"
+                  ? "#121212"
+                  : "linear-gradient(to right, #eeeeee, #ffffff)",
             }}
           >
-            {!width || width > 1279 ? (
-              <Component {...pageProps} />
-            ) : (
-              <Box
-                sx={{
-                  height: "100vh",
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography variant="h6" align="center">
-                  FashionVerse works best on devices with a viewport width
-                  larger than 1280px. Please re-size or switch devices to launch
-                  FashionVerse.
-                </Typography>
-              </Box>
-            )}
-          </div>
+            <div
+              className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
+              style={{
+                marginTop: "-24px",
+                paddingTop: "24px",
+              }}
+            >
+              {!width || width > 1279 ? (
+                <Component {...pageProps} />
+              ) : (
+                <Box
+                  sx={{
+                    height: "100vh",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography variant="h6" align="center">
+                    FashionVerse works best on devices with a viewport width
+                    larger than 1280px. Please re-size or switch devices to
+                    launch FashionVerse.
+                  </Typography>
+                </Box>
+              )}
+            </div>
+          </Container>
         </ThemeProvider>
       </ColorModeContext.Provider>
     </CacheProvider>
