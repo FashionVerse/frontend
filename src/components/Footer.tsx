@@ -21,8 +21,8 @@ export default function Footer() {
       <Grid container justifyContent={"space-between"}>
         <Grid item xs={5}>
           <Stack>
-            <Logo size="56px" withText>
-              <Typography sx={{ ml: "12px" }} variant="h5">
+            <Logo size="40px" withText>
+              <Typography sx={{ ml: "8px" }} variant="h4">
                 <strong>FASHION</strong>VERSE
               </Typography>
             </Logo>

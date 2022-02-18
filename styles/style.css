@@ -1,0 +1,71 @@
+/* @font-face {
+  font-family: "Berton Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Berton Regular"), url("Berton-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Berton Thin";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Berton Thin"), url("Berton-Thin.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Berton Light";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Berton Light"), url("Berton-Light.woff") format("woff");
+} */
+
+.bg-style-light {
+  background-color: "transparent";
+  background-position: fixed;
+  background-image: radial-gradient(
+      circle at top right,
+      #5ed8fd80,
+      #eeeeee 30%,
+      transparent 100%
+    ),
+    radial-gradient(circle at center, #5ed8fd, #eeeeee 50%, transparent 100%),
+    radial-gradient(
+      circle at bottom left,
+      #5ed8fd80,
+      #eeeeee 30%,
+      transparent 100%
+    );
+}
+
+.bg-style-dark {
+  background-color: "transparent";
+  background-position: fixed;
+  background-image: radial-gradient(
+      circle at top right,
+      #5ed8fd80,
+      #222222 30%,
+      transparent 100%
+    ),
+    radial-gradient(circle at center, #5ed8fd, #222222 50%, transparent 100%),
+    radial-gradient(
+      circle at bottom left,
+      #5ed8fd80,
+      #222222 30%,
+      transparent 100%
+    );
+}
+
+/* fallback for IE */
+.gradient-text {
+  color: inherit;
+}
+/* gradient text for modern browsers */
+@supports (background-clip: text) {
+  .gradient-text {
+    background-image: linear-gradient(90deg, #22caff, #0266c1);
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+}

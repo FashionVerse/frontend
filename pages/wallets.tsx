@@ -1,8 +1,21 @@
 import * as React from "react";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
-import { Button, Container, Typography, Grid, Paper } from "@mui/material";
+import { Container, Typography, Grid, Paper } from "@mui/material";
 import Image from "next/image";
+import { styled } from "@mui/system";
+
+const StyledPaper = styled(Paper)({
+  maxWidth: "340px",
+  aspectRatio: "1/1",
+  margin: "auto",
+  borderRadius: "32px",
+  padding: "32px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  background: `rgba( 255, 255, 255, 0.08 )`,
+});
 
 export default function Wallets() {
   return (
@@ -13,25 +26,14 @@ export default function Wallets() {
         align="center"
         color="primary"
         sx={{ mt: 16, mb: 10 }}
+        className="gradient-text"
       >
         <b>CONNECT A WALLET</b>
       </Typography>
       <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
         {WALLETS.map(({ id, href, name, src, alt }) => (
-          <Grid item xs={12} sm={12} md={5} key={id}>
-            <Paper
-              variant="outlined"
-              sx={{
-                maxWidth: "360px",
-                aspectRatio: "1/1",
-                margin: "auto",
-                borderRadius: "32px",
-                padding: "32px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
+          <Grid item xs={12} sm={12} md={4} key={id}>
+            <StyledPaper variant="outlined">
               <Image
                 src={src}
                 alt={alt}
@@ -42,7 +44,7 @@ export default function Wallets() {
               <Typography variant="h5" sx={{ mt: 2 }}>
                 {name}
               </Typography>
-            </Paper>
+            </StyledPaper>
           </Grid>
         ))}
       </Grid>

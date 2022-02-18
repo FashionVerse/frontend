@@ -8,7 +8,7 @@ import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { PaletteMode, Typography } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
-import "../src/styles.css";
+import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
 import { Box } from "@mui/system";
 
@@ -41,10 +41,11 @@ export default function MyApp(props: any) {
       },
     },
     typography: {
-      fontFamily: ["Montserrat", "sans-serif"].join(","),
+      fontFamily: ["Crimson Pro", "serif"].join(","),
       button: {
         textTransform: "none",
       },
+      fontSize: 16,
     },
   });
 
@@ -61,7 +62,10 @@ export default function MyApp(props: any) {
           <CssBaseline />
           <div
             className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
-            style={{ marginTop: "-24px", paddingTop: "24px" }}
+            style={{
+              marginTop: "-24px",
+              paddingTop: "24px",
+            }}
           >
             {!width || width > 1279 ? (
               <Component {...pageProps} />

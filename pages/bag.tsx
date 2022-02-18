@@ -125,6 +125,7 @@ export default function Bag() {
           mt: 16,
           mb: 10,
         }}
+        className="gradient-text"
       >
         <b>CHECKOUT</b>
       </Typography>

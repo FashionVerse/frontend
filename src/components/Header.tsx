@@ -33,8 +33,8 @@ export default function Header() {
       <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
         {theme.palette.mode === "dark" ? <BsBrightnessHigh /> : <BsMoonStars />}
       </IconButton>
-      <Logo size="48px" withText>
-        <Typography sx={{ ml: "12px" }} variant="h5">
+      <Logo size="40px" withText>
+        <Typography sx={{ ml: "8px" }} variant="h4">
           <strong>FASHION</strong>VERSE
         </Typography>
       </Logo>

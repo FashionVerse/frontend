@@ -36,6 +36,7 @@ export default function DropPage() {
         variant="quilted"
         cols={4}
         rowHeight={180}
+        gap={0}
       >
         {itemData.map((item) => (
           <ImageListItem key={item.img} cols={1} rows={1}>
@@ -62,6 +63,7 @@ export default function DropPage() {
             align="center"
             color="primary"
             sx={{ mt: 16, mb: 10 }}
+            className="gradient-text"
           >
             <b>
               {/* Should ideally be this {dropName} */}
@@ -75,7 +77,7 @@ export default function DropPage() {
                 <CheckBoxSelect formStateName="price" label="Price" />
                 <div style={{ flexGrow: 1 }} />
                 <CheckBoxSelect formStateName="brand" label="Brand" />
-                <CheckBoxSelect formStateName="collection" label="Colection" />
+                <CheckBoxSelect formStateName="collection" label="Collection" />
               </Stack>
             </Grid>
             {DROP_DATA.map((props) => (

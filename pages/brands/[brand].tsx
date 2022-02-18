@@ -1,5 +1,4 @@
 import * as React from "react";
-import Image from "next/image";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
 import {
@@ -11,12 +10,10 @@ import {
   ImageListItem,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import FashionItemCard, {
-  FashionItemCardProps,
-} from "../../src/components/FashionItemCard";
 import DividedTable, {
   DividedTableProps,
 } from "../../src/components/DividedTable";
+import GridCard, { GridCardProps } from "../../src/components/GridCard";
 
 export default function BrandPage() {
   const router = useRouter();
@@ -117,7 +114,7 @@ export default function BrandPage() {
               ))}
             </Grid>
           </Grid>
-          {BRAND_ITEMS.map((props) => (
+          {BRANDS.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{
@@ -125,8 +122,11 @@ export default function BrandPage() {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
+                onClick={() => {
+                  router.push("/collections/" + props.title);
+                }}
               >
-                <FashionItemCard {...props} expandable />
+                <GridCard {...props} noBrand />
               </Box>
             </Grid>
           ))}
@@ -153,76 +153,110 @@ const itemData = [
   },
 ];
 
-const BRAND_ITEMS: FashionItemCardProps[] = [
+const BRANDS: GridCardProps[] = [
   {
-    id: "ausdkbbsk",
-    src: "https://source.unsplash.com/random/900×700/?hoodies",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Hoodie",
-    price: 0.02,
-    rarity: 20,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 4,
-    collectionName: "Street Wear",
-    rarityCategory: "Super-rare",
+    id: "asdhkjasd3ad",
+    title: "Limitless",
+    subtitle: "Boundless fashion",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?nike",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?gap",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?adidas",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?cr7",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
   },
   {
-    id: "asndka62va",
-    src: "https://source.unsplash.com/random/900×700/?shirts",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Shirt",
-    price: 0.12,
-    rarity: 50,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 1,
-    collectionName: "Street Wear",
-    rarityCategory: "Extremely-rare",
+    id: "naksjadidjadw",
+    title: "Vintage",
+    subtitle: "Feeling old school?",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?company",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?logo",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?pattern",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?facebook",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
   },
   {
-    id: "as6a0a82asd",
-    src: "https://source.unsplash.com/random/900×700/?trousers",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Trousers",
-    price: 0.04,
-    rarity: 13,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
+    id: "hsyaiajskaiaasasd",
+    title: "Work Wear",
+    subtitle: "Fashion at work",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?designer",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?levis",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?denims",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?puma",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
   },
   {
-    id: "jda67kajbs",
-    src: "https://source.unsplash.com/random/900×700/?caps",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Caps & Hats",
-    price: 0.25,
-    rarity: 28,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 5,
-    collectionName: "Street Wear",
-    rarityCategory: "Ultra-rare",
-  },
-  {
-    id: "asda79qkajs72",
-    src: "https://source.unsplash.com/random/900×700/?shoes",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Shoes",
-    price: 0.01,
-    rarity: 8,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
+    id: "hajsuaiaosakassd",
+    title: "Evening Wear",
+    subtitle: "Fashionable evenings",
+    avatarSrc: "https://source.unsplash.com/random/900×700/?facebook",
+    topLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?brand",
+      alt: "grid image",
+      bgColor: "#F2B4B0",
+    },
+    topRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?logo",
+      alt: "grid image",
+      bgColor: "#F6FDE2",
+    },
+    bottomLeftImage: {
+      src: "https://source.unsplash.com/random/900×700/?branded",
+      alt: "grid image",
+      bgColor: "#FEECE5",
+    },
+    bottomRightImage: {
+      src: "https://source.unsplash.com/random/900×700/?company",
+      alt: "grid image",
+      bgColor: "#E5E5F0",
+    },
   },
 ];
 

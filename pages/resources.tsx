@@ -25,6 +25,7 @@ export default function Resources() {
         align="center"
         color="primary"
         sx={{ mt: 16, mb: 10 }}
+        className="gradient-text"
       >
         <b>RESOURCES</b>
       </Typography>

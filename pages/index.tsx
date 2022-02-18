@@ -13,6 +13,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { BiRocket } from "react-icons/bi";
+import { useRouter } from "next/router";
 import Slider from "../src/components/Slider";
 import GridCard, { GridCardProps } from "../src/components/GridCard";
 import { BsDiscord, BsMedium, BsTwitter } from "react-icons/bs";
@@ -25,6 +26,7 @@ const GradientButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Index() {
+  const router = useRouter();
   return (
     <Container>
       <Header />
@@ -42,8 +44,9 @@ export default function Index() {
               sx={{ fontWeight: 700 }}
               color="primary"
               component="span"
+              className="gradient-text"
             >
-              GENESIS&nbsp;
+              GENESIS
             </Typography>
             <i>COLLECTION</i>
           </Typography>
@@ -78,8 +81,13 @@ export default function Index() {
       </Stack>
       {/* Drops */}
       <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
-        <Typography variant="h3" color="primary" component="span">
-          <b>LATEST</b>&nbsp;
+        <Typography
+          variant="h3"
+          color="primary"
+          component="span"
+          className="gradient-text"
+        >
+          <b>LATEST</b>
         </Typography>
         DROPS
       </Typography>
@@ -103,7 +111,12 @@ export default function Index() {
       >
         <Typography variant="h3">
           OUR PARTNER&nbsp;
-          <Typography variant="h3" color="primary" component="span">
+          <Typography
+            variant="h3"
+            color="primary"
+            component="span"
+            className="gradient-text"
+          >
             <b>BRANDS</b>
           </Typography>
         </Typography>
@@ -122,13 +135,24 @@ export default function Index() {
       </Stack>
       <Slider
         slideArray={BRANDS.map((props) => (
-          <GridCard {...props} key={props.id + "-ahsdkh"} />
+          <div
+            onClick={() => {
+              router.push("/brands/" + props.title);
+            }}
+          >
+            <GridCard {...props} key={props.id + "-ahsdkh"} />
+          </div>
         ))}
       />
       {/* Advisors */}
       <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
         OUR&nbsp;
-        <Typography variant="h3" color="primary" component="span">
+        <Typography
+          variant="h3"
+          color="primary"
+          component="span"
+          className="gradient-text"
+        >
           <b>ADVISORS</b>
         </Typography>
       </Typography>
@@ -153,10 +177,11 @@ export default function Index() {
           color="primary"
           component="span"
           sx={{ fontWeight: 300 }}
+          className="gradient-text"
         >
           <b>JOIN THE</b>&nbsp;
         </Typography>
-        <b>FV</b> COMMUNITY
+        <b>FV</b>COMMUNITY
       </Typography>
       <Stack
         direction="row"

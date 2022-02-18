@@ -25,6 +25,7 @@ export default function Brands() {
           align="center"
           color="primary"
           sx={{ mt: 16, mb: 10 }}
+          className="gradient-text"
         >
           <b>BRANDS</b>
         </Typography>

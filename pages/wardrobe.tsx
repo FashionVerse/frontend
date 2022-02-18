@@ -33,7 +33,7 @@ export default function Wardrobe() {
         direction="row"
         sx={{ mt: 16, mb: 10 }}
       >
-        <Typography variant="h3" color="primary">
+        <Typography variant="h3" color="primary" className="gradient-text">
           <b>YOUR WARDROBE</b>
         </Typography>
 
