@@ -56,7 +56,7 @@ export default function Wallets() {
 const WALLETS = [
   {
     id: "hj7ay5",
-    name: "Meta Mask",
+    name: "MetaMask",
     src: "/metamask.png",
     href: "#",
     alt: "MetaMask logo",

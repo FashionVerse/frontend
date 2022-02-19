@@ -6,6 +6,8 @@ import GridCard, { GridCardProps } from "../../src/components/GridCard";
 import CheckBoxSelect from "../../src/components/CheckBoxSelect";
 import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/router";
+import firestore from "../../firebase/clientApp"
+import {collection,QueryDocumentSnapshot,DocumentData,query,where,limit,getDocs} from "@firebase/firestore";
 
 export default function Brands() {
   const methods = useForm({
@@ -14,8 +16,35 @@ export default function Brands() {
     },
   });
 
-  const router = useRouter();
 
+
+  
+
+  React.useEffect(()=>{
+    async function getBrands(){
+      const arr =[];
+      const querySnapshot = await getDocs(collection(firestore, "brands"));
+      querySnapshot.forEach((doc) => {
+        arr.push(doc.data())
+      });
+      return arr;
+    }
+    getBrands().then((value) => {
+      setBrands(value)
+    }).catch((e)=> {console.log(e)})
+  }, [])
+
+  const [brands, setBrands] = React.useState(null);
+
+  console.log(brands);
+
+  if(!brands){
+    return <h3>Loading</h3>
+  }
+
+
+
+  const router = useRouter();
   return (
     <FormProvider {...methods}>
       <Container>
@@ -33,7 +62,8 @@ export default function Brands() {
           <Grid item xs={12} sx={{ ml: 3 }}>
             <CheckBoxSelect formStateName="drops" label="Drop" />
           </Grid>
-          {BRANDS_DATA.map((props) => (
+          {/* @ts-expect-error */}
+          {brands.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{
