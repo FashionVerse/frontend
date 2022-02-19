@@ -19,14 +19,70 @@ import GridCard, { GridCardProps } from "../src/components/GridCard";
 import { BsDiscord, BsMedium, BsTwitter } from "react-icons/bs";
 import { styled } from "@mui/system";
 import AdvisorCard, { AdvisorCardProps } from "../src/components/AdvisorCard";
+import firestore from "../firebase/clientApp";
+import {
+  collection,
+  QueryDocumentSnapshot,
+  DocumentData,
+  query,
+  where,
+  limit,
+  getDocs,
+} from "@firebase/firestore";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
   color: "white",
 }));
 
+// getStaticProps / getServerSideProps
 export default function Index() {
   const router = useRouter();
+
+  React.useEffect(() => {
+    async function getBrands() {
+      const arr: GridCardProps[] = [];
+      const querySnapshot = await getDocs(collection(firestore, "brands"));
+      querySnapshot.forEach((doc) => {
+        arr.push(doc.data() as GridCardProps);
+      });
+      return arr;
+    }
+    getBrands()
+      .then((value) => {
+        setBrands(value);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  const [brands, setBrands] = React.useState<GridCardProps[] | null>(null);
+
+  if (!brands) {
+    // TODO: Add proper loader
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <Image
+          src="/assets/loading.gif"
+          alt="Loading..."
+          layout="fixed"
+          height={300}
+          width={300}
+        />
+      </Box>
+    );
+  }
+
   return (
     <Container>
       <Header />
@@ -134,10 +190,10 @@ export default function Index() {
         </GradientButton>
       </Stack>
       <Slider
-        slideArray={BRANDS.map((props) => (
+        slideArray={brands.map((props) => (
           <div
             onClick={() => {
-              router.push("/brands/" + props.title);
+              router.push("/brands/" + props.id);
             }}
           >
             <GridCard {...props} key={props.id + "-ahsdkh"} />

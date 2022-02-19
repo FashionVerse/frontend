@@ -17,7 +17,7 @@ import GridCard, { GridCardProps } from "../../src/components/GridCard";
 
 export default function BrandPage() {
   const router = useRouter();
-  const { brand } = router.query;
+  const { brandId } = router.query;
 
   function ImageGallery() {
     return (
