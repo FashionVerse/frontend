@@ -1,6 +1,7 @@
 import * as React from "react";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
+import Image from "next/image";
 import {
   Container,
   Typography,
@@ -16,12 +17,106 @@ import DividedTable, {
 import FashionItemCard, {
   FashionItemCardProps,
 } from "../../src/components/FashionItemCard";
+import firestore from "../../firebase/clientApp";
+import {
+  collection,
+  QueryDocumentSnapshot,
+  DocumentData,
+  query,
+  where,
+  limit,
+  getDocs,
+  doc,
+  getDoc
+} from "@firebase/firestore";
+import { useSnackbar } from "notistack";
+import Web3 from 'web3';
+import { nftAbi, marketAbi, marketAddress } from "../../public/abi";
 
 export default function CollectionPage() {
   const router = useRouter();
   const { collectionName } = router.query;
 
-  console.log(collectionName)
+  const { enqueueSnackbar } = useSnackbar();
+  const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
+  
+
+
+  React.useEffect(() => {
+    if(!router.isReady) return;
+    async function getItems() {
+      const arr = [];
+      const querySnapshot = await getDocs(collection(firestore, "/collections/"+collectionName+"/item"));
+      for (const id of querySnapshot.docs) {
+        
+        //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
+        const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
+        const item = await marketContract.methods.getItem(id.data().id).call();
+        const collectionDoc = await getDoc(doc(collection(firestore, "collections"), collectionName));
+        const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
+        const contract = new web3.eth.Contract(nftAbi, item.nftContract);
+        
+        
+        const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
+        const response = await fetch(nft);
+
+        if(!response.ok)
+          enqueueSnackbar(response.statusText)
+
+        const json = await response.json()
+        arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
+      }
+      console.log(arr)
+      return arr;
+    }
+    getItems()
+      .then((value) => {
+        setItems(value);
+      })
+      .catch((e) => {
+        enqueueSnackbar(e.message);
+      });
+  
+    async function getInfo() {
+      const querySnapshot = await getDoc(doc(collection(firestore, "collections"), collectionName));
+      return querySnapshot.data();
+    }
+    getInfo()
+      .then((value) => {
+        setInfo(value);
+      })
+      .catch((e) => {
+        enqueueSnackbar(e.message);
+      });
+    
+  }, [router.isReady]);
+
+  const [items, setItems] = React.useState(null);
+  const [info, setInfo] = React.useState(null);
+
+  if (!items || !info) {
+    // TODO: Add proper loader
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <Image
+          src="/assets/loading.svg"
+          alt="Loading..."
+          layout="fixed"
+          height={150}
+          width={150}
+        />
+      </Box>
+    );
+  }
 
   function ImageGallery() {
     return (
@@ -92,7 +187,7 @@ export default function CollectionPage() {
               </Typography>
             </Container>
           </Grid>
-          {COLLECTION_ITEMS.map((props) => (
+          {items.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{

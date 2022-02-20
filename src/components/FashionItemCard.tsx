@@ -61,8 +61,8 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           onClick={() => setEnlarged(true)}
         >
           <Image
-            src={props.src}
-            alt={props.alt}
+            src={props.nft.properties.image.description}
+            alt="NFT"
             layout="fill"
             objectFit="cover"
           />
@@ -76,20 +76,20 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           <ListItem disablePadding>
             <ListItemAvatar sx={{ mr: -1 }}>
               <Avatar
-                src={props.brandImage}
+                src={props.brand.avatarSrc}
                 sx={{ height: "36px", width: "36px" }}
               />
             </ListItemAvatar>
             <ListItemText
-              primary={props.pieceName}
-              secondary={props.brandName}
+              primary={props.nft.properties.name.description}
+              secondary={props.brand.title}
               secondaryTypographyProps={{ style: { marginTop: "-2px" } }}
             />
           </ListItem>
           <Stack justifyContent="center" alignItems="center" sx={{ mr: 1 }}>
             <Typography variant="caption">Rarity</Typography>
             <Typography variant="caption" sx={{ mt: "-2px" }}>
-              {props.rarity}
+              {1/parseInt(props.available)}
             </Typography>
           </Stack>
         </Stack>

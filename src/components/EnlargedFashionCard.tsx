@@ -43,8 +43,8 @@ function CardDialog(props: CardDialogProps) {
           }}
         >
           <Image
-            src={props.src}
-            alt={props.alt}
+            src={props.nft.properties.image.description}
+            alt="NFT Image"
             layout="fill"
             objectFit="cover"
           />
@@ -56,13 +56,13 @@ function CardDialog(props: CardDialogProps) {
         >
           <Stack>
             <Typography>
-              <b>{props.pieceName}</b>
+              <b>{props.nft.properties.name.description}</b>
             </Typography>
             <Typography variant="caption" color="textSecondary">
-              {props.description}
+              {props.nft.properties.description.description}
             </Typography>
             <Typography variant="caption" gutterBottom>
-              <b>{props.brandName}</b>
+              <b>{props.brand.title}</b>
             </Typography>
           </Stack>
           <Stack sx={{ textAlign: "right" }}>
@@ -70,10 +70,10 @@ function CardDialog(props: CardDialogProps) {
               <b>{props.rarityCategory}</b>
             </Typography>
             <Typography variant="caption" color="textSecondary">
-              {"No. of pieces - " + props.rarity}
+              {"No. of pieces - " + props.available}
             </Typography>
             <Typography variant="caption" color="primary">
-              {props.collectionName}
+              {props.collection.title}
             </Typography>
           </Stack>
         </Stack>

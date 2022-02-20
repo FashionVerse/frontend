@@ -20,6 +20,7 @@
     "dotenv": "^16.0.0",
     "firebase": "^9.6.7",
     "firebase-admin": "^10.0.2",
+    "fs": "^0.0.1-security",
     "immer": "^9.0.12",
     "keen-slider": "^6.6.3",
     "next": "latest",
