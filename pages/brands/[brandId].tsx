@@ -1,6 +1,7 @@
 import * as React from "react";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
+import Image from "next/image";
 import {
   Container,
   Typography,
@@ -14,10 +15,103 @@ import DividedTable, {
   DividedTableProps,
 } from "../../src/components/DividedTable";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
+import firestore from "../../firebase/clientApp";
+import {
+  collection,
+  QueryDocumentSnapshot,
+  DocumentData,
+  query,
+  where,
+  limit,
+  getDocs,
+  doc,
+  getDoc
+} from "@firebase/firestore";
+import { useSnackbar } from "notistack";
 
 export default function BrandPage() {
   const router = useRouter();
   const { brandId } = router.query;
+
+
+  const { enqueueSnackbar } = useSnackbar();
+
+
+  React.useEffect(() => {
+    if(!router.isReady) return;
+    async function getCollections() {
+      const arr: GridCardProps[] = [];
+      const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("brand", "==", brandId ?? "")));
+      querySnapshot.forEach((doc) => {
+        arr.push(doc.data());
+      });
+      return arr;
+    }
+    getCollections()
+      .then((value) => {
+        setCollections(value);
+      })
+      .catch((e) => {
+        enqueueSnackbar(e.message);
+      });
+  
+    async function getInfo() {
+      const querySnapshot = await getDoc(doc(collection(firestore, "brands"), brandId));
+      return querySnapshot.data();
+    }
+    getInfo()
+      .then((value) => {
+        setInfo(value);
+      })
+      .catch((e) => {
+        enqueueSnackbar(e.message);
+      });
+
+      async function getDesigners() {
+        const arr: GridCardProps[] = [];
+        const querySnapshot = await getDocs(collection(firestore, "/brands/"+brandId+"/designers"));
+        querySnapshot.forEach((doc) => {
+          arr.push(doc.data());
+        });
+        return arr;
+      }
+      getDesigners()
+        .then((value) => {
+          setDesigners(value);
+        })
+        .catch((e) => {
+          enqueueSnackbar(e.message);
+        });
+    
+  }, [router.isReady]);
+
+  const [collections, setCollections] = React.useState(null);
+  const [info, setInfo] = React.useState(null);
+  const [designers, setDesigners] = React.useState(null);
+
+  if (!collections || !info || !designers) {
+    // TODO: Add proper loader
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <Image
+          src="/assets/loading.svg"
+          alt="Loading..."
+          layout="fixed"
+          height={150}
+          width={150}
+        />
+      </Box>
+    );
+  }
 
   function ImageGallery() {
     return (
@@ -30,8 +124,8 @@ export default function BrandPage() {
         {itemData.map((item) => (
           <ImageListItem key={item.img} cols={4} rows={4}>
             <img
-              {...srcset(item.img, 400)}
-              alt={item.title}
+              {...srcset(info.coverSrc, 400)}
+              alt={info.title}
               loading="eager"
               style={{ objectFit: "fill" }}
             />
@@ -58,8 +152,7 @@ export default function BrandPage() {
             left: "50%",
             transform: "translate(-50%, 0)",
             overflow: "hidden",
-            backgroundImage:
-              "url(https://source.unsplash.com/random/1200x400/?logo)",
+            backgroundImage: info.avatarSrc,
           }}
         />
       </Box>
@@ -72,7 +165,7 @@ export default function BrandPage() {
         >
           <b>
             {/* Should ideally be this {brand} */}
-            {"BRAND NAME HERE"}
+            {info.title}
           </b>
         </Typography>
         <Grid container spacing={8} sx={{ mb: 16 }}>
@@ -80,11 +173,7 @@ export default function BrandPage() {
             <DividedTable {...DividerTableData} />
             <Container maxWidth="md">
               <Typography sx={{ mt: 6 }} variant="h6" align="center">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-                consectetur minus iste nulla quo praesentium modi dolorum
-                necessitatibus aliquid dolorem accusamus officia, labore neque.
-                Impedit, odit? Culpa tempora unde voluptates vero accusantium
-                accusamus fugiat, autem neque eaque iusto ipsam sequi!
+                {info.description}
               </Typography>
               <Typography
                 variant="h5"
@@ -102,7 +191,7 @@ export default function BrandPage() {
               justifyContent="center"
               alignItems="center"
             >
-              {DESIGNERS.map(({ name, description }, i) => (
+              {designers.map(({ name, description }, i) => (
                 <Grid item xs={12} id={name + i}>
                   <Typography gutterBottom align="center">
                     <b>{name}</b>
@@ -114,7 +203,7 @@ export default function BrandPage() {
               ))}
             </Grid>
           </Grid>
-          {BRANDS.map((props) => (
+          {collections.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{
@@ -123,7 +212,7 @@ export default function BrandPage() {
                   justifyContent: "center",
                 }}
                 onClick={() => {
-                  router.push("/collections/" + props.title);
+                  router.push("/collections/" + props.id);
                 }}
               >
                 <GridCard {...props} noBrand />

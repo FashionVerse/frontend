@@ -73,11 +73,11 @@ export default function Index() {
         }}
       >
         <Image
-          src="/assets/loading.gif"
+          src="/assets/loading.svg"
           alt="Loading..."
           layout="fixed"
-          height={300}
-          width={300}
+          height={150}
+          width={150}
         />
       </Box>
     );

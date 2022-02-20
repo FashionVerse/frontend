@@ -21,6 +21,8 @@ export default function CollectionPage() {
   const router = useRouter();
   const { collectionName } = router.query;
 
+  console.log(collectionName)
+
   function ImageGallery() {
     return (
       <ImageList

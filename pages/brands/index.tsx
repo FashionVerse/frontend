@@ -63,11 +63,11 @@ export default function Brands() {
         }}
       >
         <Image
-          src="/assets/loading.gif"
+          src="/assets/loading.svg"
           alt="Loading..."
           layout="fixed"
-          height={300}
-          width={300}
+          height={150}
+          width={150}
         />
       </Box>
     );
@@ -99,7 +99,7 @@ export default function Brands() {
                   justifyContent: "center",
                 }}
                 onClick={() => {
-                  router.push("/brands/" + props.title);
+                  router.push("/brands/" + props.id);
                 }}
               >
                 <GridCard {...props} />
