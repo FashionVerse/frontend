@@ -140,7 +140,7 @@ export default function DropPage() {
         gap={0}
       >
         {itemData.map((item) => (
-          <ImageListItem key={item.img} cols={1} rows={1}>
+          <ImageListItem key={item.id} cols={1} rows={1}>
             <img {...srcset(item.img, 180)} alt={item.title} loading="eager" />
           </ImageListItem>
         ))}
