@@ -17,6 +17,19 @@ const StyledPaper = styled(Paper)({
   background: `rgba( 255, 255, 255, 0.08 )`,
 });
 
+async function connectWallet(){
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      await window.ethereum.enable();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  } else {
+    alert('Metamask is not installed!')
+  }
+}
+
 export default function Wallets() {
   return (
     <Container>
@@ -33,7 +46,9 @@ export default function Wallets() {
       <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
         {WALLETS.map(({ id, href, name, src, alt }) => (
           <Grid item xs={12} sm={12} md={4} key={id}>
-            <StyledPaper variant="outlined">
+            <StyledPaper variant="outlined" onClick={() => {
+              connectWallet()
+            }}>
               <Image
                 src={src}
                 alt={alt}

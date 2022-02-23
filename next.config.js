@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
   images: {
-    domains: ["images.unsplash.com", "source.unsplash.com", "ipfs.io"],
+    domains: ["images.unsplash.com", "source.unsplash.com", "ipfs.io", "firebasestorage.googleapis.com"],
   },
 
   webpack: (config) => {

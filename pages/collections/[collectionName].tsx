@@ -64,7 +64,11 @@ export default function CollectionPage() {
           enqueueSnackbar(response.statusText)
 
         const json = await response.json()
-        arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
+        const date = new Date(parseInt(item.releaseTime) * 1000);
+        if(parseInt(item.available) > 0 && Date.now() > date){
+          arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
+        }
+        
       }
       console.log(arr)
       return arr;
@@ -79,7 +83,10 @@ export default function CollectionPage() {
   
     async function getInfo() {
       const querySnapshot = await getDoc(doc(collection(firestore, "collections"), collectionName));
-      return querySnapshot.data();
+      const dropcategory = await getDoc(doc(firestore, "drop", querySnapshot.data().drop))
+      DividerTableData.subtitle1 = querySnapshot.data().title
+      DividerTableData.subtitle2 = dropcategory.data().name
+      return {...querySnapshot.data(), dropCategory: dropcategory.data()};
     }
     getInfo()
       .then((value) => {
@@ -126,16 +133,16 @@ export default function CollectionPage() {
         cols={4}
         rowHeight={140}
       >
-        {itemData.map((item) => (
-          <ImageListItem key={item.img} cols={4} rows={4}>
+
+          <ImageListItem key={info.id} cols={4} rows={4}>
             <img
-              {...srcset(item.img, 400)}
-              alt={item.title}
+              {...srcset(info.coverSrc, 400)}
+              alt={info.title}
               loading="eager"
               style={{ objectFit: "fill" }}
             />
           </ImageListItem>
-        ))}
+        
       </ImageList>
     );
   }
@@ -158,7 +165,7 @@ export default function CollectionPage() {
             transform: "translate(-50%, 0)",
             overflow: "hidden",
             backgroundImage:
-              "url(https://source.unsplash.com/random/1200x400/?logo)",
+              "url("+info.avatarSrc+")",
           }}
         />
       </Box>
@@ -171,7 +178,7 @@ export default function CollectionPage() {
         >
           <b>
             {/* Should ideally be this {collectionName} */}
-            {"COLLECTION NAME HERE"}
+            {info.title}
           </b>
         </Typography>
         <Grid container spacing={8} sx={{ mb: 16 }}>
@@ -179,11 +186,7 @@ export default function CollectionPage() {
             <DividedTable {...DividerTableData} />
             <Container maxWidth="md">
               <Typography sx={{ mt: 6 }} variant="h6" align="center">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-                consectetur minus iste nulla quo praesentium modi dolorum
-                necessitatibus aliquid dolorem accusamus officia, labore neque.
-                Impedit, odit? Culpa tempora unde voluptates vero accusantium
-                accusamus fugiat, autem neque eaque iusto ipsam sequi!
+                {info.description}
               </Typography>
             </Container>
           </Grid>
@@ -296,7 +299,7 @@ const COLLECTION_ITEMS: FashionItemCardProps[] = [
   },
 ];
 
-const DividerTableData: DividedTableProps = {
+var DividerTableData: DividedTableProps = {
   title1: "COLLECTION",
   subtitle1: "Tundra Burst",
   title2: "DROP CATEGORY",

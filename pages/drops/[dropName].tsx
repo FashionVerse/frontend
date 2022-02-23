@@ -55,7 +55,8 @@ export default function DropPage() {
     if(!router.isReady) return;
     async function getItems() {
       const arr = [];
-      const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("drop", "==", dropName)));
+      const drop = await getDocs(query(collection(firestore, "drop"), where("id", "==", dropName)));
+      const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("drop", "==", drop.docs[0].id)));
       for (const id of querySnapshot.docs) {
     
         
@@ -71,23 +72,12 @@ export default function DropPage() {
           enqueueSnackbar(response.statusText)
 
         const json = await response.json()
-        arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
-          console.log(brand.data())
+        const date = new Date(parseInt(itemContract.releaseTime) * 1000);
+        if(parseInt(itemContract.available)>0 && Date.now() > date){
+          arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
         }
-        // const item = await marketContract.methods.getItem(id.data().id).call();
-        // const collectionDoc = await getDoc(doc(collection(firestore, "collections"), dropName));
-        // const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
-        // const contract = new web3.eth.Contract(nftAbi, item.nftContract);
         
-        
-        // const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
-        // const response = await fetch(nft);
-
-        // if(!response.ok)
-        //   enqueueSnackbar(response.statusText)
-
-        // const json = await response.json()
-        // arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
+        }
       }
       console.log(arr)
       return arr;
@@ -96,9 +86,9 @@ export default function DropPage() {
       .then((value) => {
         setItems(value);
       })
-      // .catch((e) => {
-      //   enqueueSnackbar(e.message);
-      // });
+      .catch((e) => {
+        enqueueSnackbar(e.message);
+      });
   
     
   }, [router.isReady]);

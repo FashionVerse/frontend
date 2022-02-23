@@ -11,6 +11,10 @@ import { Stack } from "@mui/material";
 import { SiEthereum } from "react-icons/si";
 import { BsHandbag } from "react-icons/bs";
 import { IconButton } from "@mui/material";
+import { ethers } from "ethers";
+import { collection, setDoc, doc } from "firebase/firestore"; 
+import firestore from "../../firebase/clientApp";
+import Web3 from "web3";
 
 export interface CardDialogProps extends FashionItemCardProps {
   open: boolean;
@@ -23,6 +27,51 @@ export interface EnlargedFashionCardProps extends FashionItemCardProps {
 }
 
 function CardDialog(props: CardDialogProps) {
+
+  async function setCart(){
+    if(typeof window.ethereum !== 'undefined'){
+      const { ethereum } = window;
+  if (ethereum) {
+      var provider = new ethers.providers.Web3Provider(ethereum);
+
+  }
+  
+  const isMetaMaskConnected = async () => {
+    const accounts = await provider.listAccounts();
+    return accounts.length > 0;
+  }
+    const connected = await isMetaMaskConnected();
+    if(connected){
+      const accounts = await ethereum.enable();
+      const account = accounts[0];
+      console.log(account)
+      setIsLoading(true);
+      await setDoc(doc(firestore, "cart", account), {
+        id: account,
+
+      });
+      await setDoc(doc(firestore, "/cart/"+account+"/items", props.itemId), {
+        id: props.itemId,
+        brand: props.brand.id,
+        collection: props.collection.id,
+        amount: 1,
+
+      });
+
+      
+
+      setIsLoading(false);
+      
+    } else {
+      alert("Connect to Wallet")
+    }
+
+    } else {
+      alert("MetaMask not installed")
+    }
+  }
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const { open, onClose } = props;
 
   return (
@@ -84,12 +133,12 @@ function CardDialog(props: CardDialogProps) {
         >
           <Stack alignItems="baseline" direction="row">
             <Typography variant="h6" sx={{ mr: "4px" }}>
-              {props.price}
+              {Web3.utils.fromWei( props.price, 'ether')}
             </Typography>
             <SiEthereum fontSize="1rem" />
           </Stack>
           <Stack alignItems="end">
-            <IconButton size="small" sx={{ mr: "6px" }}>
+            <IconButton size="small" sx={{ mr: "6px" }} onClick={()=>{setCart()}}>
               <BsHandbag />
             </IconButton>
             <Typography variant="caption" sx={{ fontSize: "8px" }}>

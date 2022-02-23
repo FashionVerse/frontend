@@ -135,6 +135,8 @@ export default function BrandPage() {
     );
   }
 
+  console.log(info.avatarSrc)
+
   return (
     <Container maxWidth={false} disableGutters>
       <Container>
@@ -152,7 +154,7 @@ export default function BrandPage() {
             left: "50%",
             transform: "translate(-50%, 0)",
             overflow: "hidden",
-            backgroundImage: info.avatarSrc,
+            backgroundImage: "url("+info.avatarSrc+")",
           }}
         />
       </Box>
