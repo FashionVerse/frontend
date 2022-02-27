@@ -42,7 +42,8 @@ export default function MyApp(props: any) {
       },
     },
     typography: {
-      fontFamily: ["Crimson Pro", "serif"].join(","),
+      //fontFamily: ["Crimson Pro", "serif"].join(","),
+
       button: {
         textTransform: "none",
       },
@@ -89,7 +90,7 @@ export default function MyApp(props: any) {
                 paddingTop: "24px",
               }}
             >
-              {!width || width > 1279 ? (
+              {!width || width > 999 ? (
                 <SnackbarProvider>
                   <Component {...pageProps} />
                 </SnackbarProvider>

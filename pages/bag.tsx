@@ -30,7 +30,8 @@ import {
   doc,
   getDoc,
   deleteDoc,
-  setDoc
+  setDoc,
+  addDoc
 } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
@@ -143,9 +144,15 @@ export default function Bag() {
         .then(function(receipt){
             console.log(receipt);
             for(const item of items){
-              deleteDoc(doc(firestore, "/cart/"+account+"/items", item)).then((value)=>{
-                getItems();
+              addDoc(collection(firestore, "purchase"), {
+                address: account,
+                item: item
+              }).then((value)=>{
+                deleteDoc(doc(firestore, "/cart/"+account+"/items", item)).then((value)=>{
+                  window.location.reload()
+                })
               })
+              
             }
             
 
@@ -236,8 +243,9 @@ export default function Bag() {
                   setData(
                     produce((state) => {
                       const idx = state.findIndex((s) => s.id === rest.id)
-                      if (state[idx].quantity <= rest.quantity){
-                        state[idx].quantity = state[idx].quantity - 1;
+                      console.log(rest)
+                      if (state[idx].quantity < rest.available){
+                        state[idx].quantity = state[idx].quantity + 1;
                         const updatedQuantity = state[idx].quantity
                         walletInit().then((account)=> {
                           if(account!==false){
@@ -251,6 +259,7 @@ export default function Bag() {
                           }
                         })
                       }
+                      
                     })
                   );
                 }}
@@ -275,6 +284,15 @@ export default function Bag() {
                     return state;
                   })
                 );
+                walletInit().then((account)=> {
+                  if(account!==false){
+                    deleteDoc(doc(firestore, "/cart/"+account+"/items", rest.itemId)).then((value)=>{
+                      window.location.reload()
+                    }).catch((e)=>{
+                      enqueueSnackbar(e.message)
+                    })
+                  }
+                })
               }}
             >
               Remove
