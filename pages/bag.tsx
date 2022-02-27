@@ -9,6 +9,7 @@ import {
   Paper,
   Stack,
   IconButton,
+  Box
 } from "@mui/material";
 import Image from "next/image";
 import FashionItemCard, {
@@ -125,6 +126,7 @@ export default function Bag() {
   async function purchaseItems(){
     const account = await walletInit();
     if(account !== false){
+      setIsLoading(true);
       const items = []
     const amounts = []
       if(data.length > 0){
@@ -171,10 +173,12 @@ export default function Bag() {
 
   React.useEffect(() => {
     walletInit().then((account) => {
+      setIsLoading(true);
       if(account !== false){
         getItems(account)
       .then((value) => {
         setData(value);
+        setIsLoading(false)
       })
       .catch((e) => {
         enqueueSnackbar(e.message);
@@ -188,6 +192,7 @@ export default function Bag() {
     
   }, []);
   const [data, setData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const totalCost = data
     .map((c) => Web3.utils.fromWei(c.price, 'ether') * c.quantity)
@@ -303,7 +308,7 @@ export default function Bag() {
     );
   }
 
-  if (!data) {
+  if (isLoading) {
     // TODO: Add proper loader
     return (
       <Box

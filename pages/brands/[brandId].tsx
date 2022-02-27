@@ -172,7 +172,7 @@ export default function BrandPage() {
         </Typography>
         <Grid container spacing={8} sx={{ mb: 16 }}>
           <Grid item xs={12}>
-            <DividedTable {...DividerTableData} />
+            {/* <DividedTable {...DividerTableData} /> */}
             <Container maxWidth="md">
               <Typography sx={{ mt: 6 }} variant="h6" align="center">
                 {info.description}
