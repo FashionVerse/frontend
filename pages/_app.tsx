@@ -6,11 +6,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import { Container, PaletteMode, Typography } from "@mui/material";
+import { Container, PaletteMode, Typography, Box } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
-import { Box } from "@mui/system";
+import { SnackbarProvider } from "notistack";
+import { IS_SERVER } from "./globals";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -41,7 +42,8 @@ export default function MyApp(props: any) {
       },
     },
     typography: {
-      fontFamily: ["Crimson Pro", "serif"].join(","),
+      //fontFamily: ["Crimson Pro", "serif"].join(","),
+
       button: {
         textTransform: "none",
       },
@@ -59,7 +61,9 @@ export default function MyApp(props: any) {
   });
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-  const { width } = useWindowSize();
+  const { width, height } = useWindowSize();
+
+  console.log(height);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -86,8 +90,10 @@ export default function MyApp(props: any) {
                 paddingTop: "24px",
               }}
             >
-              {!width || width > 1279 ? (
-                <Component {...pageProps} />
+              {!width || width > 999 ? (
+                <SnackbarProvider>
+                  <Component {...pageProps} />
+                </SnackbarProvider>
               ) : (
                 <Box
                   sx={{

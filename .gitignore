@@ -14,5 +14,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+.env
+
 # Next.js
 /.next
+
+.vercel

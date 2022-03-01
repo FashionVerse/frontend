@@ -1,23 +1,40 @@
-/* @font-face {
-  font-family: "Berton Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Berton Regular"), url("Berton-Regular.woff") format("woff");
+@font-face {
+	font-family: 'proxima_nova_rgregular';
+	src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot');
+	src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.woff') format('woff'),
+		 url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.ttf') format('truetype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'proxima_nova_rgbold';
+	src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot');
+	src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.woff') format('woff'),
+		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.ttf') format('truetype'),
+		 url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: "Berton Thin";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Berton Thin"), url("Berton-Thin.woff") format("woff");
+	font-family: 'adelle_rgregular';
+	src: url('https://litmus.com/fonts/Emails/adelle_reg-webfont.eot');
+	src: url('https://litmus.com/fonts/Emails/adelle_reg-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('https://litmus.com/fonts/Emails/adelle_reg-webfont.woff') format('woff'),
+		 url('https://litmus.com/fonts/Emails/adelle_reg-webfont.ttf') format('truetype'),
+		 url('https://litmus.com/fonts/Emails/adelle_reg-webfont.svg#adelle_rgregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
-
-@font-face {
-  font-family: "Berton Light";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Berton Light"), url("Berton-Light.woff") format("woff");
-} */
+body{
+	font-family: 'proxima_nova_rgregular', Helvetica, Arial, sans-serif;
+}
+h1{
+   font-family: 'proxima_nova_rgbold', Helvetica, Arial, sans-serif;
+}
 
 .bg-style-light {
   background-image: url("/bg-blend.png"), url("/bg-blue.png"),

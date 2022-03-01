@@ -14,6 +14,7 @@ import Logo from "./Logo";
 import Link from "./Link";
 import Tooltip from "@mui/material/Tooltip";
 import ListMenu from "./ListMenu";
+import { ethers } from "ethers";
 
 const NavIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor:
@@ -24,9 +25,43 @@ const NavIconButton = styled(IconButton)(({ theme }) => ({
   filter: `drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))`,
 }));
 
+
+
+
+
 export default function Header() {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
+
+  React.useEffect(() => {
+    if(typeof window.ethereum !== 'undefined'){
+      const { ethereum } = window;
+  if (ethereum) {
+      var provider = new ethers.providers.Web3Provider(ethereum);
+  }
+  
+  const isMetaMaskConnected = async () => {
+    const accounts = await provider.listAccounts();
+    return accounts.length > 0;
+  }
+  
+  async function getAccount() {
+    const connected = await isMetaMaskConnected();
+    if(connected){
+      const accounts = await ethereum.enable();
+      const account = accounts[0];
+      console.log(account)
+    }
+  }
+  
+  ethereum.on('accountsChanged', function (accounts) {
+    getAccount();
+  })
+    }
+    
+  })
+
+
 
   return (
     <Stack direction="row" alignItems="center" sx={{ mt: 3 }}>

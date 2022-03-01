@@ -1,11 +1,23 @@
 import * as React from "react";
+import Image from "next/image";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
-import { Container, Typography, Grid, Box } from "@mui/material";
+import { Container, Grid, Box, Typography } from "@mui/material";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
 import CheckBoxSelect from "../../src/components/CheckBoxSelect";
 import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
+import firestore from "../../firebase/clientApp";
+import {
+  collection,
+  QueryDocumentSnapshot,
+  DocumentData,
+  query,
+  where,
+  limit,
+  getDocs,
+} from "@firebase/firestore";
 
 export default function Brands() {
   const methods = useForm({
@@ -15,6 +27,51 @@ export default function Brands() {
   });
 
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+
+  React.useEffect(() => {
+    async function getBrands() {
+      const arr: GridCardProps[] = [];
+      const querySnapshot = await getDocs(collection(firestore, "brands"));
+      querySnapshot.forEach((doc) => {
+        arr.push(doc.data() as GridCardProps);
+      });
+      return arr;
+    }
+    getBrands()
+      .then((value) => {
+        setBrands(value);
+      })
+      .catch((e) => {
+        enqueueSnackbar(e.message);
+      });
+  }, []);
+
+  const [brands, setBrands] = React.useState(null);
+
+  if (!brands) {
+    // TODO: Add proper loader
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <Image
+          src="/assets/loading.svg"
+          alt="Loading..."
+          layout="fixed"
+          height={150}
+          width={150}
+        />
+      </Box>
+    );
+  }
 
   return (
     <FormProvider {...methods}>
@@ -33,7 +90,7 @@ export default function Brands() {
           <Grid item xs={12} sx={{ ml: 3 }}>
             <CheckBoxSelect formStateName="drops" label="Drop" />
           </Grid>
-          {BRANDS_DATA.map((props) => (
+          {brands.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{
@@ -42,7 +99,7 @@ export default function Brands() {
                   justifyContent: "center",
                 }}
                 onClick={() => {
-                  router.push("/brands/" + props.title);
+                  router.push("/brands/" + props.id);
                 }}
               >
                 <GridCard {...props} />
@@ -55,165 +112,6 @@ export default function Brands() {
     </FormProvider>
   );
 }
-
-const BRANDS_DATA: GridCardProps[] = [
-  {
-    id: "asdhkjasd3ad",
-    title: "Limitless",
-    subtitle: "Boundless fashion",
-    avatarSrc: "https://source.unsplash.com/random/900×700/?logo%20company",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?nike",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?gap",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?adidas",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?cr7",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "naksjadidjadw",
-    title: "Vintage",
-    subtitle: "Feeling old school?",
-    avatarSrc: "https://source.unsplash.com/random/900×700/?logo%20company",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?company",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?logo",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?pattern",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?facebook",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "hsyaiajskaiaasasd",
-    title: "Work Wear",
-    subtitle: "Fashion at work",
-    avatarSrc: "https://source.unsplash.com/random/900×700/?logo%20company",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?designer",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?levis",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?denims",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?puma",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "hajsuaiaosakassd",
-    title: "Evening Wear",
-    subtitle: "Fashionable evenings",
-    avatarSrc: "https://source.unsplash.com/random/900×700/?logo%20company",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?brand",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?logo",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?branded",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?company",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "hsbahsjsakajsas",
-    title: "Ethnic",
-    subtitle: "Fashion for the cultured",
-    avatarSrc: "https://source.unsplash.com/random/900×700/?logo%20company",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?tops",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?bikini",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?shoes",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?glam",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-  {
-    id: "laoaksiajajasndads",
-    title: "Party Wear",
-    subtitle: "Glam and Glitter",
-    avatarSrc: "https://source.unsplash.com/random/900×700/?logo%20company",
-    topLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?glam",
-      alt: "grid image",
-      bgColor: "#F2B4B0",
-    },
-    topRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?icons",
-      alt: "grid image",
-      bgColor: "#F6FDE2",
-    },
-    bottomLeftImage: {
-      src: "https://source.unsplash.com/random/900×700/?logos",
-      alt: "grid image",
-      bgColor: "#FEECE5",
-    },
-    bottomRightImage: {
-      src: "https://source.unsplash.com/random/900×700/?branded",
-      alt: "grid image",
-      bgColor: "#E5E5F0",
-    },
-  },
-];
 
 const DROP_NAME_DATA = [
   { value: "Streetwear", id: "jakais7ja" },

@@ -2,6 +2,7 @@ import * as React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
+import Image from "next/image";
 import {
   Container,
   Typography,
@@ -16,6 +17,21 @@ import FashionItemCard, {
   FashionItemCardProps,
 } from "../../src/components/FashionItemCard";
 import CheckBoxSelect, { Option } from "../../src/components/CheckBoxSelect";
+import firestore from "../../firebase/clientApp";
+import {
+  collection,
+  QueryDocumentSnapshot,
+  DocumentData,
+  query,
+  where,
+  limit,
+  getDocs,
+  doc,
+  getDoc
+} from "@firebase/firestore";
+import { useSnackbar } from "notistack";
+import Web3 from 'web3';
+import { nftAbi, marketAbi, marketAddress } from "../../public/abi";
 
 export default function DropPage() {
   const router = useRouter();
@@ -29,6 +45,81 @@ export default function DropPage() {
   });
   const { dropName } = router.query;
 
+  const { enqueueSnackbar } = useSnackbar();
+  const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
+  const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
+  
+
+
+  React.useEffect(() => {
+    if(!router.isReady) return;
+    async function getItems() {
+      const arr = [];
+      const drop = await getDocs(query(collection(firestore, "drop"), where("id", "==", dropName)));
+      const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("drop", "==", drop.docs[0].id)));
+      for (const id of querySnapshot.docs) {
+    
+        
+        const items = await getDocs(collection(firestore, "/collections/"+id.id+"/item"))
+        for(const item of items.docs){
+          const itemContract = await marketContract.methods.getItem(item.data().id).call();
+          const brand = await getDoc(doc(collection(firestore, "brands"), id.data().brand));
+          const contract = new web3.eth.Contract(nftAbi, itemContract.nftContract);
+          const nft = await contract.methods.tokenURI(itemContract.tokenIds[0]).call();
+          const response = await fetch(nft);
+
+        if(!response.ok)
+          enqueueSnackbar(response.statusText)
+
+        const json = await response.json()
+        const date = new Date(parseInt(itemContract.releaseTime) * 1000);
+        if(parseInt(itemContract.available)>0 && Date.now() > date){
+          arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
+        }
+        
+        }
+      }
+      console.log(arr)
+      return arr;
+    }
+    getItems()
+      .then((value) => {
+        setItems(value);
+      })
+      .catch((e) => {
+        enqueueSnackbar(e.message);
+      });
+  
+    
+  }, [router.isReady]);
+
+  const [items, setItems] = React.useState(null);
+
+
+  if (!items) {
+    // TODO: Add proper loader
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <Image
+          src="/assets/loading.svg"
+          alt="Loading..."
+          layout="fixed"
+          height={150}
+          width={150}
+        />
+      </Box>
+    );
+  }
+
   function ImageGallery() {
     return (
       <ImageList
@@ -39,7 +130,7 @@ export default function DropPage() {
         gap={0}
       >
         {itemData.map((item) => (
-          <ImageListItem key={item.img} cols={1} rows={1}>
+          <ImageListItem key={item.id} cols={1} rows={1}>
             <img {...srcset(item.img, 180)} alt={item.title} loading="eager" />
           </ImageListItem>
         ))}
@@ -80,7 +171,7 @@ export default function DropPage() {
                 <CheckBoxSelect formStateName="collection" label="Collection" />
               </Stack>
             </Grid>
-            {DROP_DATA.map((props) => (
+            {items.map((props) => (
               <Grid item xs={12} sm={6} md={4} key={props.id}>
                 <Box
                   sx={{
