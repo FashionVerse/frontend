@@ -136,7 +136,7 @@ export default function Index() {
         </Box>
       </Stack>
       {/* Drops */}
-      <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
+      <Typography className="firstHead" variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
         <Typography
           variant="h3"
           color="primary"
@@ -227,7 +227,7 @@ export default function Index() {
         ))}
       </Grid>
       {/* Community */}
-      <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
+      <Typography className="CommunityHead" variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
         <Typography
           variant="h3"
           color="primary"

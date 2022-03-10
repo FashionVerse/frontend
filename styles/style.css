@@ -65,3 +65,79 @@ h1{
     -webkit-background-clip: text;
   }
 }
+
+@media screen and (max-width:1000px)
+{
+	.css-iaykeu-MuiStack-root {gap:16px;}
+	.css-rfu3cm-MuiTypography-root {font-size: 2.5rem;}
+	.css-zb9jej-MuiTypography-root {font-size: 2rem;}
+	.css-1fh410u-MuiGrid-root {width:100%;margin-left:0;}
+	.css-1fh410u-MuiGrid-root>.MuiGrid-item {padding:15px;}
+	.css-p9z0ox-MuiTypography-root {margin-top: 100px;margin-bottom: 150px;}
+	.css-99pbpe-MuiPaper-root {max-width:370px;}
+	.css-w968tk-MuiTypography-root {font-size: 2rem;}
+}
+
+@media screen and (max-width:820px)
+{
+	.css-rjelc5-MuiStack-root {flex-wrap:wrap;justify-content:center;}
+	.css-rjelc5-MuiStack-root .blankDiv {display:block;width:100%;height:15px;}
+	.css-132hal6-MuiStack-root {flex-direction:column;margin-top:40px;}
+	.css-f63syc {width: 50%;min-width: 600px;max-width: 600px;}
+	#body .firstHead {margin-bottom:50px;}
+	#body .CommunityHead {margin-bottom:50px;}
+	.css-1k0idyl-MuiStack-root {margin-bottom:100px;}
+	.css-1xzqqmo-MuiGrid-root {flex-direction:column;}
+	.css-1xzqqmo-MuiGrid-root .css-k3f0g4-MuiGrid-root, .css-1xzqqmo-MuiGrid-root .css-1o7apob-MuiGrid-root {max-width:100%;}
+	.css-abv3bj-MuiStack-root {flex-direction: column;gap:20px;}
+	.css-132hal6-MuiStack-root h4.MuiTypography-root br {display:none;}
+}
+
+@media screen and (max-width:769px)
+{
+	.keen-slider__slide {width:100%!important;max-width:100%!important;min-width:100%!important;}
+	.css-99pbpe-MuiPaper-root {width:95%!important;max-width:95%!important;min-width:95%!important;}
+	.css-1fh410u-MuiGrid-root>.MuiGrid-item {padding: 15px;flex-direction: column;max-width:100%;width:100%;}
+	.css-1ogu8fn-MuiPaper-root-MuiCard-root {max-width:100%;width:100%;}
+	.css-p9z0ox-MuiTypography-root {font-size: 2rem;}
+	.css-abv3bj-MuiStack-root {flex-direction: column;margin:100px 0 64px;}
+	.css-f63syc {
+		width: 100%;
+		min-width: 100%;
+		max-width: 100%;
+	}
+	.css-1ndux9e {
+		height: 100vh;
+		width: 100vw;}
+}
+
+@media screen and (max-width:450px)
+{
+	.css-6w9oil-MuiStack-root {gap: 15px;
+		margin-right: 10px;
+	}
+	.css-iaykeu-MuiStack-root {
+		grid-gap: 0px;
+		gap: 8px;
+	}
+	a.active .MuiBox-root span {width:35px;}
+	.css-w968tk-MuiTypography-root {
+		font-size: 1.8rem;
+		text-align:center!important;
+	}
+	.css-rfu3cm-MuiTypography-root span, .css-rfu3cm-MuiTypography-root i {text-align:center;}
+	.MuiBox-root.css-79elbk .MuiBox-root.css-xzcju2 svg {width:40px;}
+	.css-p9z0ox-MuiTypography-root, #body .firstHead .gradient-text, .css-abv3bj-MuiStack-root .MuiTypography-root  {
+		font-size: 1.8rem;
+	}
+	.css-4idr46-MuiTypography-root, .css-1x7d6t-MuiTypography-root {
+		font-size: 1.8rem;
+	}
+	.css-rfu3cm-MuiTypography-root, .css-rfu3cm-MuiTypography-root .gradient-text {
+		font-size: 2.5rem;
+		text-align:center;
+	}
+	.css-zb9jej-MuiTypography-root {
+		font-size: 1.5rem;
+	}
+}

@@ -90,7 +90,7 @@ export default function MyApp(props: any) {
                 paddingTop: "24px",
               }}
             >
-              {!width || width > 999 ? (
+              {/* {!width || width > 999 ? (
                 <SnackbarProvider>
                   <Component {...pageProps} />
                 </SnackbarProvider>
@@ -110,7 +110,10 @@ export default function MyApp(props: any) {
                     launch FashionVerse.
                   </Typography>
                 </Box>
-              )}
+              )} */}
+              <SnackbarProvider>
+                  <Component {...pageProps} />
+                </SnackbarProvider>
             </div>
           </Container>
         </ThemeProvider>

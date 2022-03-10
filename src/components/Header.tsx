@@ -73,7 +73,7 @@ export default function Header() {
           <strong>FASHION</strong>VERSE
         </Typography>
       </Logo>
-      <div style={{ flexGrow: 1 }} />
+      <div className="blankDiv" style={{ flexGrow: 1 }} />
       <Stack direction="row" gap={3} alignItems={"center"}>
         <Stack
           direction="row"
