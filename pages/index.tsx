@@ -42,7 +42,7 @@ export default function Index() {
   React.useEffect(() => {
     async function getBrands() {
       const arr: GridCardProps[] = [];
-      const querySnapshot = await getDocs(collection(firestore, "brands"));
+      const querySnapshot = await getDocs(query(collection(firestore, "brands"), limit(5)));
       querySnapshot.forEach((doc) => {
         arr.push(doc.data() as GridCardProps);
       });
