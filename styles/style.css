@@ -140,4 +140,16 @@ h1{
 	.css-zb9jej-MuiTypography-root {
 		font-size: 1.5rem;
 	}
+
+	.MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l svg {width:20px;}
+	button.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeSmall.MuiButton-outlinedSizeSmall.MuiButtonBase-root.css-1ksg8y7-MuiButtonBase-root-MuiButton-root svg {width:16px;}
+	button.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeSmall.MuiButton-outlinedSizeSmall.MuiButtonBase-root.css-1ksg8y7-MuiButtonBase-root-MuiButton-root {font-size:0.75rem;}
+	.MuiBox-root.css-79elbk .MuiBox-root.css-xzcju2 svg {width:20px;}
+	a.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeLarge.MuiButton-containedSizeLarge.MuiButtonBase-root.css-724qng-MuiButtonBase-root-MuiButton-root {font-size:1.4rem;}
+	.css-lluvi1 {max-width: 245px;}
+	h4.css-zb9jej-MuiTypography-root {margin-top: 5px;}
+	.css-xzcju2 {padding-left:20px;}
+	li.MuiImageListItem-root.MuiImageListItem-quilted.css-7rtvwf-MuiImageListItem-root {height:300px!important;}
+	.MuiTypography-h3{font-size:1.5em!important;}
+	.css-1aigpzg-MuiGrid-root>.MuiGrid-item {padding-top: 0;}
 }
