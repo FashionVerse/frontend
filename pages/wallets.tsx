@@ -18,9 +18,9 @@ const StyledPaper = styled(Paper)({
 });
 
 async function connectWallet(){
-  if (typeof window.ethereum !== 'undefined') {
+  if (typeof window['ethereum'] !== 'undefined') {
     try {
-      await window.ethereum.enable();
+      await window['ethereum'].enable();
       return true;
     } catch (e) {
       return false;

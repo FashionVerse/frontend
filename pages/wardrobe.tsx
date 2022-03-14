@@ -28,6 +28,7 @@ import {
   getDoc,
   collectionGroup
 } from "@firebase/firestore";
+import { AbiItem } from 'web3-utils'
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
@@ -47,8 +48,8 @@ export default function Wardrobe() {
 
   async function walletInit(){
 
-    if(typeof window.ethereum !== 'undefined'){
-      const { ethereum } = window;
+    if(typeof window['ethereum'] !== 'undefined'){
+      const ethereum = window['ethereum'];
   if (ethereum) {
       var provider = new ethers.providers.Web3Provider(ethereum);
 
@@ -97,9 +98,9 @@ export default function Wardrobe() {
           const brandId = collectionDoc.data().brand;
           console.log(brandId)
           const brand = await getDoc(doc(firestore, "brands", brandId));
-             const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
+             const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
         const item = await marketContract.methods.getItem(itemDoc.data().id).call();
-        const contract = new web3.eth.Contract(nftAbi, item.nftContract);
+        const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
         
         
         const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
@@ -260,48 +261,3 @@ export default function Wardrobe() {
     </Container>
   );
 }
-
-const YOUR_NFTS: FashionItemCardProps[] = [
-  {
-    id: "as6a0a82asd",
-    src: "https://source.unsplash.com/random/900×700/?trousers",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Trousers",
-    price: 0.04,
-    rarity: 13,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
-  },
-  {
-    id: "jda67kajbs",
-    src: "https://source.unsplash.com/random/900×700/?caps",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Caps & Hats",
-    price: 0.25,
-    rarity: 28,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 5,
-    collectionName: "Street Wear",
-    rarityCategory: "Ultra-rare",
-  },
-  {
-    id: "asda79qkajs72",
-    src: "https://source.unsplash.com/random/900×700/?shoes",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Shoes",
-    price: 0.01,
-    rarity: 8,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
-  },
-];

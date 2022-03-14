@@ -20,14 +20,20 @@ import Web3 from "web3";
 
 export interface FashionItemCardProps {
   id: string;
+  itemId: string;
   src: string;
   alt: string;
+  nft: any;
   pieceName: string;
   brandName: string;
   brandImage: string;
+  brand: any;
+  price: any;
+  sold: any;
   rarity: number;
+  collection: any;
   rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
-  price: number;
+  available: string
   hideAddToBag?: boolean;
   hidePrice?: boolean;
   expandable?: boolean;
@@ -49,7 +55,7 @@ export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
 }));
 
 async function addToBag(){
-  if(typeof window.ethereum !== 'undefined'){
+  if(typeof window['ethereum'] !== 'undefined'){
 
   } else {
     alert("Connect your wallet")
@@ -60,8 +66,8 @@ export default function FashionItemCard(props: FashionItemCardProps) {
 
 
     async function setCart(){
-      if(typeof window.ethereum !== 'undefined'){
-        const { ethereum } = window;
+      if(typeof window['ethereum'] !== 'undefined'){
+        const ethereum  = window['ethereum'];
     if (ethereum) {
         var provider = new ethers.providers.Web3Provider(ethereum);
 

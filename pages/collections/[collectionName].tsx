@@ -10,6 +10,7 @@ import {
   ImageList,
   ImageListItem,
 } from "@mui/material";
+import { AbiItem } from 'web3-utils'
 import { useRouter } from "next/router";
 import DividedTable, {
   DividedTableProps,
@@ -27,7 +28,8 @@ import {
   limit,
   getDocs,
   doc,
-  getDoc
+  getDoc,
+  CollectionReference
 } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
@@ -50,11 +52,11 @@ export default function CollectionPage() {
       for (const id of querySnapshot.docs) {
         
         //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
-        const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
+        const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
         const item = await marketContract.methods.getItem(id.data().id).call();
-        const collectionDoc = await getDoc(doc(collection(firestore, "collections"), collectionName));
+        const collectionDoc = await getDoc(doc(firestore, "/collections/"+collectionName));
         const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
-        const contract = new web3.eth.Contract(nftAbi, item.nftContract);
+        const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
         
         
         const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
@@ -65,7 +67,8 @@ export default function CollectionPage() {
 
         const json = await response.json()
         const date = new Date(parseInt(item.releaseTime) * 1000);
-        if(parseInt(item.available) > 0 && Date.now() > date){
+        const now = new Date(Date.now());
+        if(parseInt(item.available) > 0 && now > date){
           arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
         }
         
@@ -82,7 +85,7 @@ export default function CollectionPage() {
       });
   
     async function getInfo() {
-      const querySnapshot = await getDoc(doc(collection(firestore, "collections"), collectionName));
+      const querySnapshot = await getDoc(doc(firestore, "/collections/"+collectionName));
       const dropcategory = await getDoc(doc(firestore, "drop", querySnapshot.data().drop))
       DividerTableData.subtitle1 = querySnapshot.data().title
       DividerTableData.subtitle2 = dropcategory.data().name
@@ -223,79 +226,6 @@ const itemData = [
   {
     img: "https://source.unsplash.com/random/1200x400/?city",
     title: "Collection background",
-  },
-];
-
-const COLLECTION_ITEMS: FashionItemCardProps[] = [
-  {
-    id: "ausdkbbsk",
-    src: "https://source.unsplash.com/random/900×700/?hoodies",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Hoodie",
-    price: 0.02,
-    rarity: 20,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 4,
-    collectionName: "Street Wear",
-    rarityCategory: "Super-rare",
-  },
-  {
-    id: "asndka62va",
-    src: "https://source.unsplash.com/random/900×700/?shirts",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Shirt",
-    price: 0.12,
-    rarity: 50,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 1,
-    collectionName: "Street Wear",
-    rarityCategory: "Extremely-rare",
-  },
-  {
-    id: "as6a0a82asd",
-    src: "https://source.unsplash.com/random/900×700/?trousers",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Trousers",
-    price: 0.04,
-    rarity: 13,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
-  },
-  {
-    id: "jda67kajbs",
-    src: "https://source.unsplash.com/random/900×700/?caps",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Caps & Hats",
-    price: 0.25,
-    rarity: 28,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 5,
-    collectionName: "Street Wear",
-    rarityCategory: "Ultra-rare",
-  },
-  {
-    id: "asda79qkajs72",
-    src: "https://source.unsplash.com/random/900×700/?shoes",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Shoes",
-    price: 0.01,
-    rarity: 8,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
   },
 ];
 

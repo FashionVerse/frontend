@@ -34,8 +34,8 @@ export default function Header() {
   const colorMode = React.useContext(ColorModeContext);
 
   React.useEffect(() => {
-    if(typeof window.ethereum !== 'undefined'){
-      const { ethereum } = window;
+    if(typeof window['ethereum'] !== 'undefined'){
+      const ethereum = window['ethereum'];
   if (ethereum) {
       var provider = new ethers.providers.Web3Provider(ethereum);
   }
@@ -45,7 +45,7 @@ export default function Header() {
     return accounts.length > 0;
   }
   
-  async function getAccount() {
+  const  getAccount = async () => {
     const connected = await isMetaMaskConnected();
     if(connected){
       const accounts = await ethereum.enable();
