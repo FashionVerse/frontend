@@ -11,7 +11,6 @@ import { useWindowSize } from "../src/useWindowSize";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
-import { IS_SERVER } from "./globals";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
