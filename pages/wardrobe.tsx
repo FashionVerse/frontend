@@ -88,13 +88,14 @@ export default function Wardrobe() {
 
       const querySnapshot = await getDocs(query(collection(firestore, "purchase"), where("address", "==", account)));
       for(const purchase of querySnapshot.docs){
-        console.log("PURCHASE"+purchase.data())
         const items = await getDocs(query(collectionGroup(firestore, 'item'), where("id", "==", purchase.data().item)));
         if(items.size > 0){
           const itemDoc = items.docs[0];
           const collectionId = itemDoc.data().collection;
+          console.log(itemDoc.data())
           const collectionDoc = await getDoc(doc(firestore, "collections", collectionId));
           const brandId = collectionDoc.data().brand;
+          console.log(brandId)
           const brand = await getDoc(doc(firestore, "brands", brandId));
              const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
         const item = await marketContract.methods.getItem(itemDoc.data().id).call();

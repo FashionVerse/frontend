@@ -42,10 +42,16 @@ export default function BrandPage() {
     async function getCollections() {
       const arr: GridCardProps[] = [];
       const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("brand", "==", brandId ?? "")));
+      if(querySnapshot.docs.length > 0){
+
+      
       querySnapshot.forEach((doc) => {
         arr.push(doc.data());
       });
       return arr;
+    } else {
+      return arr;
+    }
     }
     getCollections()
       .then((value) => {
@@ -57,7 +63,12 @@ export default function BrandPage() {
   
     async function getInfo() {
       const querySnapshot = await getDoc(doc(collection(firestore, "brands"), brandId));
-      return querySnapshot.data();
+      if(typeof querySnapshot.data() !== 'undefined'){
+        return querySnapshot.data();
+      } else {
+        return {};
+      }
+      
     }
     getInfo()
       .then((value) => {

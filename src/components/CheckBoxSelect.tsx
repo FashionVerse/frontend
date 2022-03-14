@@ -24,7 +24,7 @@ export default function CheckBoxSelect({
   formStateName,
   label,
 }: CheckBoxSelectProps) {
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
   const options: Option[] = watch(formStateName);
 
   return (
@@ -34,9 +34,13 @@ export default function CheckBoxSelect({
         value={options.map((opt) => opt.value)}
         renderValue={() => label}
       >
-        {options.map((opt: Option) => (
-          <MenuItem key={opt.id} value={opt.value} disableRipple>
-            <Checkbox checked={opt.selected} />
+        {options.map((opt: Option, index) => (
+          <MenuItem key={opt.id} value={opt.value}  disableRipple>
+            <Checkbox checked={opt.selected}  onChange={e => {
+              
+            options[index].selected = e.target.checked
+            setValue(formStateName, options);
+          }}/>
             <ListItemText primary={opt.value} />
           </MenuItem>
         ))}

@@ -12,7 +12,7 @@ import {
   ImageListItem,
   Stack,
 } from "@mui/material";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 import FashionItemCard, {
   FashionItemCardProps,
 } from "../../src/components/FashionItemCard";
@@ -56,6 +56,7 @@ export default function DropPage() {
     async function getItems() {
       const arr = [];
       const drop = await getDocs(query(collection(firestore, "drop"), where("id", "==", dropName)));
+      if(drop.docs.length > 0){
       const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("drop", "==", drop.docs[0].id)));
       for (const id of querySnapshot.docs) {
     
@@ -76,27 +77,65 @@ export default function DropPage() {
         if(parseInt(itemContract.available)>0 && Date.now() > date){
           arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
         }
-        
+          
+
         }
       }
-      console.log(arr)
+    } else {
+      router.replace("/404")
+    }
       return arr;
     }
+
+    async function getBrands(){
+      const arr = [];
+      const brands = await getDocs(collection(firestore, "brands"));
+      for (const brand of brands.docs){
+        arr.push(brand.data());
+      }
+      return arr;
+    }
+
+    async function getName() {
+      const drop = await getDocs(query(collection(firestore, "drop"), where("id", "==", dropName)));
+      if(drop.docs.length > 0){
+      return drop.docs[0].data().name;
+    } else {
+      router.replace("/404")
+    }
+    }
+
+    
+
     getItems()
       .then((value) => {
         setItems(value);
+        getName()
+      .then((value) => {
+        setName(value);
+
+      })
+        getBrands()
+      .then((value) => {
+        setBrands(value);
+
+      })
       })
       .catch((e) => {
         enqueueSnackbar(e.message);
       });
+
+      
   
     
   }, [router.isReady]);
 
   const [items, setItems] = React.useState(null);
+  const [brands, setBrands] = React.useState(null);
+  const [name, setName] = React.useState(null);
 
 
-  if (!items) {
+  if (!items && !brands) {
     // TODO: Add proper loader
     return (
       <Box
@@ -129,8 +168,8 @@ export default function DropPage() {
         rowHeight={180}
         gap={0}
       >
-        {itemData.map((item) => (
-          <ImageListItem key={item.id} cols={1} rows={1}>
+        {itemData.map((item, index) => (
+          <ImageListItem key={index} cols={1} rows={1}>
             <img {...srcset(item.img, 180)} alt={item.title} loading="eager" />
           </ImageListItem>
         ))}
@@ -158,7 +197,8 @@ export default function DropPage() {
           >
             <b>
               {/* Should ideally be this {dropName} */}
-              {"STREET WEAR"}
+              {/* {"STREET WEAR"} */}
+              {name}
             </b>
           </Typography>
           <Grid container spacing={8} sx={{ mb: 16 }}>
@@ -339,9 +379,9 @@ const PRICE_DATA: Option[] = [
   { value: "> 0.5 eth", id: "yuvaeibask" },
 ];
 const BRAND_DATA = [
-  { value: "Sieke", id: "oansdin" },
-  { value: "Alibas", id: "avwdhjdasjd" },
-  { value: "Gape", id: "7b2212sx" },
+  { value: "Sieke", id: "oansdin", selected: false },
+  { value: "Alibas", id: "avwdhjdasjd", selected: false },
+  { value: "Gape", id: "7b2212sx", selected: false },
 ];
 
 const COLLECTION_DATA = [

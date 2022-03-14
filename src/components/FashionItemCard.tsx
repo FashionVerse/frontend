@@ -172,7 +172,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           <Stack justifyContent="center" alignItems="center" sx={{ mr: 1 }}>
             <Typography variant="caption">Rarity</Typography>
             <Typography variant="caption" sx={{ mt: "-2px" }}>
-              {1/parseInt(props.available)}
+              {1/parseInt(props.sold.length)}
             </Typography>
           </Stack>
         </Stack>
