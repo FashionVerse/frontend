@@ -75,7 +75,7 @@ export default function Brands() {
 
   return (
     <FormProvider {...methods}>
-      <Container>
+      <Container className="brandsInner">
         <Header />
         <Typography
           variant="h3"

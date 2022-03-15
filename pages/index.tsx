@@ -114,7 +114,7 @@ export default function Index() {
             Build your First Digital <br /> Wardrobe
           </Typography>
         </div>
-        <Box
+        <Box className="myNewBox"
           sx={{
             width: "50%",
             minWidth: "300px",

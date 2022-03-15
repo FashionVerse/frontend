@@ -109,6 +109,11 @@ h1{
 	.css-1ndux9e {
 		height: 100vh;
 		width: 100vw;}
+		.dropsContainer ul.MuiImageList-root {grid-template-columns:repeat(3, 1fr)!important;}
+		.swContainer .css-1aigpzg-MuiGrid-root .MuiBox-root.css-1s8thx6 {width:100%;min-width:100%;}
+
+		.css-ypzray-MuiStack-root {flex-direction:column;margin-top: 60px;}
+		.css-1x7d6t-MuiTypography-root {margin: 0 0 20px 0;}
 }
 
 @media screen and (max-width:450px)
@@ -152,4 +157,31 @@ h1{
 	li.MuiImageListItem-root.MuiImageListItem-quilted.css-7rtvwf-MuiImageListItem-root {height:300px!important;}
 	.MuiTypography-h3{font-size:1.5em!important;}
 	.css-1aigpzg-MuiGrid-root>.MuiGrid-item {padding-top: 0;}
+
+	.dropsContainer ul.MuiImageList-root {grid-template-columns:repeat(2, 1fr)!important;}
+
+	.css-4t9f37-MuiStack-root {flex-direction:column;margin-bottom:20px;}
+	.swContainer .css-4t9f37-MuiStack-root  .css-qby5lk-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {text-align:center;display:block;width:100%;}
+
+	.swContainer .MuiGrid-root.MuiGrid-item {margin-bottom:30px;}
+	.swContainer .css-11w5woi-MuiPaper-root-MuiCard-root {min-width:100%;}
+	.swContainer .css-11w5woi-MuiPaper-root-MuiCard-root .css-1gamj71 {min-width:100%;}
+	.css-11w5woi-MuiPaper-root-MuiCard-root {width:100%;min-width:100%;max-width:100%;}
+	.css-1gamj71 {width:100%;min-width:100%;max-width:100%;}
+}
+
+@media screen and (max-width:376px)
+{
+	.css-14rpj3o-MuiButtonBase-root-MuiIconButton-root {margin-right:20px;}
+	.css-5mybnt-MuiTypography-root, .css-oi4y6c-MuiTypography-root {font-size: .9rem;}
+	.MuiTypography-h3 {font-size: 1.4em!important;}
+	.css-rfu3cm-MuiTypography-root span, .css-rfu3cm-MuiTypography-root i {font-size: 1.3em;}
+	.css-zb9jej-MuiTypography-root {font-size: 1.1rem;}
+	.MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l .keen-slider .keen-slider__slide span{width: 140px !important;height: 160px !important;}
+	.MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l .keen-slider .keen-slider__slide .MuiButton-root span {width: auto !important;height: auto !important;}
+	.MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l svg:first-child {left: 15px !important;}
+	.MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l svg:last-child {right: 15px !important;}
+
+	.brandsInner .MuiTypography-root .css-f9kd3n-MuiTypography-root {margin-top:30px;}
+	
 }

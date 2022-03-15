@@ -140,7 +140,7 @@ export default function DropPage() {
 
   return (
     <FormProvider {...methods}>
-      <Container maxWidth={false} disableGutters>
+      <Container  className="dropsContainer" maxWidth={false} disableGutters>
         <Container>
           <Header />
         </Container>
@@ -148,7 +148,7 @@ export default function DropPage() {
           <ImageGallery />
         </Box>
 
-        <Container>
+        <Container className="swContainer">
           <Typography
             variant="h3"
             align="center"
