@@ -29,8 +29,8 @@ export interface EnlargedFashionCardProps extends FashionItemCardProps {
 function CardDialog(props: CardDialogProps) {
 
   async function setCart(){
-    if(typeof window.ethereum !== 'undefined'){
-      const { ethereum } = window;
+    if(typeof window['ethereum'] !== 'undefined'){
+      const ethereum = window['ethereum'];
   if (ethereum) {
       var provider = new ethers.providers.Web3Provider(ethereum);
 

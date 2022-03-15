@@ -25,7 +25,8 @@ import {
   limit,
   getDocs,
   doc,
-  getDoc
+  getDoc,
+  Firestore
 } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
 
@@ -40,12 +41,18 @@ export default function BrandPage() {
   React.useEffect(() => {
     if(!router.isReady) return;
     async function getCollections() {
-      const arr: GridCardProps[] = [];
+      const arr = [];
       const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("brand", "==", brandId ?? "")));
+      if(querySnapshot.docs.length > 0){
+
+      
       querySnapshot.forEach((doc) => {
         arr.push(doc.data());
       });
       return arr;
+    } else {
+      return arr;
+    }
     }
     getCollections()
       .then((value) => {
@@ -56,8 +63,13 @@ export default function BrandPage() {
       });
   
     async function getInfo() {
-      const querySnapshot = await getDoc(doc(collection(firestore, "brands"), brandId));
-      return querySnapshot.data();
+      const querySnapshot = await getDoc(doc(firestore, "/brands/"+brandId));
+      if(typeof querySnapshot.data() !== 'undefined'){
+        return querySnapshot.data();
+      } else {
+        return {};
+      }
+      
     }
     getInfo()
       .then((value) => {
@@ -68,7 +80,7 @@ export default function BrandPage() {
       });
 
       async function getDesigners() {
-        const arr: GridCardProps[] = [];
+        const arr = [];
         const querySnapshot = await getDocs(collection(firestore, "/brands/"+brandId+"/designers"));
         querySnapshot.forEach((doc) => {
           arr.push(doc.data());

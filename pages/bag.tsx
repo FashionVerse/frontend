@@ -34,6 +34,7 @@ import {
   setDoc,
   addDoc
 } from "@firebase/firestore";
+import { AbiItem } from 'web3-utils'
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
@@ -60,12 +61,12 @@ function toFixedIfNecessary(value, dp) {
 export default function Bag() {
   const { enqueueSnackbar } = useSnackbar();
   const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
-  const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
+  const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
 
   async function walletInit(){
 
-    if(typeof window.ethereum !== 'undefined'){
-      const { ethereum } = window;
+    if(typeof window['ethereum'] !== 'undefined'){
+      const  ethereum  = window['ethereum'];
   if (ethereum) {
       var provider = new ethers.providers.Web3Provider(ethereum);
 
@@ -102,7 +103,7 @@ export default function Bag() {
       const item = await marketContract.methods.getItem(id.data().id).call();
       const collectionDoc = await getDoc(doc(collection(firestore, "collections"), id.data().collection));
       const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
-      const contract = new web3.eth.Contract(nftAbi, item.nftContract);
+      const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
       
       
       const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
@@ -112,9 +113,9 @@ export default function Bag() {
         enqueueSnackbar(response.statusText)
 
       const json = await response.json()
-
+      const now = new Date(Date.now())
       const date = new Date(parseInt(item.releaseTime) * 1000);
-      if(parseInt(item.available) > 0 && Date.now() > date){
+      if(parseInt(item.available) > 0 && now > date){
         arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}, quantity: id.data().amount})
       }
     }
@@ -139,8 +140,8 @@ export default function Bag() {
         console.log(items)
         console.log(amounts)
 
-        const web3 = window.web3 = new Web3(window.web3.currentProvider);
-        const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
+        const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
+        const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
 
         marketContract.methods.createMarketSale(nftContract, items, amounts).send({from: account, value: Web3.utils.toWei(String(totalCost))})
         .then(function(receipt){
@@ -194,8 +195,8 @@ export default function Bag() {
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const totalCost = data
-    .map((c) => Web3.utils.fromWei(c.price, 'ether') * c.quantity)
+   const totalCost:any = data
+    .map((c) => Number(Web3.utils.fromWei(c.price, 'ether')) * c.quantity)
     .reduce((a, b) => a + b, 0);
 
   function CheckoutCard({ quantity, ...rest }: CheckoutCardProps) {
@@ -276,7 +277,7 @@ export default function Bag() {
               variant="h5"
               sx={{ display: "flex", alignItems: "center", gap: "4px" }}
             >
-              {Web3.utils.fromWei( rest.price, 'ether')}
+              {Web3.utils.fromWei( String(rest.price), 'ether')}
               <SiEthereum fontSize="1.25rem" />
             </Typography>
             <Button
@@ -381,60 +382,3 @@ export default function Bag() {
     </Container>
   );
 }
-
-const CHECKOUT_DATA: CheckoutCardProps[] = [
-  {
-    id: "as6a0a82asd",
-    src: "https://source.unsplash.com/random/900×700/?trousers",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Trousers",
-    price: 0.04,
-    rarity: 13,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
-    expandable: true,
-    quantity: 1,
-    hideAddToBag: true,
-    hidePrice: true,
-  },
-  {
-    id: "jda67kajbs",
-    src: "https://source.unsplash.com/random/900×700/?caps",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Caps & Hats",
-    price: 0.25,
-    rarity: 28,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 5,
-    collectionName: "Street Wear",
-    rarityCategory: "Ultra-rare",
-    expandable: true,
-    quantity: 1,
-    hideAddToBag: true,
-    hidePrice: true,
-  },
-  {
-    id: "asda79qkajs72",
-    src: "https://source.unsplash.com/random/900×700/?shoes",
-    alt: "piece image",
-    brandName: "Spikey",
-    brandImage: "/placeholder.png",
-    pieceName: "Shoes",
-    price: 0.01,
-    rarity: 8,
-    description: "lorem ipsum dolor sit",
-    noOfPieces: 25,
-    collectionName: "Street Wear",
-    rarityCategory: "Semi-rare",
-    expandable: true,
-    quantity: 2,
-    hideAddToBag: true,
-    hidePrice: true,
-  },
-];
