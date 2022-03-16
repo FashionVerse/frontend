@@ -51,11 +51,11 @@ export default function Resources() {
                 color="primary"
                 size="large"
               >
-                <Typography variant="h6">
+                <Typography variant="h7">
                   <b>{buttonText}</b>
                 </Typography>
               </GradientButton>
-              <Typography variant="h6" align="center" sx={{ mt: 4 }}>
+              <Typography variant="h7" align="center" sx={{ mt: 4 }}>
                 {description}
               </Typography>
             </BlueShadowPaper>

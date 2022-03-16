@@ -17,6 +17,7 @@ import { ethers } from "ethers";
 import { collection, setDoc, doc } from "firebase/firestore"; 
 import firestore from "../../firebase/clientApp";
 import Web3 from "web3";
+import { useRouter } from "next/router";
 
 export interface FashionItemCardProps {
   id: string;
@@ -64,6 +65,8 @@ async function addToBag(){
 
 export default function FashionItemCard(props: FashionItemCardProps) {
 
+  const router = useRouter();
+
 
     async function setCart(){
       if(typeof window['ethereum'] !== 'undefined'){
@@ -100,6 +103,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
         
       } else {
         alert("Connect to Wallet")
+        router.replace("/");
       }
 
       } else {

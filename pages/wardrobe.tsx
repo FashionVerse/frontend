@@ -12,6 +12,7 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { useRouter } from "next/router";
 import FashionItemCard, {
   FashionItemCardProps,
 } from "../src/components/FashionItemCard";
@@ -44,6 +45,7 @@ export default function Wardrobe() {
   const [activePage, setActivePage] = React.useState<"nfts" | "avatar">("nfts");
 
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
   const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
 
   async function walletInit(){
@@ -68,6 +70,7 @@ export default function Wardrobe() {
       
     } else {
       alert("Connect to Wallet")
+      router.replace("/");
       return false
     }
 

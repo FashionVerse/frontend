@@ -76,18 +76,18 @@ const WALLETS = [
     href: "#",
     alt: "MetaMask logo",
   },
-  {
-    id: "k8igs4",
-    name: "Coinbase Wallet",
-    src: "/coin-base.svg",
-    href: "#",
-    alt: "CoinBase logo",
-  },
-  {
-    id: "ka80ha3",
-    name: "Wallet Connect",
-    src: "/wallet-connect.png",
-    href: "#",
-    alt: "WalletConnect logo",
-  },
+  // {
+  //   id: "k8igs4",
+  //   name: "Coinbase Wallet",
+  //   src: "/coin-base.svg",
+  //   href: "#",
+  //   alt: "CoinBase logo",
+  // },
+  // {
+  //   id: "ka80ha3",
+  //   name: "Wallet Connect",
+  //   src: "/wallet-connect.png",
+  //   href: "#",
+  //   alt: "WalletConnect logo",
+  // },
 ];

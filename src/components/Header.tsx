@@ -131,6 +131,6 @@ const DropsNavs = [
   { id: "ha8j39jak3j", label: "Work Wear", href: "/" },
   { id: "hj8jsia930an", label: "Party Wear", href: "/" },
   { id: "7ja93iajsh3a", label: "Evening Wear", href: "/" },
-  { id: "haksnaj83jaa9", label: "Ethnic", href: "/" },
+  { id: "naj83jaa9", label: "Ethnic", href: "/" },
   { id: "haksnaj83jaa9", label: "Limitless", href: "/" },
 ];

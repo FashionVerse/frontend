@@ -11,6 +11,7 @@ import {
   IconButton,
   Box
 } from "@mui/material";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import FashionItemCard, {
   FashionItemCardProps,
@@ -60,6 +61,7 @@ function toFixedIfNecessary(value, dp) {
 
 export default function Bag() {
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
   const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
   const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
 
@@ -85,6 +87,7 @@ export default function Bag() {
       
     } else {
       alert("Connect to Wallet")
+      router.replace("/");
       return false
     }
 

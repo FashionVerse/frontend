@@ -163,7 +163,7 @@ export default function DropPage() {
 
   const [items, setItems] = React.useState(null);
   const [brands, setBrands] = React.useState(null);
-  const [name, setName] = React.useState(null);
+  const [name, setName] = React.useState("");
 
 
   if (!items && !brands) {
@@ -229,7 +229,7 @@ export default function DropPage() {
             <b>
               {/* Should ideally be this {dropName} */}
               {/* {"STREET WEAR"} */}
-              {name}
+              {name.toUpperCase()}
             </b>
           </Typography>
           <Grid container spacing={8} sx={{ mb: 16 }}>
@@ -338,9 +338,4 @@ const PRICE_DATA: Option[] = [
   { value: "> 0.05 & <= 0.2 eth", id: "oichaiu", selected: false },
   { value: "> 0.2 eth & <= 0.5 eth", id: "afhjasd", selected: false },
   { value: "> 0.5 eth", id: "yuvaeibask", selected: false },
-];
-const BRAND_DATA = [
-  { value: "Sieke", id: "oansdin", selected: false },
-  { value: "Alibas", id: "avwdhjdasjd", selected: false },
-  { value: "Gape", id: "7b2212sx", selected: false },
 ];

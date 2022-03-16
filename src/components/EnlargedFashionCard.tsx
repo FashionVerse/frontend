@@ -15,6 +15,7 @@ import { ethers } from "ethers";
 import { collection, setDoc, doc } from "firebase/firestore"; 
 import firestore from "../../firebase/clientApp";
 import Web3 from "web3";
+import { useRouter } from "next/router";
 
 export interface CardDialogProps extends FashionItemCardProps {
   open: boolean;
@@ -27,6 +28,7 @@ export interface EnlargedFashionCardProps extends FashionItemCardProps {
 }
 
 function CardDialog(props: CardDialogProps) {
+  const router = useRouter();
 
   async function setCart(){
     if(typeof window['ethereum'] !== 'undefined'){
@@ -64,6 +66,7 @@ function CardDialog(props: CardDialogProps) {
       
     } else {
       alert("Connect to Wallet")
+      router.replace("/");
     }
 
     } else {
@@ -157,6 +160,7 @@ export default function EnlargedFashionCard(props: EnlargedFashionCardProps) {
   const handleClose = () => {
     setState(false);
   };
+
 
   return (
     <div>
