@@ -151,7 +151,7 @@ export default function CollectionPage() {
   }
 
   return (
-    <Container maxWidth={false} disableGutters>
+    <Container maxWidth={false} disableGutters className="collectionContainer">
       <Container>
         <Header />
       </Container>

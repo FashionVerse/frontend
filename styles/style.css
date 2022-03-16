@@ -91,6 +91,14 @@ h1{
 	.css-1xzqqmo-MuiGrid-root .css-k3f0g4-MuiGrid-root, .css-1xzqqmo-MuiGrid-root .css-1o7apob-MuiGrid-root {max-width:100%;}
 	.css-abv3bj-MuiStack-root {flex-direction: column;gap:20px;}
 	.css-132hal6-MuiStack-root h4.MuiTypography-root br {display:none;}
+
+	.checkOutPage h3.MuiTypography-root {    margin-top: 60px;
+		margin-bottom: 40px;
+	}
+
+	.checkOutItems .css-9v4ipw-MuiStack-root .MuiGrid-root, .checkOutItems .css-1tn1m65-MuiStack-root {flex-direction:column;}
+	.checkOutItems .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-5.css-k3f0g4-MuiGrid-root {max-width:100%;width:100%;}
+	.checkOutItems .css-hfzt2e-MuiPaper-root-MuiCard-root {max-width:100%;}
 }
 
 @media screen and (max-width:769px)
@@ -116,7 +124,7 @@ h1{
 		.css-1x7d6t-MuiTypography-root {margin: 0 0 20px 0;}
 }
 
-@media screen and (max-width:450px)
+@media screen and (max-width:480px)
 {
 	.css-6w9oil-MuiStack-root {gap: 15px;
 		margin-right: 10px;
@@ -168,6 +176,24 @@ h1{
 	.swContainer .css-11w5woi-MuiPaper-root-MuiCard-root .css-1gamj71 {min-width:100%;}
 	.css-11w5woi-MuiPaper-root-MuiCard-root {width:100%;min-width:100%;max-width:100%;}
 	.css-1gamj71 {width:100%;min-width:100%;max-width:100%;}
+	.checkOutItems .css-1s8thx6 {width:100%;min-width:100%;max-width:100%;}
+	.checkOutItems .css-1tn1m65-MuiStack-root {padding-left:20px;padding-right:20px;}
+	.checkOutItems .css-vkdmif-MuiTypography-root {font-size:1.2rem;}
+	.checkOutItems .css-gjx43q-MuiStack-root {flex-direction:column;}
+	.checkOutItems .css-gjx43q-MuiStack-root .css-a8xorp-MuiStack-root {width:80%;min-width:80%;max-width:80%;text-align:left;flex-direction:row;justify-content:flex-start;margin-left:60px;}
+	.checkOutItems .css-gjx43q-MuiStack-root .css-a8xorp-MuiStack-root span:last-child {margin-left:10px;}
+	.checkOutItems .MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-grid-xs-6.css-1eftpc-MuiGrid-root {max-width:100%;}
+	.checkOutItems button.css-qd485v-MuiButtonBase-root-MuiIconButton-root {padding:0px;}
+	.checkOutItems button.css-qd485v-MuiButtonBase-root-MuiIconButton-root:last-child {margin-right:20px;}
+	.checkOutItems .MuiTypography-root.MuiTypography-h5.css-1mq63i1-MuiTypography-root {font-size:1.2rem;}
+	.checkOutItems .css-9v4ipw-MuiStack-root {padding-left:20px;padding-right:20px;}
+    .collectionContainer .MuiGrid-root.MuiGrid-container.css-lq7fsg-MuiGrid-root {flex-direction:column;}
+	.collectionContainer .css-e2s56e-MuiDivider-root {height:2px;}
+	.collectionContainer .MuiGrid-root.MuiGrid-container.css-lq7fsg-MuiGrid-root .css-1i8xe9y-MuiGrid-root {margin:0;}
+	.collectionContainer .css-vue7hi-MuiTypography-root {
+		font-size: 1.2rem;margin-bottom: 10px;
+	}
+	.collectionContainer .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6.MuiGrid-grid-md-4.css-11l5t4l-MuiGrid-root {margin-bottom:30px;}
 }
 
 @media screen and (max-width:376px)

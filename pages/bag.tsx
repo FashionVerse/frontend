@@ -334,7 +334,7 @@ export default function Bag() {
   }
 
   return (
-    <Container>
+    <Container className="checkOutPage">
       <Header />
       <Typography
         variant="h3"
@@ -348,7 +348,7 @@ export default function Bag() {
       >
         <b>CHECKOUT</b>
       </Typography>
-      <Container maxWidth="md">
+      <Container maxWidth="md" className="checkOutItems">
         <BlueShadowPaper
           sx={{
             borderRadius: "32px",
