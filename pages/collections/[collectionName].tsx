@@ -86,9 +86,12 @@ export default function CollectionPage() {
   
     async function getInfo() {
       const querySnapshot = await getDoc(doc(firestore, "/collections/"+collectionName));
-      const dropcategory = await getDoc(doc(firestore, "drop", querySnapshot.data().drop))
+      const dropcategory = await getDoc(doc(firestore, "drop", querySnapshot.data().drop));
+      const itemSnapshot = await getDocs(collection(firestore, "/collections/"+collectionName+"/item"));
       DividerTableData.subtitle1 = querySnapshot.data().title
       DividerTableData.subtitle2 = dropcategory.data().name
+      var num = 0;
+      DividerTableData.subtitle3 = itemSnapshot.docs.length.toString();
       return {...querySnapshot.data(), dropCategory: dropcategory.data()};
     }
     getInfo()

@@ -66,6 +66,8 @@ export default function DropPage() {
     } 
     return false;
   }
+
+
   
   async function getItems() {
     const arr = [];
@@ -89,10 +91,56 @@ export default function DropPage() {
       const json = await response.json()
       const date = new Date(parseInt(itemContract.releaseTime) * 1000);
       const now = new Date(Date.now());
+      var add = true;
       if(parseInt(itemContract.available)>0 && now > date){
+        if(checkSelected(methods.getValues().price)){
+          const prices = [];
+          for(const priceVal of methods.getValues().price){
+            if(priceVal.id == "osndaok" && priceVal.selected){
+              if(parseInt(itemContract.price) < parseInt(Web3.utils.toWei("0.05", "ether"))){
+                console.log(itemContract);
+              } else {
+                add = false;
+              }
+            }
+
+            if(priceVal.id == "oichaiu" && priceVal.selected){
+              if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.05", "ether")) && parseInt(itemContract.price) <= parseInt(Web3.utils.toWei("0.2", "ether"))){
+                console.log(itemContract);
+              } else {
+                add = false;
+              }
+            }
+
+            if(priceVal.id == "afhjasd" && priceVal.selected){
+              if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.2", "ether")) && parseInt(itemContract.price) <= parseInt(Web3.utils.toWei("0.5", "ether"))){
+                console.log(itemContract);
+              } else {
+                add = false;
+              }
+            }
+
+            if(priceVal.id == "yuvaeibask" && priceVal.selected){
+              if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.5", "ether"))){
+                console.log(itemContract);
+              } else {
+                add = false;
+              }
+            }
+          }
+        } 
+
         if(checkSelected(methods.getValues().brand)){
+          for(const brandVal of methods.getValues().brand){
+            if(brandVal.id !== brand.data().id){
+              add = false;
+            }
+          }
         }
-        arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
+
+        if(add){
+          arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
+        }
       }
         
 
@@ -164,9 +212,10 @@ export default function DropPage() {
   const [items, setItems] = React.useState(null);
   const [brands, setBrands] = React.useState(null);
   const [name, setName] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
 
-  if (!items && !brands) {
+  if ((!items && !brands) || loading) {
     // TODO: Add proper loader
     return (
       <Box
@@ -240,7 +289,13 @@ export default function DropPage() {
                 <div style={{ flexGrow: 1 }} />
                 <CheckBoxSelect formStateName="brand" label="Brand" />
                 {/* <CheckBoxSelect formStateName="collection" label="Collection" /> */}
-                <GradientButton onClick={() => getItems()}>
+                <GradientButton onClick={() => {
+                  setLoading(true);
+                  getItems().then((items)=>{
+                    setItems(items);
+                    setLoading(false);
+                  })
+                  }}>
             <Typography variant="body1">FILTER</Typography>
           </GradientButton>
               </Stack>
