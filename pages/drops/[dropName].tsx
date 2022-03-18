@@ -94,49 +94,98 @@ export default function DropPage() {
       var add = true;
       if(parseInt(itemContract.available)>0 && now > date){
         if(checkSelected(methods.getValues().price)){
-          const prices = [];
+          var priceCheck = false;
           for(const priceVal of methods.getValues().price){
             if(priceVal.id == "osndaok" && priceVal.selected){
               if(parseInt(itemContract.price) < parseInt(Web3.utils.toWei("0.05", "ether"))){
                 console.log(itemContract);
-              } else {
-                add = false;
+                priceCheck = true;
               }
             }
 
             if(priceVal.id == "oichaiu" && priceVal.selected){
               if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.05", "ether")) && parseInt(itemContract.price) <= parseInt(Web3.utils.toWei("0.2", "ether"))){
                 console.log(itemContract);
-              } else {
-                add = false;
-              }
+                priceCheck = true;
+              } 
             }
 
             if(priceVal.id == "afhjasd" && priceVal.selected){
               if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.2", "ether")) && parseInt(itemContract.price) <= parseInt(Web3.utils.toWei("0.5", "ether"))){
                 console.log(itemContract);
-              } else {
-                add = false;
-              }
+                priceCheck = true;
+              } 
             }
 
             if(priceVal.id == "yuvaeibask" && priceVal.selected){
               if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.5", "ether"))){
                 console.log(itemContract);
-              } else {
-                add = false;
-              }
+                priceCheck = true;
+              } 
             }
+          }
+
+          if(priceCheck && add){
+            add = true;
+          } else {
+            add = false;
           }
         } 
 
         if(checkSelected(methods.getValues().brand)){
+          var brandCheck = false;
           for(const brandVal of methods.getValues().brand){
-            if(brandVal.id !== brand.data().id){
-              add = false;
+            if(brandVal.id == brand.data().id){
+              brandCheck = true;
+            }
+          }
+
+          if(brandCheck && add){
+            add = true;
+          } else {
+            add = false;
+          }
+        }
+
+        if(checkSelected(methods.getValues().rarity)){
+          var rarityCheck = false;
+        for(const rarityVal of methods.getValues().rarity){
+          console.log("LENGTH: "+itemContract.sold.length)
+          if(rarityVal.id == "123kjaasd" && rarityVal.selected){
+            if(itemContract.sold.length >=30){
+              console.log(itemContract);
+              rarityCheck  = true;
+            }
+          }
+
+          if(rarityVal.id == "asdasioqdoj" && rarityVal.selected){
+            if(itemContract.sold.length >=15 && itemContract.sold.length < 30){
+              console.log(itemContract);
+              rarityCheck  = true;
+            }
+          }
+
+          if(rarityVal.id == "asdaiuqas" && rarityVal.selected){
+            if(itemContract.sold.length >=5 && itemContract.sold.length < 15){
+              console.log(itemContract);
+              rarityCheck  = true;
+            }
+          }
+
+          if(rarityVal.id == "98ujkacc" && rarityVal.selected){
+            if(itemContract.sold.length <5){
+              console.log(itemContract);
+              rarityCheck  = true;
             }
           }
         }
+
+        if(rarityCheck && add){
+          add = true;
+        } else {
+          add = false;
+        }
+      }
 
         if(add){
           arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
