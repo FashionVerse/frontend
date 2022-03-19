@@ -77,6 +77,20 @@ function CardDialog(props: CardDialogProps) {
 
   const { open, onClose } = props;
 
+  var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
+  if(props.sold.length >=30 ){
+    rarityCategory = "Semi-rare";
+  }
+  else if (props.sold.length >=15 && props.sold.length < 30){
+    rarityCategory = "Super-rare";
+  }
+  else if (props.sold.length >=5 && props.sold.length < 15){
+    rarityCategory = "Ultra-rare";
+  }
+  if(props.sold.length < 50 ){
+    rarityCategory = "Extremely-rare";
+  }
+
   return (
     <Dialog
       open={open}
@@ -119,10 +133,10 @@ function CardDialog(props: CardDialogProps) {
           </Stack>
           <Stack sx={{ textAlign: "right" }}>
             <Typography variant="caption">
-              <b>{props.rarityCategory}</b>
+              <b>{rarityCategory}</b>
             </Typography>
             <Typography variant="caption" color="textSecondary">
-              {"No. of pieces - " + props.available}
+              {"No. of pieces - " + props.sold.length}
             </Typography>
             <Typography variant="caption" color="primary">
               {props.collection.title}

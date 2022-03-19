@@ -116,6 +116,21 @@ export default function FashionItemCard(props: FashionItemCardProps) {
   const [enlarged, setEnlarged] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
+  if(props.sold.length >=30 ){
+    rarityCategory = "Semi-rare";
+  }
+  else if (props.sold.length >=15 && props.sold.length < 30){
+    rarityCategory = "Super-rare";
+  }
+  else if (props.sold.length >=5 && props.sold.length < 15){
+    rarityCategory = "Ultra-rare";
+  }
+  if(props.sold.length < 50 ){
+    rarityCategory = "Extremely-rare";
+  }
+  
+
   if(isLoading){
     return (
       <Box
@@ -182,7 +197,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           <Stack justifyContent="center" alignItems="center" sx={{ mr: 1 }}>
             <Typography variant="caption">Rarity</Typography>
             <Typography variant="caption" sx={{ mt: "-2px" }}>
-              {1/parseInt(props.sold.length)}
+              {rarityCategory}
             </Typography>
           </Stack>
         </Stack>
