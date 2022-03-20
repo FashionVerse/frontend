@@ -99,6 +99,10 @@ h1{
 	.checkOutItems .css-9v4ipw-MuiStack-root .MuiGrid-root, .checkOutItems .css-1tn1m65-MuiStack-root {flex-direction:column;}
 	.checkOutItems .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-5.css-k3f0g4-MuiGrid-root {max-width:100%;width:100%;}
 	.checkOutItems .css-hfzt2e-MuiPaper-root-MuiCard-root {max-width:100%;}
+
+
+	/*--New--*/
+	.blankDiv {display:block;}
 }
 
 @media screen and (max-width:769px)
