@@ -236,12 +236,12 @@ export default function DropPage() {
     getItems()
       .then((value) => {
         setItems(value);
+
         getName()
       .then((value) => {
         setName(value);
         getImages().then((value)=>{
             setImageData(value)
-            console.log(imageData)
             getBrands()
         .then((value) => {
           setBrands(value);
@@ -277,6 +277,8 @@ export default function DropPage() {
 
 
   if ((!items && !brands && !imageData) || loading) {
+
+    
     // TODO: Add proper loader
     return (
       <Box
@@ -300,23 +302,29 @@ export default function DropPage() {
     );
   }
 
+
   function ImageGallery() {
-    return (
-      <ImageList
-        sx={{ width: "100%", height: "100%" }}
-        variant="quilted"
-        cols={4}
-        rowHeight={180}
-        gap={0}
-      >
-        {
-        itemData.map((item, index) => (
-          <ImageListItem key={index} cols={1} rows={1}>
-            <img {...srcset(item.img, 180)} alt="image" loading="eager" />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    );
+    if(!imageData){
+      return <div></div>
+    
+        } else {
+          return (
+            <ImageList
+              sx={{ width: "100%", height: "100%" }}
+              variant="quilted"
+              cols={4}
+              rowHeight={180}
+              gap={0}
+            >
+              {
+              imageData.map((item, index) => (
+                <ImageListItem key={index} cols={1} rows={1}>
+                  <img {...srcset(item, 180)} alt="image" loading="eager" />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          );
+        }
   }
 
   return (

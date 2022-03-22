@@ -87,9 +87,9 @@ export default function Brands() {
           <b>BRANDS</b>
         </Typography>
         <Grid container spacing={8} sx={{ mb: 16 }}>
-          <Grid item xs={12} sx={{ ml: 3 }}>
+          {/* <Grid item xs={12} sx={{ ml: 3 }}>
             <CheckBoxSelect formStateName="drops" label="Drop" />
-          </Grid>
+          </Grid> */}
           {brands.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
