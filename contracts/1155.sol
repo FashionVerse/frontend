@@ -50,20 +50,6 @@ contract TheFashionVerseToken is Initializable, ERC1155Upgradeable, AccessContro
         _unpause();
     }
 
-    // function mint(address account, uint256 id, uint256 amount, bytes memory data)
-    //     public
-    //     onlyRole(MINTER_ROLE)
-    // {
-    //     _mint(account, id, amount, data);
-    // }
-
-    // function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
-    //     public
-    //     onlyRole(MINTER_ROLE)
-    // {
-    //     _mintBatch(to, ids, amounts, data);
-    // }
-
     function mintToken(string memory tokenURI, uint256 amount)
     public onlyRole(MINTER_ROLE) returns(uint256) { 
         uint256 newItemId = _tokenIds.current(); 

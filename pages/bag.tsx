@@ -130,7 +130,6 @@ export default function Bag() {
   async function purchaseItems(){
     const account = await walletInit();
     if(account !== false){
-      setIsLoading(true);
       const items = []
     const amounts = []
       if(data.length > 0){
@@ -144,9 +143,13 @@ export default function Bag() {
         console.log(amounts)
 
         const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
+        await window['ethereum'].request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x3' }], // chainId must be in hexadecimal numbers
+        });
         const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
-
-        marketContract.methods.createMarketSale(nftContract, items, amounts).send({from: account, value: Web3.utils.toWei(String(totalCost))})
+        setIsLoading(true);
+        marketContract.methods.createMarketSale(nftContract, items, amounts).send({from: account, value: Web3.utils.toWei(String(totalCost),), })
         .then(function(receipt){
             console.log(receipt);
             for(const item of items){
@@ -164,6 +167,7 @@ export default function Bag() {
 
         }).catch((e)=>{
           enqueueSnackbar(e.message);
+          router.reload()
         })
 
       } else {

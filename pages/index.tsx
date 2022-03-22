@@ -20,6 +20,9 @@ import { BsDiscord, BsMedium, BsTwitter } from "react-icons/bs";
 import { styled } from "@mui/system";
 import AdvisorCard, { AdvisorCardProps } from "../src/components/AdvisorCard";
 import firestore from "../firebase/clientApp";
+import { AbiItem } from 'web3-utils'
+import { nftAbi, marketAbi, marketAddress } from "../public/abi";
+import Web3 from 'web3';
 import {
   collection,
   QueryDocumentSnapshot,
@@ -28,7 +31,10 @@ import {
   where,
   limit,
   getDocs,
+  getDoc,
+  doc
 } from "@firebase/firestore";
+import { useSnackbar } from "notistack";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -38,6 +44,10 @@ const GradientButton = styled(Button)(({ theme }) => ({
 // getStaticProps / getServerSideProps
 export default function Index() {
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
+  const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
 
   React.useEffect(() => {
     async function getBrands() {
@@ -48,9 +58,41 @@ export default function Index() {
       });
       return arr;
     }
+
+    async function getFeatured() {
+      const arr = [];
+      const items = await getDocs(collection(firestore, "featured"));
+      for(const item of items.docs) {
+        const itemContract = await marketContract.methods.getItem(item.data().itemId).call();
+        const collectionDoc = await getDoc(doc(firestore, "collections", item.data().collection));
+        const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
+        const contract = new web3.eth.Contract(nftAbi as AbiItem[], itemContract.nftContract);
+        const nft = await contract.methods.tokenURI(itemContract.tokenIds[0]).call();
+        const response = await fetch(nft);
+
+      if(!response.ok)
+        enqueueSnackbar(response.statusText)
+
+      const json = await response.json()
+      arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
+      
+      }
+      return arr
+    }
+
+    async function getDrops(){
+      const drops = await getDocs(collection(firestore, "drop"));
+      return drops.docs;
+    }
     getBrands()
       .then((value) => {
         setBrands(value);
+        getFeatured().then((value)=>{
+          setFeatured(value);
+          getDrops().then((value)=>{
+            setDrops(value);
+          })
+        })
       })
       .catch((e) => {
         console.log(e);
@@ -58,8 +100,10 @@ export default function Index() {
   }, []);
 
   const [brands, setBrands] = React.useState<GridCardProps[] | null>(null);
+  const [featured, setFeatured] = React.useState(null);
+  const [drops, setDrops] = React.useState(null);
 
-  if (!brands) {
+  if (!brands || !featured || !drops) {
     // TODO: Add proper loader
     return (
       <Box
@@ -132,7 +176,7 @@ export default function Index() {
             priority
             loading="eager"
           />
-          <LandingPageDisplay />
+          <LandingPageDisplay items={featured} expandable />
         </Box>
       </Stack>
       {/* Drops */}
@@ -148,13 +192,13 @@ export default function Index() {
         DROPS
       </Typography>
       <Slider
-        slideArray={DROPS.map((props) => (
+        slideArray={drops.map((props) => (
           // Hard coded link to drop
           <GridCard
-            {...props}
+            {...props.data()}
             noBrand
-            key={props.id}
-            href="/drops/street-wear"
+            key={props.data().id}
+            href={"/drops/"+props.data().id}
           />
         ))}
       />

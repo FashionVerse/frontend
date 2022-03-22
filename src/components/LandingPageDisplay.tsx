@@ -4,10 +4,13 @@ import { useKeenSlider } from "keen-slider/react";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { SiEthereum } from "react-icons/si";
 import { Box, Button, Stack } from "@mui/material";
+import EnlargedFashionCard from "./EnlargedFashionCard";
+import Web3 from 'web3';
 
-export default function LandingPageDisplay() {
+export default function LandingPageDisplay(props) {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [enlarged, setEnlarged] = React.useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     loop: true,
@@ -19,6 +22,7 @@ export default function LandingPageDisplay() {
       setLoaded(true);
     },
   });
+
 
   return (
     <Box sx={{ position: "relative", margin: "auto", maxWidth: "320px" }}>
@@ -40,9 +44,9 @@ export default function LandingPageDisplay() {
           />
         )}
         <div ref={sliderRef} className="keen-slider">
-          {SLIDES.map(({ alt, price, id, src }) => (
+          {props.items.map((item) => (
             <Stack
-              key={id}
+              key={item.id}
               className="keen-slider__slide"
               sx={{
                 alignItems: "center",
@@ -50,12 +54,15 @@ export default function LandingPageDisplay() {
               }}
             >
               <Image
-                src={src}
-                alt={alt}
+                src={item.nft.properties.image.description}
+                alt={"Featured Item"}
                 layout="fixed"
                 height={"200px"}
                 width={"180px"}
                 className="m-auto"
+                onClick={()=>{
+                  setEnlarged(true);
+                }}
               />
               <Stack direction="row" gap={1}>
                 <Button
@@ -64,10 +71,18 @@ export default function LandingPageDisplay() {
                   color="primary"
                   startIcon={<SiEthereum />}
                 >
-                  {price + " ETH"}
+                  { Web3.utils.fromWei( item.price, 'ether') + " ETH"}
                 </Button>
+                {props.expandable && (
+        <EnlargedFashionCard
+          state={enlarged}
+          setState={setEnlarged}
+          {...item}
+        />
+      )}
               </Stack>
             </Stack>
+            
           ))}
         </div>
         {loaded && instanceRef.current && (

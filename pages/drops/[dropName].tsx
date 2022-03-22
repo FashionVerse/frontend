@@ -205,6 +205,12 @@ export default function DropPage() {
   React.useEffect(() => {
     if(!router.isReady) return;
 
+    async function getImages(){
+      const drop = await getDocs(query(collection(firestore, "drop"), where("id", "==", dropName)));
+      if(drop.docs.length > 0){
+        return drop.docs[0].data().images;
+      }
+    }
     
 
     async function getBrands(){
@@ -219,7 +225,7 @@ export default function DropPage() {
     async function getName() {
       const drop = await getDocs(query(collection(firestore, "drop"), where("id", "==", dropName)));
       if(drop.docs.length > 0){
-      return drop.docs[0].data().name;
+      return drop.docs[0].data().title;
     } else {
       router.replace("/404")
     }
@@ -233,21 +239,26 @@ export default function DropPage() {
         getName()
       .then((value) => {
         setName(value);
-
-      })
-        getBrands()
-      .then((value) => {
-        setBrands(value);
-        const brands = value.map((brand)=>{
-           return {
-            'value': brand.title,
-            'id': brand.id,
-            'selected': false,
-          }
+        getImages().then((value)=>{
+            setImageData(value)
+            console.log(imageData)
+            getBrands()
+        .then((value) => {
+          setBrands(value);
+          const brands = value.map((brand)=>{
+             return {
+              'value': brand.title,
+              'id': brand.id,
+              'selected': false,
+            }
+          })
+          methods.setValue('brand', brands)
+  
         })
-        methods.setValue('brand', brands)
-
+        })
+        
       })
+       
       })
       .catch((e) => {
         enqueueSnackbar(e.message);
@@ -262,9 +273,10 @@ export default function DropPage() {
   const [brands, setBrands] = React.useState(null);
   const [name, setName] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [imageData, setImageData] = React.useState(null);
 
 
-  if ((!items && !brands) || loading) {
+  if ((!items && !brands && !imageData) || loading) {
     // TODO: Add proper loader
     return (
       <Box
@@ -297,9 +309,10 @@ export default function DropPage() {
         rowHeight={180}
         gap={0}
       >
-        {itemData.map((item, index) => (
+        {
+        itemData.map((item, index) => (
           <ImageListItem key={index} cols={1} rows={1}>
-            <img {...srcset(item.img, 180)} alt={item.title} loading="eager" />
+            <img {...srcset(item.img, 180)} alt="image" loading="eager" />
           </ImageListItem>
         ))}
       </ImageList>

@@ -15,6 +15,18 @@ import Link from "./Link";
 import Tooltip from "@mui/material/Tooltip";
 import ListMenu from "./ListMenu";
 import { ethers } from "ethers";
+import firestore from "../../firebase/clientApp";
+import {
+  collection,
+  QueryDocumentSnapshot,
+  DocumentData,
+  query,
+  where,
+  limit,
+  getDocs,
+  getDoc,
+  doc
+} from "@firebase/firestore";
 
 const NavIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor:
@@ -53,16 +65,36 @@ export default function Header() {
       console.log(account)
     }
   }
+
+  
   
   ethereum.on('accountsChanged', function (accounts) {
     getAccount();
   })
     }
+
+    async function getDrops(){
+      const arr = [];
+      const drops = await getDocs(collection(firestore, "drop"));
+      for(const drop of drops.docs){
+        arr.push({id: drop.data().id, label: drop.data().title, href: "/drops/"+drop.data().id})
+      }
+      return arr;
+
+    }
+
+    getDrops().then((value)=>{
+      setDrops(value);
+
+    })
     
   })
 
+  const [drops, setDrops] = React.useState(null);
 
-
+  if(!drops){
+    return <div></div>
+  }
   return (
     <Stack direction="row" alignItems="center" sx={{ mt: 3 }}>
       <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
@@ -84,7 +116,7 @@ export default function Header() {
           <Link href={"/brands"} color="inherit" hoverStyle>
             <Typography sx={{ fontWeight: 600 }}>Brands</Typography>
           </Link>
-          <ListMenu items={DropsNavs}>
+          <ListMenu items={drops}>
             <Typography
               sx={{
                 cursor: "pointer",
