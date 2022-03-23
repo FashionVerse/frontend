@@ -154,6 +154,7 @@ function CardDialog(props: CardDialogProps) {
             </Typography>
             <SiEthereum fontSize="1rem" />
           </Stack>
+          {!props.hideAddToBag && (
           <Stack alignItems="end">
             <IconButton size="small" sx={{ mr: "6px" }} onClick={()=>{setCart()}}>
               <BsHandbag />
@@ -162,6 +163,7 @@ function CardDialog(props: CardDialogProps) {
               Add to bag
             </Typography>
           </Stack>
+          )}
         </Stack>
       </FashionItemCardContainer>
     </Dialog>
