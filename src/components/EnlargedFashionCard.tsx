@@ -149,10 +149,11 @@ function CardDialog(props: CardDialogProps) {
           sx={{ px: 0.5, pt: 1 }}
         >
           <Stack alignItems="baseline" direction="row">
+          <SiEthereum fontSize="1rem" />
             <Typography variant="h6" sx={{ mr: "4px" }}>
               {Web3.utils.fromWei( props.price, 'ether')}
             </Typography>
-            <SiEthereum fontSize="1rem" />
+            
           </Stack>
           {!props.hideAddToBag && (
           <Stack alignItems="end">
