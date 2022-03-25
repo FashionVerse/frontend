@@ -84,11 +84,12 @@ export default function Header() {
     }
 
     getDrops().then((value)=>{
+      console.log(value)
       setDrops(value);
 
     })
     
-  })
+  }, [])
 
   const [drops, setDrops] = React.useState(null);
 

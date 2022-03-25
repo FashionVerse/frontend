@@ -51,7 +51,6 @@ const ListMenu: React.FC<Props> = ({ children, ...props }) => {
           <MenuItem
             onClick={() => handleClose(item.href)}
             key={item.id}
-            disabled={i > 0}
           >
             {item.label}
           </MenuItem>

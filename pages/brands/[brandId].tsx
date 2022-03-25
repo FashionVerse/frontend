@@ -217,7 +217,7 @@ export default function BrandPage() {
               ))}
             </Grid>
           </Grid>
-          {collections.map((props) => (
+          {collections.length > 0 ? collections.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{
@@ -232,7 +232,10 @@ export default function BrandPage() {
                 <GridCard {...props} noBrand />
               </Box>
             </Grid>
-          ))}
+          )) : <h2 style={{display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto"}}>No Collections Available</h2>}
         </Grid>
       </Container>
       <Footer />

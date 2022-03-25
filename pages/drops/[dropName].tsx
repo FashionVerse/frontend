@@ -303,6 +303,7 @@ export default function DropPage() {
   }
 
 
+
   function ImageGallery() {
     if(!imageData){
       return <div></div>
@@ -370,7 +371,7 @@ export default function DropPage() {
           </GradientButton>
               </Stack>
             </Grid>
-            {items.map((props) => (
+            {items.length > 0 ? items.map((props) => (
               <Grid item xs={12} sm={6} md={4} key={props.id}>
                 <Box
                   sx={{
@@ -382,7 +383,23 @@ export default function DropPage() {
                   <FashionItemCard {...props} expandable />
                 </Box>
               </Grid>
-            ))}
+            )) : <h2 style={{display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "auto"}}>No Items Available</h2>}
+            {/* {items.map((props) => (
+              <Grid item xs={12} sm={6} md={4} key={props.id}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FashionItemCard {...props} expandable />
+                </Box>
+              </Grid>
+            ))} */}
           </Grid>
         </Container>
         <Footer />
