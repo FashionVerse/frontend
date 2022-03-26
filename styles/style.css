@@ -37,15 +37,15 @@ h1{
 }
 
 .bg-style-light {
-  background-image: url("/bg-blend.png"), url("/bg-blue.png"),
-    url("/bg-blend.png");
+  background-image: url("/bg-blend.webp"), url("/bg-blue.webp"),
+    url("/bg-blend.webp");
   background-position: 120% -10%, center, -28% 112%;
   background-repeat: no-repeat;
   background-size: 60%;
 }
 .bg-style-dark {
-  background-image: url("/bg-blend.png"), url("/bg-blue.png"),
-    url("/bg-blend.png");
+  background-image: url("/bg-blend.webp"), url("/bg-blue.webp"),
+    url("/bg-blend.webp");
   background-position: 120% -10%, center, -28% 112%;
   background-repeat: no-repeat;
   background-size: 60%;
