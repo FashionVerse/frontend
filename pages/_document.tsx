@@ -8,7 +8,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <title>TheFashionVerse</title>
           <link rel="shortcut icon" href="/logo.ico" />
           {/* {<link rel="stylesheet" type="text/css" href="../styles/style.css" />} */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />

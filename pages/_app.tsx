@@ -11,6 +11,7 @@ import { useWindowSize } from "../src/useWindowSize";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
+import { AnimateSharedLayout } from 'framer-motion'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -19,13 +20,21 @@ export const ColorModeContext = React.createContext({
 });
 
 export default function MyApp(props: any) {
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    const item = localStorage.getItem('key')
+    if (item) {
+      console.log("!!",item)
+    }
+  }
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("dark");
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
+        localStorage.setItem("key", mode);
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
+      }
     }),
     []
   );
@@ -68,6 +77,7 @@ export default function MyApp(props: any) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <title>TheFashionVerse</title>
       </Head>
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
@@ -111,7 +121,9 @@ export default function MyApp(props: any) {
                 </Box>
               )} */}
               <SnackbarProvider>
+              <AnimateSharedLayout>
                   <Component {...pageProps} />
+              </AnimateSharedLayout>
                 </SnackbarProvider>
             </div>
           </Container>

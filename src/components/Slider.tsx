@@ -36,7 +36,7 @@ export default function Slider({ slideArray }: SliderProps) {
           display: "flex",
           alignItems: "center",
           position: "relative",
-          pl: "32px",
+          paddingLeft: "32px",
         }}
       >
         {loaded && instanceRef.current && (

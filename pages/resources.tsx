@@ -1,6 +1,7 @@
 import * as React from "react";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
+import Head from "next/head";
 import { Button, Container, Typography, Grid, Paper } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -18,6 +19,10 @@ const BlueShadowPaper = styled(Paper)(({ theme }) => ({
 
 export default function Resources() {
   return (
+    <>
+      <Head>
+        <title>TheFashionVerse | Resources</title>
+        </Head>
     <Container>
       <Header />
       <Typography
@@ -64,6 +69,7 @@ export default function Resources() {
       </Grid>
       <Footer />
     </Container>
+    </>
   );
 }
 

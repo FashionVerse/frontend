@@ -1,6 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Header from "../../src/components/Header";
+import Head from "next/head";
 import Footer from "../../src/components/Footer";
 import { Container, Grid, Box, Typography } from "@mui/material";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
@@ -74,6 +75,10 @@ export default function Brands() {
   }
 
   return (
+    <>
+      <Head>
+        <title>TheFashionVerse | Brands</title>
+      </Head>
     <FormProvider {...methods}>
       <Container className="brandsInner">
         <Header />
@@ -110,6 +115,7 @@ export default function Brands() {
         <Footer />
       </Container>
     </FormProvider>
+    </>
   );
 }
 

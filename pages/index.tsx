@@ -3,6 +3,8 @@ import Image from "next/image";
 import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import LandingPageDisplay from "../src/components/LandingPageDisplay";
+import { motion } from "framer-motion";
+
 import {
   Box,
   Button,
@@ -194,12 +196,26 @@ export default function Index() {
       <Slider
         slideArray={drops.map((props) => (
           // Hard coded link to drop
-          <GridCard
-            {...props.data()}
-            noBrand
-            key={props.data().id}
-            href={"/drops/"+props.data().id}
-          />
+          <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                cursor: "pointer",
+                margin: "1rem",
+                marginRight: "1rem",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.069 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
+            <GridCard
+              {...props.data()}
+              noBrand
+              key={props.data().id}
+              href={"/drops/"+props.data().id}
+            />
+          </motion.div>
         ))}
       />
       {/* Brands */}
