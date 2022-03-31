@@ -1,6 +1,5 @@
 import * as React from "react";
 import Image from "next/image";
-import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
 import { Container, Grid, Box, Typography } from "@mui/material";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
@@ -76,7 +75,6 @@ export default function Brands() {
   return (
     <FormProvider {...methods}>
       <Container className="brandsInner">
-        <Header />
         <Typography
           variant="h3"
           align="center"

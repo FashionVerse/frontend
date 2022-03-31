@@ -11,6 +11,7 @@ import { useWindowSize } from "../src/useWindowSize";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
+import Header from "../src/components/Header";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -110,6 +111,8 @@ export default function MyApp(props: any) {
                   </Typography>
                 </Box>
               )} */}
+              <Header />
+
               <SnackbarProvider>
                   <Component {...pageProps} />
                 </SnackbarProvider>

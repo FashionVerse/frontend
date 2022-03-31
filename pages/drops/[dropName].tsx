@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
 import Image from "next/image";
 import {
@@ -332,7 +331,7 @@ export default function DropPage() {
     <FormProvider {...methods}>
       <Container  className="dropsContainer" maxWidth={false} disableGutters>
         <Container>
-          <Header />
+          {/* <Header /> */}
         </Container>
         <Box sx={{ mt: 6, mb: 3 }}>
           <ImageGallery />

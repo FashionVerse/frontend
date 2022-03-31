@@ -63,13 +63,12 @@ contract NFTMarket is ReentrancyGuard, AccessControl, ERC1155Holder {
     );
 
     event MarketItemSold (
-        uint indexed itemId,
-        uint256 tokenId,
-        uint256 amount,
+        uint[] indexed itemIds,
         address nftContract,
         uint256 timestamp,
-        address owner
+        address buyer
     );
+
 
 
     mapping(uint256 => MarketItem) private idToMarketItem;
@@ -120,6 +119,13 @@ contract NFTMarket is ReentrancyGuard, AccessControl, ERC1155Holder {
             require(getPrice(itemIds, tokenIds, amounts) == msg.value, "Enter valid amount");
             IERC1155(nftContract).safeBatchTransferFrom(address(this), msg.sender, tokenIds, amounts, "");
             _pay.transfer(msg.value);
+
+        emit MarketItemSold(
+            itemIds,
+            nftContract,
+            block.timestamp,
+            msg.sender
+        );
         
     }
 
@@ -129,6 +135,9 @@ contract NFTMarket is ReentrancyGuard, AccessControl, ERC1155Holder {
         uint value = 0;
         for(uint i = 0; i < itemIds.length;  i++){
             require(idToMarketItem[itemIds[i]].tokenId == tokenIds[i], "Invalid Token ID");
+            require(idToMarketItem[itemIds[i]].locked == false, "Item is locked");
+            require(idToMarketItem[itemIds[i]].cancelled == false, "Item was cancelled");
+            require(block.timestamp > idToMarketItem[itemIds[i]].releaseTime, "Item not up for sale yet");
             value = value + idToMarketItem[itemIds[i]].price * amounts[i];
         }
 

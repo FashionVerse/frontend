@@ -1,5 +1,5 @@
 import * as React from "react";
-import Header from "../src/components/Header";
+
 import Footer from "../src/components/Footer";
 import { Button, Container, Typography, Grid, Paper } from "@mui/material";
 import { styled } from "@mui/system";
@@ -19,7 +19,7 @@ const BlueShadowPaper = styled(Paper)(({ theme }) => ({
 export default function Resources() {
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
       <Typography
         variant="h3"
         align="center"

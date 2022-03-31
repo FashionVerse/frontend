@@ -1,5 +1,4 @@
 import * as React from "react";
-import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import { Container, Typography, Grid, Paper } from "@mui/material";
 import Image from "next/image";
@@ -33,7 +32,7 @@ async function connectWallet(){
 export default function Wallets() {
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
       <Typography
         variant="h3"
         align="center"
