@@ -3,6 +3,7 @@ import { Stack, styled, Typography } from "@mui/material";
 import { ColorModeContext } from "../../pages/_app";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import {motion} from "framer-motion"
 import {
   BsBrightnessHigh,
   BsMoonStars,
@@ -99,11 +100,19 @@ export default function Header() {
       <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
         {theme.palette.mode === "dark" ? <BsBrightnessHigh /> : <BsMoonStars />}
       </IconButton>
+      <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+        >
       <Logo size="40px" withText>
         <Typography sx={{ ml: "8px" }} variant="h4">
           <strong>FASHION</strong>VERSE
         </Typography>
       </Logo>
+      </motion.div>
       <div className="blankDiv" style={{ flexGrow: 1 }} />
       <Stack direction="row" gap={3} alignItems={"center"}>
         <Stack
