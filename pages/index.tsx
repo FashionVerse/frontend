@@ -199,13 +199,11 @@ export default function Index() {
               // className="drops_hover_cursor"
               style = {{
                 cursor: "pointer",
-                margin: "1rem",
-                marginRight: "1rem",
               }}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.069 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
             <GridCard
@@ -255,7 +253,19 @@ export default function Index() {
               router.push("/brands/" + props.id);
             }}
           >
-            <GridCard {...props} key={props.id + "-ahsdkh"} />
+            <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
+              <GridCard {...props} key={props.id + "-ahsdkh"} />
+            </motion.div>
           </div>
         ))}
       />
@@ -281,7 +291,19 @@ export default function Index() {
             md={4}
             sx={{ display: "flex", justifyContent: "center" }}
           >
+            <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <AdvisorCard {...props} />
+            </motion.div>
           </Grid>
         ))}
       </Grid>

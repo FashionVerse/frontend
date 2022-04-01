@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { motion } from "framer-motion";
 import Footer from "../src/components/Footer";
 import Head from "next/head";
 import { Button, Container, Typography, Grid, Paper } from "@mui/material";
@@ -37,6 +37,17 @@ export default function Resources() {
       <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
         {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
           <Grid item xs={12} sm={12} md={5} key={id}>
+            <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <BlueShadowPaper
               elevation={8}
               sx={{
@@ -64,6 +75,7 @@ export default function Resources() {
                 {description}
               </Typography>
             </BlueShadowPaper>
+            </motion.div>
           </Grid>
         ))}
       </Grid>

@@ -82,7 +82,7 @@ export default function LandingPageDisplay(props) {
                   size="small"
                   color="primary"
                   startIcon={<SiEthereum />}
-                  className="tw-fixed tw-z-index-5 tw-bottom-1/4 md:tw-bottom-[1%] tw-left-1/4 tw-translate-x-1/4 md:tw-translate-y-0 -tw-translate-y-1/4"
+                  className="tw-fixed tw-z-index-5 tw-bottom-1/4 md:tw-bottom-[1%] tw-left-1/4 tw-translate-x-[21%] md:tw-translate-x-[25%] md:tw-translate-y-0 -tw-translate-y-1/4 tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50"
                 >
                   {/* {Web3.utils.fromWei(item.price, "ether") + " ETH"} */}
                   0.3 ETH

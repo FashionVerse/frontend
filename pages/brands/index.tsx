@@ -10,6 +10,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import firestore from "../../firebase/clientApp";
+import { motion } from "framer-motion";
 import {
   collection,
   QueryDocumentSnapshot,
@@ -96,6 +97,17 @@ export default function Brands() {
           </Grid> */}
           {brands.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
+              <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -106,8 +118,10 @@ export default function Brands() {
                   router.push("/brands/" + props.id);
                 }}
               >
+                
                 <GridCard {...props} />
               </Box>
+              </motion.div>
             </Grid>
           ))}
         </Grid>
