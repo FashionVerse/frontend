@@ -1,8 +1,9 @@
 import * as React from "react";
 import Footer from "../src/components/Footer";
 import { Container, Typography, Grid, Paper } from "@mui/material";
-import Image from "next/image";
 import { styled } from "@mui/system";
+const ModelViewer = require('@metamask/logo');
+import { motion } from "framer-motion";
 
 const StyledPaper = styled(Paper)({
   maxWidth: "340px",
@@ -30,6 +31,27 @@ async function connectWallet(){
 }
 
 export default function Wallets() {
+  React.useEffect(() => {
+    const viewer = ModelViewer({
+      // Dictates whether width & height are px or multiplied
+      pxNotRatio: true,
+      width: 500,
+      height: 400,
+      // pxNotRatio: false,
+      // width: 0.9,
+      // height: 0.9,
+    
+      // To make the face follow the mouse.
+      followMouse: true,
+    
+      // head should slowly drift (overrides lookAt)
+      slowDrift: false,
+    });
+    const container = document.getElementById('logo-container');
+    container.appendChild(viewer.container);
+    container.getElementsByTagName('svg')[0].style.width = '300px';
+    container.getElementsByTagName('svg')[0].style.height = '300px';
+  }, []);
   return (
     <Container>
       {/* <Header /> */}
@@ -42,23 +64,29 @@ export default function Wallets() {
       >
         <b>CONNECT A WALLET</b>
       </Typography>
-      <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
+      <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }} >
         {WALLETS.map(({ id, href, name, src, alt }) => (
-          <Grid item xs={12} sm={12} md={4} key={id}>
+          <Grid item xs={12} sm={12} md={4} key={id} style={{cursor:"pointer"}} >
+            <motion.div
+          // className="drops_hover_cursor"
+          style = {{
+            cursor: "pointer",
+          }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+        >
             <StyledPaper variant="outlined" onClick={() => {
               connectWallet()
-            }}>
-              <Image
-                src={src}
-                alt={alt}
-                layout={"fixed"}
-                height={"300px"}
-                width={"300px"}
-              />
+            }} className="tw-shadow-xl tw-shadow-cyan-500/40 hover:tw-shadow-cyan-100/50">
+              <div id="logo-container"></div>
               <Typography variant="h5" sx={{ mt: 2 }}>
                 {name}
               </Typography>
             </StyledPaper>
+            </motion.div>
           </Grid>
         ))}
       </Grid>
