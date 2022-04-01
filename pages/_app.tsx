@@ -8,6 +8,7 @@ import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { Container, PaletteMode, Typography, Box } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
+import "../styles/tailwind.css";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";

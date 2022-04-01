@@ -33,15 +33,16 @@ export default function Viewer(props) {
     <>
       <div
         style={{
-          height: "247px",
-          width: "300px",
+          height:props.height,
+          width: props.width,
+          paddingTop: "7%",
           filter: "drop-shadow(rgba(0, 0, 0, 0.3) 0px 20px 10px)"
         }}
       >
         <Canvas
           dpr={[1, 2]}
           camera={{ fov: 50 }}
-          style={{ height: "247px",width: "300px", }}
+          style={{ height:props.height, width: props.width }}
         >
           <Suspense fallback={null}>
             <Stage controls={ref} environment="city">

@@ -69,7 +69,7 @@ export default function LandingPageDisplay(props) {
                   setEnlarged(true);
                 }}
               /> */}
-              <Viewer>
+              <Viewer width="247px" height="300px">
           {/* {"name":"Cyber Punk Outfit","description":"A Cyber Punk Outfit","image":"https://ipfs.infura.io/ipfs/QmbmAYjQxCcj3MANspmK6KGKjsqQgrnNAgyAbv1iYfYV3d","animation_url":"https://ipfs.infura.io/ipfs/QmWpez4dCweVKgaMWtDXrqkDnDZcGBxrGp12khdzE9b2XJ"} */}
                 <Model 
                   link= {item.animation_url+"?filename=file"+item.id+".glb" }
@@ -82,12 +82,7 @@ export default function LandingPageDisplay(props) {
                   size="small"
                   color="primary"
                   startIcon={<SiEthereum />}
-                  style = {{
-                    position: "fixed",
-                    zIndex: "5",
-                    top: "13.5rem",
-                    left: "6.9rem"
-                  }}
+                  className="tw-fixed tw-z-index-5 tw-bottom-1/4 md:tw-bottom-[1%] tw-left-1/4 tw-translate-x-1/4 md:tw-translate-y-0 -tw-translate-y-1/4"
                 >
                   {/* {Web3.utils.fromWei(item.price, "ether") + " ETH"} */}
                   0.3 ETH
