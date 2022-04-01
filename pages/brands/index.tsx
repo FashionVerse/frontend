@@ -81,7 +81,6 @@ export default function Brands() {
       </Head>
     <FormProvider {...methods}>
       <Container className="brandsInner">
-        <Header />
         <Typography
           variant="h3"
           align="center"

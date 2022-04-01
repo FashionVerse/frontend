@@ -1,5 +1,5 @@
 import * as React from "react";
-import Header from "../src/components/Header";
+
 import Footer from "../src/components/Footer";
 import Head from "next/head";
 import { Button, Container, Typography, Grid, Paper } from "@mui/material";
@@ -24,7 +24,7 @@ export default function Resources() {
         <title>TheFashionVerse | Resources</title>
         </Head>
     <Container>
-      <Header />
+      {/* <Header /> */}
       <Typography
         variant="h3"
         align="center"

@@ -93,11 +93,9 @@ export default function Header() {
 
   const [drops, setDrops] = React.useState(null);
 
-  if(!drops){
-    return <div></div>
-  }
+  
   return (
-    <Stack direction="row" alignItems="center" sx={{ mt: 3 }}>
+    <Stack direction="row" alignItems="center" sx={{ mt: 3, }} style={{margin: 24}}>
       <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
         {theme.palette.mode === "dark" ? <BsBrightnessHigh /> : <BsMoonStars />}
       </IconButton>
@@ -117,7 +115,7 @@ export default function Header() {
           <Link href={"/brands"} color="inherit" hoverStyle>
             <Typography sx={{ fontWeight: 600 }}>Brands</Typography>
           </Link>
-          <ListMenu items={drops}>
+          { !drops ?  <ListMenu items={[{}]}>
             <Typography
               sx={{
                 cursor: "pointer",
@@ -127,7 +125,28 @@ export default function Header() {
             >
               Drops
             </Typography>
-          </ListMenu>
+          </ListMenu> : <ListMenu items={drops}>
+            <Typography
+              sx={{
+                cursor: "pointer",
+                ":hover": { transform: "scale(1.125)" },
+                fontWeight: 600,
+              }}
+            >
+              Drops
+            </Typography>
+          </ListMenu> }
+          {/* <ListMenu items={drops}>
+            <Typography
+              sx={{
+                cursor: "pointer",
+                ":hover": { transform: "scale(1.125)" },
+                fontWeight: 600,
+              }}
+            >
+              Drops
+            </Typography>
+          </ListMenu> */}
           <Link href={"/resources"} color="inherit" hoverStyle>
             <Typography sx={{ fontWeight: 600 }}>Resources</Typography>
           </Link>

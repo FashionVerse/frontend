@@ -1,5 +1,4 @@
 import * as React from "react";
-import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import {
   Button,
@@ -342,7 +341,7 @@ export default function Bag() {
 
   return (
     <Container className="checkOutPage">
-      <Header />
+      {/* <Header /> */}
       <Typography
         variant="h3"
         align="center"

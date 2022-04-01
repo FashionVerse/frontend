@@ -1,6 +1,5 @@
 import * as React from "react";
 import Image from "next/image";
-import Header from "../src/components/Header";
 import Footer from "../src/components/Footer";
 import LandingPageDisplay from "../src/components/LandingPageDisplay";
 import { motion } from "framer-motion";
@@ -131,7 +130,7 @@ export default function Index() {
 
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
       {/* Hero */}
       <Stack
         alignItems="center"

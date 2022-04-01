@@ -1,5 +1,4 @@
 import * as React from "react";
-import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
 import Image from "next/image";
 import {
@@ -156,7 +155,7 @@ export default function CollectionPage() {
   return (
     <Container maxWidth={false} disableGutters className="collectionContainer">
       <Container>
-        <Header />
+        {/* <Header /> */}
       </Container>
       <Box sx={{ mt: 6, position: "relative" }}>
         <ImageGallery />

@@ -1,5 +1,4 @@
 import * as React from "react";
-import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
 import Image from "next/image";
 import {
@@ -152,7 +151,7 @@ export default function BrandPage() {
   return (
     <Container maxWidth={false} disableGutters>
       <Container>
-        <Header />
+        {/* <Header /> */}
       </Container>
       <Box sx={{ mt: 6, position: "relative" }}>
         <ImageGallery />
