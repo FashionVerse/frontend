@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import firestore from "../../firebase/clientApp";
 import { motion } from "framer-motion";
+import AnimLogo from "../../src/components/AnimLogo";
 import {
   collection,
   QueryDocumentSnapshot,
@@ -64,13 +65,7 @@ export default function Brands() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }

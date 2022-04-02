@@ -3,7 +3,7 @@ import Image from "next/image";
 import Footer from "../src/components/Footer";
 import LandingPageDisplay from "../src/components/LandingPageDisplay";
 import { motion } from "framer-motion";
-
+import AnimLogo from "../src/components/AnimLogo";
 import {
   Box,
   Button,
@@ -117,13 +117,7 @@ export default function Index() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }

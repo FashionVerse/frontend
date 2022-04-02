@@ -5,11 +5,9 @@ import {motion} from 'framer-motion';
 export default function AnimLogo(props) {
   return (
     <>
-    <Link href="/" noLinkStyle>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
     <motion.svg 
-      height={props.size}
-      width={props.size} viewBox="0 0 71 62" fill="none" xmlns="http://www.w3.org/2000/svg"
+      height={props.height ||"142"}
+      width={props.wight ||"124"} viewBox="0 0 71 62" fill="none" xmlns="http://www.w3.org/2000/svg"
     >
       <motion.path 
         strokeLinecap="round"
@@ -60,7 +58,7 @@ export default function AnimLogo(props) {
         strokeLinejoin="round"
         initial={{
           opacity: 0,
-          rotate: -45,
+          rotate: 45,
           pathLength: 0, 
         }}
         animate={{
@@ -92,9 +90,6 @@ export default function AnimLogo(props) {
         </linearGradient>
         </defs>
     </motion.svg> 
-    {props.withText && props.children}
-    </Box>
-    </Link>
     </>
   )
 }

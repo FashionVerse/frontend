@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import AnimLogo from "./AnimLogo";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { styled, alpha } from "@mui/system";
@@ -143,13 +144,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }

@@ -22,19 +22,11 @@ export const ColorModeContext = React.createContext({
 });
 
 export default function MyApp(props: any) {
-  if (typeof window !== 'undefined') {
-    // Perform localStorage action
-    const item = localStorage.getItem('key')
-    if (item) {
-      console.log("!!",item)
-    }
-  }
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("dark");
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        localStorage.setItem("key", mode);
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       }
     }),

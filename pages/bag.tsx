@@ -20,6 +20,7 @@ import { styled } from "@mui/material/styles";
 import { SiEthereum } from "react-icons/si";
 import { produce } from "immer";
 import firestore from "../firebase/clientApp";
+import AnimLogo from "../src/components/AnimLogo";
 import {
   collection,
   QueryDocumentSnapshot,
@@ -328,13 +329,7 @@ export default function Bag() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }

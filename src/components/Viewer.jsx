@@ -2,7 +2,7 @@ import React, { Suspense, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stage } from "@react-three/drei";
 import FastAverageColor from "fast-average-color";
-
+import Image from "next/image";
 const setOpacity = (hex, alpha) =>
   `${hex}${Math.floor(alpha * 255)
     .toString(16)
@@ -10,9 +10,14 @@ const setOpacity = (hex, alpha) =>
 
 export default function Viewer(props) {
   const ref = useRef();
+  function Loader(){
+    return(
+      <Image src={props.imgLink} width={props.width} height={props.height}/>
+      // <Image src={props.imgLink} />
+    )
+  }
   useEffect(() => {
     // window.addEventListener("load", function () {
-    console.log("test");
     const fac = new FastAverageColor();
     fac
       .getColorAsync(
@@ -22,7 +27,7 @@ export default function Viewer(props) {
       .then((color) => {
         console.log(color);
         console.log(color.hex);
-        document.body.style.background = color.hex;
+        // document.body.style.background = color.hex;
       })
       .catch((e) => {
         console.log(e);
@@ -39,16 +44,15 @@ export default function Viewer(props) {
           filter: "drop-shadow(rgba(0, 0, 0, 0.3) 0px 20px 10px)"
         }}
       >
+      <Suspense fallback={<Loader/>}>
         <Canvas
           dpr={[1, 2]}
           camera={{ fov: 50 }}
           style={{ height:props.height, width: props.width }}
         >
-          <Suspense fallback={null}>
             <Stage controls={ref} environment="city">
               {props.children}
             </Stage>
-          </Suspense>
           <OrbitControls
             minPolarAngle={Math.PI / 2}
             maxPolarAngle={Math.PI / 2}
@@ -60,6 +64,7 @@ export default function Viewer(props) {
             enableRotate={true}
           />
         </Canvas>
+      </Suspense>
       </div>
     </>
   );
