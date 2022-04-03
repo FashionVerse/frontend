@@ -2,7 +2,7 @@ import React, { Suspense, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stage } from "@react-three/drei";
 import FastAverageColor from "fast-average-color";
-import Image from "next/image";
+import AnimLogo from "./AnimLogo";
 const setOpacity = (hex, alpha) =>
   `${hex}${Math.floor(alpha * 255)
     .toString(16)
@@ -12,7 +12,7 @@ export default function Viewer(props) {
   const ref = useRef();
   function Loader(){
     return(
-      <Image src={props.imgLink} width={props.width} height={props.height}/>
+      <AnimLogo />
       // <Image src={props.imgLink} />
     )
   }

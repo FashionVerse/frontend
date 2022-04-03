@@ -2,6 +2,7 @@ import * as React from "react";
 import Footer from "../../src/components/Footer";
 import Image from "next/image";
 import AnimLogo from "../../src/components/AnimLogo";
+import { Pagination } from "@mui/material";
 import {
   Container,
   Typography,
@@ -231,6 +232,9 @@ export default function BrandPage() {
           justifyContent: "center",
           margin: "auto"}}>No Collections Available</h2>}
         </Grid>
+        <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
+          <Pagination count={10} color="primary" size="large" />
+        </div>
       </Container>
       <Footer />
     </Container>

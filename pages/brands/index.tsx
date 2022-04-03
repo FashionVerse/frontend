@@ -9,18 +9,12 @@ import CheckBoxSelect from "../../src/components/CheckBoxSelect";
 import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import firestore from "../../firebase/clientApp";
 import { motion } from "framer-motion";
 import AnimLogo from "../../src/components/AnimLogo";
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-} from "@firebase/firestore";
+import {Pagination} from "@mui/material"
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Brands() {
   const methods = useForm({
@@ -31,28 +25,27 @@ export default function Brands() {
 
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-
-  React.useEffect(() => {
-    async function getBrands() {
-      const arr: GridCardProps[] = [];
-      const querySnapshot = await getDocs(collection(firestore, "brands"));
-      querySnapshot.forEach((doc) => {
-        arr.push(doc.data() as GridCardProps);
+  const { data, error } = useSWR('http://localhost:6969/api/getBrands', fetcher)
+  if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
+  const arr: GridCardProps[] = [];
+  if (data) {
+  console.log("data ",data)
+    data.brands.forEach((item) => {
+      arr.push({
+        topLeftImage: item.gridImages[0],
+        topRightImage: item.gridImages[1],
+        bottomLeftImage: item.gridImages[2],
+        bottomRightImage: item.gridImages[3],
+        avatarSrc: item.avatarSrc,
+        title: item.title,
+        subtitle: item.subtitle,
+        id: item._id,
+        href: "brands/"+item.url,
       });
-      return arr;
-    }
-    getBrands()
-      .then((value) => {
-        setBrands(value);
-      })
-      .catch((e) => {
-        enqueueSnackbar(e.message);
-      });
-  }, []);
+    });
+  }
 
-  const [brands, setBrands] = React.useState(null);
-
-  if (!brands) {
+  if (!data) {
     // TODO: Add proper loader
     return (
       <Box
@@ -90,7 +83,7 @@ export default function Brands() {
           {/* <Grid item xs={12} sx={{ ml: 3 }}>
             <CheckBoxSelect formStateName="drops" label="Drop" />
           </Grid> */}
-          {brands.map((props) => (
+          {arr.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <motion.div
               // className="drops_hover_cursor"
@@ -120,6 +113,9 @@ export default function Brands() {
             </Grid>
           ))}
         </Grid>
+        <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
+          <Pagination count={10} color="primary" size="large" />
+        </div>
         <Footer />
       </Container>
     </FormProvider>

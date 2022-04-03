@@ -85,8 +85,8 @@ const GridCard = (props: GridCardProps) => {
               }}
             >
               <Image
-                src={topLeftImage.src}
-                alt={topLeftImage.alt}
+                src={topLeftImage}
+                alt="grid card"
                 layout="fill"
                 objectFit="cover"
               />
@@ -105,8 +105,8 @@ const GridCard = (props: GridCardProps) => {
               }}
             >
               <Image
-                src={topRightImage.src}
-                alt={topRightImage.alt}
+                src={topRightImage}
+                alt="grid card"
                 layout="fill"
                 objectFit="cover"
               />
@@ -125,8 +125,8 @@ const GridCard = (props: GridCardProps) => {
               }}
             >
               <Image
-                src={bottomLeftImage.src}
-                alt={bottomLeftImage.alt}
+                src={bottomLeftImage}
+                alt="grid card"
                 layout="fill"
                 objectFit="cover"
               />
@@ -145,8 +145,8 @@ const GridCard = (props: GridCardProps) => {
               }}
             >
               <Image
-                src={bottomRightImage.src}
-                alt={bottomRightImage.alt}
+                src={bottomRightImage}
+                alt="grid card"
                 layout="fill"
                 objectFit="cover"
               />

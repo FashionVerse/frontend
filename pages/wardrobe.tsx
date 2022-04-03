@@ -29,6 +29,7 @@ import {
   getDoc,
   collectionGroup
 } from "@firebase/firestore";
+import { motion } from "framer-motion";
 import { AbiItem } from 'web3-utils'
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
@@ -213,15 +214,49 @@ export default function Wardrobe() {
         </Typography>
 
         <ButtonGroup
-          variant="contained"
+          variant="text"
           aria-label="outlined primary button group"
         >
-          <GradientButton onClick={() => setActivePage("nfts")}>
+          <Button 
+          onClick={() => setActivePage("nfts")}
+          >
+          <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                backgroundImage: activePage=="nfts"? "linear-gradient(90deg, #22caff, #0266c1)":"",
+                color: activePage=="nfts"? "white":"",
+                padding: "2%",
+                borderRadius: "5px",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <Typography variant="body1">VIEW FASHION NFTS</Typography>
-          </GradientButton>
-          <GradientButton onClick={() => setActivePage("avatar")}>
+            </motion.div>
+          </Button>
+          <Button 
+          onClick={() => setActivePage("avatar") }
+          >
+          <motion.div
+              // className="drops_hover_cursor
+              style = {{
+                backgroundImage: activePage=="avatar"? "linear-gradient(90deg, #22caff, #0266c1)":"",
+                color: activePage=="avatar"? "white":"",
+                padding: "5%",
+                borderRadius: "5px",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1}}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05}}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <Typography variant="body1">VIEW AVATAR</Typography>
-          </GradientButton>
+            </motion.div>
+          </Button>
         </ButtonGroup>
       </Stack>
       {activePage === "nfts" ? (
