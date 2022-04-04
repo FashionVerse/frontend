@@ -23,9 +23,14 @@ export default function Brands() {
     },
   });
 
+  function changePage(event, value){
+    setPage(value)
+  }
+
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-  const { data, error } = useSWR('http://localhost:6969/api/getBrands', fetcher)
+  const [page, setPage] = React.useState(1);
+  const { data, error } = useSWR('http://localhost:6969/api/getBrands?page='+page, fetcher)
   if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
   const arr: GridCardProps[] = [];
   if (data) {
@@ -102,9 +107,6 @@ export default function Brands() {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onClick={() => {
-                  router.push("/brands/" + props.id);
-                }}
               >
                 
                 <GridCard {...props} />
@@ -114,7 +116,7 @@ export default function Brands() {
           ))}
         </Grid>
         <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
-          <Pagination count={10} color="primary" size="large" />
+          <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
         </div>
         <Footer />
       </Container>
