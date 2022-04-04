@@ -24,6 +24,9 @@ export const ColorModeContext = React.createContext({
 export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("dark");
+  React.useEffect(()=>{
+    setMode(localStorage.getItem('dark-mode') === "dark"? "dark" : "light");
+  },[]);
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
@@ -32,6 +35,10 @@ export default function MyApp(props: any) {
     }),
     []
   );
+  React.useEffect(() => {
+    // console.log("mode", mode);
+    localStorage.setItem('dark-mode', mode);
+  }, [mode]);
 
   const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
     palette: {
