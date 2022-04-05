@@ -39,6 +39,7 @@ const ListMenu: React.FC<Props> = ({ children, ...props }) => {
       anchorEl={anchorEl}
       open={open}
       onClose={handleClose}
+      MenuListProps={{ onMouseLeave: handleClose }}
       PaperProps={{  
         style: {  
           backgroundColor: "rgba(0,0,0,0.05)",  

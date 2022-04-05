@@ -160,23 +160,59 @@ export default function Header() {
         </Stack>
         <Tooltip title="Wallet Connect">
           <Link href={"/wallets"} color="inherit" noLinkStyle>
+          <motion.div
+              // className="drops_hover_cursor"
+              style={{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.25 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <NavIconButton sx={{ ml: "16px" }} size="small">
               <BsWallet />
             </NavIconButton>
+            </motion.div>
           </Link>
         </Tooltip>
         <Tooltip title="Digital Wardrobe">
           <Link href={"/wardrobe"} color="inherit" noLinkStyle>
+          <motion.div
+              // className="drops_hover_cursor"
+              style={{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.25 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <NavIconButton size="small">
               <BsDoorOpen />
             </NavIconButton>
+            </motion.div>
           </Link>
         </Tooltip>
         <Tooltip title="Shopping Cart">
           <Link href={"/bag"} color="inherit" noLinkStyle>
+          <motion.div
+              // className="drops_hover_cursor"
+              style={{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.25 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <NavIconButton size="small">
               <BsHandbag />
             </NavIconButton>
+            </motion.div>
           </Link>
         </Tooltip>
       </Stack>

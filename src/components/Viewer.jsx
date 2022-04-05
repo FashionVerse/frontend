@@ -3,6 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stage } from "@react-three/drei";
 import FastAverageColor from "fast-average-color";
 import AnimLogo from "./AnimLogo";
+import { Box } from "@mui/material";
+
 const setOpacity = (hex, alpha) =>
   `${hex}${Math.floor(alpha * 255)
     .toString(16)
@@ -12,9 +14,20 @@ export default function Viewer(props) {
   const ref = useRef();
   function Loader(){
     return(
-      <AnimLogo />
+        <Box
+          sx={{
+            height: "100vh",
+            width: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "auto",
+          }}
+        >
+          <AnimLogo />
+        </Box>
+      );
       // <Image src={props.imgLink} />
-    )
   }
   useEffect(() => {
     // window.addEventListener("load", function () {
@@ -48,7 +61,8 @@ export default function Viewer(props) {
         <Canvas
           dpr={[1, 2]}
           camera={{ fov: 50 }}
-          style={{ height:props.height, width: props.width }}
+          style={{ height:props.height, width: props.width, zIndex: -1 }}
+
         >
             <Stage controls={ref} environment="city">
               {props.children}

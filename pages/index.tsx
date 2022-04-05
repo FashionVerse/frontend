@@ -24,17 +24,17 @@ import firestore from "../firebase/clientApp";
 import { AbiItem } from 'web3-utils'
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import Web3 from 'web3';
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-  getDoc,
-  doc
-} from "@firebase/firestore";
+// import {
+//   collection,
+//   QueryDocumentSnapshot,
+//   DocumentData,
+//   query,
+//   where,
+//   limit,
+//   getDocs,
+//   getDoc,
+//   doc
+// } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
 import useSWR from 'swr'
 
