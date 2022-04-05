@@ -63,7 +63,6 @@ export default function Header() {
     if(connected){
       const accounts = await ethereum.enable();
       const account = accounts[0];
-      console.log(account)
     }
   }
 
@@ -85,7 +84,6 @@ export default function Header() {
     }
 
     getDrops().then((value)=>{
-      console.log(value)
       setDrops(value);
 
     })

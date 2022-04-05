@@ -36,6 +36,9 @@ import {
   doc
 } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -50,61 +53,138 @@ export default function Index() {
   const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
   const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
 
-  React.useEffect(() => {
-    async function getBrands() {
-      const arr: GridCardProps[] = [];
-      const querySnapshot = await getDocs(query(collection(firestore, "brands"), limit(5)));
-      querySnapshot.forEach((doc) => {
-        arr.push(doc.data() as GridCardProps);
+  const getBrands = () => {
+    const { data, error } = useSWR('http://localhost:6969/api/getBrands?size=5', fetcher)
+    return {data: data, error: error}
+  }
+
+  // const { data, error } = useSWR('http://localhost:6969/api/getBrands?size=5', fetcher)
+  const {data: brandData, error: brandError} = getBrands()
+  if (brandError){
+
+  enqueueSnackbar("Failed to load brands", { variant: "error" });
+  console.log("Failed")
+  }
+  const brands: GridCardProps[] = [];
+  if (brandData) {
+  console.log("data ",brandData)
+    brandData.brands.forEach((item) => {
+      brands.push({
+        topLeftImage: item.gridImages[0],
+        topRightImage: item.gridImages[1],
+        bottomLeftImage: item.gridImages[2],
+        bottomRightImage: item.gridImages[3],
+        avatarSrc: item.avatarSrc,
+        title: item.title,
+        subtitle: item.subtitle,
+        id: item._id,
+        href: "brands/"+item.url,
       });
-      return arr;
-    }
+    });
+  }
 
-    async function getFeatured() {
-      const arr = [];
-      const items = await getDocs(collection(firestore, "featured"));
-      for(const item of items.docs) {
-        const itemContract = await marketContract.methods.getItem(item.data().itemId).call();
-        const collectionDoc = await getDoc(doc(firestore, "collections", item.data().collection));
-        const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
-        const contract = new web3.eth.Contract(nftAbi as AbiItem[], itemContract.nftContract);
-        const nft = await contract.methods.tokenURI(itemContract.tokenIds[0]).call();
-        const response = await fetch(nft);
+  const getDrops = () => {
+    const { data, error } = useSWR('http://localhost:6969/api/getDrops', fetcher)
+    return {data: data, error: error}
+  }
 
-      if(!response.ok)
-        enqueueSnackbar(response.statusText)
+  // const { data, error } = useSWR('http://localhost:6969/api/getBrands?size=5', fetcher)
+  const {data: dropData, error: dropError} = getDrops()
+  if (dropError){
 
-      const json = await response.json()
-      arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
+  enqueueSnackbar("Failed to load drops", { variant: "error" });
+  console.log("Failed")
+  }
+  const drops: GridCardProps[] = [];
+  if (dropData) {
+  console.log("drops ",dropData)
+    dropData.drops.forEach((item) => {
+      drops.push({
+        topLeftImage: item.gridImages[0],
+        topRightImage: item.gridImages[1],
+        bottomLeftImage: item.gridImages[2],
+        bottomRightImage: item.gridImages[3],
+        avatarSrc: item.avatarSrc,
+        title: item.title,
+        subtitle: item.subtitle,
+        id: item._id,
+        href: "drops/"+item.url,
+      });
+    });
+  }
+
+  
+
+  // const { data, error } = useSWR('http://localhost:6969/api/getDrops', fetcher)
+  // if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
+  // const drops: GridCardProps[] = [];
+  // if (data) {
+  // console.log("drops ",data)
+  //   data.drops.forEach((item) => {
+  //     brands.push({
+  //       topLeftImage: item.gridImages[0],
+  //       topRightImage: item.gridImages[1],
+  //       bottomLeftImage: item.gridImages[2],
+  //       bottomRightImage: item.gridImages[3],
+  //       avatarSrc: item.avatarSrc,
+  //       title: item.title,
+  //       subtitle: item.subtitle,
+  //       id: item._id,
+  //       href: "drops/"+item.url,
+  //     });
+  //   });
+  // }
+
+  // React.useEffect(() => {
+  //   async function getBrands() {
+  //     const arr: GridCardProps[] = [];
+  //     const querySnapshot = await getDocs(query(collection(firestore, "brands"), limit(5)));
+  //     querySnapshot.forEach((doc) => {
+  //       arr.push(doc.data() as GridCardProps);
+  //     });
+  //     return arr;
+  //   }
+
+  //   async function getFeatured() {
+  //     const arr = [];
+  //     const items = await getDocs(collection(firestore, "featured"));
+  //     for(const item of items.docs) {
+  //       const itemContract = await marketContract.methods.getItem(item.data().itemId).call();
+  //       const collectionDoc = await getDoc(doc(firestore, "collections", item.data().collection));
+  //       const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
+  //       const contract = new web3.eth.Contract(nftAbi as AbiItem[], itemContract.nftContract);
+  //       const nft = await contract.methods.tokenURI(itemContract.tokenIds[0]).call();
+  //       const response = await fetch(nft);
+
+  //     if(!response.ok)
+  //       enqueueSnackbar(response.statusText)
+
+  //     const json = await response.json()
+  //     arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
       
-      }
-      return arr
-    }
+  //     }
+  //     return arr
+  //   }
 
-    async function getDrops(){
-      const drops = await getDocs(collection(firestore, "drop"));
-      return drops.docs;
-    }
-    getBrands()
-      .then((value) => {
-        setBrands(value);
-        getFeatured().then((value)=>{
-          setFeatured(value);
-          getDrops().then((value)=>{
-            setDrops(value);
-          })
-        })
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+  //   async function getDrops(){
+  //     const drops = await getDocs(collection(firestore, "drop"));
+  //     return drops.docs;
+  //   }
+  //       getFeatured().then((value)=>{
+  //         setFeatured(value);
+  //         getDrops().then((value)=>{
+  //           setDrops(value);
+  //         })
+  //       })
 
-  const [brands, setBrands] = React.useState<GridCardProps[] | null>(null);
-  const [featured, setFeatured] = React.useState(null);
-  const [drops, setDrops] = React.useState(null);
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, []);
 
-  if (!brands || !featured || !drops) {
+  // const [brands, setBrands] = React.useState<GridCardProps[] | null>(null);
+
+  if (!brandData  || !dropData) {
     // TODO: Add proper loader
     return (
       <Box
@@ -171,7 +251,7 @@ export default function Index() {
             priority
             loading="eager"
           />
-          <LandingPageDisplay items={featured} expandable />
+          <LandingPageDisplay expandable />
         </Box>
       </Stack>
       {/* Drops */}
@@ -201,10 +281,10 @@ export default function Index() {
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
             <GridCard
-              {...props.data()}
+              {...props}
               noBrand
-              key={props.data().id}
-              href={"/drops/"+props.data().id}
+              key={props.id}
+              href={props.href}
             />
           </motion.div>
         ))}
