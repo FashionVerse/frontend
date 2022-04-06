@@ -64,9 +64,6 @@ function FeaturedDisplay() {
                 alignItems: "center",
                 gap: "12px",
               }}
-              onClick={()=>{
-                console.log(item._id);
-              }}
             >
           
               <Viewer width="247px" height="300px" imgLink = {item.nft.metadata.image}>

@@ -138,7 +138,7 @@ h1{
 	}
 	.css-iaykeu-MuiStack-root {
 		grid-gap: 0px;
-		gap: 8px;
+		/* gap: 8px; */
 	}
 	a.active .MuiBox-root span {width:35px;}
 	.css-w968tk-MuiTypography-root {
