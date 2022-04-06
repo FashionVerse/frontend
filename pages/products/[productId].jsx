@@ -78,7 +78,7 @@ export default function Product() {
             borderRadius: "20px",
           }}
         >
-          <div className="tw-flex tw-flex-col tw-gap-y-4">
+          <div className="tw-flex tw-flex-col tw-gap-y-6">
             <div>
               <Typography
                 variant="h3"
@@ -109,16 +109,16 @@ export default function Product() {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
-            <div className="tw-flex md:tw-flex-row tw-flex-col tw-items-center tw-justify-between tw-pr-5">
+            <div className="tw-flex md:tw-flex-row tw-flex-col tw-gap-4 tw-items-center tw-pr-5">
+            <Image src={data.brand.avatarSrc} width="40" height="40" className="tw-rounded-full"/>
             <Typography
                 variant="subtitle1"
                 gutterBottom
                 component="div"
                 className="tw-font-light"
               >
-                <span className="tw-font-semibold">Brand:</span> {data.brand.title}
+                {data.brand.title}
               </Typography>
-              <Image src={data.brand.avatarSrc} width="120" height="120" className="tw-rounded-lg"/>
             </div>
             </motion.div>
             </Link>
@@ -134,19 +134,24 @@ export default function Product() {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
-            <div className="tw-flex md:tw-flex-row tw-flex-col tw-items-center tw-justify-between tw-pr-5">
             <Typography
                 variant="subtitle1"
                 gutterBottom
                 component="div"
                 className="tw-font-light"
               >
-                <span className="tw-font-semibold">Collection:</span> {data.collection.title}
+                <span className="tw-font-semibold">{data.collection.title}</span>
               </Typography>
-              <Image src={data.collection.avatarSrc} width="120" height="120" className="tw-rounded-lg"/>
-            </div>
             </motion.div>
             </Link>
+            <Typography
+                variant="subtitle1"
+                gutterBottom
+                component="div"
+                className="tw-font-light"
+              >
+                <span className="tw-font-semibold">Rarity:</span> <span className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-r tw-from-pink-500 tw-via-red-500 tw-to-yellow-500">Ultra Rare</span>
+              </Typography>
             <div>
               {data.available != 0 ? (
                 <Typography
@@ -155,7 +160,7 @@ export default function Product() {
                   component="div"
                   className="tw-font-light"
                 >
-                  Total Available{" "}
+                  Total Available:{" "}
                   <span className="tw-font-semibold pl-2">
                     {data.available}
                   </span>
@@ -208,7 +213,7 @@ export default function Product() {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.035 }}
+              whileHover={{ scale: 1.015 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
               {data.available != 0 ? (

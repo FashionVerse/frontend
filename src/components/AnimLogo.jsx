@@ -1,5 +1,3 @@
-import Link from "../components/Link";
-import { Box } from "@mui/material";
 import {motion} from 'framer-motion';
 
 export default function AnimLogo(props) {
