@@ -78,16 +78,16 @@ function CardDialog(props: CardDialogProps) {
   const { open, onClose } = props;
 
   var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
-  if(props.sold.length >=30 ){
+  if(props.rarity.length >=30 ){
     rarityCategory = "Semi-rare";
   }
-  else if (props.sold.length >=15 && props.sold.length < 30){
+  else if (props.rarity.length >=15 && props.rarity.length < 30){
     rarityCategory = "Super-rare";
   }
-  else if (props.sold.length >=5 && props.sold.length < 15){
+  else if (props.rarity.length >=5 && props.rarity.length < 15){
     rarityCategory = "Ultra-rare";
   }
-  if(props.sold.length < 50 ){
+  if(props.rarity.length < 50 ){
     rarityCategory = "Extremely-rare";
   }
 
@@ -109,7 +109,7 @@ function CardDialog(props: CardDialogProps) {
           }}
         >
           <Image
-            src={props.nft.properties.image.description}
+            src={props.nft.image}
             alt="NFT Image"
             layout="fill"
             objectFit="cover"
@@ -122,10 +122,10 @@ function CardDialog(props: CardDialogProps) {
         >
           <Stack>
             <Typography>
-              <b>{props.nft.properties.name.description}</b>
+              <b>{props.nft.name}</b>
             </Typography>
             <Typography variant="caption" color="textSecondary">
-              {props.nft.properties.description.description}
+              {props.nft.description}
             </Typography>
             <Typography variant="caption" gutterBottom>
               <b>{props.brand.title}</b>
@@ -136,7 +136,7 @@ function CardDialog(props: CardDialogProps) {
               <b>{rarityCategory}</b>
             </Typography>
             <Typography variant="caption" color="textSecondary">
-              {"No. of pieces - " + props.sold.length}
+              {"No. of pieces - " + props.rarity.length}
             </Typography>
             <Typography variant="caption" color="primary">
               {props.collection.title}
@@ -151,7 +151,7 @@ function CardDialog(props: CardDialogProps) {
           <Stack alignItems="baseline" direction="row">
           <SiEthereum fontSize="1rem" />
             <Typography variant="h6" sx={{ mr: "4px" }}>
-              {Web3.utils.fromWei( props.price, 'ether')}
+              {Web3.utils.fromWei( props.price.toString(), 'ether')}
             </Typography>
             
           </Stack>

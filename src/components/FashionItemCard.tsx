@@ -23,25 +23,16 @@ import { useRouter } from "next/router";
 export interface FashionItemCardProps {
   id: string;
   itemId: string;
-  src: string;
-  alt: string;
   nft: any;
-  pieceName: string;
-  brandName: string;
-  brandImage: string;
   brand: any;
   price: any;
-  sold: any;
   rarity: number;
   collection: any;
   rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
-  available: string
   hideAddToBag?: boolean;
   hidePrice?: boolean;
   expandable?: boolean;
-  description: string;
-  noOfPieces: number;
-  collectionName: string;
+
 }
 
 export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
@@ -118,16 +109,16 @@ export default function FashionItemCard(props: FashionItemCardProps) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
-  if(props.sold.length >=30 ){
+  if(props.rarity >=30 ){
     rarityCategory = "Semi-rare";
   }
-  else if (props.sold.length >=15 && props.sold.length < 30){
+  else if (props.rarity >=15 && props.rarity < 30){
     rarityCategory = "Super-rare";
   }
-  else if (props.sold.length >=5 && props.sold.length < 15){
+  else if (props.rarity >=5 && props.rarity < 15){
     rarityCategory = "Ultra-rare";
   }
-  if(props.sold.length < 50 ){
+  if(props.rarity < 5 ){
     rarityCategory = "Extremely-rare";
   }
   
@@ -161,10 +152,10 @@ export default function FashionItemCard(props: FashionItemCardProps) {
             overflow: "hidden",
             backgroundColor: "white",
           }}
-          onClick={() => setEnlarged(true)}
+          onClick={() => router.push("/products/"+props.id)}
         >
           <Image
-            src={props.nft.properties.image.description}
+            src={props.nft.image}
             alt="NFT"
             layout="fill"
             objectFit="cover"
@@ -184,7 +175,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
               />
             </ListItemAvatar>
             <ListItemText
-              primary={props.nft.properties.name.description}
+              primary={props.nft.description}
               secondary={props.brand.title}
               secondaryTypographyProps={{ style: { marginTop: "-2px" } }}
             />
@@ -209,7 +200,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
             <Stack alignItems="center" direction="row">
               <SiEthereum fontSize="1rem" />
               <Typography variant="h6" sx={{ ml: "4px" }}>
-                {Web3.utils.fromWei( props.price, 'ether')}
+                {Web3.utils.fromWei( props.price.toString(), 'ether')}
               </Typography>
             </Stack>
           )}
