@@ -64,7 +64,7 @@ export default function Product() {
             borderRadius: "20px",
           }}
         >
-          <Viewer width="100%" height="100%" imgLink={data.nft.metadata.image}>
+          <Viewer width="100%" height="100%" imgLink={data.nft.metadata.image} isProduct="true">
             <Model
               link={data.nft.metadata.animation_url + "?filename=model.glb"}
             ></Model>

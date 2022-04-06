@@ -66,7 +66,7 @@ function FeaturedDisplay() {
               }}
             >
           
-              <Viewer width="247px" height="300px" imgLink = {item.nft.metadata.image}>
+              <Viewer width="247px" height="300px" imgLink = {item.nft.metadata.image} isProduct="false">
           {/* {"name":"Cyber Punk Outfit","description":"A Cyber Punk Outfit","image":"https://ipfs.infura.io/ipfs/QmbmAYjQxCcj3MANspmK6KGKjsqQgrnNAgyAbv1iYfYV3d","animation_url":"https://ipfs.infura.io/ipfs/QmWpez4dCweVKgaMWtDXrqkDnDZcGBxrGp12khdzE9b2XJ"} */}
                 <Model 
                   link= {item.nft.metadata.animation_url+"?filename=file"+item._id+".glb" }

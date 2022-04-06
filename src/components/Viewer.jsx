@@ -67,16 +67,28 @@ export default function Viewer(props) {
             <Stage controls={ref} environment="city">
               {props.children}
             </Stage>
+          {props.isProduct==="false"?
           <OrbitControls
-            minPolarAngle={Math.PI / 2}
-            maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
+          ref={ref}
+          autoRotate
+          autoRotateSpeed={5}
+          enableZoom={false}
+          enablePan={false}
+          enableRotate={true}
+        />
+          :
+          <OrbitControls
             ref={ref}
             autoRotate
-            autoRotateSpeed={5}
-            enableZoom={false}
-            enablePan={false}
+            autoRotateSpeed={4}
+            enableZoom={true}
+            enablePan={true}
             enableRotate={true}
           />
+        }
+          
         </Canvas>
       </Suspense>
       </div>
