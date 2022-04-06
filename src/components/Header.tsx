@@ -28,6 +28,10 @@ import {
   getDoc,
   doc
 } from "@firebase/firestore";
+import { useSnackbar } from "notistack";
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const NavIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor:
@@ -46,51 +50,68 @@ export default function Header() {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
 
-  React.useEffect(() => {
-    if(typeof window['ethereum'] !== 'undefined'){
-      const ethereum = window['ethereum'];
-  if (ethereum) {
-      var provider = new ethers.providers.Web3Provider(ethereum);
-  }
   
-  const isMetaMaskConnected = async () => {
-    const accounts = await provider.listAccounts();
-    return accounts.length > 0;
-  }
+
+  // React.useEffect(() => {
+  //   if(typeof window['ethereum'] !== 'undefined'){
+  //     const ethereum = window['ethereum'];
+  // if (ethereum) {
+  //     var provider = new ethers.providers.Web3Provider(ethereum);
+  // }
   
-  const  getAccount = async () => {
-    const connected = await isMetaMaskConnected();
-    if(connected){
-      const accounts = await ethereum.enable();
-      const account = accounts[0];
-    }
-  }
+  // const isMetaMaskConnected = async () => {
+  //   const accounts = await provider.listAccounts();
+  //   return accounts.length > 0;
+  // }
+  
+  // const  getAccount = async () => {
+  //   const connected = await isMetaMaskConnected();
+  //   if(connected){
+  //     const accounts = await ethereum.enable();
+  //     const account = accounts[0];
+  //   }
+  // }
 
   
   
-  ethereum.on('accountsChanged', function (accounts) {
-    getAccount();
-  })
-    }
+  // ethereum.on('accountsChanged', function (accounts) {
+  //   getAccount();
+  // })
+  //   }
 
-    async function getDrops(){
-      const arr = [];
-      const drops = await getDocs(collection(firestore, "drop"));
-      for(const drop of drops.docs){
-        arr.push({id: drop.data().id, label: drop.data().title, href: "/drops/"+drop.data().id})
-      }
-      return arr;
+  //   async function getDrops(){
+  //     const arr = [];
+  //     const drops = await getDocs(collection(firestore, "drop"));
+  //     for(const drop of drops.docs){
+  //       arr.push({id: drop.data().id, label: drop.data().title, href: "/drops/"+drop.data().id})
+  //     }
+  //     return arr;
 
-    }
+  //   }
 
-    getDrops().then((value)=>{
-      setDrops(value);
+  //   getDrops().then((value)=>{
+  //     setDrops(value);
 
-    })
+  //   })
     
-  }, [])
+  // }, [])
 
-  const [drops, setDrops] = React.useState(null);
+  const getDrops = () => {
+    const { data, error } = useSWR('http://localhost:6969/api/getDrops', fetcher)
+    return {data: data, error: error}
+  }
+
+  const {data: dropData, error: dropError} = getDrops()
+  
+  const drops = [];
+  if (dropData) {
+  console.log("drops ",dropData)
+    dropData.drops.forEach((drop) => {
+      drops.push({id: drop._id, label: drop.title, href: "/drops/"+drop.url});
+    });
+  }
+
+  // const [drops, setDrops] = React.useState(null);
 
   
   return (
