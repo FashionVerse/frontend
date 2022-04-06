@@ -15,20 +15,6 @@ import Logo from "./Logo";
 import Link from "./Link";
 import Tooltip from "@mui/material/Tooltip";
 import ListMenu from "./ListMenu";
-import { ethers } from "ethers";
-import firestore from "../../firebase/clientApp";
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-  getDoc,
-  doc
-} from "@firebase/firestore";
-import { useSnackbar } from "notistack";
 import useSWR from 'swr'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
