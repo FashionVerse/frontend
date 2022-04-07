@@ -35,6 +35,7 @@ import { useSnackbar } from "notistack";
 import Web3 from 'web3';
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import { ethers } from 'ethers'
+import WardrobeCard from "../src/components/WardRobeCard";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -91,39 +92,23 @@ export default function Wardrobe() {
           const arr = [];
           const ids = [];
 
-      const querySnapshot = await getDocs(query(collection(firestore, "purchase"), where("address", "==", account)));
-      for(const purchase of querySnapshot.docs){
-        const items = await getDocs(query(collectionGroup(firestore, 'item'), where("id", "==", purchase.data().item)));
-        if(items.size > 0){
-          const itemDoc = items.docs[0];
-          const collectionId = itemDoc.data().collection;
-          console.log(itemDoc.data())
-          const collectionDoc = await getDoc(doc(firestore, "collections", collectionId));
-          const brandId = collectionDoc.data().brand;
-          console.log(brandId)
-          const brand = await getDoc(doc(firestore, "brands", brandId));
-             const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
-        const item = await marketContract.methods.getItem(itemDoc.data().id).call();
-        const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
-        
-        
-        const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
-        const response = await fetch(nft);
+        const response = await fetch('http://localhost:6969/api/getNFTs?account='+account);
+        const items = await response.json();
 
-        if(!response.ok)
-          enqueueSnackbar(response.statusText)
+        console.log(items)
 
-        const json = await response.json()
-        if(!ids.includes(purchase.data().item)){
-          arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
-          ids.push(purchase.data().item)
-        }
-        
-        
-        } else {
-          throw "An error has occurred"
-        }
-      }
+        items.map((item)=>{
+          arr.push({
+            id: item.token_id,
+            name: item.metadata.name,
+            description: item.metadata.description,
+            src: item.metadata.image,
+            alt: "image"
+          })
+        })
+
+
+      
       return arr
       // for (const id of querySnapshot.docs) {
         
@@ -270,7 +255,8 @@ export default function Wardrobe() {
                   justifyContent: "center",
                 }}
               >
-                <FashionItemCard {...props} hideAddToBag expandable />
+                {/* <FashionItemCard {...props} hideAddToBag expandable /> */}
+                <WardrobeCard {...props} />
               </Box>
             </Grid>
           ))}
