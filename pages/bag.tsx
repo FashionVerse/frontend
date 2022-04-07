@@ -340,8 +340,8 @@ export default function Bag() {
               variant="h5"
               sx={{ display: "flex", alignItems: "center", gap: "4px" }}
             >
-              {Web3.utils.fromWei( String(rest.price), 'ether')}
               <SiEthereum fontSize="1.25rem" />
+              {rest.price}
             </Typography>
             <Button
               color="error"

@@ -9,8 +9,90 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimLogo from "../../src/components/AnimLogo";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { ethers } from "ethers";
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const fetcher = (url) => fetch(url, {method: 'POST'}).then((res) => res.json());
+
+function AnimatedButton(props)
+{
+  async function setCart(){
+    if(typeof window['ethereum'] !== 'undefined'){
+      const ethereum  = window['ethereum'];
+  if (ethereum) {
+      var provider = new ethers.providers.Web3Provider(ethereum);
+
+  }
+  
+  const isMetaMaskConnected = async () => {
+    const accounts = await provider.listAccounts();
+    return accounts.length > 0;
+  }
+    const connected = await isMetaMaskConnected();
+    if(connected){
+      const accounts = await ethereum.enable();
+      const account = accounts[0];
+        const rawResponse = await fetch('http://localhost:6969/api/addItemToBag', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({item: props.id.toString(), account: account})
+        }).catch();
+        const content = await rawResponse.json();
+        if(content.status === 'ok'){
+          setIsAnimating(2)
+        }
+        else{
+          setIsAnimating(0)
+        }
+        console.log(content);
+   } else {
+      alert("Connect to Wallet")
+      router.replace("/");
+    }
+
+    } else {
+      alert("MetaMask not installed")
+    }
+  }
+  const [isAnimating, setIsAnimating] = useState(0);
+  return(
+    <>
+    <motion.button 
+                type="button" 
+                onClick={() => 
+                  {
+                    setIsAnimating(1)
+                    setCart()
+                  }
+                }
+                style={isAnimating===0? {display:"flex"}:{display:"none"}}
+                class="tw-flex tw-gap-4 tw-items-center tw-justify-center tw-py-2 tw-px-4 tw-bg-cyan-500 hover:tw-bg-cyan-600 focus:tw-ring-cyan-400 focus:tw-ring-offset-cyan-200 tw-text-white tw-w-full tw-transition tw-ease-in tw-duration-200 tw-text-center tw-text-base tw-font-semibold tw-shadow-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 tw-rounded-lg "
+                >
+                  <AccountBalanceWalletIcon /> Add To Bag
+                </motion.button>
+                <motion.button 
+                style={isAnimating===1? {display:"flex"}:{display:"none"}}
+                type="button" class="tw-py-2 tw-px-4 tw-flex tw-justify-center tw-items-center  tw-bg-blue-600 hover:tw-bg-blue-700 focus:tw-ring-blue-500 focus:tw-ring-offset-blue-200 tw-text-white tw-w-full tw-transition tw-ease-in tw-duration-200 tw-text-center tw-text-base tw-font-semibold tw-shadow-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2  tw-rounded-lg ">
+                <svg width="20" height="20" fill="currentColor" class="tw-mr-2 tw-animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
+                    </path>
+                </svg>
+                Adding
+              </motion.button>
+              <motion.button 
+                style={isAnimating===2? {display:"flex"}:{display:"none"}}
+                type="button" class="tw-py-2 tw-px-4 tw-gap-2 tw-flex tw-justify-center tw-items-center  tw-bg-green-600 hover:tw-bg-green-700 focus:tw-ring-green-500 focus:tw-ring-offset-green-200 tw-text-white tw-w-full tw-transition tw-ease-in tw-duration-200 tw-text-center tw-text-base tw-font-semibold tw-shadow-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2  tw-rounded-lg ">
+                <DoneAllIcon />{' '}
+                Added To Bag
+              </motion.button>
+    </>
+  )
+
+}
 
 export default function Product() {
   const router = useRouter();
@@ -109,7 +191,7 @@ export default function Product() {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
-            <div className="tw-flex md:tw-flex-row tw-flex-col tw-gap-4 tw-items-center tw-pr-5">
+            <div className="tw-flex tw-flex-row tw-gap-4 tw-items-center tw-pr-5">
             <Image src={data.brand.avatarSrc} width="40" height="40" className="tw-rounded-full"/>
             <Typography
                 variant="subtitle1"
@@ -217,13 +299,9 @@ export default function Product() {
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
               {data.available != 0 ? (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="tw-rounded-lg tw-pl-5 tw-pr-5 tw-pt-3 tw-pb-3 tw-gap-x-2 tw-w-full"
-                >
-                  <AccountBalanceWalletIcon /> Add To Bag
-                </Button>
+                <>
+                <AnimatedButton id={data._id}/>
+              </>
               ) : (
                 <Button
                   disabled

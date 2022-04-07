@@ -75,16 +75,16 @@ export default function AnimLogo(props) {
       />
       <defs>
         <linearGradient id="paint0_linear_256_262" x1="39.7283" y1="0.915177" x2="39.1782" y2="21.8203" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#01F0FF"/>
-        <stop offset="1" stop-color="#05213A"/>
+        <stop stopColor="#01F0FF"/>
+        <stop offset="1" stopColor="#05213A"/>
         </linearGradient>
         <linearGradient id="paint1_linear_256_262" x1="35.5205" y1="14.2973" x2="30.3366" y2="61.4447" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#01F0FF"/>
-        <stop offset="1" stop-color="#05213A"/>
+        <stop stopColor="#01F0FF"/>
+        <stop offset="1" stopColor="#05213A"/>
         </linearGradient>
         <linearGradient id="paint2_linear_256_262" x1="49.845" y1="14.0575" x2="46.4604" y2="49.755" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#01F0FF"/>
-        <stop offset="1" stop-color="#05213A"/>
+        <stop stopColor="#01F0FF"/>
+        <stop offset="1" stopColor="#05213A"/>
         </linearGradient>
         </defs>
     </motion.svg> 
