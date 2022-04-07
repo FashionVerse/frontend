@@ -2,8 +2,10 @@ import React, { Suspense, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stage } from "@react-three/drei";
 import FastAverageColor from "fast-average-color";
-import AnimLogo from "./AnimLogo";
-import { Box } from "@mui/material";
+import { motion } from "framer-motion"
+import { Box,Typography } from "@mui/material";
+import { useProgress } from '@react-three/drei'
+import CircularProgress from '@mui/material/CircularProgress';
 
 const setOpacity = (hex, alpha) =>
   `${hex}${Math.floor(alpha * 255)
@@ -12,41 +14,52 @@ const setOpacity = (hex, alpha) =>
 
 export default function Viewer(props) {
   const ref = useRef();
+  const { progress } = useProgress()
   function Loader(){
     return(
-        <Box
-          sx={{
-            height: "100vh",
-            width: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "auto",
-          }}
-        >
-          <AnimLogo />
-        </Box>
+     <div className="tw-flex tw-items-center tw-justify-center tw-h-full tw-w-full tw-z-10 tw-scale-[2]">
+      <Box>
+      <CircularProgress variant="determinate" value={progress} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        <Typography variant="caption" component="div" color="text.secondary">
+          {`${Math.round(progress)}%`}
+        </Typography>
+      </Box>
+    </Box>
+    </div>
       );
       // <Image src={props.imgLink} />
   }
-  useEffect(() => {
-    // window.addEventListener("load", function () {
-    const fac = new FastAverageColor();
-    fac
-      .getColorAsync(
-        props.imgLink,
-        { algorithm: "sqrt", mode: "precision" }
-      )
-      .then((color) => {
-        console.log(color);
-        console.log(color.hex);
-        // document.body.style.background = color.hex;
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-    // });
-  }, []);
+  // useEffect(() => {
+  //   // window.addEventListener("load", function () {
+  //   const fac = new FastAverageColor();
+  //   fac
+  //     .getColorAsync(
+  //       props.imgLink,
+  //       { algorithm: "sqrt", mode: "precision" }
+  //     )
+  //     .then((color) => {
+  //       console.log(color);
+  //       console.log(color.hex);
+  //       // document.body.style.background = color.hex;
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  //   // });
+  // }, []);
   return (
     <>
       <div
