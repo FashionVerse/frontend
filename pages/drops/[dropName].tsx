@@ -441,10 +441,6 @@ return items;
   
     
   // }, [router.isReady]);
-  function filterItems(){
-    const itemBody = body;
-
-  }
 
 
   React.useEffect(() => {

@@ -28,7 +28,7 @@ export interface FashionItemCardProps {
   price: any;
   rarity: number;
   collection: any;
-  rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
+  rarityCategory?: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
   hideAddToBag?: boolean;
   hidePrice?: boolean;
   expandable?: boolean;

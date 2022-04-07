@@ -102,6 +102,7 @@ export default function Bag() {
 
   async function getItems(account) {
     const arr = [];
+
     // const querySnapshot = await getDocs(collection(firestore, "/cart/"+account+"/items"));
     // for (const id of querySnapshot.docs) {
     //   //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
@@ -150,7 +151,30 @@ export default function Bag() {
     //     //   });
     //     // });
     //   }
+    // const items = await fetch('http://localhost:6969/api/getItemsFromBag?account='+account)
+    try{
+    const response = await fetch('http://localhost:6969/api/getItemsFromBag?account='+account ,)
+    const itemData = await response.json();
 
+    itemData.items.map((item)=>{
+      arr.push({
+        id: item._id,
+        itemId: item.itemId,
+        nft: item.nft.metadata,
+        brand: item.brand,
+        price: item.price,
+        rarity: item.totalSupply,
+        collection: item.collection,
+        expandable: false,
+        quantity: item.quantity
+      })
+    })
+
+    console.log(itemData)
+    } catch {
+      enqueueSnackbar("Failed to load items", { variant: "error" });
+    console.log("Failed");
+    }
 
 
     return arr;
@@ -233,10 +257,12 @@ export default function Bag() {
   const [isLoading, setIsLoading] = React.useState(false);
 
    const totalCost:any = data
-    .map((c) => Number(Web3.utils.fromWei(c.price, 'ether')) * c.quantity)
+    .map((c) => Number(Web3.utils.fromWei(c.price.toString(), 'ether')) * c.quantity)
     .reduce((a, b) => a + b, 0);
 
   function CheckoutCard({ quantity, ...rest }: CheckoutCardProps) {
+    console.log("REST")
+    console.log(rest)
 
     return (
       <Grid container gap={2}>
