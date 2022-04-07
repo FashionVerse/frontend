@@ -76,22 +76,31 @@ export default function FashionItemCard(props: FashionItemCardProps) {
       if(connected){
         const accounts = await ethereum.enable();
         const account = accounts[0];
-        console.log(account)
-        setIsLoading(true);
-        await setDoc(doc(firestore, "cart", account), {
-          id: account,
+        // await setDoc(doc(firestore, "cart", account), {
+        //   id: account,
 
-        });
-        await setDoc(doc(firestore, "/cart/"+account+"/items", props.itemId), {
-          id: props.itemId,
-          collection: props.collection.id,
-          amount: 1,
+        // });
+        // await setDoc(doc(firestore, "/cart/"+account+"/items", props.itemId), {
+        //   id: props.itemId,
+        //   collection: props.collection.id,
+        //   amount: 1,
 
-        });
+        // });
+
+          const rawResponse = await fetch('http://localhost:6969/api/addItemToBag', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({item: props.id.toString(), account: account})
+          }).catch();
+          const content = await rawResponse.json();
+        
+          console.log(content);
 
         
 
-        setIsLoading(false);
         
       } else {
         alert("Connect to Wallet")
@@ -107,6 +116,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
 
   const [enlarged, setEnlarged] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  
 
   var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
   if(props.rarity >=30 ){
@@ -200,7 +210,8 @@ export default function FashionItemCard(props: FashionItemCardProps) {
             <Stack alignItems="center" direction="row">
               <SiEthereum fontSize="1rem" />
               <Typography variant="h6" sx={{ ml: "4px" }}>
-                {Web3.utils.fromWei( props.price.toString(), 'ether')}
+                {/* {Web3.utils.fromWei( props.price.toString(), 'ether')} */}
+              {props.price.toString()}
               </Typography>
             </Stack>
           )}
@@ -216,13 +227,13 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           )}
         </Box>
       </FashionItemCardContainer>
-      {props.expandable && (
+      {/* {props.expandable && (
         <EnlargedFashionCard
           state={enlarged}
           setState={setEnlarged}
           {...props}
         />
-      )}
+      )} */}
     </>
   );
 }

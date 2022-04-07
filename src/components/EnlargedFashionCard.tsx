@@ -78,16 +78,16 @@ function CardDialog(props: CardDialogProps) {
   const { open, onClose } = props;
 
   var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
-  if(props.rarity.length >=30 ){
+  if(props.rarity >=30 ){
     rarityCategory = "Semi-rare";
   }
-  else if (props.rarity.length >=15 && props.rarity.length < 30){
+  else if (props.rarity >=15 && props.rarity < 30){
     rarityCategory = "Super-rare";
   }
-  else if (props.rarity.length >=5 && props.rarity.length < 15){
+  else if (props.rarity >=5 && props.rarity < 15){
     rarityCategory = "Ultra-rare";
   }
-  if(props.rarity.length < 50 ){
+  if(props.rarity < 50 ){
     rarityCategory = "Extremely-rare";
   }
 

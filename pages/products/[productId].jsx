@@ -10,7 +10,7 @@ import Link from "next/link";
 import AnimLogo from "../../src/components/AnimLogo";
 import { useRouter } from "next/router";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url) => fetch(url, {method: 'POST'}).then((res) => res.json());
 
 export default function Product() {
   const router = useRouter();

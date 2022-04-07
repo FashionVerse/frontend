@@ -40,6 +40,9 @@ import { useSnackbar } from "notistack";
 import Web3 from 'web3';
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import { ethers } from "ethers";
+import useSWR from 'swr'
+
+const fetcher  = (url) => fetch(url).then((res)=> res.json());
 
 const BlueShadowPaper = styled(Paper)(({ theme }) => ({
   boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 30.3961px -30.3961px 30.3961px rgba(149, 149, 149, 0.095), inset -30.3961px 30.3961px 30.3961px rgba(255, 255, 255, 0.095)`,
@@ -99,30 +102,57 @@ export default function Bag() {
 
   async function getItems(account) {
     const arr = [];
-    const querySnapshot = await getDocs(collection(firestore, "/cart/"+account+"/items"));
-    for (const id of querySnapshot.docs) {
-      //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
+    // const querySnapshot = await getDocs(collection(firestore, "/cart/"+account+"/items"));
+    // for (const id of querySnapshot.docs) {
+    //   //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
       
-      const item = await marketContract.methods.getItem(id.data().id).call();
-      const collectionDoc = await getDoc(doc(collection(firestore, "collections"), id.data().collection));
-      const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
-      const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
+    //   const item = await marketContract.methods.getItem(id.data().id).call();
+    //   const collectionDoc = await getDoc(doc(collection(firestore, "collections"), id.data().collection));
+    //   const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
+    //   const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
       
       
-      const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
-      const response = await fetch(nft);
+    //   const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
+    //   const response = await fetch(nft);
 
-      if(!response.ok)
-        enqueueSnackbar(response.statusText)
+    //   if(!response.ok)
+    //     enqueueSnackbar(response.statusText)
 
-      const json = await response.json()
-      const now = new Date(Date.now())
-      const date = new Date(parseInt(item.releaseTime) * 1000);
-      if(parseInt(item.available) > 0 && now > date){
-        arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}, quantity: id.data().amount})
-      }
-    }
-    console.log(arr)
+    //   const json = await response.json()
+    //   const now = new Date(Date.now())
+    //   const date = new Date(parseInt(item.releaseTime) * 1000);
+    //   if(parseInt(item.available) > 0 && now > date){
+    //     arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}, quantity: id.data().amount})
+    //   }
+    // }
+    // console.log(arr)
+    // const { data, error } = useSWR('http://localhost:6969/api/getItemsFromBag?account='+account, fetcher)
+
+    // if (error){
+
+    //   enqueueSnackbar("Failed to load drops", { variant: "error" });
+    //   console.log("Failed")
+    //   }
+    //   // const drops: GridCardProps[] = [];
+    //   if (data) {
+    //   console.log("items ",data)
+    //     // dropData.drops.forEach((item) => {
+    //     //   drops.push({
+    //     //     topLeftImage: item.gridImages[0],
+    //     //     topRightImage: item.gridImages[1],
+    //     //     bottomLeftImage: item.gridImages[2],
+    //     //     bottomRightImage: item.gridImages[3],
+    //     //     avatarSrc: item.avatarSrc,
+    //     //     title: item.title,
+    //     //     subtitle: item.subtitle,
+    //     //     id: item._id,
+    //     //     href: "drops/"+item.url,
+    //     //   });
+    //     // });
+    //   }
+
+
+
     return arr;
   }
   

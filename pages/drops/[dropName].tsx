@@ -72,15 +72,16 @@ export default function DropPage() {
   const [mounted, setMounted] = React.useState(false);
 
   const getDrop = (dropName) => {
+
     console.log('http://localhost:6969/api/getDrops?url='+dropName)
     const { data, error } = useSWR('http://localhost:6969/api/getDrops?url='+dropName, fetcher)
     return {data: data, error: error}
   }
 
-  const getItems = (dropName) =>{
-    const { data, error } = useSWR('http://localhost:6969/api/getItems?dropName='+dropName, fetcher);
-    return {data: data, error: error}
-  }
+  // const getItems = (dropName) =>{
+  //   const { data, error } = useSWR('http://localhost:6969/api/getItems?dropName='+dropName, fetcher);
+  //   return {data: data, error: error}
+  // }
 
 
 
@@ -108,14 +109,103 @@ export default function DropPage() {
     // });
   }
 
+  async function getItems(){
 
-  const {data: itemData, error: itemError} = getItems(dropName);
-  const items: FashionItemCardProps[] = [];
 
-  if(itemError){
-    enqueueSnackbar("Failed to load items", { variant: "error" });
-    console.log("Failed");
-  }
+    const items: FashionItemCardProps[] = [];
+    try {
+      const bodyItem = {
+        rarity: [],
+        brands: [],
+        price: []
+      };
+      const rarity = methods.getValues().rarity;
+      const brand = methods.getValues().brand;
+      const price = methods.getValues().price;
+
+
+      brand.map((brandItem)=>{
+        if(brandItem.selected){
+          bodyItem.brands.push(brandItem.id)
+        }
+      })
+
+      rarity.map((rarityItem)=>{
+        if(rarityItem.selected){
+          if(rarityItem.id == "123kjaasd"){
+            bodyItem.rarity.push({
+              min: 30
+            })
+          }
+          if(rarityItem.id == "asdasioqdoj"){
+            bodyItem.rarity.push({
+              min: 15,
+              max: 30
+            })
+          }
+          if(rarityItem.id == "asdaiuqas"){
+            bodyItem.rarity.push({
+              min: 5,
+              max: 15
+            })
+          }
+          if(rarityItem.id == "98ujkacc"){
+            bodyItem.rarity.push({
+              min: 0,
+              max: 5
+            })
+          }
+
+        }
+      })
+
+      price.map((priceItem)=>{
+        if(priceItem.selected){
+          if(priceItem.id == "yuvaeibask"){
+            bodyItem.price.push({
+              min: (Web3.utils.toWei("0.5", "ether"))
+            })
+          }
+          if(priceItem.id == "afhjasd"){
+            bodyItem.price.push({
+              min: (Web3.utils.toWei("0.2", "ether")),
+              max: (Web3.utils.toWei("0.5", "ether"))
+            })
+          }
+          if(priceItem.id == "oichaiu"){
+            bodyItem.price.push({
+              min: (Web3.utils.toWei("0.05", "ether")),
+              max: (Web3.utils.toWei("0.2", "ether"))
+            })
+          }
+          if(priceItem.id == "osndaok"){
+            bodyItem.price.push({
+              min: 0,
+              max: (Web3.utils.toWei("0.05", "ether"))
+            })
+          }
+
+        }
+      })
+
+      console.log(bodyItem)
+
+      
+
+
+
+    const response = await fetch('http://localhost:6969/api/getItems' ,
+    {
+      method:'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(bodyItem),}
+    )
+    const itemData = await response.json();
+
+    
 
   if(itemData){
     console.log("items", itemData)
@@ -131,8 +221,21 @@ export default function DropPage() {
         rarityCategory: "Semi-rare",
         expandable: false,
       })
+
+      
     })
   }
+} catch(e) {
+  console.log(e)
+  enqueueSnackbar("Failed to load items", { variant: "error" });
+    console.log("Failed");
+
+}
+return items;
+  }
+
+
+  
 
   
 
@@ -338,6 +441,12 @@ export default function DropPage() {
   
     
   // }, [router.isReady]);
+  function filterItems(){
+    const itemBody = body;
+
+  }
+
+
   React.useEffect(() => {
     const brands = []
     fetch('http://localhost:6969/api/getBrands')
@@ -347,7 +456,14 @@ export default function DropPage() {
       brands.push({id: brand._id, value: brand.title, selected: false})
     })
     methods.setValue('brand', brands)
+
+    getItems().then((value)=>{
+      console.log(value)
+      setItems(value);
+    })
   }).catch((e)=>{});
+
+  
   }, [router.isReady])
   
 
@@ -356,9 +472,11 @@ export default function DropPage() {
   const [name, setName] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [imageData, setImageData] = React.useState(null);
+  const [items, setItems] = React.useState(null)
 
 
-  if ((!itemData  || !dropData) || loading) {
+
+  if ((!items  || !dropData) || loading) {
 
     
 
@@ -438,17 +556,20 @@ export default function DropPage() {
                 <CheckBoxSelect formStateName="brand" label="Brand" />
                 {/* <CheckBoxSelect formStateName="collection" label="Collection" /> */}
                 <GradientButton onClick={() => {
-                  // setLoading(true);
-                  // getItems().then((items)=>{
-                  //   setItems(items);
-                  //   setLoading(false);
-                  // })
+                  setLoading(true);
+                  getItems().then((items)=>{
+                    setItems(items);
+                    setLoading(false);
+                  })
+                  
                   }}>
             <Typography variant="body1">FILTER</Typography>
           </GradientButton>
               </Stack>
             </Grid>
-            {items.length > 0 ? items.map((props) => (
+            {items.length > 0 ? items.map((props) => { 
+              console.log(props)
+              return(
               <Grid item xs={12} sm={6} md={4} key={props.id}>
                 <Box
                   sx={{
@@ -460,7 +581,7 @@ export default function DropPage() {
                   <FashionItemCard {...props} expandable />
                 </Box>
               </Grid>
-            )) : <h2 style={{display: "flex",
+            )}) : <h2 style={{display: "flex",
             alignItems: "center",
             justifyContent: "center",
             margin: "auto"}}>No Items Available</h2>}
@@ -541,7 +662,7 @@ const RARITY_DATA: Option[] = [
 ];
 
 const PRICE_DATA: Option[] = [
-  { value: "Below 0.05 ETH", id: "osndaok", selected: false },
+  { value: "Below 0.05 ETH", id: "osndaok", selected: false, },
   { value: "0.05 - 0.2 ETH", id: "oichaiu", selected: false },
   { value: "0.2 - 0.5 ETH", id: "afhjasd", selected: false },
   { value: "Above 0.5 ETH", id: "yuvaeibask", selected: false },

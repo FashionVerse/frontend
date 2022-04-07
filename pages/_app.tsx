@@ -70,9 +70,7 @@ export default function MyApp(props: any) {
   });
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-  const { width, height } = useWindowSize();
 
-  console.log(height);
 
   return (
     <CacheProvider value={emotionCache}>

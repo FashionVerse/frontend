@@ -165,7 +165,7 @@ export default function Header() {
             <Typography sx={{ fontWeight: 600 }}>Resources</Typography>
           </Link>
         </Stack>
-        <Tooltip title="Wallet Connect">
+        <Tooltip title="Connect Wallet">
           <Link href={"/wallets"} color="inherit" noLinkStyle>
           <motion.div
               // className="drops_hover_cursor"
