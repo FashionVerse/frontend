@@ -155,6 +155,7 @@ export default function Bag() {
     try{
     const response = await fetch('http://localhost:6969/api/getItemsFromBag?account='+account ,)
     const itemData = await response.json();
+    console.log(itemData)
 
     itemData.items.map((item)=>{
       arr.push({
@@ -166,7 +167,8 @@ export default function Bag() {
         rarity: item.totalSupply,
         collection: item.collection,
         expandable: false,
-        quantity: item.quantity
+        quantity: item.quantity,
+        available: item.available
       })
     })
 
@@ -185,48 +187,50 @@ export default function Bag() {
     const account = await walletInit();
     if(account !== false){
       const items = []
+      const token = []
     const amounts = []
-      if(data.length > 0){
-        const nftContract = data[0].nftContract;
-        for( const item of data){
-          items.push(item.itemId)
-          amounts.push(item.quantity)
-        }
-        console.log(nftContract)
-        console.log(items)
-        console.log(amounts)
+    console.log(data)
+      // if(data.length > 0){
+      //   const nftContract = data[0].nftContract;
+      //   for( const item of data){
+      //     items.push(item.itemId)
+      //     amounts.push(item.quantity)
+      //   }
+      //   console.log(nftContract)
+      //   console.log(items)
+      //   console.log(amounts)
 
-        const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
-        await window['ethereum'].request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x3' }], // chainId must be in hexadecimal numbers
-        });
-        const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
-        setIsLoading(true);
-        marketContract.methods.createMarketSale(nftContract, items, amounts).send({from: account, value: Web3.utils.toWei(String(totalCost),), })
-        .then(function(receipt){
-            console.log(receipt);
-            for(const item of items){
-              addDoc(collection(firestore, "purchase"), {
-                address: account,
-                item: item
-              }).then((value)=>{
-                deleteDoc(doc(firestore, "/cart/"+account+"/items", item)).then((value)=>{
-                  window.location.reload()
-                })
-              })
+      //   const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
+      //   await window['ethereum'].request({
+      //     method: 'wallet_switchEthereumChain',
+      //     params: [{ chainId: '0x3' }], // chainId must be in hexadecimal numbers
+      //   });
+      //   const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
+      //   setIsLoading(true);
+      //   marketContract.methods.createMarketSale(nftContract, items, amounts).send({from: account, value: Web3.utils.toWei(String(totalCost),), })
+      //   .then(function(receipt){
+      //       console.log(receipt);
+      //       for(const item of items){
+      //         addDoc(collection(firestore, "purchase"), {
+      //           address: account,
+      //           item: item
+      //         }).then((value)=>{
+      //           deleteDoc(doc(firestore, "/cart/"+account+"/items", item)).then((value)=>{
+      //             window.location.reload()
+      //           })
+      //         })
               
-            }
+      //       }
             
 
-        }).catch((e)=>{
-          enqueueSnackbar(e.message);
-          router.reload()
-        })
+      //   }).catch((e)=>{
+      //     enqueueSnackbar(e.message);
+      //     router.reload()
+      //   })
 
-      } else {
-        alert("Nothing to purchase");
-      }
+      // } else {
+      //   alert("Nothing to purchase");
+      // }
     }
 
     
@@ -287,13 +291,7 @@ export default function Bag() {
                         const updatedQuantity = state[idx].quantity
                         walletInit().then((account)=> {
                           if(account!==false){
-                            setDoc(doc(firestore, "/cart/"+account+"/items", rest.itemId), {
-                              id: rest.itemId,
-                              collection: rest.collection.id,
-                              amount: updatedQuantity
-                            }).catch((e)=>{
-                              enqueueSnackbar(e.message)
-                            })
+                            
                           }
                         })
                       }
@@ -318,13 +316,7 @@ export default function Bag() {
                         const updatedQuantity = state[idx].quantity
                         walletInit().then((account)=> {
                           if(account!==false){
-                            setDoc(doc(firestore, "/cart/"+account+"/items", rest.itemId), {
-                              id: rest.itemId,
-                              collection: rest.collection.id,
-                              amount: updatedQuantity
-                            }).catch((e)=>{
-                              enqueueSnackbar(e.message)
-                            })
+                            
                           }
                         })
                       }

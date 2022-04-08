@@ -95,7 +95,6 @@ export default function Viewer(props) {
           <OrbitControls
             ref={ref}
             autoRotate
-            autoRotateSpeed={4}
             enableZoom={true}
             enablePan={true}
             enableRotate={true}

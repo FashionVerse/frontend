@@ -129,7 +129,7 @@ export default function Header() {
           <Link href={"/brands"} color="inherit" hoverStyle>
             <Typography sx={{ fontWeight: 600 }}>Brands</Typography>
           </Link>
-          { !drops ?  <ListMenu items={[{}]}>
+          { !drops ?  <ListMenu items={[]}>
             <Typography
               sx={{
                 cursor: "pointer",

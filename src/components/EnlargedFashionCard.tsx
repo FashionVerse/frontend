@@ -136,7 +136,7 @@ function CardDialog(props: CardDialogProps) {
               <b>{rarityCategory}</b>
             </Typography>
             <Typography variant="caption" color="textSecondary">
-              {"No. of pieces - " + props.rarity.length}
+              {"No. of pieces - " + props.rarity}
             </Typography>
             <Typography variant="caption" color="primary">
               {props.collection.title}

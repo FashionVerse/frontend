@@ -40,10 +40,18 @@ export default function BrandPage() {
   const router = useRouter();
   const { brandId } = router.query;
 
+  const [page, setPage] = React.useState(1);
+
+  function changePage(event, value){
+    setPage(value)
+  }
+
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const { data, error } = useSWR('http://localhost:6969/api/getBrands?url='+brandId, fetcher)
+
+
+  const { data, error } = useSWR('http://localhost:6969/api/getBrands?url='+brandId+"&page="+page, fetcher)
   if (error) {
     router.replace("/404")
   }
@@ -129,6 +137,8 @@ export default function BrandPage() {
   // const [collections, setCollections] = React.useState(null);
   // const [info, setInfo] = React.useState(null);
   // const [designers, setDesigners] = React.useState(null);
+
+  
 
   if (!data) {
     // TODO: Add proper loader
@@ -279,7 +289,7 @@ export default function BrandPage() {
             margin: "auto"}}>No Items Available</h2>}
         </Grid>
         <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
-          <Pagination count={10} color="primary" size="large" />
+        <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
         </div>
       </Container>
       <Footer />

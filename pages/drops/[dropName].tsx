@@ -40,6 +40,13 @@ export default function DropPage() {
   const { dropName } = router.query;
 
   const { enqueueSnackbar } = useSnackbar();
+
+  const [page, setPage] = React.useState(1);
+
+  function changePage(event, value){
+    setPage(value)
+  }
+
   const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
   const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
 
@@ -60,8 +67,6 @@ export default function DropPage() {
   const [mounted, setMounted] = React.useState(false);
 
   const getDrop = (dropName) => {
-
-    console.log('http://localhost:6969/api/getDrops?url='+dropName)
     const { data, error } = useSWR('http://localhost:6969/api/getDrops?url='+dropName, fetcher)
     return {data: data, error: error}
   }
@@ -182,7 +187,7 @@ export default function DropPage() {
 
 
 
-    const response = await fetch('http://localhost:6969/api/getItems' ,
+    const response = await fetch('http://localhost:6969/api/getItems?&page='+page ,
     {
       method:'POST',
     headers: {
@@ -197,6 +202,7 @@ export default function DropPage() {
 
   if(itemData){
     console.log("items", itemData)
+    setItemData(itemData)
     itemData.items.map((item)=>{
       items.push({
         id: item._id,
@@ -457,6 +463,7 @@ return items;
   const [loading, setLoading] = React.useState(false);
   const [imageData, setImageData] = React.useState(null);
   const [items, setItems] = React.useState(null)
+  const [itemData, setItemData] = React.useState(null)
 
 
 
@@ -572,7 +579,7 @@ return items;
           
           </Grid>
           <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
-          <Pagination count={1} color="primary" size="large" page={1} />
+          <Pagination count={itemData.totalPages} color="primary" size="large" onChange={changePage} page={page} />
         </div>
         </Container>
         <Footer />

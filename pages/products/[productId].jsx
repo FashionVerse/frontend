@@ -234,7 +234,7 @@ export default function Product() {
                 component="div"
                 className="tw-font-light"
               >
-                <span className="tw-font-semibold">Rarity:</span> <span className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-r tw-from-pink-500 tw-via-red-500 tw-to-yellow-500">Ultra Rare</span>
+                <span className="tw-font-semibold">Rarity:</span> <span className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500">Ultra Rare</span>
               </Typography>
             <div>
               {data.available != 0 ? (

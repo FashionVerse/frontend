@@ -32,7 +32,7 @@ export interface FashionItemCardProps {
   hideAddToBag?: boolean;
   hidePrice?: boolean;
   expandable?: boolean;
-
+  available?: any
 }
 
 export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
