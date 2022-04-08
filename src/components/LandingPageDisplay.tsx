@@ -75,7 +75,7 @@ function FeaturedDisplay() {
               <Stack direction="row" gap={1}>
                 <Link href={`/products/${item._id}`}>
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   size="small"
                   color="primary"
                   startIcon={<SiEthereum />}

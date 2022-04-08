@@ -72,7 +72,7 @@ function AnimatedButton(props)
                   }
                 }
                 style={isAnimating===0? {display:"flex"}:{display:"none"}}
-                class="tw-flex tw-gap-4 tw-items-center tw-justify-center tw-py-2 tw-px-4 tw-bg-cyan-500 hover:tw-bg-cyan-600 focus:tw-ring-cyan-400 focus:tw-ring-offset-cyan-200 tw-text-white tw-w-full tw-transition tw-ease-in tw-duration-200 tw-text-center tw-text-base tw-font-semibold tw-shadow-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 tw-rounded-lg "
+                class="tw-cursor-pointer tw-flex tw-gap-4 tw-items-center tw-justify-center tw-py-2 tw-px-4 tw-bg-cyan-500 hover:tw-bg-cyan-600 focus:tw-ring-cyan-400 focus:tw-ring-offset-cyan-200 tw-text-white tw-w-full tw-transition tw-ease-in tw-duration-200 tw-text-center tw-text-base tw-font-semibold tw-shadow-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 tw-rounded-lg "
                 >
                   <AccountBalanceWalletIcon /> Add To Bag
                 </motion.button>

@@ -30,6 +30,7 @@ import {
   Firestore
 } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
+import {motion} from 'framer-motion';
 import useSWR from 'swr';
 import { FashionItemCardProps } from "../../src/components/FashionItemCard";
 import FashionItemCard from "../../src/components/FashionItemCard";
@@ -273,15 +274,16 @@ export default function BrandPage() {
               console.log(props)
               return(
               <Grid item xs={12} sm={6} md={4} key={props.id}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                  <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+          className="tw-cursor-pointer"
+        >
                   <FashionItemCard {...props} expandable />
-                </Box>
+                  </motion.div>
               </Grid>
             )}) : <h2 style={{display: "flex",
             alignItems: "center",
