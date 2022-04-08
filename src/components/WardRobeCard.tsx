@@ -11,6 +11,7 @@ export interface WardrobeCardProps {
   description: string;
   src: string;
   alt: string;
+  quantity: string;
 }
 
 const WardrobeCardContainer = styled(Card)(({ theme }) => ({
@@ -54,6 +55,9 @@ export default function WardrobeCard(props: WardrobeCardProps) {
         </Typography>
         <Typography variant="subtitle2" color="textSecondary" align="center">
           {props.description}
+        </Typography>
+        <Typography variant="subtitle2" color="textSecondary" align="center">
+          Quantity: {props.quantity}
         </Typography>
       </Box>
     </WardrobeCardContainer>

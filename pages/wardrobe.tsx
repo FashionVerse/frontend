@@ -103,7 +103,8 @@ export default function Wardrobe() {
             name: item.metadata.name,
             description: item.metadata.description,
             src: item.metadata.image,
-            alt: "image"
+            alt: "image",
+            quantity: item.amount
           })
         })
 

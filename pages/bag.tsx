@@ -21,20 +21,6 @@ import { SiEthereum } from "react-icons/si";
 import { produce } from "immer";
 import firestore from "../firebase/clientApp";
 import AnimLogo from "../src/components/AnimLogo";
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-  doc,
-  getDoc,
-  deleteDoc,
-  setDoc,
-  addDoc
-} from "@firebase/firestore";
 import { AbiItem } from 'web3-utils'
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
@@ -162,13 +148,15 @@ export default function Bag() {
         id: item._id,
         itemId: item.itemId,
         nft: item.nft.metadata,
+        tokenId: item.nft.tokenId,
         brand: item.brand,
         price: item.price,
         rarity: item.totalSupply,
         collection: item.collection,
         expandable: false,
         quantity: item.quantity,
-        available: item.available
+        available: item.available,
+        nftContract: item.nft.nftContract
       })
     })
 
@@ -189,7 +177,52 @@ export default function Bag() {
       const items = []
       const token = []
     const amounts = []
-    console.log(data)
+
+
+    try {
+      if(data.length > 0){
+        data.map((item)=>{
+          items.push(item.itemId)
+          token.push(item.tokenId)
+          amounts.push(item.quantity)
+        })
+
+        // const cost = Web3.utils.fromWei(totalCost.toString(), 'ether')
+
+        await window['ethereum'].request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x3' }], 
+            });
+               const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
+        await window['ethereum'].request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x3' }], // chainId must be in hexadecimal numbers
+        });
+
+        const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
+
+        const nftContract = data[0].nftContract
+
+        setIsLoading(true);
+
+        console.log(amounts)
+
+        const receipt = await marketContract.methods.createMarketSale(nftContract, items, token, amounts).send({from: account, value: totalCost, })
+        setIsLoading(false);    
+        console.log(receipt)
+
+        
+
+        
+      } else { 
+        alert("Nothing to purchase");
+      }
+    } catch(e) {
+      setIsLoading(false)
+      enqueueSnackbar('An error occurred');
+      console.log(e)
+          // router.reload()
+    }
       // if(data.length > 0){
       //   const nftContract = data[0].nftContract;
       //   for( const item of data){
@@ -261,7 +294,7 @@ export default function Bag() {
   const [isLoading, setIsLoading] = React.useState(false);
 
    const totalCost:any = data
-    .map((c) => Number(Web3.utils.fromWei(c.price.toString(), 'ether')) * c.quantity)
+    .map((c) => c.price* c.quantity)
     .reduce((a, b) => a + b, 0);
 
   function CheckoutCard({ quantity, ...rest }: CheckoutCardProps) {
@@ -347,11 +380,6 @@ export default function Bag() {
                 );
                 walletInit().then((account)=> {
                   if(account!==false){
-                    deleteDoc(doc(firestore, "/cart/"+account+"/items", rest.itemId)).then((value)=>{
-                      window.location.reload()
-                    }).catch((e)=>{
-                      enqueueSnackbar(e.message)
-                    })
                   }
                 })
               }}
