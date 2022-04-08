@@ -141,13 +141,20 @@ export default function Product() {
       </Head>
       <div class="tw-flex tw-flex-wrap md:tw-h-screen tw-p-10 tw-h-full tw-gap-x-10 tw-justify-center tw-items-center ">
         <div
-          class="tw-mb-4 tw-px-4 md:tw-w-1/2 tw-w-full tw-shadow-2xl tw-h-[60vh] lg:tw-h-full"
+          class="tw-mb-4 tw-px-4 md:tw-w-1/2 tw-w-full tw-shadow-2xl tw-h-[65vh] lg:tw-h-full"
           style={{
             backgroundColor: "rgba(0,0,0,0.05)",
             backdropFilter: "blur(5px)",
             borderRadius: "20px",
           }}
         >
+          <Image
+            src="/hero-circle.svg"
+            alt="..."
+            layout="fill"
+            priority
+            loading="eager"
+          />
           <Viewer width="100%" height="100%" imgLink={data.nft.metadata.image} isProduct="true">
             <Model
               link={data.nft.metadata.animation_url + "?filename=model.glb"}
@@ -167,16 +174,16 @@ export default function Product() {
               <Typography
                 variant="h3"
                 component="div"
+                color="primary"
                 gutterBottom
                 className="tw-font-bold"
               >
                 {data.nft.metadata.name}
               </Typography>
               <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 gutterBottom
                 component="div"
-                className="tw-font-light"
               >
                 {data.nft.metadata.description}
               </Typography>
@@ -193,7 +200,7 @@ export default function Product() {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
-            <div className="tw-flex tw-flex-row tw-gap-4 tw-items-center tw-pr-5">
+            <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-4 tw-items-center tw-pr-5">
             <Image src={data.brand.avatarSrc} width="40" height="40" className="tw-rounded-full"/>
             <Typography
                 variant="subtitle1"
