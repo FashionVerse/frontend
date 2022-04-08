@@ -12,11 +12,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { ethers } from "ethers";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import Footer from "../../src/components/Footer";
 
 const fetcher = (url) => fetch(url, {method: 'POST'}).then((res) => res.json());
 
 function AnimatedButton(props)
 {
+  const router = useRouter();
   async function setCart(){
     if(typeof window['ethereum'] !== 'undefined'){
       const ethereum  = window['ethereum'];
@@ -51,7 +53,7 @@ function AnimatedButton(props)
         console.log(content);
    } else {
       alert("Connect to Wallet")
-      router.replace("/");
+      router.replace("/wallets");
     }
 
     } else {
@@ -316,6 +318,9 @@ export default function Product() {
             {/* <br/> */}
           </div>
         </div>
+      </div>
+      <div className="tw-pt-[4rem] tw-pb-[4rem]">
+        <Footer />
       </div>
     </>
   );

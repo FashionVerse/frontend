@@ -18,24 +18,12 @@ import FashionItemCard, {
   FashionItemCardProps,
 } from "../../src/components/FashionItemCard";
 import CheckBoxSelect, { Option } from "../../src/components/CheckBoxSelect";
-import firestore from "../../firebase/clientApp";
 import { AbiItem } from 'web3-utils'
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-  doc,
-  getDoc
-} from "@firebase/firestore";
+import {Pagination} from "@mui/material"
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
 import { nftAbi, marketAbi, marketAddress } from "../../public/abi";
 import { styled } from "@mui/system";
-import { getClientBuildManifest } from "next/dist/client/route-loader";
 import useSWR from 'swr'
 
 const fetcher  = (url) => fetch(url).then((res)=> res.json());
@@ -583,6 +571,9 @@ return items;
             margin: "auto"}}>No Items Available</h2>}
           
           </Grid>
+          <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
+          <Pagination count={1} color="primary" size="large" page={1} />
+        </div>
         </Container>
         <Footer />
       </Container>

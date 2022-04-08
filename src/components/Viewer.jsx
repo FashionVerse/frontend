@@ -17,7 +17,7 @@ export default function Viewer(props) {
   const { progress } = useProgress()
   function Loader(){
     return(
-     <div className="tw-flex tw-items-center tw-justify-center tw-h-full tw-w-full tw-z-10 tw-scale-[2]">
+     <div className="tw-flex tw-items-center tw-justify-center tw-h-full tw-w-full tw-z-10 tw-scale-[1.5]">
       <Box>
       <CircularProgress variant="determinate" value={progress} />
       <Box
