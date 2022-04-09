@@ -113,7 +113,7 @@ export default function Bag() {
     //   }
     // }
     // console.log(arr)
-    // const { data, error } = useSWR('http://localhost:6969/api/getItemsFromBag?account='+account, fetcher)
+    // const { data, error } = useSWR(process.env.API_URL+'/api/getItemsFromBag?account='+account, fetcher)
 
     // if (error){
 
@@ -137,9 +137,9 @@ export default function Bag() {
     //     //   });
     //     // });
     //   }
-    // const items = await fetch('http://localhost:6969/api/getItemsFromBag?account='+account)
+    // const items = await fetch(process.env.API_URL+'/api/getItemsFromBag?account='+account)
     try{
-    const response = await fetch('http://localhost:6969/api/getItemsFromBag?account='+account ,)
+    const response = await fetch(process.env.API_URL+'/api/getItemsFromBag?account='+account ,)
     const itemData = await response.json();
     console.log(itemData)
 

@@ -30,7 +30,7 @@ export default function Brands() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [page, setPage] = React.useState(1);
-  const { data, error } = useSWR('http://localhost:6969/api/getBrands?page='+page, fetcher)
+  const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?page='+page, fetcher)
   if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
   const arr: GridCardProps[] = [];
   if (data) {
