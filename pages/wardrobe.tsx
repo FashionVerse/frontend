@@ -2,6 +2,8 @@ import * as React from "react";
 import Footer from "../src/components/Footer";
 import Image from "next/image";
 import AnimLogo from "../src/components/AnimLogo";
+import { SegmentedControl } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import {
   Container,
   Typography,
@@ -199,7 +201,7 @@ export default function Wardrobe() {
           <b>YOUR WARDROBE</b>
         </Typography>
 
-        <ButtonGroup
+        {/* <ButtonGroup
           variant="text"
           aria-label="outlined primary button group"
         >
@@ -243,7 +245,28 @@ export default function Wardrobe() {
             <Typography variant="body1">VIEW AVATAR</Typography>
             </motion.div>
           </Button>
-        </ButtonGroup>
+        </ButtonGroup> */}
+        {/* <MantineProvider theme={{ colorScheme: localStorage.getItem('dark-mode') === "dark"? "dark" : "light" }}> */}
+        <SegmentedControl
+          value={activePage}
+          onChange={setActivePage}
+          fullWidth
+          size="lg"
+          radius="lg"
+          color="blue"
+          transitionDuration={700}
+          transitionTimingFunction="linear"
+          data={[
+            { label: 'VIEW FASHION NFTS', value: 'nfts' },
+            { label: 'VIEW AVATAR', value: 'avatar' },
+          ]}
+          sx={() => ({
+            backgroundColor: "rgba(0,0,0,0.05)",
+            backdropFilter: "blur(5px)",
+            borderRadius: "20px"
+          })}
+        />
+        {/* </MantineProvider> */}
       </Stack>
       {activePage === "nfts" ? (
         <Grid container spacing={8} sx={{ mb: 16 }}>

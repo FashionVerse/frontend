@@ -14,6 +14,9 @@ import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
 import { AnimateSharedLayout } from 'framer-motion'
 import Header from "../src/components/Header";
+import { MantineProvider } from '@mantine/core';
+import { ColorSchemeProvider, ColorScheme } from '@mantine/core';
+
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -24,13 +27,16 @@ export const ColorModeContext = React.createContext({
 export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("dark");
+  const [colorScheme, setColorScheme] = React.useState<ColorScheme>('light');
   React.useEffect(()=>{
     setMode(localStorage.getItem('dark-mode') === "dark"? "dark" : "light");
+    setColorScheme(localStorage.getItem('dark-mode') === "dark"? "dark" : "light");
   },[]);
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setColorScheme((prevMode) => (prevMode === "light" ? "dark" : "light"));
       }
     }),
     []
@@ -79,6 +85,7 @@ export default function MyApp(props: any) {
         <title>TheFashionVerse</title>
       </Head>
       <ColorModeContext.Provider value={colorMode}>
+      <MantineProvider theme={{ colorScheme: colorScheme }}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Container
@@ -129,6 +136,7 @@ export default function MyApp(props: any) {
             </div>
           </Container>
         </ThemeProvider>
+        </MantineProvider>
       </ColorModeContext.Provider>
     </CacheProvider>
   );
