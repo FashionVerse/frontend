@@ -115,7 +115,7 @@ export default function Product() {
   );;
   console.log("Product Id ",productId);
   const { data, error } = useSWR(
-    "http://localhost:6969/api/getItems?id=" + productId,
+    process.env.API_URL+"/api/getItems?id=" + productId,
     fetcher
   );
   if (error) return <div>failed to load</div>;
