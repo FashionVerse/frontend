@@ -188,7 +188,7 @@ export default function Product() {
                 {data.nft.metadata.description}
               </Typography>
             </div>
-            <Link href={"/brands/"+data.brand._id} className="!tw-cursor-pointer">
+            <Link href={"/brands/"+data.brand.url} className="!tw-cursor-pointer">
             <motion.div
               // className="drops_hover_cursor"
               style={{

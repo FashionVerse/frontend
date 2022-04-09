@@ -324,7 +324,7 @@ export default function Index() {
         slideArray={brands.map((props) => (
           <div
             onClick={() => {
-              router.push("/brands/" + props.id);
+              router.push(props.href);
             }}
           >
             <motion.div
