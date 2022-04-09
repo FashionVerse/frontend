@@ -1,6 +1,9 @@
 import * as React from "react";
 import Footer from "../src/components/Footer";
 import Image from "next/image";
+import AnimLogo from "../src/components/AnimLogo";
+import { SegmentedControl } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import {
   Container,
   Typography,
@@ -28,11 +31,13 @@ import {
   getDoc,
   collectionGroup
 } from "@firebase/firestore";
+import { motion } from "framer-motion";
 import { AbiItem } from 'web3-utils'
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import { ethers } from 'ethers'
+import WardrobeCard from "../src/components/WardRobeCard";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -41,7 +46,7 @@ const GradientButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Wardrobe() {
-  const [activePage, setActivePage] = React.useState<"nfts" | "avatar">("nfts");
+  const [activePage, setActivePage] = React.useState("nfts");
 
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
@@ -89,39 +94,24 @@ export default function Wardrobe() {
           const arr = [];
           const ids = [];
 
-      const querySnapshot = await getDocs(query(collection(firestore, "purchase"), where("address", "==", account)));
-      for(const purchase of querySnapshot.docs){
-        const items = await getDocs(query(collectionGroup(firestore, 'item'), where("id", "==", purchase.data().item)));
-        if(items.size > 0){
-          const itemDoc = items.docs[0];
-          const collectionId = itemDoc.data().collection;
-          console.log(itemDoc.data())
-          const collectionDoc = await getDoc(doc(firestore, "collections", collectionId));
-          const brandId = collectionDoc.data().brand;
-          console.log(brandId)
-          const brand = await getDoc(doc(firestore, "brands", brandId));
-             const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
-        const item = await marketContract.methods.getItem(itemDoc.data().id).call();
-        const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
-        
-        
-        const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
-        const response = await fetch(nft);
+        const response = await fetch(process.env.API_URL+'/api/getNFTs?account='+account);
+        const items = await response.json();
 
-        if(!response.ok)
-          enqueueSnackbar(response.statusText)
+        console.log(items)
 
-        const json = await response.json()
-        if(!ids.includes(purchase.data().item)){
-          arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
-          ids.push(purchase.data().item)
-        }
-        
-        
-        } else {
-          throw "An error has occurred"
-        }
-      }
+        items.map((item)=>{
+          arr.push({
+            id: item.token_id,
+            name: item.metadata.name,
+            description: item.metadata.description,
+            src: item.metadata.image,
+            alt: "image",
+            quantity: item.amount
+          })
+        })
+
+
+      
       return arr
       // for (const id of querySnapshot.docs) {
         
@@ -193,13 +183,7 @@ export default function Wardrobe() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }
@@ -217,17 +201,72 @@ export default function Wardrobe() {
           <b>YOUR WARDROBE</b>
         </Typography>
 
-        <ButtonGroup
-          variant="contained"
+        {/* <ButtonGroup
+          variant="text"
           aria-label="outlined primary button group"
         >
-          <GradientButton onClick={() => setActivePage("nfts")}>
+          <Button 
+          onClick={() => setActivePage("nfts")}
+          >
+          <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                backgroundImage: activePage=="nfts"? "linear-gradient(90deg, #22caff, #0266c1)":"",
+                color: activePage=="nfts"? "white":"",
+                padding: "2%",
+                borderRadius: "5px",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <Typography variant="body1">VIEW FASHION NFTS</Typography>
-          </GradientButton>
-          <GradientButton onClick={() => setActivePage("avatar")}>
+            </motion.div>
+          </Button>
+          <Button 
+          onClick={() => setActivePage("avatar") }
+          >
+          <motion.div
+              // className="drops_hover_cursor
+              style = {{
+                backgroundImage: activePage=="avatar"? "linear-gradient(90deg, #22caff, #0266c1)":"",
+                color: activePage=="avatar"? "white":"",
+                padding: "5%",
+                borderRadius: "5px",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1}}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05}}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
             <Typography variant="body1">VIEW AVATAR</Typography>
-          </GradientButton>
-        </ButtonGroup>
+            </motion.div>
+          </Button>
+        </ButtonGroup> */}
+        {/* <MantineProvider theme={{ colorScheme: localStorage.getItem('dark-mode') === "dark"? "dark" : "light" }}> */}
+        <SegmentedControl
+          value={activePage}
+          onChange={setActivePage}
+          fullWidth
+          size="lg"
+          radius="lg"
+          color="blue"
+          transitionDuration={700}
+          transitionTimingFunction="linear"
+          data={[
+            { label: 'VIEW FASHION NFTS', value: 'nfts' },
+            { label: 'VIEW AVATAR', value: 'avatar' },
+          ]}
+          sx={() => ({
+            backgroundColor: "rgba(0,0,0,0.05)",
+            backdropFilter: "blur(5px)",
+            borderRadius: "20px"
+          })}
+        />
+        {/* </MantineProvider> */}
       </Stack>
       {activePage === "nfts" ? (
         <Grid container spacing={8} sx={{ mb: 16 }}>
@@ -240,7 +279,8 @@ export default function Wardrobe() {
                   justifyContent: "center",
                 }}
               >
-                <FashionItemCard {...props} hideAddToBag expandable />
+                {/* <FashionItemCard {...props} hideAddToBag expandable /> */}
+                <WardrobeCard {...props} />
               </Box>
             </Grid>
           ))}

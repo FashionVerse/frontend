@@ -20,25 +20,15 @@ import { styled } from "@mui/material/styles";
 import { SiEthereum } from "react-icons/si";
 import { produce } from "immer";
 import firestore from "../firebase/clientApp";
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-  doc,
-  getDoc,
-  deleteDoc,
-  setDoc,
-  addDoc
-} from "@firebase/firestore";
+import AnimLogo from "../src/components/AnimLogo";
 import { AbiItem } from 'web3-utils'
 import { useSnackbar } from "notistack";
 import Web3 from 'web3';
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import { ethers } from "ethers";
+import useSWR from 'swr'
+
+const fetcher  = (url) => fetch(url).then((res)=> res.json());
 
 const BlueShadowPaper = styled(Paper)(({ theme }) => ({
   boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 30.3961px -30.3961px 30.3961px rgba(149, 149, 149, 0.095), inset -30.3961px 30.3961px 30.3961px rgba(255, 255, 255, 0.095)`,
@@ -98,30 +88,85 @@ export default function Bag() {
 
   async function getItems(account) {
     const arr = [];
-    const querySnapshot = await getDocs(collection(firestore, "/cart/"+account+"/items"));
-    for (const id of querySnapshot.docs) {
-      //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
-      
-      const item = await marketContract.methods.getItem(id.data().id).call();
-      const collectionDoc = await getDoc(doc(collection(firestore, "collections"), id.data().collection));
-      const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
-      const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
-      
-      
-      const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
-      const response = await fetch(nft);
 
-      if(!response.ok)
-        enqueueSnackbar(response.statusText)
+    // const querySnapshot = await getDocs(collection(firestore, "/cart/"+account+"/items"));
+    // for (const id of querySnapshot.docs) {
+    //   //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
+      
+    //   const item = await marketContract.methods.getItem(id.data().id).call();
+    //   const collectionDoc = await getDoc(doc(collection(firestore, "collections"), id.data().collection));
+    //   const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
+    //   const contract = new web3.eth.Contract(nftAbi as AbiItem[], item.nftContract);
+      
+      
+    //   const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
+    //   const response = await fetch(nft);
 
-      const json = await response.json()
-      const now = new Date(Date.now())
-      const date = new Date(parseInt(item.releaseTime) * 1000);
-      if(parseInt(item.available) > 0 && now > date){
-        arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}, quantity: id.data().amount})
-      }
+    //   if(!response.ok)
+    //     enqueueSnackbar(response.statusText)
+
+    //   const json = await response.json()
+    //   const now = new Date(Date.now())
+    //   const date = new Date(parseInt(item.releaseTime) * 1000);
+    //   if(parseInt(item.available) > 0 && now > date){
+    //     arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}, quantity: id.data().amount})
+    //   }
+    // }
+    // console.log(arr)
+    // const { data, error } = useSWR(process.env.API_URL+'/api/getItemsFromBag?account='+account, fetcher)
+
+    // if (error){
+
+    //   enqueueSnackbar("Failed to load drops", { variant: "error" });
+    //   console.log("Failed")
+    //   }
+    //   // const drops: GridCardProps[] = [];
+    //   if (data) {
+    //   console.log("items ",data)
+    //     // dropData.drops.forEach((item) => {
+    //     //   drops.push({
+    //     //     topLeftImage: item.gridImages[0],
+    //     //     topRightImage: item.gridImages[1],
+    //     //     bottomLeftImage: item.gridImages[2],
+    //     //     bottomRightImage: item.gridImages[3],
+    //     //     avatarSrc: item.avatarSrc,
+    //     //     title: item.title,
+    //     //     subtitle: item.subtitle,
+    //     //     id: item._id,
+    //     //     href: "drops/"+item.url,
+    //     //   });
+    //     // });
+    //   }
+    // const items = await fetch(process.env.API_URL+'/api/getItemsFromBag?account='+account)
+    try{
+    const response = await fetch(process.env.API_URL+'/api/getItemsFromBag?account='+account ,)
+    const itemData = await response.json();
+    console.log(itemData)
+
+    itemData.items.map((item)=>{
+      arr.push({
+        id: item._id,
+        itemId: item.itemId,
+        nft: item.nft.metadata,
+        tokenId: item.nft.tokenId,
+        brand: item.brand,
+        price: item.price,
+        rarity: item.totalSupply,
+        collection: item.collection,
+        expandable: false,
+        quantity: item.quantity,
+        available: item.available,
+        nftContract: item.nft.nftContract
+      })
+    })
+
+    console.log(itemData)
+    } catch {
+      enqueueSnackbar("Failed to load items", { variant: "error" });
+    console.log("Failed");
     }
-    console.log(arr)
+
+
     return arr;
   }
   
@@ -130,48 +175,95 @@ export default function Bag() {
     const account = await walletInit();
     if(account !== false){
       const items = []
+      const token = []
     const amounts = []
-      if(data.length > 0){
-        const nftContract = data[0].nftContract;
-        for( const item of data){
-          items.push(item.itemId)
-          amounts.push(item.quantity)
-        }
-        console.log(nftContract)
-        console.log(items)
-        console.log(amounts)
 
-        const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
+
+    try {
+      if(data.length > 0){
+        data.map((item)=>{
+          items.push(item.itemId)
+          token.push(item.tokenId)
+          amounts.push(item.quantity)
+        })
+
+        // const cost = Web3.utils.fromWei(totalCost.toString(), 'ether')
+
+        await window['ethereum'].request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x3' }], 
+            });
+               const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
         await window['ethereum'].request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: '0x3' }], // chainId must be in hexadecimal numbers
         });
+
         const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
+
+        const nftContract = data[0].nftContract
+
         setIsLoading(true);
-        marketContract.methods.createMarketSale(nftContract, items, amounts).send({from: account, value: Web3.utils.toWei(String(totalCost),), })
-        .then(function(receipt){
-            console.log(receipt);
-            for(const item of items){
-              addDoc(collection(firestore, "purchase"), {
-                address: account,
-                item: item
-              }).then((value)=>{
-                deleteDoc(doc(firestore, "/cart/"+account+"/items", item)).then((value)=>{
-                  window.location.reload()
-                })
-              })
-              
-            }
-            
 
-        }).catch((e)=>{
-          enqueueSnackbar(e.message);
-          router.reload()
-        })
+        console.log(amounts)
 
-      } else {
+        const receipt = await marketContract.methods.createMarketSale(nftContract, items, token, amounts).send({from: account, value: totalCost, })
+        setIsLoading(false);    
+        console.log(receipt)
+
+        
+
+        
+      } else { 
         alert("Nothing to purchase");
       }
+    } catch(e) {
+      setIsLoading(false)
+      enqueueSnackbar('An error occurred');
+      console.log(e)
+          // router.reload()
+    }
+      // if(data.length > 0){
+      //   const nftContract = data[0].nftContract;
+      //   for( const item of data){
+      //     items.push(item.itemId)
+      //     amounts.push(item.quantity)
+      //   }
+      //   console.log(nftContract)
+      //   console.log(items)
+      //   console.log(amounts)
+
+      //   const web3 = window['web3'] = new Web3(window['web3'].currentProvider);
+      //   await window['ethereum'].request({
+      //     method: 'wallet_switchEthereumChain',
+      //     params: [{ chainId: '0x3' }], // chainId must be in hexadecimal numbers
+      //   });
+      //   const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
+      //   setIsLoading(true);
+      //   marketContract.methods.createMarketSale(nftContract, items, amounts).send({from: account, value: Web3.utils.toWei(String(totalCost),), })
+      //   .then(function(receipt){
+      //       console.log(receipt);
+      //       for(const item of items){
+      //         addDoc(collection(firestore, "purchase"), {
+      //           address: account,
+      //           item: item
+      //         }).then((value)=>{
+      //           deleteDoc(doc(firestore, "/cart/"+account+"/items", item)).then((value)=>{
+      //             window.location.reload()
+      //           })
+      //         })
+              
+      //       }
+            
+
+      //   }).catch((e)=>{
+      //     enqueueSnackbar(e.message);
+      //     router.reload()
+      //   })
+
+      // } else {
+      //   alert("Nothing to purchase");
+      // }
     }
 
     
@@ -202,10 +294,12 @@ export default function Bag() {
   const [isLoading, setIsLoading] = React.useState(false);
 
    const totalCost:any = data
-    .map((c) => Number(Web3.utils.fromWei(c.price, 'ether')) * c.quantity)
+    .map((c) => c.price* c.quantity)
     .reduce((a, b) => a + b, 0);
 
   function CheckoutCard({ quantity, ...rest }: CheckoutCardProps) {
+    console.log("REST")
+    console.log(rest)
 
     return (
       <Grid container gap={2}>
@@ -230,13 +324,7 @@ export default function Bag() {
                         const updatedQuantity = state[idx].quantity
                         walletInit().then((account)=> {
                           if(account!==false){
-                            setDoc(doc(firestore, "/cart/"+account+"/items", rest.itemId), {
-                              id: rest.itemId,
-                              collection: rest.collection.id,
-                              amount: updatedQuantity
-                            }).catch((e)=>{
-                              enqueueSnackbar(e.message)
-                            })
+                            
                           }
                         })
                       }
@@ -261,13 +349,7 @@ export default function Bag() {
                         const updatedQuantity = state[idx].quantity
                         walletInit().then((account)=> {
                           if(account!==false){
-                            setDoc(doc(firestore, "/cart/"+account+"/items", rest.itemId), {
-                              id: rest.itemId,
-                              collection: rest.collection.id,
-                              amount: updatedQuantity
-                            }).catch((e)=>{
-                              enqueueSnackbar(e.message)
-                            })
+                            
                           }
                         })
                       }
@@ -283,8 +365,8 @@ export default function Bag() {
               variant="h5"
               sx={{ display: "flex", alignItems: "center", gap: "4px" }}
             >
-              {Web3.utils.fromWei( String(rest.price), 'ether')}
               <SiEthereum fontSize="1.25rem" />
+              {rest.price}
             </Typography>
             <Button
               color="error"
@@ -298,11 +380,6 @@ export default function Bag() {
                 );
                 walletInit().then((account)=> {
                   if(account!==false){
-                    deleteDoc(doc(firestore, "/cart/"+account+"/items", rest.itemId)).then((value)=>{
-                      window.location.reload()
-                    }).catch((e)=>{
-                      enqueueSnackbar(e.message)
-                    })
                   }
                 })
               }}
@@ -328,13 +405,7 @@ export default function Bag() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }

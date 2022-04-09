@@ -1,5 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
+import Header from "../../src/components/Header";
+import Head from "next/head";
 import Footer from "../../src/components/Footer";
 import { Container, Grid, Box, Typography } from "@mui/material";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
@@ -7,16 +9,12 @@ import CheckBoxSelect from "../../src/components/CheckBoxSelect";
 import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
-import firestore from "../../firebase/clientApp";
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-} from "@firebase/firestore";
+import { motion } from "framer-motion";
+import AnimLogo from "../../src/components/AnimLogo";
+import {Pagination} from "@mui/material"
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Brands() {
   const methods = useForm({
@@ -25,30 +23,34 @@ export default function Brands() {
     },
   });
 
+  function changePage(event, value){
+    setPage(value)
+  }
+
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-
-  React.useEffect(() => {
-    async function getBrands() {
-      const arr: GridCardProps[] = [];
-      const querySnapshot = await getDocs(collection(firestore, "brands"));
-      querySnapshot.forEach((doc) => {
-        arr.push(doc.data() as GridCardProps);
+  const [page, setPage] = React.useState(1);
+  const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?page='+page, fetcher)
+  if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
+  const arr: GridCardProps[] = [];
+  if (data) {
+  console.log("data ",data)
+    data.brands.forEach((item) => {
+      arr.push({
+        topLeftImage: item.gridImages[0],
+        topRightImage: item.gridImages[1],
+        bottomLeftImage: item.gridImages[2],
+        bottomRightImage: item.gridImages[3],
+        avatarSrc: item.avatarSrc,
+        title: item.title,
+        subtitle: item.subtitle,
+        id: item._id,
+        href: "brands/"+item.url,
       });
-      return arr;
-    }
-    getBrands()
-      .then((value) => {
-        setBrands(value);
-      })
-      .catch((e) => {
-        enqueueSnackbar(e.message);
-      });
-  }, []);
+    });
+  }
 
-  const [brands, setBrands] = React.useState(null);
-
-  if (!brands) {
+  if (!data) {
     // TODO: Add proper loader
     return (
       <Box
@@ -61,18 +63,16 @@ export default function Brands() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }
 
   return (
+    <>
+      <Head>
+        <title>TheFashionVerse | Brands</title>
+      </Head>
     <FormProvider {...methods}>
       <Container className="brandsInner">
         <Typography
@@ -88,26 +88,40 @@ export default function Brands() {
           {/* <Grid item xs={12} sx={{ ml: 3 }}>
             <CheckBoxSelect formStateName="drops" label="Drop" />
           </Grid> */}
-          {brands.map((props) => (
+          {arr.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
+              <motion.div
+              // className="drops_hover_cursor"
+              style = {{
+                cursor: "pointer",
+              }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ ease: "easeOut", delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+            >
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onClick={() => {
-                  router.push("/brands/" + props.id);
-                }}
               >
+                
                 <GridCard {...props} />
               </Box>
+              </motion.div>
             </Grid>
           ))}
         </Grid>
+        <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
+          <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
+        </div>
         <Footer />
       </Container>
     </FormProvider>
+    </>
   );
 }
 

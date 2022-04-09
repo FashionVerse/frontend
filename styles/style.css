@@ -64,6 +64,9 @@ h1{
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
   }
+  .gradient-background {
+    background-image: linear-gradient(90deg, #22caff, #0266c1);
+  }
 }
 
 @media screen and (max-width:1000px)
@@ -135,7 +138,7 @@ h1{
 	}
 	.css-iaykeu-MuiStack-root {
 		grid-gap: 0px;
-		gap: 8px;
+		/* gap: 8px; */
 	}
 	a.active .MuiBox-root span {width:35px;}
 	.css-w968tk-MuiTypography-root {
@@ -215,3 +218,5 @@ h1{
 	.brandsInner .MuiTypography-root .css-f9kd3n-MuiTypography-root {margin-top:30px;}
 	
 }
+
+/* Test */

@@ -36,7 +36,7 @@ export default function Slider({ slideArray }: SliderProps) {
           display: "flex",
           alignItems: "center",
           position: "relative",
-          pl: "32px",
+          paddingLeft: "32px",
         }}
       >
         {loaded && instanceRef.current && (
@@ -86,7 +86,7 @@ function Arrow(props: {
         fontSize="3em"
         color="#22CAFF"
         onClick={props.onClick}
-        style={{ position: "absolute", top: "40%", left: 0 }}
+        style={{ position: "absolute", top: "40%", left: 0, cursor:"pointer" }}
       />
     );
   } else
@@ -95,7 +95,7 @@ function Arrow(props: {
         fontSize="3em"
         color="#22CAFF"
         onClick={props.onClick}
-        style={{ position: "absolute", top: "40%", right: 0 }}
+        style={{ position: "absolute", top: "40%", right: 0 ,cursor:"pointer" }}
       />
     );
 }

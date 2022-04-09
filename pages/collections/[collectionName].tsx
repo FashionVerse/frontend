@@ -1,6 +1,6 @@
 import * as React from "react";
 import Footer from "../../src/components/Footer";
-import Image from "next/image";
+import AnimLogo from "../../src/components/AnimLogo";
 import {
   Container,
   Typography,
@@ -119,13 +119,7 @@ export default function CollectionPage() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }

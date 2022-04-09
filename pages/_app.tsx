@@ -8,10 +8,15 @@ import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { Container, PaletteMode, Typography, Box } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
+import "../styles/tailwind.css";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
+import { AnimateSharedLayout } from 'framer-motion'
 import Header from "../src/components/Header";
+import { MantineProvider } from '@mantine/core';
+import { ColorSchemeProvider, ColorScheme } from '@mantine/core';
+
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -22,14 +27,24 @@ export const ColorModeContext = React.createContext({
 export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("dark");
+  const [colorScheme, setColorScheme] = React.useState<ColorScheme>('light');
+  React.useEffect(()=>{
+    setMode(localStorage.getItem('dark-mode') === "dark"? "dark" : "light");
+    setColorScheme(localStorage.getItem('dark-mode') === "dark"? "dark" : "light");
+  },[]);
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
+        setColorScheme((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      }
     }),
     []
   );
+  React.useEffect(() => {
+    // console.log("mode", mode);
+    localStorage.setItem('dark-mode', mode);
+  }, [mode]);
 
   const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
     palette: {
@@ -61,16 +76,16 @@ export default function MyApp(props: any) {
   });
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-  const { width, height } = useWindowSize();
 
-  console.log(height);
 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <title>TheFashionVerse</title>
       </Head>
       <ColorModeContext.Provider value={colorMode}>
+      <MantineProvider theme={{ colorScheme: colorScheme }}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Container
@@ -114,11 +129,14 @@ export default function MyApp(props: any) {
               <Header />
 
               <SnackbarProvider>
+              <AnimateSharedLayout>
                   <Component {...pageProps} />
+              </AnimateSharedLayout>
                 </SnackbarProvider>
             </div>
           </Container>
         </ThemeProvider>
+        </MantineProvider>
       </ColorModeContext.Provider>
     </CacheProvider>
   );

@@ -1,6 +1,8 @@
 import * as React from "react";
 import Footer from "../../src/components/Footer";
 import Image from "next/image";
+import AnimLogo from "../../src/components/AnimLogo";
+import { Pagination } from "@mui/material";
 import {
   Container,
   Typography,
@@ -28,79 +30,118 @@ import {
   Firestore
 } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
+import {motion} from 'framer-motion';
+import useSWR from 'swr';
+import { FashionItemCardProps } from "../../src/components/FashionItemCard";
+import FashionItemCard from "../../src/components/FashionItemCard";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function BrandPage() {
   const router = useRouter();
   const { brandId } = router.query;
 
+  const [page, setPage] = React.useState(1);
+
+  function changePage(event, value){
+    setPage(value)
+  }
+
 
   const { enqueueSnackbar } = useSnackbar();
 
 
-  React.useEffect(() => {
-    if(!router.isReady) return;
-    async function getCollections() {
-      const arr = [];
-      const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("brand", "==", brandId ?? "")));
-      if(querySnapshot.docs.length > 0){
+
+  const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?url='+brandId+"&page="+page, fetcher)
+  if (error) {
+    router.replace("/404")
+  }
+  const arr: FashionItemCardProps[] = [];
+  if (data) {
+  console.log("data ",data)
+    data.items.map((item) => {
+       arr.push({
+        id: item._id,
+        itemId: item.itemId,
+        nft: item.nft.metadata,
+        brand: data.brand,
+        price: item.price,
+        rarity: item.totalSupply,
+        collection: item.collection,
+        rarityCategory: "Semi-rare",
+        expandable: false,
+      });
 
       
-      querySnapshot.forEach((doc) => {
-        arr.push(doc.data());
-      });
-      return arr;
-    } else {
-      return arr;
-    }
-    }
-    getCollections()
-      .then((value) => {
-        setCollections(value);
-      })
-      .catch((e) => {
-        enqueueSnackbar(e.message);
-      });
+    })
+  }
+
+  // React.useEffect(() => {
+  //   if(!router.isReady) return;
+  //   async function getCollections() {
+  //     const arr = [];
+  //     const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("brand", "==", brandId ?? "")));
+  //     if(querySnapshot.docs.length > 0){
+
+      
+  //     querySnapshot.forEach((doc) => {
+  //       arr.push(doc.data());
+  //     });
+  //     return arr;
+  //   } else {
+  //     return arr;
+  //   }
+  //   }
+  //   getCollections()
+  //     .then((value) => {
+  //       setCollections(value);
+  //     })
+  //     .catch((e) => {
+  //       enqueueSnackbar(e.message);
+  //     });
   
-    async function getInfo() {
-      const querySnapshot = await getDoc(doc(firestore, "/brands/"+brandId));
-      if(typeof querySnapshot.data() !== 'undefined'){
-        return querySnapshot.data();
-      } else {
-        return {};
-      }
+  //   async function getInfo() {
+  //     const querySnapshot = await getDoc(doc(firestore, "/brands/"+brandId));
+  //     if(typeof querySnapshot.data() !== 'undefined'){
+  //       return querySnapshot.data();
+  //     } else {
+  //       return {};
+  //     }
       
-    }
-    getInfo()
-      .then((value) => {
-        setInfo(value);
-      })
-      .catch((e) => {
-        enqueueSnackbar(e.message);
-      });
+  //   }
+  //   getInfo()
+  //     .then((value) => {
+  //       setInfo(value);
+  //     })
+  //     .catch((e) => {
+  //       enqueueSnackbar(e.message);
+  //     });
 
-      async function getDesigners() {
-        const arr = [];
-        const querySnapshot = await getDocs(collection(firestore, "/brands/"+brandId+"/designers"));
-        querySnapshot.forEach((doc) => {
-          arr.push(doc.data());
-        });
-        return arr;
-      }
-      getDesigners()
-        .then((value) => {
-          setDesigners(value);
-        })
-        .catch((e) => {
-          enqueueSnackbar(e.message);
-        });
+  //     async function getDesigners() {
+  //       const arr = [];
+  //       const querySnapshot = await getDocs(collection(firestore, "/brands/"+brandId+"/designers"));
+  //       querySnapshot.forEach((doc) => {
+  //         arr.push(doc.data());
+  //       });
+  //       return arr;
+  //     }
+  //     getDesigners()
+  //       .then((value) => {
+  //         setDesigners(value);
+  //       })
+  //       .catch((e) => {
+  //         enqueueSnackbar(e.message);
+  //       });
     
-  }, [router.isReady]);
+  // }, [router.isReady]);
 
-  const [collections, setCollections] = React.useState(null);
-  const [info, setInfo] = React.useState(null);
-  const [designers, setDesigners] = React.useState(null);
+  // const [collections, setCollections] = React.useState(null);
+  // const [info, setInfo] = React.useState(null);
+  // const [designers, setDesigners] = React.useState(null);
 
-  if (!collections || !info || !designers) {
+  
+
+  if (!data) {
     // TODO: Add proper loader
     return (
       <Box
@@ -113,13 +154,7 @@ export default function BrandPage() {
           margin: "auto",
         }}
       >
-        <Image
-          src="/assets/loading.svg"
-          alt="Loading..."
-          layout="fixed"
-          height={150}
-          width={150}
-        />
+        <AnimLogo />
       </Box>
     );
   }
@@ -135,8 +170,8 @@ export default function BrandPage() {
         {itemData.map((item) => (
           <ImageListItem key={item.img} cols={4} rows={4}>
             <img
-              {...srcset(info.coverSrc, 400)}
-              alt={info.title}
+              {...srcset(data.brand.coverSrc, 400)}
+              alt={data.brand.title}
               loading="eager"
               style={{ objectFit: "fill" }}
             />
@@ -146,7 +181,7 @@ export default function BrandPage() {
     );
   }
 
-  console.log(info.avatarSrc)
+  console.log(data.avatarSrc)
 
   return (
     <Container maxWidth={false} disableGutters>
@@ -165,7 +200,7 @@ export default function BrandPage() {
             left: "50%",
             transform: "translate(-50%, 0)",
             overflow: "hidden",
-            backgroundImage: "url("+info.avatarSrc+")",
+            backgroundImage: "url("+data.brand.avatarSrc+")",
           }}
         />
       </Box>
@@ -178,7 +213,7 @@ export default function BrandPage() {
         >
           <b>
             {/* Should ideally be this {brand} */}
-            {info.title}
+            {data.brand.title}
           </b>
         </Typography>
         <Grid container spacing={8} sx={{ mb: 16 }}>
@@ -186,7 +221,7 @@ export default function BrandPage() {
             {/* <DividedTable {...DividerTableData} /> */}
             <Container maxWidth="md">
               <Typography sx={{ mt: 6 }} variant="h6" align="center">
-                {info.description}
+                {data.description}
               </Typography>
               <Typography
                 variant="h5"
@@ -204,7 +239,7 @@ export default function BrandPage() {
               justifyContent="center"
               alignItems="center"
             >
-              {designers.map(({ name, description }, i) => (
+              {/* {designers.map(({ name, description }, i) => (
                 <Grid item xs={12} id={name + i}>
                   <Typography gutterBottom align="center">
                     <b>{name}</b>
@@ -213,10 +248,10 @@ export default function BrandPage() {
                     {description}
                   </Typography>
                 </Grid>
-              ))}
+              ))} */}
             </Grid>
           </Grid>
-          {collections.length > 0 ? collections.map((props) => (
+          {/* {collections.length > 0 ? collections.map((props) => (
             <Grid item xs={12} sm={6} md={4} key={props.id}>
               <Box
                 sx={{
@@ -234,8 +269,30 @@ export default function BrandPage() {
           )) : <h2 style={{display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          margin: "auto"}}>No Collections Available</h2>}
+          margin: "auto"}}>No Collections Available</h2>} */}
+          {arr.length > 0 ? arr.map((props) => { 
+              console.log(props)
+              return(
+              <Grid item xs={12} sm={6} md={4} key={props.id}>
+                  <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+          className="tw-cursor-pointer"
+        >
+                  <FashionItemCard {...props} expandable />
+                  </motion.div>
+              </Grid>
+            )}) : <h2 style={{display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "auto"}}>No Items Available</h2>}
         </Grid>
+        <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
+        <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
+        </div>
       </Container>
       <Footer />
     </Container>
