@@ -16,8 +16,11 @@ const Model = (props) => {
     const blob = new Blob( [ arraybuffer ], { type: 'application/octet-stream' } );
     const link = document.body.appendChild( document.createElement( 'a' ) );
     link.href = URL.createObjectURL( blob );
-    link.textContent = "Hello World";
     link.rel="ar";
+    const img = link.appendChild(document.createElement('img'));
+    img.src="https://threejs.org/examples/files/arkit.png";
+    img.widht="100";
+    img.id="button";
     console.log(gltf.scene);
     console.log(blob)
     link.download = 'asset.usdz';
