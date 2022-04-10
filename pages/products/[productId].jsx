@@ -141,7 +141,7 @@ export default function Product() {
       </Head>
       <div class="tw-flex tw-flex-wrap md:tw-h-screen tw-p-10 tw-h-full tw-gap-x-10 tw-justify-center tw-items-center ">
         <div id="product-container"
-          class="tw-mb-4 tw-px-4 md:tw-w-1/2 tw-w-full tw-shadow-2xl tw-h-[65vh] lg:tw-h-full"
+          class="tw-relative tw-mb-4 tw-px-4 md:tw-w-1/2 tw-w-full tw-shadow-2xl tw-h-[65vh] lg:tw-h-full"
           style={{
             backgroundColor: "rgba(0,0,0,0.05)",
             backdropFilter: "blur(5px)",
