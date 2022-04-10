@@ -52,7 +52,7 @@ export default function BrandPage() {
 
 
 
-  const { data, error } = useSWR('http://localhost:6969/api/getBrands?url='+brandId+"&page="+page, fetcher)
+  const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?url='+brandId+"&page="+page, fetcher)
   if (error) {
     router.replace("/404")
   }

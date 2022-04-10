@@ -67,12 +67,12 @@ export default function DropPage() {
   const [mounted, setMounted] = React.useState(false);
 
   const getDrop = (dropName) => {
-    const { data, error } = useSWR('http://localhost:6969/api/getDrops?url='+dropName, fetcher)
+    const { data, error } = useSWR(process.env.API_URL+'/api/getDrops?url='+dropName, fetcher)
     return {data: data, error: error}
   }
 
   // const getItems = (dropName) =>{
-  //   const { data, error } = useSWR('http://localhost:6969/api/getItems?dropName='+dropName, fetcher);
+  //   const { data, error } = useSWR(process.env.API_URL+'/api/getItems?dropName='+dropName, fetcher);
   //   return {data: data, error: error}
   // }
 
@@ -187,7 +187,7 @@ export default function DropPage() {
 
 
 
-    const response = await fetch('http://localhost:6969/api/getItems?&page='+page ,
+    const response = await fetch(process.env.API_URL+'/api/getItems?&page='+page ,
     {
       method:'POST',
     headers: {
@@ -439,7 +439,7 @@ return items;
 
   React.useEffect(() => {
     const brands = []
-    fetch('http://localhost:6969/api/getBrands')
+    fetch(process.env.API_URL+'/api/getBrands')
   .then(response => response.json())
   .then(data => {
     data.brands.map((brand)=>{

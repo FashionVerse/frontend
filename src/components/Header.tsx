@@ -83,7 +83,7 @@ export default function Header() {
   // }, [])
 
   const getDrops = () => {
-    const { data, error } = useSWR('http://localhost:6969/api/getDrops', fetcher)
+    const { data, error } = useSWR(process.env.API_URL+'/api/getDrops', fetcher)
     return {data: data, error: error}
   }
 

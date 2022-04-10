@@ -35,7 +35,7 @@ function AnimatedButton(props)
     if(connected){
       const accounts = await ethereum.enable();
       const account = accounts[0];
-        const rawResponse = await fetch('http://localhost:6969/api/addItemToBag', {
+        const rawResponse = await fetch(process.env.API_URL+'/api/addItemToBag', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',

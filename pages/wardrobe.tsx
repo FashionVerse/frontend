@@ -46,7 +46,7 @@ const GradientButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function Wardrobe() {
-  const [activePage, setActivePage] = React.useState<"nfts" | "avatar">("nfts");
+  const [activePage, setActivePage] = React.useState("nfts");
 
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
@@ -94,7 +94,7 @@ export default function Wardrobe() {
           const arr = [];
           const ids = [];
 
-        const response = await fetch('http://localhost:6969/api/getNFTs?account='+account);
+        const response = await fetch(process.env.API_URL+'/api/getNFTs?account='+account);
         const items = await response.json();
 
         console.log(items)

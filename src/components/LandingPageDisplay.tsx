@@ -17,7 +17,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 function FeaturedDisplay() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [loaded, setLoaded] = useState(false);
-  const { data, error } = useSWR('http://localhost:6969/api/getFeatured', fetcher)
+  const { data, error } = useSWR(process.env.API_URL+'/api/getFeatured', fetcher)
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     loop: true,

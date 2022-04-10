@@ -54,11 +54,11 @@ export default function Index() {
   const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
 
   const getBrands = () => {
-    const { data, error } = useSWR('http://localhost:6969/api/getBrands?size=5', fetcher)
+    const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
     return {data: data, error: error}
   }
 
-  // const { data, error } = useSWR('http://localhost:6969/api/getBrands?size=5', fetcher)
+  // const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
   const {data: brandData, error: brandError} = getBrands()
   if (brandError){
 
@@ -84,11 +84,11 @@ export default function Index() {
   }
 
   const getDrops = () => {
-    const { data, error } = useSWR('http://localhost:6969/api/getDrops', fetcher)
+    const { data, error } = useSWR(process.env.API_URL+'/api/getDrops', fetcher)
     return {data: data, error: error}
   }
 
-  // const { data, error } = useSWR('http://localhost:6969/api/getBrands?size=5', fetcher)
+  // const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
   const {data: dropData, error: dropError} = getDrops()
   if (dropError){
 
@@ -115,7 +115,7 @@ export default function Index() {
 
   
 
-  // const { data, error } = useSWR('http://localhost:6969/api/getDrops', fetcher)
+  // const { data, error } = useSWR(process.env.API_URL+'/api/getDrops', fetcher)
   // if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
   // const drops: GridCardProps[] = [];
   // if (data) {
