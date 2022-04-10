@@ -158,6 +158,7 @@ export default function Product() {
           <Viewer width="100%" height="100%" imgLink={data.nft.metadata.image} isProduct="true">
             <Model
               link={data.nft.metadata.animation_url + "?filename=model.glb"}
+              imgLink={data.nft.metadata.image}
             ></Model>
           </Viewer>
         </div>
