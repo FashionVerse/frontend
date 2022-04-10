@@ -16,6 +16,7 @@ const Model = (props) => {
   link.textContent = "Hello World";
   console.log(blob)
   link.download = 'scene.usdz';
+  link.rel="ar";
   }, [])
   return(
   <>
