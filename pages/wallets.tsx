@@ -4,6 +4,8 @@ import { Container, Typography, Grid, Paper } from "@mui/material";
 import { styled } from "@mui/system";
 const ModelViewer = require('@metamask/logo');
 import { motion } from "framer-motion";
+import { NextSeo } from "next-seo";
+
 
 const StyledPaper = styled(Paper)({
   maxWidth: "340px",
@@ -53,7 +55,42 @@ export default function Wallets() {
     container.getElementsByTagName('svg')[0].style.height = '300px';
   }, []);
   return (
-    <Container>
+    <>
+    <NextSeo
+      title="Using More of Config"
+      description="This example uses more of the available config options."
+      canonical="https://www.canonical.ie/"
+      openGraph={{
+        url: 'https://www.url.ie/a',
+        title: 'Open Graph Title',
+        description: 'Open Graph Description',
+        images: [
+          {
+            url: 'https://www.example.ie/og-image-01.jpg',
+            width: 800,
+            height: 600,
+            alt: 'Og Image Alt',
+            type: 'image/jpeg',
+          },
+          {
+            url: 'https://www.example.ie/og-image-02.jpg',
+            width: 900,
+            height: 800,
+            alt: 'Og Image Alt Second',
+            type: 'image/jpeg',
+          },
+          { url: 'https://www.example.ie/og-image-03.jpg' },
+          { url: 'https://www.example.ie/og-image-04.jpg' },
+        ],
+        site_name: 'SiteName',
+      }}
+      twitter={{
+        handle: '@handle',
+        site: '@site',
+        cardType: 'summary_large_image',
+      }}
+    />
+        <Container>
       {/* <Header /> */}
       <Typography
         variant="h3"
@@ -92,6 +129,7 @@ export default function Wallets() {
       </Grid>
       <Footer />
     </Container>
+    </>
   );
 }
 

@@ -18,15 +18,16 @@ import FashionItemCard, {
   FashionItemCardProps,
 } from "../../src/components/FashionItemCard";
 import CheckBoxSelect, { Option } from "../../src/components/CheckBoxSelect";
-import { AbiItem } from 'web3-utils'
-import {Pagination} from "@mui/material"
+import { AbiItem } from "web3-utils";
+import { Pagination } from "@mui/material";
 import { useSnackbar } from "notistack";
-import Web3 from 'web3';
+import Web3 from "web3";
 import { nftAbi, marketAbi, marketAddress } from "../../public/abi";
 import { styled } from "@mui/system";
-import useSWR from 'swr'
+import useSWR from "swr";
+import { NextSeo } from "next-seo";
 
-const fetcher  = (url) => fetch(url).then((res)=> res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function DropPage() {
   const router = useRouter();
@@ -43,12 +44,19 @@ export default function DropPage() {
 
   const [page, setPage] = React.useState(1);
 
-  function changePage(event, value){
-    setPage(value)
+  function changePage(event, value) {
+    setPage(value);
   }
 
-  const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
-  const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
+  const web3 = new Web3(
+    new Web3.providers.HttpProvider(
+      "https://ropsten.infura.io/v3/" + process.env.INFURA_API_KEY
+    )
+  );
+  const marketContract = new web3.eth.Contract(
+    marketAbi as AbiItem[],
+    marketAddress
+  );
 
   const GradientButton = styled(Button)(({ theme }) => ({
     background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -56,37 +64,37 @@ export default function DropPage() {
     padding: "12px 18px",
   }));
 
-  function checkSelected(arr){
-    for(const item of arr) {
-      if(item.selected == true){
+  function checkSelected(arr) {
+    for (const item of arr) {
+      if (item.selected == true) {
         return true;
       }
-    } 
+    }
     return false;
   }
   const [mounted, setMounted] = React.useState(false);
 
   const getDrop = (dropName) => {
-    const { data, error } = useSWR(process.env.API_URL+'/api/getDrops?url='+dropName, fetcher)
-    return {data: data, error: error}
-  }
+    const { data, error } = useSWR(
+      process.env.API_URL + "/api/getDrops?url=" + dropName,
+      fetcher
+    );
+    return { data: data, error: error };
+  };
 
   // const getItems = (dropName) =>{
   //   const { data, error } = useSWR(process.env.API_URL+'/api/getItems?dropName='+dropName, fetcher);
   //   return {data: data, error: error}
   // }
 
-
-
-  const {data: dropData, error: dropError} = getDrop(dropName);
-  if (dropError){
-
-  enqueueSnackbar("Failed to load drops", { variant: "error" });
-  console.log("Failed")
+  const { data: dropData, error: dropError } = getDrop(dropName);
+  if (dropError) {
+    enqueueSnackbar("Failed to load drops", { variant: "error" });
+    console.log("Failed");
   }
   // const drops: GridCardProps[] = [];
   if (dropData) {
-  console.log("drops ",dropData)
+    console.log("drops ", dropData);
     // dropData.drops.forEach((item) => {
     //   drops.push({
     //     topLeftImage: item.gridImages[0],
@@ -102,148 +110,127 @@ export default function DropPage() {
     // });
   }
 
-  async function getItems(){
-
-
+  async function getItems() {
     const items: FashionItemCardProps[] = [];
     try {
       const bodyItem = {
         rarity: [],
         brands: [],
-        price: []
+        price: [],
       };
       const rarity = methods.getValues().rarity;
       const brand = methods.getValues().brand;
       const price = methods.getValues().price;
 
-
-      brand.map((brandItem)=>{
-        if(brandItem.selected){
-          bodyItem.brands.push(brandItem.id)
+      brand.map((brandItem) => {
+        if (brandItem.selected) {
+          bodyItem.brands.push(brandItem.id);
         }
-      })
+      });
 
-      rarity.map((rarityItem)=>{
-        if(rarityItem.selected){
-          if(rarityItem.id == "123kjaasd"){
+      rarity.map((rarityItem) => {
+        if (rarityItem.selected) {
+          if (rarityItem.id == "123kjaasd") {
             bodyItem.rarity.push({
-              min: 30
-            })
+              min: 30,
+            });
           }
-          if(rarityItem.id == "asdasioqdoj"){
+          if (rarityItem.id == "asdasioqdoj") {
             bodyItem.rarity.push({
               min: 15,
-              max: 30
-            })
+              max: 30,
+            });
           }
-          if(rarityItem.id == "asdaiuqas"){
+          if (rarityItem.id == "asdaiuqas") {
             bodyItem.rarity.push({
               min: 5,
-              max: 15
-            })
+              max: 15,
+            });
           }
-          if(rarityItem.id == "98ujkacc"){
+          if (rarityItem.id == "98ujkacc") {
             bodyItem.rarity.push({
               min: 0,
-              max: 5
-            })
+              max: 5,
+            });
           }
-
         }
-      })
+      });
 
-      price.map((priceItem)=>{
-        if(priceItem.selected){
-          if(priceItem.id == "yuvaeibask"){
+      price.map((priceItem) => {
+        if (priceItem.selected) {
+          if (priceItem.id == "yuvaeibask") {
             bodyItem.price.push({
-              min: (Web3.utils.toWei("0.5", "ether"))
-            })
+              min: Web3.utils.toWei("0.5", "ether"),
+            });
           }
-          if(priceItem.id == "afhjasd"){
+          if (priceItem.id == "afhjasd") {
             bodyItem.price.push({
-              min: (Web3.utils.toWei("0.2", "ether")),
-              max: (Web3.utils.toWei("0.5", "ether"))
-            })
+              min: Web3.utils.toWei("0.2", "ether"),
+              max: Web3.utils.toWei("0.5", "ether"),
+            });
           }
-          if(priceItem.id == "oichaiu"){
+          if (priceItem.id == "oichaiu") {
             bodyItem.price.push({
-              min: (Web3.utils.toWei("0.05", "ether")),
-              max: (Web3.utils.toWei("0.2", "ether"))
-            })
+              min: Web3.utils.toWei("0.05", "ether"),
+              max: Web3.utils.toWei("0.2", "ether"),
+            });
           }
-          if(priceItem.id == "osndaok"){
+          if (priceItem.id == "osndaok") {
             bodyItem.price.push({
               min: 0,
-              max: (Web3.utils.toWei("0.05", "ether"))
-            })
+              max: Web3.utils.toWei("0.05", "ether"),
+            });
           }
-
         }
-      })
+      });
 
-      console.log(bodyItem)
+      console.log(bodyItem);
 
-      
+      const response = await fetch(
+        process.env.API_URL + "/api/getItems?&page=" + page,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bodyItem),
+        }
+      );
+      const itemData = await response.json();
 
-
-
-    const response = await fetch(process.env.API_URL+'/api/getItems?&page='+page ,
-    {
-      method:'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(bodyItem),}
-    )
-    const itemData = await response.json();
-
-    
-
-  if(itemData){
-    console.log("items", itemData)
-    setItemData(itemData)
-    itemData.items.map((item)=>{
-      items.push({
-        id: item._id,
-        itemId: item.itemId,
-        nft: item.nft.metadata,
-        brand: item.brand,
-        price: item.price,
-        rarity: item.totalSupply,
-        collection: item.collection,
-        rarityCategory: "Semi-rare",
-        expandable: false,
-      })
-
-      
-    })
-  }
-} catch(e) {
-  console.log(e)
-  enqueueSnackbar("Failed to load items", { variant: "error" });
-    console.log("Failed");
-
-}
-return items;
+      if (itemData) {
+        console.log("items", itemData);
+        setItemData(itemData);
+        itemData.items.map((item) => {
+          items.push({
+            id: item._id,
+            itemId: item.itemId,
+            nft: item.nft.metadata,
+            brand: item.brand,
+            price: item.price,
+            rarity: item.totalSupply,
+            collection: item.collection,
+            rarityCategory: "Semi-rare",
+            expandable: false,
+          });
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      enqueueSnackbar("Failed to load items", { variant: "error" });
+      console.log("Failed");
+    }
+    return items;
   }
 
-
-  
-
-  
-
-
-
-  
   // async function getItems() {
   //   const arr = [];
   //   const drop = await getDocs(query(collection(firestore, "drop"), where("id", "==", dropName)));
   //   if(drop.docs.length > 0){
   //   const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("drop", "==", drop.docs[0].id)));
   //   for (const id of querySnapshot.docs) {
-  
-      
+
   //     const items = await getDocs(collection(firestore, "/collections/"+id.id+"/item"))
   //     for(const item of items.docs){
   //       const itemContract = await marketContract.methods.getItem(item.data().id).call();
@@ -274,21 +261,21 @@ return items;
   //             if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.05", "ether")) && parseInt(itemContract.price) <= parseInt(Web3.utils.toWei("0.2", "ether"))){
   //               console.log(itemContract);
   //               priceCheck = true;
-  //             } 
+  //             }
   //           }
 
   //           if(priceVal.id == "afhjasd" && priceVal.selected){
   //             if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.2", "ether")) && parseInt(itemContract.price) <= parseInt(Web3.utils.toWei("0.5", "ether"))){
   //               console.log(itemContract);
   //               priceCheck = true;
-  //             } 
+  //             }
   //           }
 
   //           if(priceVal.id == "yuvaeibask" && priceVal.selected){
   //             if(parseInt(itemContract.price) > parseInt(Web3.utils.toWei("0.5", "ether"))){
   //               console.log(itemContract);
   //               priceCheck = true;
-  //             } 
+  //             }
   //           }
   //         }
 
@@ -297,7 +284,7 @@ return items;
   //         } else {
   //           add = false;
   //         }
-  //       } 
+  //       }
 
   //       if(checkSelected(methods.getValues().brand)){
   //         var brandCheck = false;
@@ -358,7 +345,6 @@ return items;
   //         arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...id.data()}})
   //       }
   //     }
-        
 
   //     }
   //   }
@@ -367,7 +353,6 @@ return items;
   // }
   //   return arr;
   // }
-
 
   // React.useEffect(() => {
   //   if(!router.isReady) return;
@@ -378,7 +363,6 @@ return items;
   //       return drop.docs[0].data().images;
   //     }
   //   }
-    
 
   //   async function getBrands(){
   //     const arr = [];
@@ -397,8 +381,6 @@ return items;
   //     router.replace("/404")
   //   }
   //   }
-
-    
 
   //   getItems()
   //     .then((value) => {
@@ -420,57 +402,46 @@ return items;
   //           }
   //         })
   //         methods.setValue('brand', brands)
-  
+
   //       })
   //       })
-        
+
   //     })
-       
+
   //     })
   //     .catch((e) => {
   //       enqueueSnackbar(e.message);
   //     });
 
-      
-  
-    
   // }, [router.isReady]);
 
-
   React.useEffect(() => {
-    const brands = []
-    fetch(process.env.API_URL+'/api/getBrands')
-  .then(response => response.json())
-  .then(data => {
-    data.brands.map((brand)=>{
-      brands.push({id: brand._id, value: brand.title, selected: false})
-    })
-    methods.setValue('brand', brands)
+    const brands = [];
+    fetch(process.env.API_URL + "/api/getBrands")
+      .then((response) => response.json())
+      .then((data) => {
+        data.brands.map((brand) => {
+          brands.push({ id: brand._id, value: brand.title, selected: false });
+        });
+        methods.setValue("brand", brands);
 
-    getItems().then((value)=>{
-      console.log(value)
-      setItems(value);
-    })
-  }).catch((e)=>{});
-
-  
-  }, [router.isReady])
-  
+        getItems().then((value) => {
+          console.log(value);
+          setItems(value);
+        });
+      })
+      .catch((e) => {});
+  }, [router.isReady]);
 
   // const [items, setItems] = React.useState(null);
   // const [brands, setBrands] = React.useState(null);
   const [name, setName] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [imageData, setImageData] = React.useState(null);
-  const [items, setItems] = React.useState(null)
-  const [itemData, setItemData] = React.useState(null)
+  const [items, setItems] = React.useState(null);
+  const [itemData, setItemData] = React.useState(null);
 
-
-
-  if ((!items  || !dropData) || loading) {
-
-    
-
+  if (!items || !dropData || loading) {
     // TODO: Add proper loader
     return (
       <Box
@@ -488,38 +459,67 @@ return items;
     );
   }
 
-
-
   function ImageGallery() {
-    if(!dropData){
-      return <div></div>
-    
-        } else {
-          return (
-            <ImageList
-              sx={{ width: "100%", height: "100%" }}
-              variant="quilted"
-              cols={4}
-              rowHeight={180}
-              gap={0}
-            >
-              {
-              dropData.images.map((item, index) => (
-                <ImageListItem key={index} cols={1} rows={1}>
-                  <img {...srcset(item, 180)} alt="image" loading="eager" />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          );
-        }
+    if (!dropData) {
+      return <div></div>;
+    } else {
+      return (
+        <ImageList
+          sx={{ width: "100%", height: "100%" }}
+          variant="quilted"
+          cols={4}
+          rowHeight={180}
+          gap={0}
+        >
+          {dropData.images.map((item, index) => (
+            <ImageListItem key={index} cols={1} rows={1}>
+              <img {...srcset(item, 180)} alt="image" loading="eager" />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      );
+    }
   }
 
   return (
+    <>
+    <NextSeo
+      title="Using More of Config"
+      description="This example uses more of the available config options."
+      canonical="https://www.canonical.ie/"
+      openGraph={{
+        url: 'https://www.url.ie/a',
+        title: 'Open Graph Title',
+        description: 'Open Graph Description',
+        images: [
+          {
+            url: 'https://www.example.ie/og-image-01.jpg',
+            width: 800,
+            height: 600,
+            alt: 'Og Image Alt',
+            type: 'image/jpeg',
+          },
+          {
+            url: 'https://www.example.ie/og-image-02.jpg',
+            width: 900,
+            height: 800,
+            alt: 'Og Image Alt Second',
+            type: 'image/jpeg',
+          },
+          { url: 'https://www.example.ie/og-image-03.jpg' },
+          { url: 'https://www.example.ie/og-image-04.jpg' },
+        ],
+        site_name: 'SiteName',
+      }}
+      twitter={{
+        handle: '@handle',
+        site: '@site',
+        cardType: 'summary_large_image',
+      }}
+    />
     <FormProvider {...methods}>
-      <Container  className="dropsContainer" maxWidth={false} disableGutters>
-        <Container>
-          {/* <Header /> */}
-        </Container>
+      <Container className="dropsContainer" maxWidth={false} disableGutters>
+        <Container>{/* <Header /> */}</Container>
         <Box sx={{ mt: 6, mb: 3 }}>
           <ImageGallery />
         </Box>
@@ -546,45 +546,63 @@ return items;
                 <div style={{ flexGrow: 1 }} />
                 <CheckBoxSelect formStateName="brand" label="Brand" />
                 {/* <CheckBoxSelect formStateName="collection" label="Collection" /> */}
-                <GradientButton onClick={() => {
-                  setLoading(true);
-                  getItems().then((items)=>{
-                    setItems(items);
-                    setLoading(false);
-                  })
-                  
-                  }}>
-            <Typography variant="body1">FILTER</Typography>
-          </GradientButton>
-              </Stack>
-            </Grid>
-            {items.length > 0 ? items.map((props) => { 
-              console.log(props)
-              return(
-              <Grid item xs={12} sm={6} md={4} key={props.id}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                <GradientButton
+                  onClick={() => {
+                    setLoading(true);
+                    getItems().then((items) => {
+                      setItems(items);
+                      setLoading(false);
+                    });
                   }}
                 >
-                  <FashionItemCard {...props} expandable />
-                </Box>
-              </Grid>
-            )}) : <h2 style={{display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "auto"}}>No Items Available</h2>}
-          
+                  <Typography variant="body1">FILTER</Typography>
+                </GradientButton>
+              </Stack>
+            </Grid>
+            {items.length > 0 ? (
+              items.map((props) => {
+                console.log(props);
+                return (
+                  <Grid item xs={12} sm={6} md={4} key={props.id}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <FashionItemCard {...props} expandable />
+                    </Box>
+                  </Grid>
+                );
+              })
+            ) : (
+              <h2
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "auto",
+                }}
+              >
+                No Items Available
+              </h2>
+            )}
           </Grid>
           <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
-          <Pagination count={itemData.totalPages} color="primary" size="large" onChange={changePage} page={page} />
-        </div>
+            <Pagination
+              count={itemData.totalPages}
+              color="primary"
+              size="large"
+              onChange={changePage}
+              page={page}
+            />
+          </div>
         </Container>
         <Footer />
       </Container>
     </FormProvider>
+    </>
   );
 }
 
@@ -656,7 +674,7 @@ const RARITY_DATA: Option[] = [
 ];
 
 const PRICE_DATA: Option[] = [
-  { value: "Below 0.05 ETH", id: "osndaok", selected: false, },
+  { value: "Below 0.05 ETH", id: "osndaok", selected: false },
   { value: "0.05 - 0.2 ETH", id: "oichaiu", selected: false },
   { value: "0.2 - 0.5 ETH", id: "afhjasd", selected: false },
   { value: "Above 0.5 ETH", id: "yuvaeibask", selected: false },

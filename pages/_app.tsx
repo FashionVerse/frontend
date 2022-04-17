@@ -12,11 +12,12 @@ import "../styles/tailwind.css";
 import "../styles/style.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
-import { AnimateSharedLayout } from 'framer-motion'
+import { AnimateSharedLayout } from "framer-motion";
 import Header from "../src/components/Header";
-import { MantineProvider } from '@mantine/core';
-import { ColorSchemeProvider, ColorScheme } from '@mantine/core';
-
+import { MantineProvider } from "@mantine/core";
+import { ColorSchemeProvider, ColorScheme } from "@mantine/core";
+import { DefaultSeo } from "next-seo";
+import SEO from '../next-seo.config';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -27,23 +28,25 @@ export const ColorModeContext = React.createContext({
 export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("dark");
-  const [colorScheme, setColorScheme] = React.useState<ColorScheme>('light');
-  React.useEffect(()=>{
-    setMode(localStorage.getItem('dark-mode') === "dark"? "dark" : "light");
-    setColorScheme(localStorage.getItem('dark-mode') === "dark"? "dark" : "light");
-  },[]);
+  const [colorScheme, setColorScheme] = React.useState<ColorScheme>("light");
+  React.useEffect(() => {
+    setMode(localStorage.getItem("dark-mode") === "dark" ? "dark" : "light");
+    setColorScheme(
+      localStorage.getItem("dark-mode") === "dark" ? "dark" : "light"
+    );
+  }, []);
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
         setColorScheme((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      }
+      },
     }),
     []
   );
   React.useEffect(() => {
     // console.log("mode", mode);
-    localStorage.setItem('dark-mode', mode);
+    localStorage.setItem("dark-mode", mode);
   }, [mode]);
 
   const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
@@ -77,7 +80,6 @@ export default function MyApp(props: any) {
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
-
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -85,27 +87,27 @@ export default function MyApp(props: any) {
         <title>TheFashionVerse</title>
       </Head>
       <ColorModeContext.Provider value={colorMode}>
-      <MantineProvider theme={{ colorScheme: colorScheme }}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Container
-            maxWidth={false}
-            disableGutters
-            sx={{
-              backgroundImage:
-                mode === "dark"
-                  ? "#121212"
-                  : "linear-gradient(to right, #eeeeee, #ffffff)",
-            }}
-          >
-            <div
-              className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
-              style={{
-                marginTop: "-24px",
-                paddingTop: "24px",
+        <MantineProvider theme={{ colorScheme: colorScheme }}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Container
+              maxWidth={false}
+              disableGutters
+              sx={{
+                backgroundImage:
+                  mode === "dark"
+                    ? "#121212"
+                    : "linear-gradient(to right, #eeeeee, #ffffff)",
               }}
             >
-              {/* {!width || width > 999 ? (
+              <div
+                className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
+                style={{
+                  marginTop: "-24px",
+                  paddingTop: "24px",
+                }}
+              >
+                {/* {!width || width > 999 ? (
                 <SnackbarProvider>
                   <Component {...pageProps} />
                 </SnackbarProvider>
@@ -126,16 +128,17 @@ export default function MyApp(props: any) {
                   </Typography>
                 </Box>
               )} */}
-              <Header />
+                <Header />
 
-              <SnackbarProvider>
-              <AnimateSharedLayout>
-                  <Component {...pageProps} />
-              </AnimateSharedLayout>
+                <SnackbarProvider>
+                  <AnimateSharedLayout>
+                    <DefaultSeo {...SEO} />
+                    <Component {...pageProps} />
+                  </AnimateSharedLayout>
                 </SnackbarProvider>
-            </div>
-          </Container>
-        </ThemeProvider>
+              </div>
+            </Container>
+          </ThemeProvider>
         </MantineProvider>
       </ColorModeContext.Provider>
     </CacheProvider>

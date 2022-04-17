@@ -13,6 +13,8 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import Footer from "../../src/components/Footer";
+import { NextSeo } from "next-seo";
+
 
 const fetcher = (url) => fetch(url, {method: 'POST'}).then((res) => res.json());
 
@@ -136,12 +138,46 @@ export default function Product() {
   console.log("data fetched",data);
   return (
     <>
+    <NextSeo
+      title="Using More of Config"
+      description="This example uses more of the available config options."
+      canonical="https://www.canonical.ie/"
+      openGraph={{
+        url: 'https://www.url.ie/a',
+        title: 'Open Graph Title',
+        description: 'Open Graph Description',
+        images: [
+          {
+            url: 'https://www.example.ie/og-image-01.jpg',
+            width: 800,
+            height: 600,
+            alt: 'Og Image Alt',
+            type: 'image/jpeg',
+          },
+          {
+            url: 'https://www.example.ie/og-image-02.jpg',
+            width: 900,
+            height: 800,
+            alt: 'Og Image Alt Second',
+            type: 'image/jpeg',
+          },
+          { url: 'https://www.example.ie/og-image-03.jpg' },
+          { url: 'https://www.example.ie/og-image-04.jpg' },
+        ],
+        site_name: 'SiteName',
+      }}
+      twitter={{
+        handle: '@handle',
+        site: '@site',
+        cardType: 'summary_large_image',
+      }}
+    />
       <Head>
         <title>Product</title>
       </Head>
       <div class="tw-flex tw-flex-wrap md:tw-h-screen tw-p-10 tw-h-full tw-gap-x-10 tw-justify-center tw-items-center ">
         <div id="product-container"
-          class="tw-mb-4 tw-px-4 md:tw-w-1/2 tw-w-full tw-shadow-2xl tw-h-[65vh] lg:tw-h-full"
+          class="tw-mb-4 tw-px-4 md:tw-w-1/2 tw-w-full tw-shadow-2xl tw-h-[65vh] lg:tw-h-full tw-shadow-white/50"
           style={{
             backgroundColor: "rgba(0,0,0,0.05)",
             backdropFilter: "blur(5px)",
@@ -163,7 +199,7 @@ export default function Product() {
           </Viewer>
         </div>
         <div
-          class="tw-my-4 tw-p-6 md:tw-w-1/3 tw-w-full tw-shadow-2xl tw-space-y-7 tw-text-center md:tw-text-justify "
+          class="tw-my-4 tw-p-6 md:tw-w-1/3 tw-w-full tw-shadow-xl tw-space-y-7 tw-text-center md:tw-text-justify  "
           style={{
             backgroundColor: "rgba(0,0,0,0.05)",
             backdropFilter: "blur(5px)",
