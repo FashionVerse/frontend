@@ -35,9 +35,9 @@ export type GridCardProps = {
 
 const GridCardContainer = styled(Paper)(({ theme }) => ({
   width: "100%",
-  maxWidth: "300px",
-  borderRadius: "18px",
-  padding: "12px",
+  maxWidth: "403px",
+  borderRadius: "24px",
+  padding: "26px",
   paddingBottom: "0px",
   background:
     theme.palette.mode === "dark"
@@ -71,8 +71,8 @@ const GridCard = (props: GridCardProps) => {
       onClick={() => (props.href ? router.push(props.href) : null)}
     >
       <Stack justifyContent={"space-between"}>
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
+        <Grid container spacing={2}>
+          <Grid item md={6}>
             <Box
               sx={{
                 width: "100%",
@@ -92,7 +92,7 @@ const GridCard = (props: GridCardProps) => {
               />
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item md={6}>
             <Box
               sx={{
                 width: "100%",
@@ -112,7 +112,7 @@ const GridCard = (props: GridCardProps) => {
               />
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item md={6}>
             <Box
               sx={{
                 width: "100%",
@@ -132,7 +132,7 @@ const GridCard = (props: GridCardProps) => {
               />
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item md={6}>
             <Box
               sx={{
                 width: "100%",
@@ -153,21 +153,21 @@ const GridCard = (props: GridCardProps) => {
             </Box>
           </Grid>
         </Grid>
-        <List sx={{ width: "100%", maxWidth: 360, pl: props.noBrand ? 1 : 0 }}>
+        <List className="bottom-info" sx={{  pl: props.noBrand ? 1 : 0 }}>
           <ListItem disablePadding>
             {!props.noBrand && (
               <ListItemAvatar>
-                <Avatar src={avatarSrc} />
+                <Avatar src={avatarSrc}  sx={{ width: 61, height: 61 }} />
               </ListItemAvatar>
             )}
             <ListItemText
               primary={title}
               secondary={subtitle}
-              primaryTypographyProps={{ variant: "h6", fontWeight: 600 }}
+              primaryTypographyProps={{ variant: "h6", fontWeight: 700 }}
               secondaryTypographyProps={{
                 variant: "caption",
                 color: mode === "dark" ? "primary" : "secondary",
-                mt: -0.8,
+                // mt: -0.8,
               }}
             />
           </ListItem>

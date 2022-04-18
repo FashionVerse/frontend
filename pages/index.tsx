@@ -21,9 +21,10 @@ import { BsDiscord, BsMedium, BsTwitter } from "react-icons/bs";
 import { styled } from "@mui/system";
 import AdvisorCard, { AdvisorCardProps } from "../src/components/AdvisorCard";
 import firestore from "../firebase/clientApp";
-import { AbiItem } from 'web3-utils'
+import { AbiItem } from "web3-utils";
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
-import Web3 from 'web3';
+import Web3 from "web3";
+import Typewriter from "typewriter-effect";
 // import {
 //   collection,
 //   QueryDocumentSnapshot,
@@ -36,7 +37,7 @@ import Web3 from 'web3';
 //   doc
 // } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
-import useSWR from 'swr'
+import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -50,24 +51,33 @@ export default function Index() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
-  const web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/'+process.env.INFURA_API_KEY));
-  const marketContract = new web3.eth.Contract(marketAbi as AbiItem[], marketAddress);
+  const web3 = new Web3(
+    new Web3.providers.HttpProvider(
+      "https://ropsten.infura.io/v3/" + process.env.INFURA_API_KEY
+    )
+  );
+  const marketContract = new web3.eth.Contract(
+    marketAbi as AbiItem[],
+    marketAddress
+  );
 
   const getBrands = () => {
-    const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
-    return {data: data, error: error}
-  }
+    const { data, error } = useSWR(
+      process.env.API_URL + "/api/getBrands?size=5",
+      fetcher
+    );
+    return { data: data, error: error };
+  };
 
   // const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
-  const {data: brandData, error: brandError} = getBrands()
-  if (brandError){
-
-  enqueueSnackbar("Failed to load brands", { variant: "error" });
-  console.log("Failed")
+  const { data: brandData, error: brandError } = getBrands();
+  if (brandError) {
+    enqueueSnackbar("Failed to load brands", { variant: "error" });
+    console.log("Failed");
   }
   const brands: GridCardProps[] = [];
   if (brandData) {
-  console.log("data ",brandData)
+    console.log("data ", brandData);
     brandData.brands.forEach((item) => {
       brands.push({
         topLeftImage: item.gridImages[0],
@@ -78,26 +88,28 @@ export default function Index() {
         title: item.title,
         subtitle: item.subtitle,
         id: item._id,
-        href: "brands/"+item.url,
+        href: "brands/" + item.url,
       });
     });
   }
 
   const getDrops = () => {
-    const { data, error } = useSWR(process.env.API_URL+'/api/getDrops', fetcher)
-    return {data: data, error: error}
-  }
+    const { data, error } = useSWR(
+      process.env.API_URL + "/api/getDrops",
+      fetcher
+    );
+    return { data: data, error: error };
+  };
 
   // const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
-  const {data: dropData, error: dropError} = getDrops()
-  if (dropError){
-
-  enqueueSnackbar("Failed to load drops", { variant: "error" });
-  console.log("Failed")
+  const { data: dropData, error: dropError } = getDrops();
+  if (dropError) {
+    enqueueSnackbar("Failed to load drops", { variant: "error" });
+    console.log("Failed");
   }
   const drops: GridCardProps[] = [];
   if (dropData) {
-  console.log("drops ",dropData)
+    console.log("drops ", dropData);
     dropData.drops.forEach((item) => {
       drops.push({
         topLeftImage: item.gridImages[0],
@@ -108,12 +120,10 @@ export default function Index() {
         title: item.title,
         subtitle: item.subtitle,
         id: item._id,
-        href: "drops/"+item.url,
+        href: "drops/" + item.url,
       });
     });
   }
-
-  
 
   // const { data, error } = useSWR(process.env.API_URL+'/api/getDrops', fetcher)
   // if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
@@ -161,7 +171,7 @@ export default function Index() {
 
   //     const json = await response.json()
   //     arr.push({...itemContract, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
-      
+
   //     }
   //     return arr
   //   }
@@ -184,7 +194,7 @@ export default function Index() {
 
   // const [brands, setBrands] = React.useState<GridCardProps[] | null>(null);
 
-  if (!brandData  || !dropData) {
+  if (!brandData || !dropData) {
     // TODO: Add proper loader
     return (
       <Box
@@ -203,186 +213,247 @@ export default function Index() {
   }
 
   return (
-    <Container>
-      {/* <Header /> */}
-      {/* Hero */}
-      <Stack
-        alignItems="center"
-        justifyContent="center"
+    <Container className="wrapper home-page" maxWidth={false}>
+      {/* First Fold */}
+      <Grid
+        container
+        spacing={2}
         direction="row"
-        sx={{ mt: 10, gap: 6 }}
+        justifyContent="center"
+        alignItems="center"
+        className="custom-container first-fold"
       >
-        <div>
-          <Typography variant="h3">
+        <Grid item md={6}>
+          <Box>
+            <Typography variant="h1" className="main-heading">
+              <Typography
+                variant="h1"
+                color="primary"
+                component="span"
+                className="gradient-text"
+              >
+                GENESIS
+              </Typography>
+              <i>COLLECTION</i>
+            </Typography>
+            <Typography
+              sx={{ mt: 3 }}
+              variant="subtitle1"
+              className="sub-heading"
+              align="center"
+            >
+              {/* Build your First Digital <br /> Wardrobe */}
+              <Typewriter
+                options={{
+                  strings: ["  Build Your First Digital <br /> Wardrobe."],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item md={6}>
+          <Box
+            className="myNewBox"
+            // sx={{
+            //   aspectRatio: "1/1",
+            // }}
+          >
+            {/* <Image
+              src="/hero-circle.svg"
+              alt="..."
+              priority
+              loading="eager"
+              layout="responsive"
+              width="740px"
+              height="740px"
+            /> */}
+            <LandingPageDisplay expandable />
+          </Box>
+        </Grid>
+      </Grid>
+
+      {/* Drops */}
+      <Grid
+        container
+        spacing={0}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        className="custom-container second-fold section-spacing common-fold"
+      >
+        <Grid item xs={12}>
+          <span className="divider"></span>
+          <Box>
+            <Typography
+              variant="h2"
+              className="secondary-heading"
+              sx={{ mt: 10, mb: 10 }}
+            >
+              <Typography
+                variant="h2"
+                color="primary"
+                component="span"
+                className="gradient-text"
+              >
+                LATEST
+              </Typography>
+              <i>DROPS</i>
+            </Typography>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Slider
+            slideArray={drops.map((props) => (
+              // Hard coded link to drop
+              <motion.div
+                // className="drops_hover_cursor"
+                style={{
+                  cursor: "pointer",
+                }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ ease: "easeOut", delay: 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+              >
+                <GridCard {...props} noBrand key={props.id} href={props.href} />
+              </motion.div>
+            ))}
+          />
+        </Grid>
+      </Grid>
+      {/* Brands */}
+
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        className="custom-container section-spacing third-fold common-fold"
+      >
+        <Grid item xs={12}>
+          <span className="divider"></span>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography
+              variant="h2"
+              className="secondary-heading"
+              sx={{ mt: 10, mb: 10 }}
+            >
+               OUR PARTNER&nbsp;
+              <Typography
+                variant="h2"
+                color="primary"
+                component="span"
+                className="gradient-text"
+              >
+                     <b>BRANDS</b>
+              </Typography>
+        
+            </Typography>
+            <GradientButton
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+              startIcon={<BiRocket />}
+              href="/brands"
+            >
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                Explore All
+              </Typography>
+            </GradientButton>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Slider
+            slideArray={brands.map((props) => (
+              <div
+                onClick={() => {
+                  router.push(props.href);
+                }}
+              >
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <GridCard {...props} key={props.id + "-ahsdkh"} />
+                </motion.div>
+              </div>
+            ))}
+          />
+        </Grid>
+      </Grid>
+      {/* Advisors */}
+      <Grid
+        container
+        spacing={2}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        className="custom-container"
+      >
+        <Grid item xs={12}>
+          <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
+            OUR&nbsp;
             <Typography
               variant="h3"
-              sx={{ fontWeight: 700 }}
               color="primary"
               component="span"
               className="gradient-text"
             >
-              GENESIS
+              <b>ADVISORS</b>
             </Typography>
-            <i>COLLECTION</i>
           </Typography>
-          <Typography
-            sx={{ mt: 3, fontSize: "2.5rem" }}
-            variant="h4"
-            align="center"
-          >
-            Build your First Digital <br /> Wardrobe
-          </Typography>
-        </div>
-        <Box className="myNewBox"
-          sx={{
-            width: "50%",
-            minWidth: "300px",
-            maxWidth: "540px",
-            aspectRatio: "1/1",
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            src="/hero-circle.svg"
-            alt="..."
-            layout="fill"
-            priority
-            loading="eager"
-          />
-          <LandingPageDisplay expandable />
-        </Box>
-      </Stack>
-      {/* Drops */}
-      <Typography className="firstHead" variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
-        <Typography
-          variant="h3"
-          color="primary"
-          component="span"
-          className="gradient-text"
-        >
-          <b>LATEST</b>
-        </Typography>
-        DROPS
-      </Typography>
-      <Slider
-        slideArray={drops.map((props) => (
-          // Hard coded link to drop
-          <motion.div
-              // className="drops_hover_cursor"
-              style = {{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-            <GridCard
-              {...props}
-              noBrand
-              key={props.id}
-              href={props.href}
-            />
-          </motion.div>
-        ))}
-      />
-      {/* Brands */}
-      <Stack
-        justifyContent="space-between"
-        alignItems="center"
-        direction={"row"}
-        sx={{ margin: "128px 64px 64px" }}
-      >
-        <Typography variant="h3">
-          OUR PARTNER&nbsp;
-          <Typography
-            variant="h3"
-            color="primary"
-            component="span"
-            className="gradient-text"
-          >
-            <b>BRANDS</b>
-          </Typography>
-        </Typography>
-        <GradientButton
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
-          startIcon={<BiRocket />}
-          href="/brands"
-        >
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            Explore All
-          </Typography>
-        </GradientButton>
-      </Stack>
-      <Slider
-        slideArray={brands.map((props) => (
-          <div
-            onClick={() => {
-              router.push(props.href);
-            }}
-          >
-            <motion.div
-              // className="drops_hover_cursor"
-              style = {{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-              <GridCard {...props} key={props.id + "-ahsdkh"} />
-            </motion.div>
-          </div>
-        ))}
-      />
-      {/* Advisors */}
-      <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
-        OUR&nbsp;
-        <Typography
-          variant="h3"
-          color="primary"
-          component="span"
-          className="gradient-text"
-        >
-          <b>ADVISORS</b>
-        </Typography>
-      </Typography>
-      <Grid container spacing={12}>
-        {ADVISORS.map((props) => (
-          <Grid
-            key={props.id}
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <motion.div
-              // className="drops_hover_cursor"
-              style = {{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-            <AdvisorCard {...props} />
-            </motion.div>
+        </Grid>
+        <Grid item xs={12}>
+          <Grid container spacing={12}>
+            {ADVISORS.map((props) => (
+              <Grid
+                key={props.id}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <AdvisorCard {...props} />
+                </motion.div>
+              </Grid>
+            ))}
           </Grid>
-        ))}
+        </Grid>
       </Grid>
       {/* Community */}
-      <Typography className="CommunityHead" variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
+      <Typography
+        className="CommunityHead"
+        variant="h3"
+        align="center"
+        sx={{ mt: 16, mb: 10 }}
+      >
         <Typography
           variant="h3"
           color="primary"

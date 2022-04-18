@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { Box } from "@mui/material";
+import { motion } from "framer-motion";
 
 type SliderProps = {
   slideArray: any[];
@@ -30,16 +31,26 @@ export default function Slider({ slideArray }: SliderProps) {
   });
 
   return (
-    <Box sx={{ position: "relative" }}>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          position: "relative",
-          paddingLeft: "32px",
-        }}
-      >
-        {loaded && instanceRef.current && (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        position: "relative",
+        // paddingLeft: "32px",
+      }}
+    >
+      {loaded && instanceRef.current && (
+        <motion.div
+          // className="drops_hover_cursor"
+          style={{
+            cursor: "pointer",
+          }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+        >
           <Arrow
             left
             onClick={(e: any) =>
@@ -47,19 +58,30 @@ export default function Slider({ slideArray }: SliderProps) {
             }
             disabled={currentSlide === 0}
           />
-        )}
-        <div
-          ref={sliderRef}
-          className="keen-slider"
-          style={{ margin: "0px 16px" }}
+        </motion.div>
+      )}
+      <div ref={sliderRef} className="keen-slider">
+        {slideArray.map((slideContent) => (
+          <Box
+            className="keen-slider__slide"
+            // sx={{ padding: "0px 12px" }}
+          >
+            {slideContent}
+          </Box>
+        ))}
+      </div>
+      {loaded && instanceRef.current && (
+        <motion.div
+          // className="drops_hover_cursor"
+          style={{
+            cursor: "pointer",
+          }}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeOut", delay: 0.1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
         >
-          {slideArray.map((slideContent) => (
-            <Box className="keen-slider__slide" sx={{ padding: "0px 12px" }}>
-              {slideContent}
-            </Box>
-          ))}
-        </div>
-        {loaded && instanceRef.current && (
           <Arrow
             onClick={(e: any) =>
               e.stopPropagation() || instanceRef.current?.next()
@@ -69,8 +91,8 @@ export default function Slider({ slideArray }: SliderProps) {
               instanceRef.current.track.details.slides.length - 1
             }
           />
-        )}
-      </Box>
+        </motion.div>
+      )}
     </Box>
   );
 }
@@ -83,19 +105,19 @@ function Arrow(props: {
   if (props.left) {
     return (
       <BsArrowLeftCircle
-        fontSize="3em"
+        fontSize="2em"
         color="#22CAFF"
         onClick={props.onClick}
-        style={{ position: "absolute", top: "40%", left: 0, cursor:"pointer" }}
+        // style={{ position: "absolute", top: "40%", left: 0, cursor:"pointer" }}
       />
     );
   } else
     return (
       <BsArrowRightCircle
-        fontSize="3em"
+        fontSize="2em"
         color="#22CAFF"
         onClick={props.onClick}
-        style={{ position: "absolute", top: "40%", right: 0 ,cursor:"pointer" }}
+        // style={{ position: "absolute", top: "40%", right: 0 ,cursor:"pointer" }}
       />
     );
 }

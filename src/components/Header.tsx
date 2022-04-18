@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Stack, styled, Typography } from "@mui/material";
+import { Container, Stack, styled, Typography } from "@mui/material";
 import { ColorModeContext } from "../../pages/_app";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 import {
   BsBrightnessHigh,
   BsMoonStars,
@@ -15,7 +15,7 @@ import Logo from "./Logo";
 import Link from "./Link";
 import Tooltip from "@mui/material/Tooltip";
 import ListMenu from "./ListMenu";
-import useSWR from 'swr'
+import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -28,15 +28,9 @@ const NavIconButton = styled(IconButton)(({ theme }) => ({
   filter: `drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))`,
 }));
 
-
-
-
-
 export default function Header() {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
-
-  
 
   // React.useEffect(() => {
   //   if(typeof window['ethereum'] !== 'undefined'){
@@ -44,12 +38,12 @@ export default function Header() {
   // if (ethereum) {
   //     var provider = new ethers.providers.Web3Provider(ethereum);
   // }
-  
+
   // const isMetaMaskConnected = async () => {
   //   const accounts = await provider.listAccounts();
   //   return accounts.length > 0;
   // }
-  
+
   // const  getAccount = async () => {
   //   const connected = await isMetaMaskConnected();
   //   if(connected){
@@ -58,8 +52,6 @@ export default function Header() {
   //   }
   // }
 
-  
-  
   // ethereum.on('accountsChanged', function (accounts) {
   //   getAccount();
   // })
@@ -79,78 +71,106 @@ export default function Header() {
   //     setDrops(value);
 
   //   })
-    
+
   // }, [])
 
   const getDrops = () => {
-    const { data, error } = useSWR(process.env.API_URL+'/api/getDrops', fetcher)
-    return {data: data, error: error}
-  }
+    const { data, error } = useSWR(
+      process.env.API_URL + "/api/getDrops",
+      fetcher
+    );
+    return { data: data, error: error };
+  };
 
-  const {data: dropData, error: dropError} = getDrops()
-  
+  const { data: dropData, error: dropError } = getDrops();
+
   const drops = [];
   if (dropData) {
-  console.log("drops ",dropData)
+    console.log("drops ", dropData);
     dropData.drops.forEach((drop) => {
-      drops.push({id: drop._id, label: drop.title, href: "/drops/"+drop.url});
+      drops.push({
+        id: drop._id,
+        label: drop.title,
+        href: "/drops/" + drop.url,
+      });
     });
   }
 
   // const [drops, setDrops] = React.useState(null);
+  const [stickyHeader, setStickyHeader] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", () =>
+      setStickyHeader(window.pageYOffset > 100)
+      );
+    }
+  }, []);
 
-  
   return (
-    <Stack direction="row" alignItems="center" sx={{ mt: 3, }} style={{margin: 24}}>
-      <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
-        {theme.palette.mode === "dark" ? <BsBrightnessHigh /> : <BsMoonStars />}
-      </IconButton>
-      <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 0.1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-        >
-      <Logo size="40px" withText>
-        <Typography sx={{ ml: "8px" }} variant="h4">
-          <strong>FASHION</strong>VERSE
-        </Typography>
-      </Logo>
-      </motion.div>
-      <div className="blankDiv" style={{ flexGrow: 1 }} />
-      <Stack direction="row" gap={3} alignItems={"center"}>
+    <header className={`header ${stickyHeader ? "stick-header" : ""}`}>
+      <Container className="custom-container" maxWidth={false}>
         <Stack
+          className="inner-container"
           direction="row"
-          gap={6}
-          alignItems={"center"}
-          sx={{ mr: 4, fontSize: "1.2rem" }}
+          alignItems="center"
         >
-          <Link href={"/brands"} color="inherit" hoverStyle>
-            <Typography sx={{ fontWeight: 600 }}>Brands</Typography>
-          </Link>
-          { !drops ?  <ListMenu items={[]}>
-            <Typography
-              sx={{
-                cursor: "pointer",
-                ":hover": { transform: "scale(1.125)" },
-                fontWeight: 600,
-              }}
+          <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
+            {theme.palette.mode === "dark" ? (
+              <BsBrightnessHigh />
+            ) : (
+              <BsMoonStars />
+            )}
+          </IconButton>
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ ease: "easeOut", delay: 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+          >
+            <Logo size="70px" withText>
+              <Typography fontWeight={300} sx={{ ml: "8px" }} variant="h4">
+                <strong>FASHION</strong>VERSE
+              </Typography>
+            </Logo>
+          </motion.div>
+          <div className="blankDiv" style={{ flexGrow: 1 }} />
+          <Stack direction="row" gap={3} alignItems={"center"}>
+            <Stack
+              direction="row"
+              gap={6}
+              alignItems={"center"}
+              sx={{ mr: 4, fontSize: "1.2rem" }}
             >
-              Drops
-            </Typography>
-          </ListMenu> : <ListMenu items={drops}>
-            <Typography
-              sx={{
-                cursor: "pointer",
-                ":hover": { transform: "scale(1.125)" },
-                fontWeight: 600,
-              }}
-            >
-              Drops
-            </Typography>
-          </ListMenu> }
-          {/* <ListMenu items={drops}>
+              <Link href={"/brands"} color="inherit" hoverStyle>
+                <Typography sx={{ fontWeight: 600 }}>Brands</Typography>
+              </Link>
+              {!drops ? (
+                <ListMenu items={[]}>
+                  <Typography
+                    sx={{
+                      cursor: "pointer",
+                      ":hover": { transform: "scale(1.125)" },
+                      fontWeight: 600,
+                    }}
+                  >
+                    Drops
+                  </Typography>
+                </ListMenu>
+              ) : (
+                <ListMenu items={drops}>
+                  <Typography
+                    sx={{
+                      cursor: "pointer",
+                      ":hover": { transform: "scale(1.125)" },
+                      fontWeight: 600,
+                    }}
+                  >
+                    Drops
+                  </Typography>
+                </ListMenu>
+              )}
+              {/* <ListMenu items={drops}>
             <Typography
               sx={{
                 cursor: "pointer",
@@ -161,69 +181,71 @@ export default function Header() {
               Drops
             </Typography>
           </ListMenu> */}
-          <Link href={"/resources"} color="inherit" hoverStyle>
-            <Typography sx={{ fontWeight: 600 }}>Resources</Typography>
-          </Link>
+              <Link href={"/resources"} color="inherit" hoverStyle>
+                <Typography sx={{ fontWeight: 600 }}>Resources</Typography>
+              </Link>
+            </Stack>
+            <Tooltip title="Connect Wallet">
+              <Link href={"/wallets"} color="inherit" noLinkStyle>
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.25 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <NavIconButton sx={{ ml: "16px" }} size="small">
+                    <BsWallet />
+                  </NavIconButton>
+                </motion.div>
+              </Link>
+            </Tooltip>
+            <Tooltip title="Digital Wardrobe">
+              <Link href={"/wardrobe"} color="inherit" noLinkStyle>
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.25 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <NavIconButton size="small">
+                    <BsDoorOpen />
+                  </NavIconButton>
+                </motion.div>
+              </Link>
+            </Tooltip>
+            <Tooltip title="Shopping Cart">
+              <Link href={"/bag"} color="inherit" noLinkStyle>
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.25 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <NavIconButton size="small">
+                    <BsHandbag />
+                  </NavIconButton>
+                </motion.div>
+              </Link>
+            </Tooltip>
+          </Stack>
         </Stack>
-        <Tooltip title="Connect Wallet">
-          <Link href={"/wallets"} color="inherit" noLinkStyle>
-          <motion.div
-              // className="drops_hover_cursor"
-              style={{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.25 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-            <NavIconButton sx={{ ml: "16px" }} size="small">
-              <BsWallet />
-            </NavIconButton>
-            </motion.div>
-          </Link>
-        </Tooltip>
-        <Tooltip title="Digital Wardrobe">
-          <Link href={"/wardrobe"} color="inherit" noLinkStyle>
-          <motion.div
-              // className="drops_hover_cursor"
-              style={{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.25 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-            <NavIconButton size="small">
-              <BsDoorOpen />
-            </NavIconButton>
-            </motion.div>
-          </Link>
-        </Tooltip>
-        <Tooltip title="Shopping Cart">
-          <Link href={"/bag"} color="inherit" noLinkStyle>
-          <motion.div
-              // className="drops_hover_cursor"
-              style={{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.25 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-            <NavIconButton size="small">
-              <BsHandbag />
-            </NavIconButton>
-            </motion.div>
-          </Link>
-        </Tooltip>
-      </Stack>
-    </Stack>
+      </Container>
+    </header>
   );
 }
 
