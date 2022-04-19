@@ -22,7 +22,7 @@ export default function Resources() {
   return (
     <>
       <Head>
-        <title>TheFashionVerse | Resources</title>
+        <title>The FashionVerse | Resources</title>
         </Head>
         <NextSeo
       title="Using More of Config"
@@ -143,7 +143,7 @@ const RESOURCE_INFO = [
   },
   {
     id: "ajaskas",
-    buttonText: "GENESIS COLLECTION",
+    buttonText: "Genesis Collection",
     href: "https://docs.google.com/document/d/1s9yWrtnbdsu-LX0KZ5ledULVFwHYWxQOslSxiLtoJiQ/edit",
     description: "Browse through the details of our genesis collection",
   },

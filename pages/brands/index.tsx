@@ -106,7 +106,7 @@ export default function Brands() {
       }}
     />
       <Head>
-        <title>TheFashionVerse | Brands</title>
+        <title>The FashionVerse | Brands</title>
       </Head>
     <FormProvider {...methods}>
       <Container className="brandsInner">

@@ -206,7 +206,7 @@ export default function Index() {
   return (
     <>
     <NextSeo
-      title="FashionVerse"
+      title="The FashionVerse"
       description="This example uses more of the available config options."
       canonical="https://www.canonical.ie/"
       openGraph={{
@@ -446,7 +446,7 @@ export default function Index() {
         </IconButton>
         <IconButton
           size="large"
-          href="https://discord.gg/SPmtYrBq"
+          href="https://discord.gg/thefashionverse"
           target="_blank"
         >
           <BsDiscord fontSize={"2em"} color="#738ADB" />
