@@ -16,6 +16,13 @@ import Link from "./Link";
 import Tooltip from "@mui/material/Tooltip";
 import ListMenu from "./ListMenu";
 import useSWR from "swr";
+import Image from "next/image";
+import wallet from "../../public/wallet.svg";
+import wardrobe from "../../public/wardrobe.svg";
+import cart from "../../public/shopping-cart.svg";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch, { SwitchProps } from "@mui/material/Switch";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -31,6 +38,53 @@ const NavIconButton = styled(IconButton)(({ theme }) => ({
 export default function Header() {
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
+  const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+    width: 62,
+    height: 34,
+    padding: 7,
+    "& .MuiSwitch-switchBase": {
+      margin: 1,
+      padding: 0,
+      transform: "translateX(6px)",
+      "&.Mui-checked": {
+        color: "#fff",
+        transform: "translateX(22px)",
+        "& .MuiSwitch-thumb:before": {
+          backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
+            "#fff"
+          )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`,
+        },
+        "& + .MuiSwitch-track": {
+          opacity: 1,
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+        },
+      },
+    },
+    "& .MuiSwitch-thumb": {
+      backgroundColor: theme.palette.mode === "dark" ? "#22CAFF" : "#fff",
+      width: 32,
+      height: 32,
+      "&:before": {
+        content: "''",
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        left: 0,
+        top: 0,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
+          "#22CAFF"
+        )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
+      },
+    },
+    "& .MuiSwitch-track": {
+      opacity: 1,
+      backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+      borderRadius: 20 / 2,
+    },
+  }));
 
   // React.useEffect(() => {
   //   if(typeof window['ethereum'] !== 'undefined'){
@@ -101,7 +155,7 @@ export default function Header() {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () =>
-      setStickyHeader(window.pageYOffset > 100)
+        setStickyHeader(window.pageYOffset > 100)
       );
     }
   }, []);
@@ -109,18 +163,15 @@ export default function Header() {
   return (
     <header className={`header ${stickyHeader ? "stick-header" : ""}`}>
       <Container className="custom-container" maxWidth={false}>
-        <Stack
-          className="inner-container"
-          direction="row"
-          alignItems="center"
-        >
-          <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
+        <Stack className="inner-container" direction="row" alignItems="center">
+          {/* <IconButton onClick={colorMode.toggleColorMode} sx={{ mr: 6 }}>
             {theme.palette.mode === "dark" ? (
               <BsBrightnessHigh />
             ) : (
               <BsMoonStars />
             )}
-          </IconButton>
+          </IconButton> */}
+
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -129,7 +180,11 @@ export default function Header() {
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
           >
             <Logo size="70px" withText>
-              <Typography fontWeight={300} sx={{ ml: "8px" }} variant="h4">
+              <Typography
+                fontWeight={300}
+                sx={{ ml: "8px", letterSpacing: 3 }}
+                variant="h4"
+              >
                 <strong>FASHION</strong>VERSE
               </Typography>
             </Logo>
@@ -199,7 +254,13 @@ export default function Header() {
                   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                 >
                   <NavIconButton sx={{ ml: "16px" }} size="small">
-                    <BsWallet />
+                    {/* <BsWallet /> */}
+                    <Image
+                      src={wallet}
+                      alt="wallet"
+                      width="29px"
+                      height="29px"
+                    />
                   </NavIconButton>
                 </motion.div>
               </Link>
@@ -218,7 +279,13 @@ export default function Header() {
                   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                 >
                   <NavIconButton size="small">
-                    <BsDoorOpen />
+                    {/* <BsDoorOpen /> */}
+                    <Image
+                      src={wardrobe}
+                      alt="wardrobe"
+                      width="29px"
+                      height="29px"
+                    />
                   </NavIconButton>
                 </motion.div>
               </Link>
@@ -237,11 +304,28 @@ export default function Header() {
                   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                 >
                   <NavIconButton size="small">
-                    <BsHandbag />
+                    {/* <BsHandbag /> */}
+                    <Image src={cart} alt="cart" width="29px" height="30px" />
                   </NavIconButton>
                 </motion.div>
               </Link>
             </Tooltip>
+            <FormGroup>
+              {/* <FormControlLabel
+                onClick={colorMode.toggleColorMode}
+                control={<Switch defaultChecked />}
+                label="Dark Mode"
+                sx={{ position: "fixed" }}
+              /> */}
+              <FormControlLabel
+                onChange={() => {
+                  colorMode.toggleColorMode();
+                }}
+                control={<MaterialUISwitch/>}
+                label=""
+                checked={theme.palette.mode === "dark"}
+              />
+            </FormGroup>
           </Stack>
         </Stack>
       </Container>

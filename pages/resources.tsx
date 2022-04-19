@@ -13,6 +13,7 @@ const GradientButton = styled(Button)(({ theme }) => ({
   minWidth: "220px",
 }));
 
+
 const BlueShadowPaper = styled(Paper)(({ theme }) => ({
   boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 50.3961px -50.3961px 50.3961px rgba(149, 149, 149, 0.095), inset -50.3961px 50.3961px 50.3961px rgba(255, 255, 255, 0.095)`,
   background: theme.palette.mode === "dark" ? "#121212" : "#FFF",
@@ -70,6 +71,7 @@ export default function Resources() {
         <b>RESOURCES</b>
       </Typography>
       <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
+
         {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
           <Grid item xs={12} sm={12} md={5} key={id}>
             <motion.div

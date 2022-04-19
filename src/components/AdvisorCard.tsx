@@ -15,7 +15,8 @@ export interface AdvisorCardProps {
 }
 
 const AdvisorCardContainer = styled(Card)(({ theme }) => ({
-  maxWidth: "375px",
+  // maxWidth: "375px",
+  width: "100%",
   background:
     theme.palette.mode === "dark"
       ? `rgba( 255, 255, 255, 0.2 )`
@@ -30,13 +31,16 @@ export default function AdvisorCard(props: AdvisorCardProps) {
     palette: { mode },
   } = useTheme();
   return (
-    <AdvisorCardContainer>
+    <AdvisorCardContainer className="custom-card">
+      <figure>
       <CardMedia
         component="img"
-        height="200"
+        height="300"
         image={props.src}
+        
         alt={props.alt}
       />
+      </figure>
       <CardContent>
         <Typography variant="h5" sx={{ fontWeight: 600 }} component="div">
           {props.name}

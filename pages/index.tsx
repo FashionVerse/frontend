@@ -215,88 +215,88 @@ export default function Index() {
 
   return (
     <>
-    <NextSeo
-    title="The FashionVerse"
-    description="This example uses more of the available config options."
-    canonical="https://www.canonical.ie/"
-    openGraph={{
-      url: 'https://www.url.ie/a',
-      title: 'Open Graph Title',
-      description: 'Open Graph Description',
-      images: [
-        {
-          url: 'https://www.example.ie/og-image-01.jpg',
-          width: 800,
-          height: 600,
-          alt: 'Og Image Alt',
-          type: 'image/jpeg',
-        },
-        {
-          url: 'https://www.example.ie/og-image-02.jpg',
-          width: 900,
-          height: 800,
-          alt: 'Og Image Alt Second',
-          type: 'image/jpeg',
-        },
-        { url: 'https://www.example.ie/og-image-03.jpg' },
-        { url: 'https://www.example.ie/og-image-04.jpg' },
-      ],
-      site_name: 'SiteName',
-    }}
-    twitter={{
-      handle: '@handle',
-      site: '@site',
-      cardType: 'summary_large_image',
-    }}
-  />
-    <Container className="wrapper home-page" maxWidth={false}>
-      {/* First Fold */}
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        className="custom-container first-fold"
-      >
-        <Grid item md={6}>
-          <Box>
-            <Typography variant="h1" className="main-heading">
-              <Typography
-                variant="h1"
-                color="primary"
-                component="span"
-                className="gradient-text"
-              >
-                GENESIS
+      <NextSeo
+        title="The FashionVerse"
+        description="This example uses more of the available config options."
+        canonical="https://www.canonical.ie/"
+        openGraph={{
+          url: "https://www.url.ie/a",
+          title: "Open Graph Title",
+          description: "Open Graph Description",
+          images: [
+            {
+              url: "https://www.example.ie/og-image-01.jpg",
+              width: 800,
+              height: 600,
+              alt: "Og Image Alt",
+              type: "image/jpeg",
+            },
+            {
+              url: "https://www.example.ie/og-image-02.jpg",
+              width: 900,
+              height: 800,
+              alt: "Og Image Alt Second",
+              type: "image/jpeg",
+            },
+            { url: "https://www.example.ie/og-image-03.jpg" },
+            { url: "https://www.example.ie/og-image-04.jpg" },
+          ],
+          site_name: "SiteName",
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
+      <Container className="wrapper home-page common-wrapper" maxWidth={false}>
+        {/* First Fold */}
+        <Grid
+          container
+          spacing={2}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container first-fold"
+        >
+          <Grid item md={6}>
+            <Box>
+              <Typography variant="h1" className="main-heading">
+                <Typography
+                  variant="h1"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  GENESIS
+                </Typography>
+                <i>COLLECTION</i>
               </Typography>
-              <i>COLLECTION</i>
-            </Typography>
-            <Typography
-              sx={{ mt: 3 }}
-              variant="subtitle1"
-              className="sub-heading"
-              align="center"
+              <Typography
+                sx={{ mt: 3 }}
+                variant="subtitle1"
+                className="sub-heading"
+                align="center"
+              >
+                {/* Build your First Digital <br /> Wardrobe */}
+                <Typewriter
+                  options={{
+                    strings: ["  Build Your First Digital <br /> Wardrobe."],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item md={6}>
+            <Box
+              className="myNewBox"
+              // sx={{
+              //   aspectRatio: "1/1",
+              // }}
             >
-              {/* Build your First Digital <br /> Wardrobe */}
-              <Typewriter
-                options={{
-                  strings: ["  Build Your First Digital <br /> Wardrobe."],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item md={6}>
-          <Box
-            className="myNewBox"
-            // sx={{
-            //   aspectRatio: "1/1",
-            // }}
-          >
-            {/* <Image
+              {/* <Image
               src="/hero-circle.svg"
               alt="..."
               priority
@@ -305,233 +305,257 @@ export default function Index() {
               width="740px"
               height="740px"
             /> */}
-            <LandingPageDisplay expandable />
-          </Box>
-        </Grid>
-      </Grid>
-
-      {/* Drops */}
-      <Grid
-        container
-        spacing={0}
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        className="custom-container second-fold section-spacing common-fold"
-      >
-        <Grid item xs={12}>
-          <span className="divider"></span>
-          <Box>
-            <Typography
-              variant="h2"
-              className="secondary-heading"
-              sx={{ mt: 10, mb: 10 }}
-            >
-              <Typography
-                variant="h2"
-                color="primary"
-                component="span"
-                className="gradient-text"
-              >
-                LATEST
-              </Typography>
-              <i>DROPS</i>
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Slider
-            slideArray={drops.map((props) => (
-              // Hard coded link to drop
-              <motion.div
-                // className="drops_hover_cursor"
-                style={{
-                  cursor: "pointer",
-                }}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ ease: "easeOut", delay: 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-              >
-                <GridCard {...props} noBrand key={props.id} href={props.href} />
-              </motion.div>
-            ))}
-          />
-        </Grid>
-      </Grid>
-      {/* Brands */}
-
-      <Grid
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        className="custom-container section-spacing third-fold common-fold"
-      >
-        <Grid item xs={12}>
-          <span className="divider"></span>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography
-              variant="h2"
-              className="secondary-heading"
-              sx={{ mt: 10, mb: 10 }}
-            >
-               OUR PARTNER&nbsp;
-              <Typography
-                variant="h2"
-                color="primary"
-                component="span"
-                className="gradient-text"
-              >
-                     <b>BRANDS</b>
-              </Typography>
-        
-            </Typography>
-            <GradientButton
-              variant="contained"
-              color="primary"
-              size="large"
-              sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
-              startIcon={<BiRocket />}
-              href="/brands"
-            >
-              <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                Explore All
-              </Typography>
-            </GradientButton>
-          </Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Slider
-            slideArray={brands.map((props) => (
-              <div
-                onClick={() => {
-                  router.push(props.href);
-                }}
-              >
-                <motion.div
-                  // className="drops_hover_cursor"
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                >
-                  <GridCard {...props} key={props.id + "-ahsdkh"} />
-                </motion.div>
-              </div>
-            ))}
-          />
-        </Grid>
-      </Grid>
-      {/* Advisors */}
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        className="custom-container"
-      >
-        <Grid item xs={12}>
-          <Typography variant="h3" align="center" sx={{ mt: 16, mb: 10 }}>
-            OUR&nbsp;
-            <Typography
-              variant="h3"
-              color="primary"
-              component="span"
-              className="gradient-text"
-            >
-              <b>ADVISORS</b>
-            </Typography>
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={12}>
-            {ADVISORS.map((props) => (
-              <Grid
-                key={props.id}
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <motion.div
-                  // className="drops_hover_cursor"
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                >
-                  <AdvisorCard {...props} />
-                </motion.div>
-              </Grid>
-            ))}
+              <LandingPageDisplay expandable />
+            </Box>
           </Grid>
         </Grid>
-      </Grid>
-      {/* Community */}
-      <Typography
-        className="CommunityHead"
-        variant="h3"
-        align="center"
-        sx={{ mt: 16, mb: 10 }}
-      >
-        <Typography
-          variant="h3"
-          color="primary"
-          component="span"
-          sx={{ fontWeight: 300 }}
-          className="gradient-text"
+
+        {/* Drops */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
         >
-          <b>JOIN THE</b>&nbsp;
-        </Typography>
-        <b>FV</b>COMMUNITY
-      </Typography>
-      <Stack
-        direction="row"
-        gap={6}
-        alignItems="center"
-        justifyContent="center"
-        sx={{ mb: 20 }}
-      >
-        <IconButton
-          size="large"
-          href="https://twitter.com/FashionVerseInc"
-          target="_blank"
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box>
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                sx={{ mt: 10, mb: 10 }}
+              >
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  LATEST&nbsp;
+                </Typography>
+                <i>DROPS</i>
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Slider
+              slideArray={drops.map((props) => (
+                // Hard coded link to drop
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <GridCard
+                    {...props}
+                    noBrand
+                    key={props.id}
+                    href={props.href}
+                  />
+                </motion.div>
+              ))}
+            />
+          </Grid>
+        </Grid>
+        {/* Brands */}
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container section-spacing third-fold common-fold"
         >
-          <BsTwitter fontSize={"2em"} color="#1DA1F2" />
-        </IconButton>
-        <IconButton
-          size="large"
-          href="https://discord.gg/thefashionverse"
-          target="_blank"
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ mx: 16, my: 10 }}
+            >
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                // sx={{ mt: 10, mb: 10 }}
+              >
+                OUR PARTNER&nbsp;
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  <b>BRANDS</b>
+                </Typography>
+              </Typography>
+              <GradientButton
+                variant="contained"
+                color="primary"
+                className="exploere-all-btn"
+                size="large"
+                sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                startIcon={<BiRocket />}
+                href="/brands"
+              >
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Explore All
+                </Typography>
+              </GradientButton>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Slider
+              slideArray={brands.map((props) => (
+                <div
+                  onClick={() => {
+                    router.push(props.href);
+                  }}
+                >
+                  <motion.div
+                    // className="drops_hover_cursor"
+                    style={{
+                      cursor: "pointer",
+                    }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ ease: "easeOut", delay: 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                  >
+                    <GridCard {...props} key={props.id + "-ahsdkh"} />
+                  </motion.div>
+                </div>
+              ))}
+            />
+          </Grid>
+        </Grid>
+
+        {/* Advisors */}
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container section-spacing fourth-fold"
         >
-          <BsDiscord fontSize={"2em"} color="#738ADB" />
-        </IconButton>
-        <IconButton
-          size="large"
-          href="https://medium.com/@FashionVerse"
-          target="_blank"
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box sx={{ my: 10 }}>
+              <Typography variant="h2" className="secondary-heading">
+                OUR&nbsp;
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  <b>ADVISORS</b>
+                </Typography>
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container spacing={6}>
+              {ADVISORS.map((props) => (
+                <Grid
+                  key={props.id}
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  sx={{ display: "flex", justifyContent: "center" }}
+                >
+                  <AdvisorCard {...props} />
+                  {/* <motion.div
+                    // className="drops_hover_cursor"
+                    style={{
+                      cursor: "pointer",
+                    }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ ease: "easeOut", delay: 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                  >
+                    <AdvisorCard {...props} />
+                  </motion.div> */}
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+        {/* Community */}
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container section-spacing fifth-fold"
         >
-          <BsMedium fontSize={"2em"} color="#515151" />
-        </IconButton>
-      </Stack>
-      <Footer />
-    </Container>
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box sx={{ my: 10 }}>
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                sx={{ mt: 10, mb: 10 }}
+              >
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  JOIN THE&nbsp;
+                </Typography>
+                <i>
+                  <b>FV</b>COMMUNITY
+                </i>
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Stack
+            direction="row"
+            gap={6}
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mb: 6 }}
+          >
+            <IconButton
+              size="large"
+              href="https://twitter.com/FashionVerseInc"
+              target="_blank"
+            >
+              <BsTwitter fontSize={"2em"} color="#1DA1F2" />
+            </IconButton>
+            <IconButton
+              size="large"
+              href="https://discord.gg/thefashionverse"
+              target="_blank"
+            >
+              <BsDiscord fontSize={"2em"} color="#738ADB" />
+            </IconButton>
+            <IconButton
+              size="large"
+              href="https://medium.com/@FashionVerse"
+              target="_blank"
+            >
+              <BsMedium fontSize={"2em"} color="#515151" />
+            </IconButton>
+          </Stack>
+        </Grid>
+        <Footer />
+      </Container>
     </>
   );
 }
