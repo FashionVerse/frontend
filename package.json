@@ -36,6 +36,7 @@
     "immer": "^9.0.12",
     "keen-slider": "^6.6.3",
     "next": "latest",
+    "next-seo": "^5.4.0",
     "notistack": "^2.0.3",
     "prop-types": "latest",
     "react": "latest",

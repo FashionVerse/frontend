@@ -25,6 +25,7 @@ import { AbiItem } from "web3-utils";
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import Web3 from "web3";
 import Typewriter from "typewriter-effect";
+import { NextSeo } from "next-seo";
 // import {
 //   collection,
 //   QueryDocumentSnapshot,
@@ -213,6 +214,41 @@ export default function Index() {
   }
 
   return (
+    <>
+    <NextSeo
+    title="The FashionVerse"
+    description="This example uses more of the available config options."
+    canonical="https://www.canonical.ie/"
+    openGraph={{
+      url: 'https://www.url.ie/a',
+      title: 'Open Graph Title',
+      description: 'Open Graph Description',
+      images: [
+        {
+          url: 'https://www.example.ie/og-image-01.jpg',
+          width: 800,
+          height: 600,
+          alt: 'Og Image Alt',
+          type: 'image/jpeg',
+        },
+        {
+          url: 'https://www.example.ie/og-image-02.jpg',
+          width: 900,
+          height: 800,
+          alt: 'Og Image Alt Second',
+          type: 'image/jpeg',
+        },
+        { url: 'https://www.example.ie/og-image-03.jpg' },
+        { url: 'https://www.example.ie/og-image-04.jpg' },
+      ],
+      site_name: 'SiteName',
+    }}
+    twitter={{
+      handle: '@handle',
+      site: '@site',
+      cardType: 'summary_large_image',
+    }}
+  />
     <Container className="wrapper home-page" maxWidth={false}>
       {/* First Fold */}
       <Grid
@@ -481,7 +517,7 @@ export default function Index() {
         </IconButton>
         <IconButton
           size="large"
-          href="https://discord.gg/SPmtYrBq"
+          href="https://discord.gg/thefashionverse"
           target="_blank"
         >
           <BsDiscord fontSize={"2em"} color="#738ADB" />
@@ -496,6 +532,7 @@ export default function Index() {
       </Stack>
       <Footer />
     </Container>
+    </>
   );
 }
 

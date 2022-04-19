@@ -4,6 +4,7 @@ import Footer from "../src/components/Footer";
 import Head from "next/head";
 import { Button, Container, Typography, Grid, Paper } from "@mui/material";
 import { styled } from "@mui/system";
+import { NextSeo } from "next-seo";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -21,8 +22,42 @@ export default function Resources() {
   return (
     <>
       <Head>
-        <title>TheFashionVerse | Resources</title>
+        <title>The FashionVerse | Resources</title>
         </Head>
+        <NextSeo
+      title="Using More of Config"
+      description="This example uses more of the available config options."
+      canonical="https://www.canonical.ie/"
+      openGraph={{
+        url: 'https://www.url.ie/a',
+        title: 'Open Graph Title',
+        description: 'Open Graph Description',
+        images: [
+          {
+            url: 'https://www.example.ie/og-image-01.jpg',
+            width: 800,
+            height: 600,
+            alt: 'Og Image Alt',
+            type: 'image/jpeg',
+          },
+          {
+            url: 'https://www.example.ie/og-image-02.jpg',
+            width: 900,
+            height: 800,
+            alt: 'Og Image Alt Second',
+            type: 'image/jpeg',
+          },
+          { url: 'https://www.example.ie/og-image-03.jpg' },
+          { url: 'https://www.example.ie/og-image-04.jpg' },
+        ],
+        site_name: 'SiteName',
+      }}
+      twitter={{
+        handle: '@handle',
+        site: '@site',
+        cardType: 'summary_large_image',
+      }}
+    />
     <Container>
       {/* <Header /> */}
       <Typography
@@ -108,7 +143,7 @@ const RESOURCE_INFO = [
   },
   {
     id: "ajaskas",
-    buttonText: "GENESIS COLLECTION",
+    buttonText: "Genesis Collection",
     href: "https://docs.google.com/document/d/1s9yWrtnbdsu-LX0KZ5ledULVFwHYWxQOslSxiLtoJiQ/edit",
     description: "Browse through the details of our genesis collection",
   },

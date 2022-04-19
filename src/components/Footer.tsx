@@ -32,9 +32,7 @@ export default function Footer() {
               gutterBottom
               sx={{ mt: 2 }}
             >
-              The Fashion, Inc. is an NFT marketplace for 3D digital clothing
-              that enables the user to build an avatar wearable digital closet,
-              often interlinked with physical fashion utility.
+              The Fashion, Inc. is an NFT marketplace for 3D digital clothing that enables the user to build an metaverse compatible digital closet.
             </Typography>
             <List sx={{ width: "100%", maxWidth: 360 }}>
               <ListItem disableGutters>
@@ -111,14 +109,14 @@ export default function Footer() {
 }
 
 const ABOUT_LINKS = [
-  { label: "About us", href: "about", id: "asdjas" },
+  { label: "About us", href: "https://www.notion.so/The-FashionVerse-Inc-f6e6a8b81d7e44e0bcff50039a813d75", id: "asdjas" },
   { label: "Blog", href: "blog", id: "kaijsa" },
-  { label: "Legal & Privacy", href: "legal", id: "lakosa" },
-  { label: "Cookie policies", href: "cookie-policy", id: "kaijsy" },
-  { label: "Cookie preferences", href: "cookie-preferences", id: "lauhsn" },
+  // { label: "Legal & Privacy", href: "legal", id: "lakosa" },
+  // { label: "Cookie policies", href: "cookie-policy", id: "kaijsy" },
+  // { label: "Cookie preferences", href: "cookie-preferences", id: "lauhsn" },
 ];
 
 const SUPPORT_LINKS = [
   { label: "Contact us", href: "contact", id: "lpokiu" },
-  { label: "Bug bounty", href: "bug-bounty", id: "qwerty" },
+  // { label: "Bug bounty", href: "bug-bounty", id: "qwerty" },
 ];

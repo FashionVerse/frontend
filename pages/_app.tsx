@@ -16,6 +16,8 @@ import { AnimateSharedLayout } from "framer-motion";
 import Header from "../src/components/Header";
 import { MantineProvider } from "@mantine/core";
 import { ColorSchemeProvider, ColorScheme } from "@mantine/core";
+import { DefaultSeo } from "next-seo";
+import SEO from '../next-seo.config';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -131,6 +133,7 @@ export default function MyApp(props: any) {
 
                 <SnackbarProvider>
                   <AnimateSharedLayout>
+                    <DefaultSeo {...SEO} />
                     <Component {...pageProps} />
                   </AnimateSharedLayout>
                 </SnackbarProvider>
