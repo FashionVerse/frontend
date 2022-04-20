@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useKeenSlider } from "keen-slider/react";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { SiEthereum } from "react-icons/si";
-import { Box, Button, Stack } from "@mui/material";
+import { Avatar, Box, Button, Stack } from "@mui/material";
 import EnlargedFashionCard from "./EnlargedFashionCard";
 import Web3 from "web3";
 import Viewer from "./Viewer";
@@ -11,7 +11,7 @@ import Model from "./Model";
 import AnimLogo from "./AnimLogo";
 import useSWR from "swr";
 import Link from "next/link";
-
+import etheriumIcon from "../../public/etherium-icon.svg";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -90,9 +90,15 @@ function FeaturedDisplay() {
                   variant="contained"
                   size="small"
                   color="primary"
-                  startIcon={<SiEthereum />}
+                  // startIcon={<SiEthereum />}
+                  startIcon={
+                    <Image
+                      src={etheriumIcon}
+                      alt="etherium icon"
+                    />
+                  }
                   // className="tw-fixed tw-z-index-5 tw-bottom-1/4 md:tw-bottom-[1%] tw-left-[20%] tw-translate-x-[21%] md:tw-translate-x-[25%] md:tw-translate-y-0 -tw-translate-y-1/4 tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50"
-                  className="tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50"
+                  className="tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50 cost-btn"
                 >
                   {/* {Web3.utils.fromWei(item.price.toString().slice(0, 2), "ether") + " ETH"} */}
                   {item.price.toString() + " ETH"}

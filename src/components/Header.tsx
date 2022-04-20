@@ -198,7 +198,7 @@ export default function Header() {
               sx={{ mr: 4, fontSize: "1.2rem" }}
             >
               <Link href={"/brands"} color="inherit" hoverStyle>
-                <Typography sx={{ fontWeight: 600 }}>Brands</Typography>
+                <Typography sx={{ fontWeight: 600, fontSize: "22px" }}>Brands</Typography>
               </Link>
               {!drops ? (
                 <ListMenu items={[]}>
@@ -321,7 +321,7 @@ export default function Header() {
                 onChange={() => {
                   colorMode.toggleColorMode();
                 }}
-                control={<MaterialUISwitch/>}
+                control={<MaterialUISwitch />}
                 label=""
                 checked={theme.palette.mode === "dark"}
               />

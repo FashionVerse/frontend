@@ -120,385 +120,10 @@ h1 {
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .css-iaykeu-MuiStack-root {
-    gap: 16px;
-  }
-  .css-rfu3cm-MuiTypography-root {
-    font-size: 2.5rem;
-  }
-  .css-zb9jej-MuiTypography-root {
-    font-size: 2rem;
-  }
-  .css-1fh410u-MuiGrid-root {
-    width: 100%;
-    margin-left: 0;
-  }
-  .css-1fh410u-MuiGrid-root > .MuiGrid-item {
-    padding: 15px;
-  }
-  .css-p9z0ox-MuiTypography-root {
-    margin-top: 100px;
-    margin-bottom: 150px;
-  }
-  .css-99pbpe-MuiPaper-root {
-    max-width: 370px;
-  }
-  .css-w968tk-MuiTypography-root {
-    font-size: 2rem;
-  }
-}
-
-@media screen and (max-width: 820px) {
-  .css-rjelc5-MuiStack-root {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .css-rjelc5-MuiStack-root .blankDiv {
-    display: block;
-    width: 100%;
-    height: 15px;
-  }
-  .css-132hal6-MuiStack-root {
-    flex-direction: column;
-    margin-top: 40px;
-  }
-  .css-f63syc {
-    width: 50%;
-    min-width: 600px;
-    max-width: 600px;
-  }
-  #body .firstHead {
-    margin-bottom: 50px;
-  }
-  #body .CommunityHead {
-    margin-bottom: 50px;
-  }
-  .css-1k0idyl-MuiStack-root {
-    margin-bottom: 100px;
-  }
-  .css-1xzqqmo-MuiGrid-root {
-    flex-direction: column;
-  }
-  .css-1xzqqmo-MuiGrid-root .css-k3f0g4-MuiGrid-root,
-  .css-1xzqqmo-MuiGrid-root .css-1o7apob-MuiGrid-root {
-    max-width: 100%;
-  }
-  .css-abv3bj-MuiStack-root {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .css-132hal6-MuiStack-root h4.MuiTypography-root br {
-    display: none;
-  }
-
-  .checkOutPage h3.MuiTypography-root {
-    margin-top: 60px;
-    margin-bottom: 40px;
-  }
-
-  .checkOutItems .css-9v4ipw-MuiStack-root .MuiGrid-root,
-  .checkOutItems .css-1tn1m65-MuiStack-root {
-    flex-direction: column;
-  }
-  .checkOutItems
-    .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-5.css-k3f0g4-MuiGrid-root {
-    max-width: 100%;
-    width: 100%;
-  }
-  .checkOutItems .css-hfzt2e-MuiPaper-root-MuiCard-root {
-    max-width: 100%;
-  }
-
-  /*--New--*/
-  .blankDiv {
-    display: block;
-  }
-}
-
-@media screen and (max-width: 769px) {
-  .keen-slider__slide {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-  }
-  .css-99pbpe-MuiPaper-root {
-    width: 95% !important;
-    max-width: 95% !important;
-    min-width: 95% !important;
-  }
-  .css-1fh410u-MuiGrid-root > .MuiGrid-item {
-    padding: 15px;
-    flex-direction: column;
-    max-width: 100%;
-    width: 100%;
-  }
-  .css-1ogu8fn-MuiPaper-root-MuiCard-root {
-    max-width: 100%;
-    width: 100%;
-  }
-  .css-p9z0ox-MuiTypography-root {
-    font-size: 2rem;
-  }
-  .css-abv3bj-MuiStack-root {
-    flex-direction: column;
-    margin: 100px 0 64px;
-  }
-  .css-f63syc {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-  }
-  .css-1ndux9e {
-    height: 100vh;
-    width: 100vw;
-  }
-  .dropsContainer ul.MuiImageList-root {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-  .swContainer .css-1aigpzg-MuiGrid-root .MuiBox-root.css-1s8thx6 {
-    width: 100%;
-    min-width: 100%;
-  }
-
-  .css-ypzray-MuiStack-root {
-    flex-direction: column;
-    margin-top: 60px;
-  }
-  .css-1x7d6t-MuiTypography-root {
-    margin: 0 0 20px 0;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .css-6w9oil-MuiStack-root {
-    gap: 15px;
-    margin-right: 10px;
-  }
-  .css-iaykeu-MuiStack-root {
-    grid-gap: 0px;
-    /* gap: 8px; */
-  }
-  a.active .MuiBox-root span {
-    width: 35px;
-  }
-  .css-w968tk-MuiTypography-root {
-    font-size: 1.8rem;
-    text-align: center !important;
-  }
-  .css-rfu3cm-MuiTypography-root span,
-  .css-rfu3cm-MuiTypography-root i {
-    text-align: center;
-  }
-  .MuiBox-root.css-79elbk .MuiBox-root.css-xzcju2 svg {
-    width: 40px;
-  }
-  .css-p9z0ox-MuiTypography-root,
-  #body .firstHead .gradient-text,
-  .css-abv3bj-MuiStack-root .MuiTypography-root {
-    font-size: 1.8rem;
-  }
-  .css-4idr46-MuiTypography-root,
-  .css-1x7d6t-MuiTypography-root {
-    font-size: 1.8rem;
-  }
-  .css-rfu3cm-MuiTypography-root,
-  .css-rfu3cm-MuiTypography-root .gradient-text {
-    font-size: 2.5rem;
-    text-align: center;
-  }
-  .css-zb9jej-MuiTypography-root {
-    font-size: 1.5rem;
-  }
-
-  .MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l svg {
-    width: 20px;
-  }
-  button.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeSmall.MuiButton-outlinedSizeSmall.MuiButtonBase-root.css-1ksg8y7-MuiButtonBase-root-MuiButton-root
-    svg {
-    width: 16px;
-  }
-  button.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary.MuiButton-sizeSmall.MuiButton-outlinedSizeSmall.MuiButtonBase-root.css-1ksg8y7-MuiButtonBase-root-MuiButton-root {
-    font-size: 0.75rem;
-  }
-  .MuiBox-root.css-79elbk .MuiBox-root.css-xzcju2 svg {
-    width: 20px;
-  }
-  a.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeLarge.MuiButton-containedSizeLarge.MuiButtonBase-root.css-724qng-MuiButtonBase-root-MuiButton-root {
-    font-size: 1.4rem;
-  }
-  .css-lluvi1 {
-    max-width: 245px;
-  }
-  h4.css-zb9jej-MuiTypography-root {
-    margin-top: 5px;
-  }
-  .css-xzcju2 {
-    padding-left: 20px;
-  }
-  li.MuiImageListItem-root.MuiImageListItem-quilted.css-7rtvwf-MuiImageListItem-root {
-    height: 300px !important;
-  }
-  .MuiTypography-h3 {
-    font-size: 1.5em !important;
-  }
-  .css-1aigpzg-MuiGrid-root > .MuiGrid-item {
-    padding-top: 0;
-  }
-
-  .dropsContainer ul.MuiImageList-root {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  .css-4t9f37-MuiStack-root {
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  .swContainer
-    .css-4t9f37-MuiStack-root
-    .css-qby5lk-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
-    text-align: center;
-    display: block;
-    width: 100%;
-  }
-
-  .swContainer .MuiGrid-root.MuiGrid-item {
-    margin-bottom: 30px;
-  }
-  .swContainer .css-11w5woi-MuiPaper-root-MuiCard-root {
-    min-width: 100%;
-  }
-  .swContainer .css-11w5woi-MuiPaper-root-MuiCard-root .css-1gamj71 {
-    min-width: 100%;
-  }
-  .css-11w5woi-MuiPaper-root-MuiCard-root {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-  }
-  .css-1gamj71 {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-  }
-  .checkOutItems .css-1s8thx6 {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-  }
-  .checkOutItems .css-1tn1m65-MuiStack-root {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .checkOutItems .css-vkdmif-MuiTypography-root {
-    font-size: 1.2rem;
-  }
-  .checkOutItems .css-gjx43q-MuiStack-root {
-    flex-direction: column;
-  }
-  .checkOutItems .css-gjx43q-MuiStack-root .css-a8xorp-MuiStack-root {
-    width: 80%;
-    min-width: 80%;
-    max-width: 80%;
-    text-align: left;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin-left: 60px;
-  }
-  .checkOutItems
-    .css-gjx43q-MuiStack-root
-    .css-a8xorp-MuiStack-root
-    span:last-child {
-    margin-left: 10px;
-  }
-  .checkOutItems
-    .MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-grid-xs-6.css-1eftpc-MuiGrid-root {
-    max-width: 100%;
-  }
-  .checkOutItems button.css-qd485v-MuiButtonBase-root-MuiIconButton-root {
-    padding: 0px;
-  }
-  .checkOutItems
-    button.css-qd485v-MuiButtonBase-root-MuiIconButton-root:last-child {
-    margin-right: 20px;
-  }
-  .checkOutItems
-    .MuiTypography-root.MuiTypography-h5.css-1mq63i1-MuiTypography-root {
-    font-size: 1.2rem;
-  }
-  .checkOutItems .css-9v4ipw-MuiStack-root {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .collectionContainer .MuiGrid-root.MuiGrid-container.css-lq7fsg-MuiGrid-root {
-    flex-direction: column;
-  }
-  .collectionContainer .css-e2s56e-MuiDivider-root {
-    height: 2px;
-  }
-  .collectionContainer
-    .MuiGrid-root.MuiGrid-container.css-lq7fsg-MuiGrid-root
-    .css-1i8xe9y-MuiGrid-root {
-    margin: 0;
-  }
-  .collectionContainer .css-vue7hi-MuiTypography-root {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  .collectionContainer
-    .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6.MuiGrid-grid-md-4.css-11l5t4l-MuiGrid-root {
-    margin-bottom: 30px;
-  }
-}
-
-@media screen and (max-width: 376px) {
-  .css-14rpj3o-MuiButtonBase-root-MuiIconButton-root {
-    margin-right: 20px;
-  }
-  .css-5mybnt-MuiTypography-root,
-  .css-oi4y6c-MuiTypography-root {
-    font-size: 0.9rem;
-  }
-  .MuiTypography-h3 {
-    font-size: 1.4em !important;
-  }
-  .css-rfu3cm-MuiTypography-root span,
-  .css-rfu3cm-MuiTypography-root i {
-    font-size: 1.3em;
-  }
-  .css-zb9jej-MuiTypography-root {
-    font-size: 1.1rem;
-  }
-  .MuiBox-root.css-lluvi1
-    .MuiBox-root.css-1ytfe2l
-    .keen-slider
-    .keen-slider__slide
-    span {
-    width: 140px !important;
-    height: 160px !important;
-  }
-  .MuiBox-root.css-lluvi1
-    .MuiBox-root.css-1ytfe2l
-    .keen-slider
-    .keen-slider__slide
-    .MuiButton-root
-    span {
-    width: auto !important;
-    height: auto !important;
-  }
-  .MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l svg:first-child {
-    left: 15px !important;
-  }
-  .MuiBox-root.css-lluvi1 .MuiBox-root.css-1ytfe2l svg:last-child {
-    right: 15px !important;
-  }
-
-  .brandsInner .MuiTypography-root .css-f9kd3n-MuiTypography-root {
-    margin-top: 30px;
-  }
-}
 
 /* Test */
+
+
 
 /* New css */
 /* header */
@@ -541,7 +166,7 @@ header + div {
   width: 1600px;
   margin-left: auto;
   margin-right: auto;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   padding-left: 0;
   padding-right: 0;
 }
@@ -588,11 +213,29 @@ header + div {
   display: flex;
   align-items: center;
   margin-left: auto;
-  background-image: url("/hero-circle.svg");
+  background-image: url("/hero-circle.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
+.cost-btn{
+  color: #fff;
+  border-radius: 21px;
+  padding: 4px 14px;
+  box-shadow: none;
+}
+.cost-btn:hover{
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease-in-out 0s;
+}
+.bg-style-dark .cost-btn{
+  background: #262525;
+}
+.bg-style-light .cost-btn{
+  color: #000;
+  background: #B9E5F4;
+}
+
 .main-heading {
   font-weight: 800;
   font-size: 72px;
@@ -683,7 +326,7 @@ header + div {
 
 /* second fold */
 .common-fold .keen-slider {
-  padding: 0 30px;
+  /* padding: 0 30px; */
 }
 .common-fold svg {
   z-index: 111;
@@ -691,7 +334,7 @@ header + div {
   height: auto;
 }
 .common-fold .keen-slider__slide {
-  padding: 0 41px;
+  padding: 0 16px;
 }
 .bottom-info {
   padding: 26px 0;
