@@ -2,7 +2,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import Footer from "../src/components/Footer";
 import Head from "next/head";
-import { Button, Container, Typography, Grid, Paper } from "@mui/material";
+import { Button, Container, Typography, Grid, Paper, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { NextSeo } from "next-seo";
 
@@ -12,7 +12,6 @@ const GradientButton = styled(Button)(({ theme }) => ({
   borderRadius: "999px",
   minWidth: "220px",
 }));
-
 
 const BlueShadowPaper = styled(Paper)(({ theme }) => ({
   boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 50.3961px -50.3961px 50.3961px rgba(149, 149, 149, 0.095), inset -50.3961px 50.3961px 50.3961px rgba(255, 255, 255, 0.095)`,
@@ -24,100 +23,135 @@ export default function Resources() {
     <>
       <Head>
         <title>The FashionVerse | Resources</title>
-        </Head>
-        <NextSeo
-      title="Using More of Config"
-      description="This example uses more of the available config options."
-      canonical="https://www.canonical.ie/"
-      openGraph={{
-        url: 'https://www.url.ie/a',
-        title: 'Open Graph Title',
-        description: 'Open Graph Description',
-        images: [
-          {
-            url: 'https://www.example.ie/og-image-01.jpg',
-            width: 800,
-            height: 600,
-            alt: 'Og Image Alt',
-            type: 'image/jpeg',
-          },
-          {
-            url: 'https://www.example.ie/og-image-02.jpg',
-            width: 900,
-            height: 800,
-            alt: 'Og Image Alt Second',
-            type: 'image/jpeg',
-          },
-          { url: 'https://www.example.ie/og-image-03.jpg' },
-          { url: 'https://www.example.ie/og-image-04.jpg' },
-        ],
-        site_name: 'SiteName',
-      }}
-      twitter={{
-        handle: '@handle',
-        site: '@site',
-        cardType: 'summary_large_image',
-      }}
-    />
-    <Container>
-      {/* <Header /> */}
-      <Typography
-        variant="h3"
-        align="center"
-        color="primary"
-        sx={{ mt: 16, mb: 10 }}
-        className="gradient-text"
-      >
-        <b>RESOURCES</b>
-      </Typography>
-      <Grid container justifyContent="center" spacing={12} sx={{ mb: 16 }}>
+      </Head>
+      <NextSeo
+        title="Using More of Config"
+        description="This example uses more of the available config options."
+        canonical="https://www.canonical.ie/"
+        openGraph={{
+          url: "https://www.url.ie/a",
+          title: "Open Graph Title",
+          description: "Open Graph Description",
+          images: [
+            {
+              url: "https://www.example.ie/og-image-01.jpg",
+              width: 800,
+              height: 600,
+              alt: "Og Image Alt",
+              type: "image/jpeg",
+            },
+            {
+              url: "https://www.example.ie/og-image-02.jpg",
+              width: 900,
+              height: 800,
+              alt: "Og Image Alt Second",
+              type: "image/jpeg",
+            },
+            { url: "https://www.example.ie/og-image-03.jpg" },
+            { url: "https://www.example.ie/og-image-04.jpg" },
+          ],
+          site_name: "SiteName",
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
 
-        {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
-          <Grid item xs={12} sm={12} md={5} key={id}>
-            <motion.div
-              // className="drops_hover_cursor"
-              style = {{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-            <BlueShadowPaper
-              elevation={8}
-              sx={{
-                maxWidth: "360px",
-                aspectRatio: "1/1",
-                margin: "auto",
-                borderRadius: "32px",
-                padding: "32px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <GradientButton
-                href={href}
-                variant="contained"
-                color="primary"
-                size="large"
+      <Container
+        className="wrapper resource-page common-wrapper"
+        maxWidth={false}
+      >
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container  common-fold"
+        >
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box>
+              <Typography
+                variant="h1"
+                className="secondary-heading"
+                sx={{ mt: 10, mb: 10 }}
               >
-                <Typography variant="subtitle1">
-                  <b>{buttonText}</b>
+                <Typography
+                  variant="h1"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  RESOURCES
                 </Typography>
-              </GradientButton>
-              <Typography variant="subtitle1" align="center" sx={{ mt: 4 }}>
-                {description}
               </Typography>
-            </BlueShadowPaper>
-            </motion.div>
+            </Box>
           </Grid>
-        ))}
-      </Grid>
-      <Footer />
-    </Container>
+        </Grid>
+
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
+            <Grid
+              sx={{ marginBottom: "100px" }}
+              item
+              xs={12}
+              sm={12}
+              md={5}
+              key={id}
+            >
+              <motion.div
+                // className="drops_hover_cursor"
+                style={{
+                  cursor: "pointer",
+                }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ ease: "easeOut", delay: 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+              >
+                <BlueShadowPaper
+                  elevation={8}
+                  sx={{
+                    maxWidth: "360px",
+                    aspectRatio: "1/1",
+                    margin: "auto",
+                    borderRadius: "32px",
+                    padding: "32px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <GradientButton
+                    href={href}
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                  >
+                    <Typography variant="subtitle1">
+                      <b>{buttonText}</b>
+                    </Typography>
+                  </GradientButton>
+                  <Typography variant="subtitle1" align="center" sx={{ mt: 4 }}>
+                    {description}
+                  </Typography>
+                </BlueShadowPaper>
+              </motion.div>
+            </Grid>
+          ))}
+        </Grid>
+        <Footer />
+      </Container>
     </>
   );
 }

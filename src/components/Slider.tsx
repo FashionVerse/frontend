@@ -19,7 +19,7 @@ export default function Slider({ slideArray }: SliderProps) {
         slides: { perView: 2, spacing: 2 },
       },
       "(min-width: 1000px)": {
-        slides: { perView: 3, spacing: 4 },
+        slides: { perView: 3, spacing: 16 },
       },
     },
     slideChanged(slider) {
@@ -31,14 +31,15 @@ export default function Slider({ slideArray }: SliderProps) {
   });
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        position: "relative",
-        // paddingLeft: "32px",
-      }}
-    >
+    // <Box
+    //   sx={{
+    //     display: "flex",
+    //     alignItems: "center",
+    //     position: "relative",
+    //     // paddingLeft: "32px",
+    //   }}
+    // >
+    <>
       {loaded && instanceRef.current && (
         <motion.div
           // className="drops_hover_cursor"
@@ -93,7 +94,8 @@ export default function Slider({ slideArray }: SliderProps) {
           />
         </motion.div>
       )}
-    </Box>
+      </>
+    // </Box>
   );
 }
 

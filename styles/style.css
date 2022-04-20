@@ -166,7 +166,7 @@ header + div {
   width: 1600px;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   padding-left: 0;
   padding-right: 0;
 }
@@ -325,9 +325,9 @@ header + div {
 }
 
 /* second fold */
-.common-fold .keen-slider {
-  /* padding: 0 30px; */
-}
+/* .common-fold .keen-slider {
+  padding: 0 30px;
+} */
 .common-fold svg {
   z-index: 111;
   width: 83px;
