@@ -10,6 +10,7 @@ import { Container, PaletteMode, Typography, Box } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
 import "../styles/tailwind.css";
 import "../styles/style.css";
+import "../styles/style-new.css";
 import "../styles/responsive.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";

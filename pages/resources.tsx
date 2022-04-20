@@ -93,11 +93,12 @@ export default function Resources() {
         </Grid>
 
         <Grid
+          sx={{ marginTop: "20px", marginBottom: "40px" }}
           container
           direction="row"
           justifyContent="center"
           alignItems="center"
-          className="custom-container second-fold section-spacing common-fold"
+          className="custom-container common-fold"
         >
           {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
             <Grid
@@ -120,31 +121,38 @@ export default function Resources() {
                 whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
               >
                 <BlueShadowPaper
-                  elevation={8}
+                  elevation={2}
                   sx={{
                     maxWidth: "360px",
                     aspectRatio: "1/1",
                     margin: "auto",
-                    borderRadius: "32px",
-                    padding: "32px",
+                    borderRadius: "10px",
+                    padding: "0 32px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    justifyContent: "center"
                   }}
                 >
-                  <GradientButton
-                    href={href}
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                  >
-                    <Typography variant="subtitle1">
-                      <b>{buttonText}</b>
+                  <Box
+                    sx={{
+                      textAlign: "center"
+                    }}
+                  >     
+                    <Typography variant="subtitle1" align="center" sx={{ mb: 4 }}>
+                      {description}
                     </Typography>
-                  </GradientButton>
-                  <Typography variant="subtitle1" align="center" sx={{ mt: 4 }}>
-                    {description}
-                  </Typography>
+                    <GradientButton
+                      href={href}
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                    >
+                      <Typography variant="subtitle1">
+                        <b>{buttonText}</b>
+                      </Typography>
+                    </GradientButton>
+                  </Box>
                 </BlueShadowPaper>
               </motion.div>
             </Grid>

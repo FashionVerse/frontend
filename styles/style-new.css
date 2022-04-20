@@ -1,0 +1,4 @@
+.resource-page {
+  background: url("/resourse-top-right-gradient.svg") no-repeat 100% 0, url("/resourse-bottom-left-gradient.svg") no-repeat 0 100%;
+  background-size: 42%, 37%;
+}
