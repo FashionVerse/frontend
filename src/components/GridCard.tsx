@@ -35,7 +35,7 @@ export type GridCardProps = {
 
 const GridCardContainer = styled(Paper)(({ theme }) => ({
   width: "100%",
-  maxWidth: "403px",
+  // maxWidth: "403px",
   borderRadius: "24px",
   padding: "26px",
   paddingBottom: "0px",

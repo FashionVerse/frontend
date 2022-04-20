@@ -340,29 +340,38 @@ export default function Index() {
             </Box>
           </Grid>
           <Grid item xs={12}>
-            <Slider
-              slideArray={drops.map((props) => (
-                // Hard coded link to drop
-                <motion.div
-                  // className="drops_hover_cursor"
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                >
-                  <GridCard
-                    {...props}
-                    noBrand
-                    key={props.id}
-                    href={props.href}
-                  />
-                </motion.div>
-              ))}
-            />
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                position: "relative",
+                // paddingLeft: "32px",
+              }}
+            >
+              <Slider
+                slideArray={drops.map((props) => (
+                  // Hard coded link to drop
+                  <motion.div
+                    // className="drops_hover_cursor"
+                    style={{
+                      cursor: "pointer",
+                    }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ ease: "easeOut", delay: 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                  >
+                    <GridCard
+                      {...props}
+                      noBrand
+                      key={props.id}
+                      href={props.href}
+                    />
+                  </motion.div>
+                ))}
+              />
+            </Box>
           </Grid>
         </Grid>
         {/* Brands */}

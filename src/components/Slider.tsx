@@ -19,7 +19,10 @@ export default function Slider({ slideArray }: SliderProps) {
         slides: { perView: 2, spacing: 2 },
       },
       "(min-width: 1000px)": {
-        slides: { perView: 3, spacing: 16 },
+        slides: { perView: 2, spacing: 8 },
+      },
+      "(min-width: 1366px)": {
+        slides: { perView: 3, spacing: 8 },
       },
     },
     slideChanged(slider) {

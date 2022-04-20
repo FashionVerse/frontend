@@ -6,7 +6,8 @@
     padding-left: 24px;
     padding-right: 24px;
   }
-  .main-heading .gradient-text,.main-heading {
+  .main-heading .gradient-text,
+  .main-heading {
     font-size: 62px;
   }
   .myNewBox {
@@ -16,23 +17,40 @@
     padding-bottom: 67px;
   }
   .section-spacing {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 70px;
+    padding-bottom: 70px;
   }
-  .secondary-heading .gradient-text{
+  .secondary-heading .gradient-text {
     font-size: 57px;
   }
 }
 @media screen and (max-width: 1439px) {
-  .myNewBox{
+  .myNewBox {
     width: 590px;
     height: 590px;
   }
-  .cost-btn{
+  .cost-btn {
     position: relative;
     top: -43px;
   }
+  .section-spacing {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
 
+@media screen and (max-width: 1364px) {
+  .main-heading .gradient-text,
+  .main-heading {
+    font-size: 55px;
+  }
+  .secondary-heading .gradient-text {
+    font-size: 50px;
+  }
+  .section-spacing {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }
 
 @media screen and (max-width: 1000px) {
