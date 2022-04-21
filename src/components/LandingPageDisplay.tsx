@@ -12,6 +12,7 @@ import AnimLogo from "./AnimLogo";
 import useSWR from "swr";
 import Link from "next/link";
 import etheriumIcon from "../../public/etherium-icon.svg";
+import Gif from "../../public/dummy.gif";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -84,6 +85,8 @@ function FeaturedDisplay() {
                 }
               />
             </Viewer>
+         
+            {/* <Image src={Gif} alt="gif" width="429px" height="429px" /> */}
             <Stack direction="row" gap={1}>
               <Link href={`/products/${item._id}`}>
                 <Button
@@ -91,12 +94,7 @@ function FeaturedDisplay() {
                   size="small"
                   color="primary"
                   // startIcon={<SiEthereum />}
-                  startIcon={
-                    <Image
-                      src={etheriumIcon}
-                      alt="etherium icon"
-                    />
-                  }
+                  startIcon={<Image src={etheriumIcon} alt="etherium icon" />}
                   // className="tw-fixed tw-z-index-5 tw-bottom-1/4 md:tw-bottom-[1%] tw-left-[20%] tw-translate-x-[21%] md:tw-translate-x-[25%] md:tw-translate-y-0 -tw-translate-y-1/4 tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50"
                   className="tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50 cost-btn"
                 >

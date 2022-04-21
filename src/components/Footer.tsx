@@ -112,7 +112,8 @@ export default function Footer() {
           container
           justifyContent={"center"}
           alignItems={"center"}
-          sx={{ borderTop: "2px solid #ccc", my: 2, pt: 2 }}
+          sx={{ my: 2, pt: 2 }}
+          className="copy-right-box"
         >
           <Grid item>
             <Typography

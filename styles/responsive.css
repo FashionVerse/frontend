@@ -44,7 +44,7 @@
   .main-heading {
     font-size: 55px;
   }
-  .secondary-heading .gradient-text {
+  .secondary-heading .gradient-text,.secondary-heading {
     font-size: 50px;
   }
   .section-spacing {

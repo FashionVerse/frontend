@@ -249,7 +249,13 @@ export default function Index() {
           cardType: "summary_large_image",
         }}
       />
+      
       <Container className="wrapper home-page common-wrapper" maxWidth={false}>
+      <div className="star-wrapper">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          </div>
         {/* First Fold */}
         <Grid
           container
@@ -259,8 +265,14 @@ export default function Index() {
           alignItems="center"
           className="custom-container first-fold"
         >
+          <div className="lines">
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+          </div>
+         
           <Grid item md={6}>
-            <Box>
+            <Box sx={{ minHeight: "271px" }}>
               <Typography variant="h1" className="main-heading">
                 <Typography
                   variant="h1"
