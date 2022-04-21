@@ -71,91 +71,117 @@ export default function Brands() {
 
   return (
     <>
-    <NextSeo
-      title="Using More of Config"
-      description="This example uses more of the available config options."
-      canonical="https://www.canonical.ie/"
-      openGraph={{
-        url: 'https://www.url.ie/a',
-        title: 'Open Graph Title',
-        description: 'Open Graph Description',
-        images: [
-          {
-            url: 'https://www.example.ie/og-image-01.jpg',
-            width: 800,
-            height: 600,
-            alt: 'Og Image Alt',
-            type: 'image/jpeg',
-          },
-          {
-            url: 'https://www.example.ie/og-image-02.jpg',
-            width: 900,
-            height: 800,
-            alt: 'Og Image Alt Second',
-            type: 'image/jpeg',
-          },
-          { url: 'https://www.example.ie/og-image-03.jpg' },
-          { url: 'https://www.example.ie/og-image-04.jpg' },
-        ],
-        site_name: 'SiteName',
-      }}
-      twitter={{
-        handle: '@handle',
-        site: '@site',
-        cardType: 'summary_large_image',
-      }}
-    />
+      <NextSeo
+        title="Using More of Config"
+        description="This example uses more of the available config options."
+        canonical="https://www.canonical.ie/"
+        openGraph={{
+          url: 'https://www.url.ie/a',
+          title: 'Open Graph Title',
+          description: 'Open Graph Description',
+          images: [
+            {
+              url: 'https://www.example.ie/og-image-01.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Og Image Alt',
+              type: 'image/jpeg',
+            },
+            {
+              url: 'https://www.example.ie/og-image-02.jpg',
+              width: 900,
+              height: 800,
+              alt: 'Og Image Alt Second',
+              type: 'image/jpeg',
+            },
+            { url: 'https://www.example.ie/og-image-03.jpg' },
+            { url: 'https://www.example.ie/og-image-04.jpg' },
+          ],
+          site_name: 'SiteName',
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+      />
       <Head>
         <title>The FashionVerse | Brands</title>
       </Head>
-    <FormProvider {...methods}>
-      <Container className="brandsInner">
-        <Typography
-          variant="h3"
-          align="center"
-          color="primary"
-          sx={{ mt: 16, mb: 10 }}
-          className="gradient-text"
+      <FormProvider {...methods}>
+        <Container
+            className="wrapper brand-page common-wrapper"
+            maxWidth={false}
         >
-          <b>BRANDS</b>
-        </Typography>
-        <Grid container spacing={8} sx={{ mb: 16 }}>
-          {/* <Grid item xs={12} sx={{ ml: 3 }}>
-            <CheckBoxSelect formStateName="drops" label="Drop" />
-          </Grid> */}
-          {arr.map((props) => (
-            <Grid item xs={12} sm={6} md={4} key={props.id}>
-              <motion.div
-              // className="drops_hover_cursor"
-              style = {{
-                cursor: "pointer",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ ease: "easeOut", delay: 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                
-                <GridCard {...props} />
+          <Grid
+            container
+            spacing={0}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            className="custom-container  common-fold"
+          >
+            <Grid item xs={12}>
+              <span className="divider"></span>
+              <Box>
+                <Typography
+                  variant="h1"
+                  className="secondary-heading"
+                  sx={{ mt: 10, mb: 10 }}
+                >
+                  <Typography
+                    variant="h1"
+                    color="primary"
+                    component="span"
+                    className="gradient-text"
+                  >
+                    BRANDS
+                  </Typography>
+                </Typography>
               </Box>
-              </motion.div>
             </Grid>
-          ))}
-        </Grid>
-        <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
-          <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
-        </div>
-        <Footer />
-      </Container>
-    </FormProvider>
+          </Grid>
+
+          <Grid
+            sx={{ marginTop: "-30px", marginBottom: "40px" }}
+            container
+            direction="row"
+            className=""
+            spacing={6}
+          >
+            {arr.map((props) => (
+                <Grid item xs={12} sm={6} md={4} key={props.id}>
+                  <motion.div
+                  // className="drops_hover_cursor"
+                  style = {{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    
+                    <GridCard {...props} />
+                  </Box>
+                  </motion.div>
+                </Grid>
+              ))}
+          </Grid>
+          <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] tw-mt-5">
+            <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
+          </div>
+          <Footer />
+        </Container>
+      </FormProvider>
     </>
   );
 }

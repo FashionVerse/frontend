@@ -2,3 +2,7 @@
   background: url("/resourse-top-right-gradient.svg") no-repeat 100% 0, url("/resourse-bottom-left-gradient.svg") no-repeat 0 100%;
   background-size: 42%, 37%;
 }
+.brand-page {
+  background: url(/bottom-right.png) bottom right no-repeat, url(/bottom-left.png) bottom left no-repeat;
+  background-size: auto;
+}
