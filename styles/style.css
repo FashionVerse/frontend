@@ -871,6 +871,23 @@ header + div {
   background-size: auto, auto, auto, auto, auto;
 }
 
+.bg-style-dark .resource-page {
+  background: url("/top-right-home.png") right 2.1% no-repeat,
+    url("/top-left-home.png") left 2.1% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center 89% no-repeat,
+    url("/bottom-right.png") bottom right no-repeat,
+    url("/bottom-left.png") bottom left no-repeat;
+  background-size: auto, auto, auto, auto, auto;
+}
+.bg-style-light .resource-page{
+  background: url("/top-right-home-white.png") right 2.1% no-repeat,
+    url("/top-left-home-white.png") left 2.1% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center 50% no-repeat,
+      url("/bottom-right-white.png") bottom right no-repeat,
+    url("/bottom-left-white.png") bottom left no-repeat;
+  background-size: auto, auto, auto, auto, auto;
+}
+
 /* .home-page {
   background: url("/bg-blend.webp") 140% -10% no-repeat,
     url("/home-page-side-bg-blend.svg") -25% 16% no-repeat,
