@@ -159,14 +159,12 @@ export default function BrandPage() {
   function ImageGallery() {
     return (
       <ImageList
-        sx={{ width: "100%", height: "100%" }}
-        variant="quilted"
-        cols={4}
-        rowHeight={140}
-        className="parralex-image"
-      >
-        {itemData.map((item) => (
-          <ImageListItem key={item.img} cols={4} rows={4}>
+          sx={{ width: "100%", height: "100%" }}
+          // variant="quilted"
+          rowHeight={572}
+          className="parralex-image"
+        >
+          <ImageListItem>
             <img
               {...srcset(data.brand.coverSrc, 400)}
               alt={data.brand.title}
@@ -174,8 +172,25 @@ export default function BrandPage() {
               style={{ objectFit: "cover" }}
             />
           </ImageListItem>
-        ))}
-      </ImageList>
+        </ImageList>
+      // <ImageList
+      //   sx={{ width: "100%", height: "100%" }}
+      //   // variant="quilted"
+      //   // cols={4}
+      //   rowHeight={572}
+      //   className="parralex-image"
+      // >
+      //   {/* {itemData.map((item) => ( */}
+      //     <ImageListItem>
+      //       <img
+      //         {...srcset(data.brand.coverSrc, 400)}
+      //         alt={data.brand.title}
+      //         loading="eager"
+      //         style={{ objectFit: "cover" }}
+      //       />
+      //     </ImageListItem>
+      //   {/* ))} */}
+      // </ImageList>
     );
   }
 

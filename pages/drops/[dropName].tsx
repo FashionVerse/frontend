@@ -25,6 +25,7 @@ import Web3 from "web3";
 import { nftAbi, marketAbi, marketAddress } from "../../public/abi";
 import { styled } from "@mui/system";
 import useSWR from "swr";
+import Typewriter from "typewriter-effect";
 import { NextSeo } from "next-seo";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -466,16 +467,18 @@ export default function DropPage() {
       return (
         <ImageList
           sx={{ width: "100%", height: "100%" }}
-          variant="quilted"
-          cols={4}
-          rowHeight={180}
-          gap={0}
+          // variant="quilted"
+          rowHeight={572}
+          className="parralex-image"
         >
-          {dropData.images.map((item, index) => (
-            <ImageListItem key={index} cols={1} rows={1}>
-              <img {...srcset(item, 180)} alt="image" loading="eager" />
-            </ImageListItem>
-          ))}
+          <ImageListItem>
+            <img
+              {...srcset(dropData.coverSrc, 400)}
+              alt={dropData.title}
+              loading="eager"
+              style={{ objectFit: "cover" }}
+            />
+          </ImageListItem>
         </ImageList>
       );
     }
@@ -483,114 +486,147 @@ export default function DropPage() {
 
   return (
     <>
-    <NextSeo
-      title="Using More of Config"
-      description="This example uses more of the available config options."
-      canonical="https://www.canonical.ie/"
-      openGraph={{
-        url: 'https://www.url.ie/a',
-        title: 'Open Graph Title',
-        description: 'Open Graph Description',
-        images: [
-          {
-            url: 'https://www.example.ie/og-image-01.jpg',
-            width: 800,
-            height: 600,
-            alt: 'Og Image Alt',
-            type: 'image/jpeg',
-          },
-          {
-            url: 'https://www.example.ie/og-image-02.jpg',
-            width: 900,
-            height: 800,
-            alt: 'Og Image Alt Second',
-            type: 'image/jpeg',
-          },
-          { url: 'https://www.example.ie/og-image-03.jpg' },
-          { url: 'https://www.example.ie/og-image-04.jpg' },
-        ],
-        site_name: 'SiteName',
-      }}
-      twitter={{
-        handle: '@handle',
-        site: '@site',
-        cardType: 'summary_large_image',
-      }}
-    />
-    <FormProvider {...methods}>
-      <Container className="dropsContainer" maxWidth={false} disableGutters>
-        <Container>{/* <Header /> */}</Container>
-        <Box sx={{ mt: 6, mb: 3 }}>
-          <ImageGallery />
-        </Box>
+      <NextSeo
+        title="Using More of Config"
+        description="This example uses more of the available config options."
+        canonical="https://www.canonical.ie/"
+        openGraph={{
+          url: "https://www.url.ie/a",
+          title: "Open Graph Title",
+          description: "Open Graph Description",
+          images: [
+            {
+              url: "https://www.example.ie/og-image-01.jpg",
+              width: 800,
+              height: 600,
+              alt: "Og Image Alt",
+              type: "image/jpeg",
+            },
+            {
+              url: "https://www.example.ie/og-image-02.jpg",
+              width: 900,
+              height: 800,
+              alt: "Og Image Alt Second",
+              type: "image/jpeg",
+            },
+            { url: "https://www.example.ie/og-image-03.jpg" },
+            { url: "https://www.example.ie/og-image-04.jpg" },
+          ],
+          site_name: "SiteName",
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
+      <FormProvider {...methods}>
+        <Container
+          className="wrapper dropsContainer common-wrapper"
+          maxWidth={false}
+          disableGutters
+        >
+          <Box sx={{ position: "relative" }}>
+            <ImageGallery />
+          </Box>
 
-        <Container className="swContainer">
-          <Typography
-            variant="h3"
-            align="center"
-            color="primary"
-            sx={{ mt: 16, mb: 10 }}
-            className="gradient-text"
+          <Grid
+            container
+            spacing={0}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            className="custom-container"
           >
-            <b>
-              {/* Should ideally be this {dropName} */}
-              {/* {"STREET WEAR"} */}
-              {dropData.title.toUpperCase()}
-            </b>
-          </Typography>
-          {dropData.subtitle.toUpperCase()}
-          <Grid container spacing={8} sx={{ mb: 16 }}>
-            <Grid item xs={12}>
-              <Stack direction="row" gap={2} sx={{ px: 1 }}>
-                <CheckBoxSelect formStateName="rarity" label="Rarity" />
-                <CheckBoxSelect formStateName="price" label="Price" />
-                <div style={{ flexGrow: 1 }} />
-                <CheckBoxSelect formStateName="brand" label="Brand" />
-                {/* <CheckBoxSelect formStateName="collection" label="Collection" /> */}
-                <GradientButton
-                  onClick={() => {
-                    setLoading(true);
-                    getItems().then((items) => {
-                      setItems(items);
-                      setLoading(false);
-                    });
+            <Grid item xs={12} sx={{ mt: 10, mb: 4 }}>
+              <span className="divider"></span>
+              <Box>
+                <Typography
+                  variant="h1"
+                  className="main-heading"
+                  align="center"
+                  textTransform="uppercase"
+                  sx={{ mt: 10, mb: 0 }}
+                >
+                  <Typography
+                    variant="h1"
+                    color="primary"
+                    component="span"
+                    className="gradient-text"
+                  >
+                    {dropData.title.toUpperCase()}
+                  </Typography>
+                </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  className="sub-heading"
+                  align="center"
+                >
+                  {/* Build your First Digital <br /> Wardrobe */}
+                  <Typewriter
+                    options={{
+                      strings: [dropData.subtitle.toUpperCase()],
+                      autoStart: true,
+                      loop: true,
+                    }}
+                  />
+                </Typography>
+              </Box>
+            </Grid>
+
+            <Grid
+              container
+              className="side-spacing"
+              spacing={4}
+              sx={{ mt: 2, mb: 10 }}
+            >
+              <Grid item xs={12}>
+                <Stack direction="row" gap={2} sx={{ px: 1 }}>
+                  <CheckBoxSelect formStateName="rarity" label="Rarity" />
+                  <CheckBoxSelect formStateName="price" label="Price" />
+                  <div style={{ flexGrow: 1 }} />
+                  <CheckBoxSelect formStateName="brand" label="Brand" />
+                  {/* <CheckBoxSelect formStateName="collection" label="Collection" /> */}
+                  <GradientButton
+                    onClick={() => {
+                      setLoading(true);
+                      getItems().then((items) => {
+                        setItems(items);
+                        setLoading(false);
+                      });
+                    }}
+                  >
+                    <Typography variant="body1">FILTER</Typography>
+                  </GradientButton>
+                </Stack>
+              </Grid>
+
+              {items.length > 0 ? (
+                items.map((props) => {
+                  console.log(props);
+                  return (
+                    <Grid item xs={12} sm={6} md={4} key={props.id}>
+                      <FashionItemCard {...props} expandable />
+                    </Grid>
+                  );
+                })
+              ) : (
+                <h2
+                  className="no-items-available"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "auto",
                   }}
                 >
-                  <Typography variant="body1">FILTER</Typography>
-                </GradientButton>
-              </Stack>
+                  Coming Soon…
+                </h2>
+              )}
             </Grid>
-            {items.length > 0 ? (
-              items.map((props) => {
-                console.log(props);
-                return (
-                  <Grid item xs={12} sm={6} md={4} key={props.id}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <FashionItemCard {...props} expandable />
-                    </Box>
-                  </Grid>
-                );
-              })
-            ) : (
-              <h2
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "auto",
-                }}
-              >
-                Coming Soon…
-              </h2>
-            )}
           </Grid>
-          <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
+          <div className="tw-flex tw-justify-center tw-items-end tw-pb-4 tw-mb-[5%] tw-mt-5">
             <Pagination
               count={itemData.totalPages}
               color="primary"
@@ -599,10 +635,10 @@ export default function DropPage() {
               page={page}
             />
           </div>
+
+          <Footer />
         </Container>
-        <Footer />
-      </Container>
-    </FormProvider>
+      </FormProvider>
     </>
   );
 }

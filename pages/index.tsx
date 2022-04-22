@@ -271,7 +271,7 @@ export default function Index() {
             <div className="line"></div>
           </div>
          
-          <Grid item md={6}>
+          <Grid item md={6} className="main-heading-wrapper">
             <Box sx={{ minHeight: "271px" }}>
               <Typography variant="h1" className="main-heading">
                 <Typography
