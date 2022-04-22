@@ -16,6 +16,7 @@ import DividedTable, {
   DividedTableProps,
 } from "../../src/components/DividedTable";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
+import Typewriter from "typewriter-effect";
 import firestore from "../../firebase/clientApp";
 import {
   collection,
@@ -27,11 +28,11 @@ import {
   getDocs,
   doc,
   getDoc,
-  Firestore
+  Firestore,
 } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
-import {motion} from 'framer-motion';
-import useSWR from 'swr';
+import { motion } from "framer-motion";
+import useSWR from "swr";
 import { FashionItemCardProps } from "../../src/components/FashionItemCard";
 import FashionItemCard from "../../src/components/FashionItemCard";
 import { NextSeo } from "next-seo";
@@ -44,24 +45,24 @@ export default function BrandPage() {
 
   const [page, setPage] = React.useState(1);
 
-  function changePage(event, value){
-    setPage(value)
+  function changePage(event, value) {
+    setPage(value);
   }
-
 
   const { enqueueSnackbar } = useSnackbar();
 
-
-
-  const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?url='+brandId+"&page="+page, fetcher)
+  const { data, error } = useSWR(
+    process.env.API_URL + "/api/getBrands?url=" + brandId + "&page=" + page,
+    fetcher
+  );
   if (error) {
-    router.replace("/404")
+    router.replace("/404");
   }
   const arr: FashionItemCardProps[] = [];
   if (data) {
-  console.log("data ",data)
+    console.log("data ", data);
     data.items.map((item) => {
-       arr.push({
+      arr.push({
         id: item._id,
         itemId: item.itemId,
         nft: item.nft.metadata,
@@ -72,9 +73,7 @@ export default function BrandPage() {
         rarityCategory: "Semi-rare",
         expandable: false,
       });
-
-      
-    })
+    });
   }
 
   // React.useEffect(() => {
@@ -84,7 +83,6 @@ export default function BrandPage() {
   //     const querySnapshot = await getDocs(query(collection(firestore, "collections"), where("brand", "==", brandId ?? "")));
   //     if(querySnapshot.docs.length > 0){
 
-      
   //     querySnapshot.forEach((doc) => {
   //       arr.push(doc.data());
   //     });
@@ -100,7 +98,7 @@ export default function BrandPage() {
   //     .catch((e) => {
   //       enqueueSnackbar(e.message);
   //     });
-  
+
   //   async function getInfo() {
   //     const querySnapshot = await getDoc(doc(firestore, "/brands/"+brandId));
   //     if(typeof querySnapshot.data() !== 'undefined'){
@@ -108,7 +106,7 @@ export default function BrandPage() {
   //     } else {
   //       return {};
   //     }
-      
+
   //   }
   //   getInfo()
   //     .then((value) => {
@@ -133,14 +131,12 @@ export default function BrandPage() {
   //       .catch((e) => {
   //         enqueueSnackbar(e.message);
   //       });
-    
+
   // }, [router.isReady]);
 
   // const [collections, setCollections] = React.useState(null);
   // const [info, setInfo] = React.useState(null);
   // const [designers, setDesigners] = React.useState(null);
-
-  
 
   if (!data) {
     // TODO: Add proper loader
@@ -167,6 +163,7 @@ export default function BrandPage() {
         variant="quilted"
         cols={4}
         rowHeight={140}
+        className="parralex-image"
       >
         {itemData.map((item) => (
           <ImageListItem key={item.img} cols={4} rows={4}>
@@ -174,7 +171,7 @@ export default function BrandPage() {
               {...srcset(data.brand.coverSrc, 400)}
               alt={data.brand.title}
               loading="eager"
-              style={{ objectFit: "fill" }}
+              style={{ objectFit: "cover" }}
             />
           </ImageListItem>
         ))}
@@ -182,156 +179,198 @@ export default function BrandPage() {
     );
   }
 
-  console.log(data.avatarSrc)
+  console.log(data.avatarSrc);
 
   return (
     <>
-    <NextSeo
-      title="Using More of Config"
-      description="This example uses more of the available config options."
-      canonical="https://www.canonical.ie/"
-      openGraph={{
-        url: 'https://www.url.ie/a',
-        title: 'Open Graph Title',
-        description: 'Open Graph Description',
-        images: [
-          {
-            url: 'https://www.example.ie/og-image-01.jpg',
-            width: 800,
-            height: 600,
-            alt: 'Og Image Alt',
-            type: 'image/jpeg',
-          },
-          {
-            url: 'https://www.example.ie/og-image-02.jpg',
-            width: 900,
-            height: 800,
-            alt: 'Og Image Alt Second',
-            type: 'image/jpeg',
-          },
-          { url: 'https://www.example.ie/og-image-03.jpg' },
-          { url: 'https://www.example.ie/og-image-04.jpg' },
-        ],
-        site_name: 'SiteName',
-      }}
-      twitter={{
-        handle: '@handle',
-        site: '@site',
-        cardType: 'summary_large_image',
-      }}
-    />
-    <Container maxWidth={false} disableGutters>
-      <Container>
-        {/* <Header /> */}
-      </Container>
-      <Box sx={{ mt: 6, position: "relative" }}>
-        <ImageGallery />
-        <Box
-          sx={{
-            width: "380px",
-            aspectRatio: "1/1",
-            borderRadius: "99999px",
-            position: "absolute",
-            bottom: "-120px",
-            left: "50%",
-            transform: "translate(-50%, 0)",
-            overflow: "hidden",
-            backgroundImage: "url("+data.brand.avatarSrc+")",
-          }}
-        />
-      </Box>
-      <Container>
-        <Typography
+      <NextSeo
+        title="Using More of Config"
+        description="This example uses more of the available config options."
+        canonical="https://www.canonical.ie/"
+        openGraph={{
+          url: "https://www.url.ie/a",
+          title: "Open Graph Title",
+          description: "Open Graph Description",
+          images: [
+            {
+              url: "https://www.example.ie/og-image-01.jpg",
+              width: 800,
+              height: 600,
+              alt: "Og Image Alt",
+              type: "image/jpeg",
+            },
+            {
+              url: "https://www.example.ie/og-image-02.jpg",
+              width: 900,
+              height: 800,
+              alt: "Og Image Alt Second",
+              type: "image/jpeg",
+            },
+            { url: "https://www.example.ie/og-image-03.jpg" },
+            { url: "https://www.example.ie/og-image-04.jpg" },
+          ],
+          site_name: "SiteName",
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
+
+      <Container
+        className="wrapper brand-page-inner common-wrapper"
+        maxWidth={false}
+        disableGutters
+      >
+        <Box sx={{ position: "relative" }}>
+          <ImageGallery />
+          <Box
+            sx={{
+              width: "380px",
+              aspectRatio: "1/1",
+              borderRadius: "99999px",
+              position: "absolute",
+              bottom: "-170px",
+              zIndex: 2,
+              left: "50%",
+              transform: "translate(-50%, 0)",
+              overflow: "hidden",
+              backgroundImage: "url(" + data.brand.avatarSrc + ")",
+              boxShadow: "0 0 16px 0 #c0c0c0",
+              whileHover: {
+                boxShadow: "0 0 16px 0 #c0c0c0"
+              }
+            }}
+          />
+        </Box>
+
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container"
+        >
+          <Grid item xs={12} sx={{ mt: 28, mb: 4 }}>
+            <span className="divider"></span>
+            <Box>
+              <Typography
+                variant="h1"
+                className="main-heading"
+                align="center"
+                textTransform="uppercase"
+                sx={{ mt: 10, mb: 0 }}
+              >
+                <Typography
+                  variant="h1"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  {data.brand.title}
+                </Typography>
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                className="sub-heading"
+                align="center"
+              >
+                {/* Build your First Digital <br /> Wardrobe */}
+                <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </Typography>
+
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                sx={{ mt: 8 }}
+              >
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  CONTRIBUTING DESIGNER
+                </Typography>
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                className="sub-heading with-small-font"
+                align="center"
+              >
+                {data.brand.contributor}
+              </Typography>
+            </Box>
+          </Grid>
+
+          <Grid
+            container
+            className="side-spacing"
+            direction="row"
+            spacing={4}
+            sx={{ mt: 2, mb: 10 }}
+          >
+            {arr.length > 0 ? (
+              arr.map((props) => {
+                console.log(props);
+                return (
+                  <Grid item xs={12} sm={6} md={4} key={props.id}>
+                    <FashionItemCard {...props} expandable />
+                  </Grid>
+                );
+              })
+            ) : (
+              <h2
+              className="no-items-available"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "auto",
+                }}
+              >
+                Coming Soon…
+              </h2>
+            )}
+          </Grid>
+        </Grid>
+
+        {/* <Typography
           variant="h3"
           align="center"
           color="primary"
           sx={{ mt: 24, mb: 4 }}
         >
           <b>
-            {/* Should ideally be this {brand} */}
             {data.brand.title}
           </b>
-        </Typography>
-        <Grid container spacing={8} sx={{ mb: 16 }}>
-          <Grid item xs={12}>
-            {/* <DividedTable {...DividerTableData} /> */}
-            <Container maxWidth="md">
-              <Typography sx={{ mt: 6 }} variant="h6" align="center">
-                {data.description}
-              </Typography>
-              <Typography
-                variant="h5"
-                align="center"
-                color="primary"
-                sx={{ mt: 6, mb: 2 }}
-              >
-                <b>CONTRIBUTING DESIGNERS</b>
-              </Typography>
-            </Container>
-            <Grid
-              xs={12}
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {/* {designers.map(({ name, description }, i) => (
-                <Grid item xs={12} id={name + i}>
-                  <Typography gutterBottom align="center">
-                    <b>{name}</b>
-                  </Typography>
-                  <Typography align="center" variant="body2">
-                    {description}
-                  </Typography>
-                </Grid>
-              ))} */}
-            </Grid>
-          </Grid>
-          {/* {collections.length > 0 ? collections.map((props) => (
-            <Grid item xs={12} sm={6} md={4} key={props.id}>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                onClick={() => {
-                  router.push("/collections/" + props.id);
-                }}
-              >
-                <GridCard {...props} noBrand />
-              </Box>
-            </Grid>
-          )) : <h2 style={{display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "auto"}}>No Collections Available</h2>} */}
-          {arr.length > 0 ? arr.map((props) => { 
-              console.log(props)
-              return(
-              <Grid item xs={12} sm={6} md={4} key={props.id}>
-                  <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ ease: "easeOut", delay: 0.1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-          className="tw-cursor-pointer"
-        >
-                  <FashionItemCard {...props} expandable />
-                  </motion.div>
-              </Grid>
-            )}) : <h2 style={{display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "auto"}}>No Items Available</h2>}
-        </Grid>
-        <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] -tw-mt-[5%]">
-        <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
-        </div>
+        </Typography> */}
+
+        {arr.length > 0 ? (
+          <div className="tw-flex tw-justify-center tw-items-end tw-pb-4 tw-mb-[5%] tw-mt-5">
+            <Pagination
+              count={data.totalPages}
+              color="primary"
+              size="large"
+              onChange={changePage}
+              page={page}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+        <Footer />
       </Container>
-      <Footer />
-    </Container>
     </>
   );
 }

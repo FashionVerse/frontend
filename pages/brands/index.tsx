@@ -144,24 +144,13 @@ export default function Brands() {
               </Box>
             </Grid>
             <Grid
-            sx={{ marginTop: "-30px", marginBottom: "40px" }}
-            container
-            direction="row"
-            spacing={4}
-          >
-            {arr.map((props) => (
-              <Grid item xs={12} sm={6}  lg={4} key={props.id}>
-                <motion.div
-                  // className="drops_hover_cursor"
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                >
+              sx={{ marginTop: "-30px", marginBottom: "40px" }}
+              container
+              direction="row"
+              spacing={4}
+            >
+              {arr.map((props) => (
+                <Grid item xs={12} sm={6} lg={4} key={props.id}>
                   <Box
                     sx={{
                       display: "flex",
@@ -171,23 +160,23 @@ export default function Brands() {
                   >
                     <GridCard {...props} />
                   </Box>
-                </motion.div>
-              </Grid>
-            ))}
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
-          </Grid>
-
-    
-
-          <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] tw-mt-5">
-            <Pagination
-              count={data.totalPages}
-              color="primary"
-              size="large"
-              onChange={changePage}
-              page={page}
-            />
-          </div>
+          {arr.length > 0 ? (
+            <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] tw-mt-5">
+              <Pagination
+                count={data.totalPages}
+                color="primary"
+                size="large"
+                onChange={changePage}
+                page={page}
+              />
+            </div>
+          ) : (
+            ""
+          )}
           <Footer />
         </Container>
       </FormProvider>

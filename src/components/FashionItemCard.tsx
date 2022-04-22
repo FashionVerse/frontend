@@ -15,10 +15,11 @@ import { SiEthereum } from "react-icons/si";
 import { IconButton } from "@mui/material";
 import EnlargedFashionCard from "./EnlargedFashionCard";
 import { ethers } from "ethers";
-import { collection, setDoc, doc } from "firebase/firestore"; 
+import { collection, setDoc, doc } from "firebase/firestore";
 import firestore from "../../firebase/clientApp";
 import Web3 from "web3";
 import { useRouter } from "next/router";
+import etheriumIcon from "../../public/etherium-icon.svg";
 
 export interface FashionItemCardProps {
   id: string;
@@ -32,11 +33,11 @@ export interface FashionItemCardProps {
   hideAddToBag?: boolean;
   hidePrice?: boolean;
   expandable?: boolean;
-  available?: any
+  available?: any;
 }
 
 export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
-  maxWidth: "375px",
+  maxWidth: "404px",
   background:
     theme.palette.mode === "dark"
       ? `rgba( 255, 255, 255, 0.2 )`
@@ -44,36 +45,33 @@ export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
   backdropFilter: `blur( 8px )`,
   WebkitBackdropFilter: `blur( 8px )`,
   padding: "16px",
-  borderRadius: "16px",
+  borderRadius: "20px",
+  boxShadow: "none",
 }));
 
-async function addToBag(){
-  if(typeof window['ethereum'] !== 'undefined'){
-
+async function addToBag() {
+  if (typeof window["ethereum"] !== "undefined") {
   } else {
-    alert("Connect your wallet")
+    alert("Connect your wallet");
   }
 }
 
 export default function FashionItemCard(props: FashionItemCardProps) {
-
   const router = useRouter();
 
-
-    async function setCart(){
-      if(typeof window['ethereum'] !== 'undefined'){
-        const ethereum  = window['ethereum'];
-    if (ethereum) {
+  async function setCart() {
+    if (typeof window["ethereum"] !== "undefined") {
+      const ethereum = window["ethereum"];
+      if (ethereum) {
         var provider = new ethers.providers.Web3Provider(ethereum);
+      }
 
-    }
-    
-    const isMetaMaskConnected = async () => {
-      const accounts = await provider.listAccounts();
-      return accounts.length > 0;
-    }
+      const isMetaMaskConnected = async () => {
+        const accounts = await provider.listAccounts();
+        return accounts.length > 0;
+      };
       const connected = await isMetaMaskConnected();
-      if(connected){
+      if (connected) {
         const accounts = await ethereum.enable();
         const account = accounts[0];
         // await setDoc(doc(firestore, "cart", account), {
@@ -87,53 +85,52 @@ export default function FashionItemCard(props: FashionItemCardProps) {
 
         // });
 
-          const rawResponse = await fetch(process.env.API_URL+'/api/addItemToBag', {
-            method: 'POST',
+        const rawResponse = await fetch(
+          process.env.API_URL + "/api/addItemToBag",
+          {
+            method: "POST",
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
+              Accept: "application/json",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({item: props.id.toString(), account: account})
-          }).catch();
-          const content = await rawResponse.json();
-        
-          console.log(content);
+            body: JSON.stringify({
+              item: props.id.toString(),
+              account: account,
+            }),
+          }
+        ).catch();
+        const content = await rawResponse.json();
 
-        
-
-        
+        console.log(content);
       } else {
-        alert("Connect to Wallet")
+        alert("Connect to Wallet");
         router.replace("/");
       }
-
-      } else {
-        alert("MetaMask not installed")
-      }
+    } else {
+      alert("MetaMask not installed");
     }
-    
-    
+  }
 
   const [enlarged, setEnlarged] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  
 
-  var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
-  if(props.rarity >=30 ){
+  var rarityCategory:
+    | "Semi-rare"
+    | "Super-rare"
+    | "Ultra-rare"
+    | "Extremely-rare";
+  if (props.rarity >= 30) {
     rarityCategory = "Semi-rare";
-  }
-  else if (props.rarity >=15 && props.rarity < 30){
+  } else if (props.rarity >= 15 && props.rarity < 30) {
     rarityCategory = "Super-rare";
-  }
-  else if (props.rarity >=5 && props.rarity < 15){
+  } else if (props.rarity >= 5 && props.rarity < 15) {
     rarityCategory = "Ultra-rare";
   }
-  if(props.rarity < 5 ){
+  if (props.rarity < 5) {
     rarityCategory = "Extremely-rare";
   }
-  
 
-  if(isLoading){
+  if (isLoading) {
     return (
       <Box
         sx={{
@@ -152,7 +149,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
 
   return (
     <>
-      <FashionItemCardContainer>
+      <FashionItemCardContainer className="custom-card">
         <Box
           sx={{
             minWidth: "300px",
@@ -162,7 +159,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
             overflow: "hidden",
             backgroundColor: "white",
           }}
-          onClick={() => router.push("/products/"+props.id)}
+          onClick={() => router.push("/products/" + props.id)}
         >
           <Image
             src={props.nft.image}
@@ -188,9 +185,10 @@ export default function FashionItemCard(props: FashionItemCardProps) {
               primary={props.nft.description}
               secondary={props.brand.title}
               secondaryTypographyProps={{ style: { marginTop: "-2px" } }}
+              primaryTypographyProps={{ style: { fontWeight: "700" } }}
             />
           </ListItem>
-          <Stack justifyContent="center" alignItems="center" sx={{ mr: 1 }}>
+          <Stack sx={{ minWidth: "70px" }}>
             <Typography variant="caption">Rarity</Typography>
             <Typography variant="caption" sx={{ mt: "-2px" }}>
               {rarityCategory}
@@ -208,16 +206,27 @@ export default function FashionItemCard(props: FashionItemCardProps) {
         >
           {!props.hidePrice && (
             <Stack alignItems="center" direction="row">
-              <SiEthereum fontSize="1rem" />
-              <Typography variant="h6" sx={{ ml: "4px" }}>
+              {/* <SiEthereum fontSize="1rem" /> */}
+              <Image
+                width="23px"
+                height="38px"
+                src={etheriumIcon}
+                alt="etherium icon"
+              />
+              <Typography variant="h6" sx={{ ml: 1 }}>
                 {/* {Web3.utils.fromWei( props.price.toString(), 'ether')} */}
-              {props.price.toString()}
+                {props.price.toString()}
               </Typography>
             </Stack>
           )}
           {!props.hideAddToBag && (
             <Stack alignItems="center">
-              <IconButton size="small" onClick={()=> {setCart()}}>
+              <IconButton
+                size="small"
+                onClick={() => {
+                  setCart();
+                }}
+              >
                 <BsHandbag />
               </IconButton>
               <Typography variant="caption" sx={{ fontSize: "8px" }}>

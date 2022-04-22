@@ -23,6 +23,10 @@
   .secondary-heading .gradient-text {
     font-size: 57px;
   }
+  .side-spacing{
+    padding-left: 100px;
+    padding-right: 100px; 
+  }
 }
 @media screen and (max-width: 1439px) {
   .myNewBox {
@@ -40,6 +44,10 @@
 }
 
 @media screen and (max-width: 1364px) {
+  .side-spacing{
+    padding-left: 60px;
+    padding-right: 60px; 
+  }
   .main-heading .gradient-text,
   .main-heading {
     font-size: 55px;

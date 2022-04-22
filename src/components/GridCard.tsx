@@ -47,6 +47,7 @@ const GridCardContainer = styled(Paper)(({ theme }) => ({
   WebkitBackdropFilter: `blur( 8px )`,
   marginTop: "12px",
   marginBottom: "12px",
+  boxShadow: "none"
 }));
 
 const GridCard = (props: GridCardProps) => {
@@ -67,7 +68,7 @@ const GridCard = (props: GridCardProps) => {
   const router = useRouter();
 
   return (
-    <GridCardContainer
+    <GridCardContainer className="custom-card"
       onClick={() => (props.href ? router.push(props.href) : null)}
     >
       <Stack justifyContent={"space-between"}>

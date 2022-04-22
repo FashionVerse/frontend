@@ -538,6 +538,7 @@ export default function DropPage() {
               {dropData.title.toUpperCase()}
             </b>
           </Typography>
+          {dropData.subtitle.toUpperCase()}
           <Grid container spacing={8} sx={{ mb: 16 }}>
             <Grid item xs={12}>
               <Stack direction="row" gap={2} sx={{ px: 1 }}>
@@ -585,7 +586,7 @@ export default function DropPage() {
                   margin: "auto",
                 }}
               >
-                No Items Available
+                Coming Soon…
               </h2>
             )}
           </Grid>
