@@ -11,8 +11,8 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { motion } from "framer-motion";
 import AnimLogo from "../../src/components/AnimLogo";
-import {Pagination} from "@mui/material"
-import useSWR from 'swr'
+import { Pagination } from "@mui/material";
+import useSWR from "swr";
 import { NextSeo } from "next-seo";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -24,18 +24,21 @@ export default function Brands() {
     },
   });
 
-  function changePage(event, value){
-    setPage(value)
+  function changePage(event, value) {
+    setPage(value);
   }
 
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [page, setPage] = React.useState(1);
-  const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?page='+page, fetcher)
+  const { data, error } = useSWR(
+    process.env.API_URL + "/api/getBrands?page=" + page,
+    fetcher
+  );
   if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
   const arr: GridCardProps[] = [];
   if (data) {
-  console.log("data ",data)
+    console.log("data ", data);
     data.brands.forEach((item) => {
       arr.push({
         topLeftImage: item.gridImages[0],
@@ -46,7 +49,7 @@ export default function Brands() {
         title: item.title,
         subtitle: item.subtitle,
         id: item._id,
-        href: "brands/"+item.url,
+        href: "brands/" + item.url,
       });
     });
   }
@@ -76,33 +79,33 @@ export default function Brands() {
         description="This example uses more of the available config options."
         canonical="https://www.canonical.ie/"
         openGraph={{
-          url: 'https://www.url.ie/a',
-          title: 'Open Graph Title',
-          description: 'Open Graph Description',
+          url: "https://www.url.ie/a",
+          title: "Open Graph Title",
+          description: "Open Graph Description",
           images: [
             {
-              url: 'https://www.example.ie/og-image-01.jpg',
+              url: "https://www.example.ie/og-image-01.jpg",
               width: 800,
               height: 600,
-              alt: 'Og Image Alt',
-              type: 'image/jpeg',
+              alt: "Og Image Alt",
+              type: "image/jpeg",
             },
             {
-              url: 'https://www.example.ie/og-image-02.jpg',
+              url: "https://www.example.ie/og-image-02.jpg",
               width: 900,
               height: 800,
-              alt: 'Og Image Alt Second',
-              type: 'image/jpeg',
+              alt: "Og Image Alt Second",
+              type: "image/jpeg",
             },
-            { url: 'https://www.example.ie/og-image-03.jpg' },
-            { url: 'https://www.example.ie/og-image-04.jpg' },
+            { url: "https://www.example.ie/og-image-03.jpg" },
+            { url: "https://www.example.ie/og-image-04.jpg" },
           ],
-          site_name: 'SiteName',
+          site_name: "SiteName",
         }}
         twitter={{
-          handle: '@handle',
-          site: '@site',
-          cardType: 'summary_large_image',
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
         }}
       />
       <Head>
@@ -110,8 +113,8 @@ export default function Brands() {
       </Head>
       <FormProvider {...methods}>
         <Container
-            className="wrapper brand-page common-wrapper"
-            maxWidth={false}
+          className="wrapper brand-page common-wrapper"
+          maxWidth={false}
         >
           <Grid
             container
@@ -119,7 +122,7 @@ export default function Brands() {
             direction="row"
             justifyContent="center"
             alignItems="center"
-            className="custom-container  common-fold"
+            className="custom-container"
           >
             <Grid item xs={12}>
               <span className="divider"></span>
@@ -140,20 +143,17 @@ export default function Brands() {
                 </Typography>
               </Box>
             </Grid>
-          </Grid>
-
-          <Grid
+            <Grid
             sx={{ marginTop: "-30px", marginBottom: "40px" }}
             container
             direction="row"
-            className=""
-            spacing={6}
+            spacing={4}
           >
             {arr.map((props) => (
-                <Grid item xs={12} sm={6} md={4} key={props.id}>
-                  <motion.div
+              <Grid item xs={12} sm={6}  lg={4} key={props.id}>
+                <motion.div
                   // className="drops_hover_cursor"
-                  style = {{
+                  style={{
                     cursor: "pointer",
                   }}
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -169,15 +169,24 @@ export default function Brands() {
                       justifyContent: "center",
                     }}
                   >
-                    
                     <GridCard {...props} />
                   </Box>
-                  </motion.div>
-                </Grid>
-              ))}
+                </motion.div>
+              </Grid>
+            ))}
           </Grid>
+          </Grid>
+
+    
+
           <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] tw-mt-5">
-            <Pagination count={data.totalPages} color="primary" size="large" onChange={changePage} page={page} />
+            <Pagination
+              count={data.totalPages}
+              color="primary"
+              size="large"
+              onChange={changePage}
+              page={page}
+            />
           </div>
           <Footer />
         </Container>
