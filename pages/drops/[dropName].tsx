@@ -564,13 +564,14 @@ export default function DropPage() {
                   align="center"
                 >
                   {/* Build your First Digital <br /> Wardrobe */}
-                  <Typewriter
+                  {/* <Typewriter
                     options={{
                       strings: [dropData.subtitle.toUpperCase()],
                       autoStart: true,
                       loop: true,
-                    }}
-                  />
+                    }} */}
+                    {dropData.subtitle.toUpperCase()}
+                  {/* /> */}
                 </Typography>
               </Box>
             </Grid>

@@ -1318,6 +1318,7 @@ header + div {
   background: #000;
 }
 .lines {
+  display:none;
   position: absolute;
   top: 0;
   left: 0;
@@ -1402,10 +1403,10 @@ header + div {
 .bg-style-light .home-page {
   background: url("/top-right-home-white.png") right 2.1% no-repeat,
     url("/top-left-home-white.png") left 2.1% no-repeat,
-    url("/home-page-middle-bg-blend.svg") center 50% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center 52% no-repeat,
     url("/bottom-right-white.png") bottom right no-repeat,
     url("/bottom-left-white.png") bottom left no-repeat;
-  background-size: auto, auto, auto, auto, auto;
+  background-size: auto, auto, 100%, auto, auto;
 }
 
 .bg-style-dark .brand-page {
@@ -1439,7 +1440,7 @@ header + div {
     url("/home-page-middle-bg-blend.svg") center 89% no-repeat,
       url("/bottom-right-white.png") bottom right no-repeat,
     url("/bottom-left-white.png") bottom left no-repeat;
-  background-size: auto, auto, auto, auto, auto;
+  background-size: auto, auto, 100%, auto, auto;
 }
 
 .bg-style-dark .resource-page {
@@ -1508,11 +1509,19 @@ header + div {
 .first-fold {
   padding-bottom: 97px;
 }
-.gif-outer {
-  width: 100%;
-  height: 0;
-  padding-bottom: 133%;
-  position: relative;
+.first-fold .keen-slider{
+  height: 100%;
+  align-items: center;
+}
+.first-fold .keen-slider .keen-slider__slide {
+  justify-content: center;
+}
+.gif-outer{
+  width:280px;
+  height:auto;
+}
+.gif-outer span {
+border-radius:10px;
 }
 .giphy-embed {
   position: absolute;
@@ -1540,6 +1549,8 @@ header + div {
   border-radius: 21px;
   padding: 4px 14px;
   box-shadow: none;
+  position:relative;
+  top:30px
 }
 .cost-btn:hover {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
@@ -1579,7 +1590,7 @@ header + div {
   font-weight: 700;
 }
 .main-heading i {
-  font-weight: 300;
+  font-weight: 700;
   font-family: "AmalineTrialRegular400";
 }
 .secondary-heading {
@@ -1587,6 +1598,7 @@ header + div {
   line-height: 24px;
   font-family: "AmalineTrialRegular400";
   text-align: center;
+  font-weight:700;
 }
 .secondary-heading .gradient-text {
   font-family: "AmalineTrialRegular400";
@@ -1610,6 +1622,7 @@ header + div {
 }
 .secondary-heading i {
   font-style: normal;
+  font-weight: 700;
 }
 .sub-heading {
   font-weight: 500;
@@ -1754,6 +1767,12 @@ header + div {
   background-clip: text;
   text-fill-color: transparent;
 }
+.bg-style-light .custom-card {
+  border:1px solid #fff;
+}
+.bg-style-light .keen-slider .custom-card:hover {
+  box-shadow: 0 0 16px 0 #fff;
+}
 .custom-card {
   cursor: pointer;
   box-shadow: none;
@@ -1848,8 +1867,12 @@ header + div {
   font-weight: 700;
 }
 .sub-heading.with-small-font {
-  font-size: 36px;
+  font-size: 26px;
   font-weight: 500;
+  line-height: 39px;
+  max-width: 80%;
+  margin-left:auto;
+  margin-right:auto;
 }
 .no-items-available {
   border: 1px solid #fff;

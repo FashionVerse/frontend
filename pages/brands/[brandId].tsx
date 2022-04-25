@@ -290,17 +290,18 @@ export default function BrandPage() {
 
               <Typography
                 variant="subtitle1"
-                className="sub-heading"
+                className="sub-heading with-small-font"
                 align="center"
               >
                 {/* Build your First Digital <br /> Wardrobe */}
-                <Typewriter
+                {/* <Typewriter
                   options={{
                     strings: [data.brand.description],
                     autoStart: true,
                     loop: true,
                   }}
-                />
+                /> */}
+                {data.brand.description}
               </Typography>
 
               <Typography
@@ -327,6 +328,8 @@ export default function BrandPage() {
               </Typography>
             </Box>
           </Grid>
+
+          
 
           <Grid
             container
@@ -358,6 +361,7 @@ export default function BrandPage() {
               </h2>
             )}
           </Grid>
+
         </Grid>
 
         {/* <Typography

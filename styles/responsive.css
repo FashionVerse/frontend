@@ -29,14 +29,14 @@
   }
 }
 @media screen and (max-width: 1439px) {
-  .myNewBox {
+  /* .myNewBox {
     width: 590px;
     height: 590px;
-  }
-  .cost-btn {
+  } */
+  /* .cost-btn {
     position: relative;
     top: -43px;
-  }
+  } */
   .section-spacing {
     padding-top: 60px;
     padding-bottom: 60px;

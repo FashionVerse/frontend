@@ -12,7 +12,8 @@ import AnimLogo from "./AnimLogo";
 import useSWR from "swr";
 import Link from "next/link";
 import etheriumIcon from "../../public/etherium-icon.svg";
-import Gif from "../../public/dummy.gif";
+import Gif from "../../public/clothes.gif";
+
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -66,16 +67,16 @@ function FeaturedDisplay() {
             className="keen-slider__slide"
             sx={{
               alignItems: "center",
-              gap: "12px",
+              // gap: "12px",
             }}
           >
-            <Viewer
+            {/* <Viewer
               width="500px"
               height="400px"
               imgLink={item.nft.metadata.image}
               isProduct="false"
             >
-              {/* {"name":"Cyber Punk Outfit","description":"A Cyber Punk Outfit","image":"https://ipfs.infura.io/ipfs/QmbmAYjQxCcj3MANspmK6KGKjsqQgrnNAgyAbv1iYfYV3d","animation_url":"https://ipfs.infura.io/ipfs/QmWpez4dCweVKgaMWtDXrqkDnDZcGBxrGp12khdzE9b2XJ"} */}
+              {"name":"Cyber Punk Outfit","description":"A Cyber Punk Outfit","image":"https://ipfs.infura.io/ipfs/QmbmAYjQxCcj3MANspmK6KGKjsqQgrnNAgyAbv1iYfYV3d","animation_url":"https://ipfs.infura.io/ipfs/QmWpez4dCweVKgaMWtDXrqkDnDZcGBxrGp12khdzE9b2XJ"}
               <Model
                 link={
                   item.nft.metadata.animation_url +
@@ -84,10 +85,13 @@ function FeaturedDisplay() {
                   ".glb"
                 }
               />
-            </Viewer>
+            </Viewer> */}
          
-            {/* <Image src={Gif} alt="gif" width="429px" height="429px" /> */}
-            <Stack direction="row" gap={1}>
+            <div className="gif-outer" >
+              <Image  src={Gif} alt="gif"  objectFit="cover" />
+            </div>
+
+        
               <Link href={`/products/${item._id}`}>
                 <Button
                   variant="contained"
@@ -102,7 +106,7 @@ function FeaturedDisplay() {
                   {item.price.toString() + " ETH"}
                 </Button>
               </Link>
-            </Stack>
+             
           </Stack>
         ))}
       </div>
@@ -117,8 +121,10 @@ export default function LandingPageDisplay(props) {
         margin: "auto",
         display: "flex",
         alignItems: "center",
-        maxWidth: "342px",
+        width: "542px",
         position: "relative",
+        top: "12px",
+        height: "100%"
       }}
     >
       <FeaturedDisplay />
@@ -139,10 +145,11 @@ function Arrow(props: {
         onClick={props.onClick}
         style={{
           position: "absolute",
-          top: "40%",
+          top: "50%",
           left: 0,
           zIndex: "5",
           cursor: "pointer",
+          marginTop: "-32px"
         }}
       />
     );
@@ -154,9 +161,10 @@ function Arrow(props: {
         onClick={props.onClick}
         style={{
           position: "absolute",
-          top: "40%",
+          top: "50%",
           right: 0,
           cursor: "pointer",
+          marginTop: "-32px"
         }}
       />
     );
