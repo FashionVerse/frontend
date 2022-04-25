@@ -1408,6 +1408,23 @@ header + div {
     url("/bottom-left-white.png") bottom left no-repeat;
   background-size: auto, auto, 100%, auto, auto;
 }
+.bg-style-dark .connect-wallet {
+  background: url("/top-right-home.png") right 2.1% no-repeat,
+    url("/top-left-home.png") left 2.1% no-repeat,
+    url("/connect-wallet.svg") center 53% no-repeat,
+    url("/bottom-right.png") bottom right no-repeat,
+    url("/bottom-left.png") bottom left no-repeat;
+  background-size: auto, auto, auto, auto, auto;
+}
+.bg-style-light .connect-wallet {
+  background: url("/top-right-home-white.png") right 2.1% no-repeat,
+    url("/top-left-home-white.png") left 2.1% no-repeat,
+    url("/connect-wallet.svg") center 52% no-repeat,
+    url("/bottom-right-white.png") bottom right no-repeat,
+    url("/bottom-left-white.png") bottom left no-repeat;
+  background-size: auto, auto, 100%, auto, auto;
+}
+
 
 .bg-style-dark .brand-page {
   background: url("/top-right-home.png") right 2.1% no-repeat,
