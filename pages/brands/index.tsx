@@ -124,6 +124,8 @@ export default function Brands() {
             alignItems="center"
             className="custom-container"
           >
+
+            
             <Grid item xs={12}>
               <span className="divider"></span>
               <Box>
@@ -143,6 +145,8 @@ export default function Brands() {
                 </Typography>
               </Box>
             </Grid>
+
+            
             <Grid
               sx={{ marginTop: "-30px", marginBottom: "40px" }}
               container
@@ -163,6 +167,9 @@ export default function Brands() {
                 </Grid>
               ))}
             </Grid>
+
+
+
           </Grid>
           {arr.length > 0 ? (
             <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] tw-mt-5">
