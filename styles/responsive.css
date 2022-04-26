@@ -8,7 +8,15 @@
   }
   .main-heading .gradient-text,
   .main-heading {
-    font-size: 62px;
+    font-size: 57px;
+  }
+  .secondary-heading,.secondary-heading .gradient-text{
+    font-size: 52px;
+  }
+  .sub-heading{
+    font-size: 44px;
+    line-height: normal;
+
   }
   .myNewBox {
     width: auto;
@@ -20,9 +28,7 @@
     padding-top: 70px;
     padding-bottom: 70px;
   }
-  .secondary-heading .gradient-text {
-    font-size: 57px;
-  }
+
   .side-spacing{
     padding-left: 100px;
     padding-right: 100px; 
@@ -48,12 +54,15 @@
     padding-left: 60px;
     padding-right: 60px; 
   }
+  .sub-heading{
+    font-size: 38px;
+  }
   .main-heading .gradient-text,
   .main-heading {
     font-size: 55px;
   }
   .secondary-heading .gradient-text,.secondary-heading {
-    font-size: 50px;
+    font-size: 48px;
   }
   .section-spacing {
     padding-top: 50px;

@@ -1,7 +1,6 @@
 import * as React from "react";
 import Footer from "../src/components/Footer";
 import {
-  Button,
   Container,
   Typography,
   Grid,
@@ -27,13 +26,14 @@ import Web3 from "web3";
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import { ethers } from "ethers";
 import useSWR from "swr";
+import Button from "@mui/material/Button";
 import { NextSeo } from "next-seo";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BlueShadowPaper = styled(Paper)(({ theme }) => ({
-  boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 30.3961px -30.3961px 30.3961px rgba(149, 149, 149, 0.095), inset -30.3961px 30.3961px 30.3961px rgba(255, 255, 255, 0.095)`,
-  background: theme.palette.mode === "dark" ? "#121212" : "#FFF",
+  // boxShadow: `0px 5.25872px 5.25872px ${theme.palette.primary.main}, inset 30.3961px -30.3961px 30.3961px rgba(149, 149, 149, 0.095), inset -30.3961px 30.3961px 30.3961px rgba(255, 255, 255, 0.095)`,
+  background: theme.palette.mode === "dark" ? "rgba(18, 18, 18, 0.5)" : "#FFF",
 }));
 
 const GradientButton = styled(Button)(({ theme }) => ({
@@ -218,6 +218,7 @@ export default function Bag() {
             .send({ from: account, value: totalCost });
           setIsLoading(false);
           console.log(receipt);
+          enqueueSnackbar("Your item's have been purchased sucessfully");
         } else {
           alert("Nothing to purchase");
         }
@@ -449,56 +450,82 @@ export default function Bag() {
   }
 
   return (
-    <Container className="checkOutPage">
-      {/* <Header /> */}
-      <Typography
-        variant="h3"
-        align="center"
-        color="primary"
-        sx={{
-          mt: 16,
-          mb: 10,
-        }}
-        className="gradient-text"
+    <Container
+      className="wrapper home-page common-wrapper checkOutPage"
+      maxWidth={false}
+    >
+      <Grid
+        container
+        spacing={0}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        className="custom-container"
       >
-        <b>CHECKOUT</b>
-      </Typography>
-      <Container maxWidth="md" className="checkOutItems">
-        <BlueShadowPaper
-          sx={{
-            borderRadius: "32px",
-            mb: 16,
-          }}
-        >
-          <Stack gap={4} sx={{ px: 4, py: 6 }}>
-            {data.map((props) => (
-              <CheckoutCard {...props} />
-            ))}
-          </Stack>
-
-          <Stack
-            direction="row"
-            justifyContent={"flex-end"}
-            sx={{ px: 8, pb: 4 }}
-          >
-            <Stack gap={2}>
-              <Typography variant="h5">
-                {"Total Cost: " + toFixedIfNecessary(totalCost, 4) + " ETH"}
-              </Typography>
-              <GradientButton
+        <Grid item xs={12}>
+          <span className="divider"></span>
+          <Box>
+            <Typography
+              variant="h1"
+              className="secondary-heading"
+              sx={{ mt: 10, mb: 10 }}
+            >
+              <Typography
+                variant="h1"
                 color="primary"
-                sx={{ borderRadius: "12px" }}
-                onClick={() => {
-                  purchaseItems();
-                }}
+                component="span"
+                className="gradient-text"
               >
-                <Typography variant="h5">Purchase</Typography>
-              </GradientButton>
+                CHECKOUT
+              </Typography>
+            </Typography>
+          </Box>
+        </Grid>
+        <Container maxWidth="md" className="checkOutItems">
+          <BlueShadowPaper
+            sx={{
+              borderRadius: "32px",
+              mb: 16,
+            }}
+          >
+            <Stack gap={4} sx={{ px: 4, py: 6 }}>
+              <Typography
+                sx={{ textAlign: "left", fontSize: "41px", lineHeight: "normal" }}
+                variant="subtitle1"
+                className="sub-heading"
+                align="center"
+                style={{textAlign: "left", fontSize: "41px", lineHeight: "normal" }}
+              >
+                Items in Order
+              </Typography>
+              {data.map((props) => (
+                <CheckoutCard {...props} />
+              ))}
             </Stack>
-          </Stack>
-        </BlueShadowPaper>
-      </Container>
 
+            <Stack
+              direction="row"
+              justifyContent={"flex-end"}
+              sx={{ px: 8, pb: 4 }}
+            >
+              <Stack gap={2}>
+                <Typography variant="h5">
+                  {"Total Cost: " + toFixedIfNecessary(totalCost, 4) + " ETH"}
+                </Typography>
+                <GradientButton
+                  color="primary"
+                  sx={{ borderRadius: "12px" }}
+                  onClick={() => {
+                    purchaseItems();
+                  }}
+                >
+                  <Typography variant="h5">Purchase</Typography>
+                </GradientButton>
+              </Stack>
+            </Stack>
+          </BlueShadowPaper>
+        </Container>
+      </Grid>
       <Footer />
     </Container>
   );

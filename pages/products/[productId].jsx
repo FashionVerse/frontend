@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import Viewer from "../../src/components/Viewer";
 import Model from "../../src/components/Model";
@@ -10,63 +11,70 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimLogo from "../../src/components/AnimLogo";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { ethers } from "ethers";
-import DoneAllIcon from '@mui/icons-material/DoneAll';
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import Footer from "../../src/components/Footer";
 import { NextSeo } from "next-seo";
-import Gif from "../../public/product-img.gif";
+// import Gif from "../../public/product-img.gif";
 import { styled, alpha, useTheme } from "@mui/system";
+import Dialog, { DialogProps } from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Gif from "../../public/clothes.gif";
 
+const fetcher = (url) =>
+  fetch(url, { method: "POST" }).then((res) => res.json());
 
-const fetcher = (url) => fetch(url, {method: 'POST'}).then((res) => res.json());
-
-function AnimatedButton(props)
-{
+function AnimatedButton(props) {
   const router = useRouter();
-  async function setCart(){
-    if(typeof window['ethereum'] !== 'undefined'){
-      const ethereum  = window['ethereum'];
-  if (ethereum) {
-      var provider = new ethers.providers.Web3Provider(ethereum);
+  async function setCart() {
+    if (typeof window["ethereum"] !== "undefined") {
+      const ethereum = window["ethereum"];
+      if (ethereum) {
+        var provider = new ethers.providers.Web3Provider(ethereum);
+      }
 
-  }
-  
-  const isMetaMaskConnected = async () => {
-    const accounts = await provider.listAccounts();
-    return accounts.length > 0;
-  }
-    const connected = await isMetaMaskConnected();
-    if(connected){
-      const accounts = await ethereum.enable();
-      const account = accounts[0];
-        const rawResponse = await fetch(process.env.API_URL+'/api/addItemToBag', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({item: props.id.toString(), account: account})
-        }).catch();
+      const isMetaMaskConnected = async () => {
+        const accounts = await provider.listAccounts();
+        return accounts.length > 0;
+      };
+      const connected = await isMetaMaskConnected();
+      if (connected) {
+        const accounts = await ethereum.enable();
+        const account = accounts[0];
+        const rawResponse = await fetch(
+          process.env.API_URL + "/api/addItemToBag",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              item: props.id.toString(),
+              account: account,
+            }),
+          }
+        ).catch();
         const content = await rawResponse.json();
-        if(content.status === 'ok'){
-          setIsAnimating(2)
-        }
-        else{
-          setIsAnimating(0)
+        if (content.status === "ok") {
+          setIsAnimating(2);
+        } else {
+          setIsAnimating(0);
         }
         console.log(content);
-   } else {
-      alert("Connect to Wallet")
-      router.replace("/wallets");
-    }
-
+      } else {
+        alert("Connect to Wallet");
+        router.replace("/wallets");
+      }
     } else {
-      alert("MetaMask not installed")
+      alert("MetaMask not installed");
     }
   }
   const [isAnimating, setIsAnimating] = useState(0);
-  return(
+  return (
     <>
       {/* <motion.button 
         type="button" 
@@ -81,42 +89,46 @@ function AnimatedButton(props)
         >
           <AccountBalanceWalletIcon /> Add To Bag lllll
         </motion.button> */}
-        
-        <Button 
-          variant="contained" 
-          size="large" 
-          onClick={() => 
-          {
-            setIsAnimating(1)
-            setCart()
-          }}
-          style={isAnimating===0? {display:"flex"}:{display:"none"}}
-          sx={{color: "#fff", width: 1}}
+
+      <Button
+        variant="contained"
+        size="large"
+        onClick={() => {
+          setIsAnimating(1);
+          setCart();
+        }}
+        style={isAnimating === 0 ? { display: "flex" } : { display: "none" }}
+        sx={{ color: "#fff", width: 1 }}
+      >
+        <AccountBalanceWalletIcon /> Add To Bag
+      </Button>
+      <Button
+        variant="contained"
+        size="large"
+        style={isAnimating === 1 ? { display: "flex" } : { display: "none" }}
+        sx={{ color: "#fff", width: 1 }}
+      >
+        <svg
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="tw-mr-2 tw-animate-spin"
+          viewBox="0 0 1792 1792"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <AccountBalanceWalletIcon /> Add To Bag
-        </Button> 
-        <Button 
-          variant="contained" 
-          size="large" 
-          style={isAnimating===1? {display:"flex"}:{display:"none"}}
-          sx={{color: "#fff", width: 1}}
-        >
-          <svg width="20" height="20" fill="currentColor" class="tw-mr-2 tw-animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-            <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z">
-              </path>
-          </svg> 
-          Adding
-        </Button>      
-        <Button 
-          variant="contained" 
-          size="large" 
-          style={isAnimating===2? {display:"flex"}:{display:"none"}}
-          sx={{color: "#fff", width: 1}}
-        >
-          <DoneAllIcon />{' '}
-          Added To Bag
-        </Button>
-        {/* <motion.button 
+          <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z"></path>
+        </svg>
+        Adding
+      </Button>
+      <Button
+        variant="contained"
+        size="large"
+        style={isAnimating === 2 ? { display: "flex" } : { display: "none" }}
+        sx={{ color: "#fff", width: 1 }}
+      >
+        <DoneAllIcon /> Added To Bag
+      </Button>
+      {/* <motion.button 
         style={isAnimating===1? {display:"flex"}:{display:"none"}}
         type="button" class="tw-py-2 tw-px-4 tw-flex tw-justify-center tw-items-center  tw-bg-blue-600 hover:tw-bg-blue-700 focus:tw-ring-blue-500 focus:tw-ring-offset-blue-200 tw-text-white tw-w-full tw-transition tw-ease-in tw-duration-200 tw-text-center tw-text-base tw-font-semibold tw-shadow-md focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2  tw-rounded-lg ">
         <svg width="20" height="20" fill="currentColor" class="tw-mr-2 tw-animate-spin" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -132,175 +144,273 @@ function AnimatedButton(props)
         Added To Bag jjjjjj
       </motion.button> */}
     </>
-  )
-
+  );
 }
 
 export default function Product() {
+  const [open, setOpen] = useState(false);
+  const [fullWidth, setFullWidth] = useState(true);
+  const [maxWidth, setMaxWidth] = useState("md");
   const router = useRouter();
   const { productId } = router.query;
-  if(!productId) return (
-    <Box
-      sx={{
-        height: "100vh",
-        width: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "auto",
-      }}
-    >
-      <AnimLogo />
-    </Box>
-  );;
-  console.log("Product Id ",productId);
+
+  if (!productId)
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <AnimLogo />
+      </Box>
+    );
+  console.log("Product Id ", productId);
+
   const { data, error } = useSWR(
-    process.env.API_URL+"/api/getItems?id=" + productId,
+    process.env.API_URL + "/api/getItems?id=" + productId,
     fetcher
   );
+
   if (error) return <div>failed to load</div>;
-  if (!data) return (
-    <Box
-      sx={{
-        height: "100vh",
-        width: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "auto",
-      }}
-    >
-      <AnimLogo />
-    </Box>
-  );
-  console.log("data fetched",data);
+  if (!data)
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <AnimLogo />
+      </Box>
+    );
+  console.log("data fetched", data);
   const {
     palette: { mode },
   } = useTheme();
+
+  // const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('sm');
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-    <NextSeo
-      title="Using More of Config"
-      description="This example uses more of the available config options."
-      canonical="https://www.canonical.ie/"
-      openGraph={{
-        url: 'https://www.url.ie/a',
-        title: 'Open Graph Title',
-        description: 'Open Graph Description',
-        images: [
-          {
-            url: 'https://www.example.ie/og-image-01.jpg',
-            width: 800,
-            height: 600,
-            alt: 'Og Image Alt',
-            type: 'image/jpeg',
-          },
-          {
-            url: 'https://www.example.ie/og-image-02.jpg',
-            width: 900,
-            height: 800,
-            alt: 'Og Image Alt Second',
-            type: 'image/jpeg',
-          },
-          { url: 'https://www.example.ie/og-image-03.jpg' },
-          { url: 'https://www.example.ie/og-image-04.jpg' },
-        ],
-        site_name: 'SiteName',
-      }}
-      twitter={{
-        handle: '@handle',
-        site: '@site',
-        cardType: 'summary_large_image',
-      }}
-    />
-    <Head>
-      <title>Product</title>
-    </Head>
+      <NextSeo
+        title="Using More of Config"
+        description="This example uses more of the available config options."
+        canonical="https://www.canonical.ie/"
+        openGraph={{
+          url: "https://www.url.ie/a",
+          title: "Open Graph Title",
+          description: "Open Graph Description",
+          images: [
+            {
+              url: "https://www.example.ie/og-image-01.jpg",
+              width: 800,
+              height: 600,
+              alt: "Og Image Alt",
+              type: "image/jpeg",
+            },
+            {
+              url: "https://www.example.ie/og-image-02.jpg",
+              width: 900,
+              height: 800,
+              alt: "Og Image Alt Second",
+              type: "image/jpeg",
+            },
+            { url: "https://www.example.ie/og-image-03.jpg" },
+            { url: "https://www.example.ie/og-image-04.jpg" },
+          ],
+          site_name: "SiteName",
+        }}
+        twitter={{
+          handle: "@handle",
+          site: "@site",
+          cardType: "summary_large_image",
+        }}
+      />
+      <Head>
+        <title>Product</title>
+      </Head>
 
-    <Container
+      <Container
         className="wrapper resource-page common-wrapper"
         maxWidth={false}
-    >
-      <Grid
-        container
-        spacing={0}
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        className="custom-container common-fold1"
       >
         <Grid
-          sx={{ marginTop: "20px", marginBottom: "100px" }}
           container
+          spacing={0}
           direction="row"
-          spacing={4}
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container common-fold1"
         >
-          <Grid item lg={6}>
-            <div id="product-container"
-              class="tw-shadow-2xl tw-shadow-white/50"
-              style={{
-                backgroundColor: "rgba(0,0,0,0.05)",
-                backdropFilter: "blur(5px)",
-                borderRadius: "20px",
-              }}
-            >
+          <Grid
+            sx={{ marginTop: "20px", marginBottom: "100px", alignItems: "center" }}
+            container
+            direction="row"
+            spacing={4}
+          >
+            <Grid item lg={6}>
+              <div
+                id="product-container"
+                class="tw-shadow-2xl tw-shadow-white/50"
+                style={{
+                  backgroundColor: "rgba(0,0,0,0.05)",
+                  backdropFilter: "blur(5px)",
+                  borderRadius: "20px",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "20px",
+                    overflow: "hidden",
+                    px: 6,
+                    py: 6,
+                  }}
+                >
+                  {/* <Image
+                    sx={{ borderRadius: "20px" }}
+                    src={Gif}
+                    alt="gif"
+                    objectFit="cover"
+                  /> */}
+                  <div className="gif-outer" style={{ width: "410px" }}>
+                    <Image
+                      sx={{
+                        borderRadius: "20px",
+                        width: "500px",
+                        height: "400px",
+                      }}
+                      src={Gif}
+                      alt="gif"
+                      objectFit="cover"
+                    />
+                  </div>
+
+                  <Button
+                    variant="outlined"
+                    onClick={handleClickOpen}
+                    color={mode === "dark" ? "primary" : "secondary"}
+                    sx={{
+                      alignSelf: "flex-end",
+                      marginTop: "20px",
+                    }}
+                  >
+                    Open in 3d
+                  </Button>
+
+                  {/* Adding Modal for viewer */}
+                  {open && (
+                    <Dialog
+                      fullWidth={fullWidth}
+                      maxWidth={maxWidth}
+                      open={open}
+                      onClose={handleClose}
+                    >
+                      <DialogTitle
+                        sx={{
+                          background:
+                            "linear-gradient(270.98deg, #01f0ff 1.94%, rgba(0, 0, 0) 50.07%)",
+                        }}
+                      >
+                        3D View
+                      </DialogTitle>
+                      <DialogContent
+                        sx={{
+                          background: "#fff",
+                        }}
+                      >
+                        <Box
+                          noValidate
+                          component="form"
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            m: "auto",
+                            width: "fit-content",
+                          }}
+                        >
+                          <Viewer
+                            width="500px"
+                            height="400px"
+                            imgLink={data.nft.metadata.image}
+                            isProduct="true"
+                          >
+                            <Model
+                              link={
+                                data.nft.metadata.animation_url +
+                                "?filename=model.glb"
+                              }
+                              imgLink={data.nft.metadata.image}
+                            ></Model>
+                          </Viewer>
+                        </Box>
+                      </DialogContent>
+                      <DialogActions
+                        sx={{
+                          background: "#fff",
+                        }}
+                      >
+                        <Button onClick={handleClose}>Close</Button>
+                      </DialogActions>
+                    </Dialog>
+                  )}
+                </Box>
+              </div>
+            </Grid>
+            <Grid item lg={6}>
               <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "20px",
-                  overflow: "hidden",
-                  px: 6, py: 6
+                  padding: "0 20px 20px;",
                 }}
               >
-                <Image sx={{borderRadius: "20px"}}  src={Gif} alt="gif"  objectFit="cover" />
-                <Button 
-                  variant="outlined"
-                  color={mode === "dark" ? "primary" : "secondary"}
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
                   sx={{
-                    alignSelf: "flex-end",
-                    marginTop: "20px"
+                    marginBottom: "10px",
                   }}
                 >
-                  Open in 3d
-                </Button>
-              </Box>
-            </div>
-          </Grid>
-          <Grid item lg={6}>
-            <Box
-              sx={{
-                padding: "0 20px 20px;"
-              }}
-            >
-              <Typography
-                variant="subtitle1"
-                gutterBottom
-                component="div"
-                sx={{
-                  marginBottom: "10px"
-                }}
-              >
-                {data.nft.metadata.description}
-              </Typography>
-              <Typography
-                variant="h1"
-                component="h1"
-                color="primary"
-                sx={{
-                  fontSize: 'h3.fontSize',
-                  textAlign: 'left',
-                  fontWeight: 700,
-                  marginBottom: "20px"
-                }}
-              >
-                {data.nft.metadata.name}
-              </Typography>
+                  {data.nft.metadata.description}
+                </Typography>
+                <Typography
+                  variant="h1"
+                  component="h1"
+                  color="primary"
+                  sx={{
+                    fontSize: "h3.fontSize",
+                    textAlign: "left",
+                    fontWeight: 700,
+                    marginBottom: "20px",
+                  }}
+                >
+                  {data.nft.metadata.name}
+                </Typography>
 
-              <Link href={"/brands/"+data.brand.url} className="!tw-cursor-pointer">
-                <motion.div
+                <Link
+                  href={"/brands/" + data.brand.url}
+                  className="!tw-cursor-pointer"
+                >
+                  {/* <motion.div
                   // className="drops_hover_cursor"
                   style={{
                     cursor: "pointer",
@@ -310,23 +420,31 @@ export default function Product() {
                   transition={{ ease: "easeOut", delay: 0.1 }}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                >
+                > */}
                   <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-4 tw-items-center tw-pr-5">
-                    <Image src={data.brand.avatarSrc} width="40" height="40" className="tw-rounded-full"/>
+                    <Image
+                      src={data.brand.avatarSrc}
+                      width="40"
+                      height="40"
+                      className="tw-rounded-full"
+                    />
                     <Typography
-                        variant="subtitle1"
-                        gutterBottom
-                        component="div"
-                        className="tw-font-light"
-                      >
-                        {data.brand.title}
+                      variant="subtitle1"
+                      gutterBottom
+                      component="div"
+                      className="tw-font-light"
+                    >
+                      {data.brand.title}
                     </Typography>
                   </div>
-                </motion.div>
-              </Link>
+                  {/* </motion.div> */}
+                </Link>
 
-              <Link href={"/collections/"+data.collection._id} className="!tw-cursor-pointer">
-                <motion.div
+                <Link
+                  href={"/collections/" + data.collection._id}
+                  className="!tw-cursor-pointer"
+                >
+                  {/* <motion.div
                   // className="drops_hover_cursor"
                   style={{
                     cursor: "pointer",
@@ -336,7 +454,7 @@ export default function Product() {
                   transition={{ ease: "easeOut", delay: 0.1 }}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                >
+                > */}
                   <Typography
                     variant="subtitle1"
                     gutterBottom
@@ -344,124 +462,120 @@ export default function Product() {
                     className="tw-font-light"
                     sx={{ marginTop: "10px" }}
                   >
-                    <span className="tw-font-semibold">{data.collection.title}</span>
+                    <span className="tw-font-semibold">
+                      {data.collection.title}
+                    </span>
                   </Typography>
-                </motion.div>
-              </Link>
+                  {/* </motion.div> */}
+                </Link>
 
-              <Typography
-                variant="subtitle1"
-                gutterBottom
-                component="div"
-                className="tw-font-light"
-                sx={{ marginBottom: "10px" }}
-              >
-                <span className="tw-font-semibold">Rarity:</span> 
-                <div className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500">Ultra Rare</div>
-              </Typography>
-
-              <div>
-                {data.available != 0 ? (
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    component="div"
-                    className="tw-font-semibold"
-                    sx={{ marginBottom: "10px", fontWeight: "600" }}
-                  >
-                    Total Available:{" "}
-                    <div className="tw-font-semibold pl-2">
-                      {data.available}
-                    </div>
-                  </Typography>
-                ) : (
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    component="div"
-                    className="tw-font-semibold tw-text-red-500"
-                  >
-                    Currently Unavailable
-                  </Typography>
-                )}
-              </div>
-
-              <Box sx={{marginBottom: "30px"}}>
                 <Typography
-                  variant="h2"
+                  variant="subtitle1"
                   gutterBottom
                   component="div"
-                  className="tw-font-medium"
-                  sx={{
-                    fontSize: 'h6.fontSize',
-                  }}
+                  className="tw-font-light"
+                  sx={{ marginBottom: "10px" }}
                 >
-                  Current Price:
+                  <span className="tw-font-semibold">Rarity:</span>
+                  <div className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500">
+                    Ultra Rare
+                  </div>
                 </Typography>
-                <Typography
-                  variant="h3"
-                  gutterBottom
-                  component="div"
-                  className="tw-font-bold"
-                  sx={{
-                    fontSize: 'h4.fontSize',
-                    fontWeight: 700
-                  }}
-                >
-                  <img
-                    alt="ETH"
-                    style={{
-                      width: "24px",
-                      height: "24px",
-                      objectFit: "contain",
+
+                <div>
+                  {data.available != 0 ? (
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      component="div"
+                      className="tw-font-semibold"
+                      sx={{ marginBottom: "10px", fontWeight: "600" }}
+                    >
+                      Total Available:{" "}
+                      <div className="tw-font-semibold pl-2">
+                        {data.available}
+                      </div>
+                    </Typography>
+                  ) : (
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      component="div"
+                      className="tw-font-semibold tw-text-red-500"
+                    >
+                      Currently Unavailable
+                    </Typography>
+                  )}
+                </div>
+
+                <Box sx={{ marginBottom: "30px", display: "flex", alignItems: "center" }}>
+                  <Typography
+                    variant="h2"
+                    gutterBottom
+                    component="div"
+                    className="tw-font-medium"
+                    sx={{
+                      fontSize: "h6.fontSize", mr: 2
                     }}
-                    src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
-                    size="24"
-                  />{" "}
-                  {data.price} ETH
-                </Typography>
-              </Box>
-
-              <motion.div
-                // className="drops_hover_cursor"
-                style={{
-                  cursor: "pointer",
-                }}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ ease: "easeOut", delay: 0.1 }}
-                whileHover={{ scale: 1.015 }}
-                whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-              >
-                {data.available != 0 ? (
-                  <>
-                    <AnimatedButton id={data._id}/>
-                  </>
-                ) : (                  
-                  <Button 
-                    disabled
-                    variant="contained" 
-                    size="large"
-                    sx={{color: "#fff", width: 1}}
                   >
-                    <AccountBalanceWalletIcon /> Add To Bag
-                  </Button>
-                )}
-              </motion.div>
-            </Box>           
+                    Current Price:
+                  </Typography>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    component="div"
+                    className="tw-font-bold"
+                    sx={{
+                      fontSize: "h4.fontSize",
+                      fontWeight: 700,
+                    }}
+                  >
+                    <img
+                      alt="ETH"
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        objectFit: "contain",
+                      }}
+                      src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
+                      size="24"
+                    />{" "}
+                    {data.price} ETH
+                  </Typography>
+                </Box>
+
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.015 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  {data.available != 0 ? (
+                    <>
+                      <AnimatedButton id={data._id} />
+                    </>
+                  ) : (
+                    <Button
+                      disabled
+                      variant="contained"
+                      size="large"
+                      sx={{ color: "#fff", width: "400px" }}
+                    >
+                      <AccountBalanceWalletIcon /> Add To Bag
+                    </Button>
+                  )}
+                </motion.div>
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Footer />
-    </Container>
-
-
-
-
-
-
-
-
+        <Footer />
+      </Container>
 
       {/* <div class="tw-flex tw-flex-wrap md:tw-h-screen tw-p-10 tw-h-full tw-gap-x-10 tw-justify-center tw-items-center ">
         <div id="product-container"

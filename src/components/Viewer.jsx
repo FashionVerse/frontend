@@ -33,7 +33,7 @@ export default function Viewer(props) {
           padding: '1rem',
         }}
       >
-        <Typography variant="caption" component="div" color="text.secondary">
+        <Typography sx={{color: "#22CAFF"}} variant="caption" component="div" color="text.secondary">
           {`${Math.round(progress)}%`}
         </Typography>
       </Box>
@@ -66,7 +66,7 @@ export default function Viewer(props) {
         style={{
           height:props.height,
           width: props.width,
-          paddingTop: "7%",
+          paddingTop: "10px",
           filter: "drop-shadow(rgba(0, 0, 0, 0.3) 0px 20px 10px)"
         }}
       >

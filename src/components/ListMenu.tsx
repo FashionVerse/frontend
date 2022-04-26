@@ -50,12 +50,17 @@ const ListMenu: React.FC<Props> = ({ children, ...props }) => {
       >
         {children}
       </div>
+
       <Menu
       id="basic-menu"
       anchorEl={anchorEl}
       open={open}
+      className="custom-dropdown"
       onClose={handleClose}
       MenuListProps={{ onMouseLeave: handleClose }}
+      style={{
+        cursor: "pointer",
+      }}
       PaperProps={{  
         style: {  
           backgroundColor: "rgba(0,0,0,0.05)",  
@@ -101,6 +106,7 @@ const ListMenu: React.FC<Props> = ({ children, ...props }) => {
       >
         {children}
       </div>
+      
       <Menu
       id="basic-menu"
       anchorEl={anchorEl}

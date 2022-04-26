@@ -22,7 +22,7 @@ import wardrobe from "../../public/wardrobe.svg";
 import cart from "../../public/shopping-cart.svg";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch, { SwitchProps } from "@mui/material/Switch";
+import Switch from "@mui/material/Switch";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -198,7 +198,7 @@ export default function Header() {
               sx={{ mr: 4, fontSize: "1.2rem" }}
             >
               <Link href={"/brands"} color="inherit" hoverStyle>
-                <Typography sx={{ fontWeight: 600, fontSize: "22px" }}>Brands</Typography>
+                <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>Brands</Typography>
               </Link>
               {!drops ? (
                 <ListMenu items={[]}>
@@ -207,6 +207,7 @@ export default function Header() {
                       cursor: "pointer",
                       ":hover": { transform: "scale(1.125)" },
                       fontWeight: 600,
+                      textTransform: "uppercase" 
                     }}
                   >
                     Drops
@@ -217,8 +218,9 @@ export default function Header() {
                   <Typography
                     sx={{
                       cursor: "pointer",
-                      ":hover": { transform: "scale(1.125)" },
+                      // ":hover": { transform: "scale(1.125)" },
                       fontWeight: 600,
+                      textTransform: "uppercase" 
                     }}
                   >
                     Drops
@@ -237,7 +239,7 @@ export default function Header() {
             </Typography>
           </ListMenu> */}
               <Link href={"/resources"} color="inherit" hoverStyle>
-                <Typography sx={{ fontWeight: 600 }}>Resources</Typography>
+                <Typography sx={{ fontWeight: 600, textTransform: "uppercase"  }}>Resources</Typography>
               </Link>
             </Stack>
             <Tooltip title="Connect Wallet">
@@ -317,18 +319,23 @@ export default function Header() {
                 label="Dark Mode"
                 sx={{ position: "fixed" }}
               /> */}
+           
               <FormControlLabel
                 onChange={() => {
                   colorMode.toggleColorMode();
                 }}
+                className="custom-switch"
                 control={<MaterialUISwitch />}
                 label=""
                 checked={theme.palette.mode === "dark"}
               />
+              
             </FormGroup>
+            
           </Stack>
         </Stack>
       </Container>
+      
     </header>
   );
 }
