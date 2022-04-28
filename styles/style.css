@@ -1618,7 +1618,7 @@ header + div {
 .bg-style-dark .home-page {
   background: url("/top-right-home.png") right 1.9% no-repeat,
     url("/top-left-home.png") left 2.1% no-repeat,
-    url("/home-page-middle-bg-blend.svg") center 53% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center 65% no-repeat,
     url("/bottom-right.png") bottom right no-repeat,
     url("/bottom-left.png") bottom left no-repeat;
   background-size: auto, auto, auto, auto, auto;
@@ -1626,7 +1626,7 @@ header + div {
 .bg-style-light .home-page {
   background: url("/top-right-home-white.png") right 1.9% no-repeat,
     url("/top-left-home-white.png") left 2.1% no-repeat,
-    url("/home-page-middle-bg-blend.svg") center 52% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center 65% no-repeat,
     url("/bottom-right-white.png") bottom right no-repeat,
     url("/bottom-left-white.png") bottom left no-repeat;
   background-size: auto, auto, 100%, auto, auto;
