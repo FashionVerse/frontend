@@ -3,9 +3,9 @@ import Image from "next/image";
 import Header from "../../src/components/Header";
 import Head from "next/head";
 import Footer from "../../src/components/Footer";
-import { Container, Grid, Box, Typography } from "@mui/material";
+import { Container, Grid, Box, Typography, Stack } from "@mui/material";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
-import CheckBoxSelect from "../../src/components/CheckBoxSelect";
+import CheckBoxSelect, { Option } from "../../src/components/CheckBoxSelect";
 import { useForm, FormProvider } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
@@ -124,8 +124,6 @@ export default function Brands() {
             alignItems="center"
             className="custom-container"
           >
-
-            
             <Grid item xs={12}>
               <span className="divider"></span>
               <Box>
@@ -146,7 +144,12 @@ export default function Brands() {
               </Box>
             </Grid>
 
-            
+            <Grid item xs={12} sx={{ mb: 5 }}>
+              <Stack direction="row" gap={2} sx={{ px: 1 }}>
+                <CheckBoxSelect formStateName="drops" label="Drop" />
+              </Stack>
+            </Grid>
+
             <Grid
               sx={{ marginTop: "-30px", marginBottom: "40px" }}
               container
@@ -167,9 +170,6 @@ export default function Brands() {
                 </Grid>
               ))}
             </Grid>
-
-
-
           </Grid>
           {arr.length > 0 ? (
             <div className="tw-flex tw-justify-center tw-items-end tw-pb-10 tw-mb-[5%] tw-mt-5">

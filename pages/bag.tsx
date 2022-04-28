@@ -490,39 +490,49 @@ export default function Bag() {
           >
             <Stack gap={4} sx={{ px: 4, py: 6 }}>
               <Typography
-                sx={{ textAlign: "left", fontSize: "41px", lineHeight: "normal" }}
+                sx={{
+                  textAlign: "left",
+                  fontSize: "41px",
+                  lineHeight: "normal",
+                }}
                 variant="subtitle1"
                 className="sub-heading"
                 align="center"
-                style={{textAlign: "left", fontSize: "41px", lineHeight: "normal" }}
+                style={{
+                  textAlign: "left",
+                  fontSize: "41px",
+                  lineHeight: "normal",
+                }}
               >
-                Items in Order
+                {totalCost > 0 ? "Items in Order" : <p style={{textAlign: "center"}}> No Items in Order </p>}
               </Typography>
               {data.map((props) => (
                 <CheckoutCard {...props} />
               ))}
             </Stack>
 
-            <Stack
-              direction="row"
-              justifyContent={"flex-end"}
-              sx={{ px: 8, pb: 4 }}
-            >
-              <Stack gap={2}>
-                <Typography variant="h5">
-                  {"Total Cost: " + toFixedIfNecessary(totalCost, 4) + " ETH"}
-                </Typography>
-                <GradientButton
-                  color="primary"
-                  sx={{ borderRadius: "12px" }}
-                  onClick={() => {
-                    purchaseItems();
-                  }}
-                >
-                  <Typography variant="h5">Purchase</Typography>
-                </GradientButton>
+            {totalCost > 0 && (
+              <Stack
+                direction="row"
+                justifyContent={"flex-end"}
+                sx={{ px: 8, pb: 4 }}
+              >
+                <Stack gap={2}>
+                  <Typography variant="h5">
+                    {"Total Cost: " + toFixedIfNecessary(totalCost, 4) + " ETH"}
+                  </Typography>
+                  <GradientButton
+                    color="primary"
+                    sx={{ borderRadius: "12px" }}
+                    onClick={() => {
+                      purchaseItems();
+                    }}
+                  >
+                    <Typography variant="h5">Purchase</Typography>
+                  </GradientButton>
+                </Stack>
               </Stack>
-            </Stack>
+            )}
           </BlueShadowPaper>
         </Container>
       </Grid>

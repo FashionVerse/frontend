@@ -570,7 +570,7 @@ export default function DropPage() {
                       autoStart: true,
                       loop: true,
                     }} */}
-                    {dropData.subtitle.toUpperCase()}
+                  {dropData.subtitle.toUpperCase()}
                   {/* /> */}
                 </Typography>
               </Box>

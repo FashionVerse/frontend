@@ -1,4 +1,11 @@
 @media screen and (max-width: 1679px) {
+  .designer-info-box {
+    width: calc(100% - 30px);
+  }
+  /* .fashion-card-image{
+     height: 235px !important;
+     min-height: auto !important;
+  } */
   .custom-container {
     width: 100%;
   }
@@ -10,13 +17,13 @@
   .main-heading {
     font-size: 57px;
   }
-  .secondary-heading,.secondary-heading .gradient-text{
+  .secondary-heading,
+  .secondary-heading .gradient-text {
     font-size: 52px;
   }
-  .sub-heading{
+  .sub-heading {
     font-size: 44px;
     line-height: normal;
-
   }
   .myNewBox {
     width: auto;
@@ -29,9 +36,9 @@
     padding-bottom: 70px;
   }
 
-  .side-spacing{
+  .side-spacing {
     padding-left: 100px;
-    padding-right: 100px; 
+    padding-right: 100px;
   }
 }
 @media screen and (max-width: 1439px) {
@@ -50,18 +57,19 @@
 }
 
 @media screen and (max-width: 1364px) {
-  .side-spacing{
+  .side-spacing {
     padding-left: 60px;
-    padding-right: 60px; 
+    padding-right: 60px;
   }
-  .sub-heading{
+  .sub-heading {
     font-size: 38px;
   }
   .main-heading .gradient-text,
   .main-heading {
     font-size: 55px;
   }
-  .secondary-heading .gradient-text,.secondary-heading {
+  .secondary-heading .gradient-text,
+  .secondary-heading {
     font-size: 48px;
   }
   .section-spacing {
@@ -71,6 +79,9 @@
 }
 
 @media screen and (max-width: 1000px) {
+  .bottom-info .MuiListItemText-root span:first-child {
+    font-size: 22px;
+  }
   .css-iaykeu-MuiStack-root {
     gap: 16px;
   }

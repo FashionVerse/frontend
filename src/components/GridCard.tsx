@@ -71,7 +71,7 @@ const GridCard = (props: GridCardProps) => {
     <GridCardContainer className="custom-card"
       onClick={() => (props.href ? router.push(props.href) : null)}
     >
-      <Stack justifyContent={"space-between"}>
+      {/* <Stack justifyContent={"space-between"}> */}
         <Grid container spacing={2}>
           <Grid item md={6}>
             <Box
@@ -89,6 +89,7 @@ const GridCard = (props: GridCardProps) => {
                 src={topLeftImage.toString()}
                 alt="grid card"
                 layout="fill"
+                className="fashion-card-image"
                 objectFit="cover"
               />
             </Box>
@@ -173,7 +174,7 @@ const GridCard = (props: GridCardProps) => {
             />
           </ListItem>
         </List>
-      </Stack>
+      {/* </Stack> */}
     </GridCardContainer>
   );
 };

@@ -35,12 +35,14 @@ export default function CheckBoxSelect({
         renderValue={() => label}
       >
         {options.map((opt: Option, index) => (
-          <MenuItem key={opt.id} value={opt.value}  disableRipple>
-            <Checkbox checked={opt.selected}  onChange={e => {
-              
-            options[index].selected = e.target.checked
-            setValue(formStateName, options);
-          }}/>
+          <MenuItem key={opt.id} value={opt.value} disableRipple>
+            <Checkbox
+              checked={opt.selected}
+              onChange={(e) => {
+                options[index].selected = e.target.checked;
+                setValue(formStateName, options);
+              }}
+            />
             <ListItemText primary={opt.value} />
           </MenuItem>
         ))}

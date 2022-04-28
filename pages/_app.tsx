@@ -29,12 +29,13 @@ export const ColorModeContext = React.createContext({
 
 export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const [mode, setMode] = React.useState<PaletteMode>("dark");
-  const [colorScheme, setColorScheme] = React.useState<ColorScheme>("light");
+  const [mode, setMode] = React.useState<PaletteMode>("light");
+  const [colorScheme, setColorScheme] = React.useState<ColorScheme>("dark");
+  
   React.useEffect(() => {
-    setMode(localStorage.getItem("dark-mode") === "dark" ? "dark" : "light");
+    setMode(localStorage.getItem("dark-mode") === "light" ? "dark" : "dark");
     setColorScheme(
-      localStorage.getItem("dark-mode") === "dark" ? "dark" : "light"
+      localStorage.getItem("dark-mode") === "light" ? "dark" : "light"
     );
   }, []);
   const colorMode = React.useMemo(
@@ -50,7 +51,8 @@ export default function MyApp(props: any) {
     // console.log("mode", mode);
     localStorage.setItem("dark-mode", mode);
   }, [mode]);
-  const font = "'Commissioner', sans-serif";
+
+  const font = "'Montserrat', sans-serif";
   const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
     palette: {
       mode,
@@ -103,6 +105,7 @@ export default function MyApp(props: any) {
                     : "linear-gradient(to right, #eeeeee, #ffffff)",
               }}
             > */}
+            {/* { console.log("mode1", mode)} */}
               <div
                 className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
                 // style={{

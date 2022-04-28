@@ -12,13 +12,16 @@ import {
   Typography,
   Grid,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
 import { BiRocket } from "react-icons/bi";
 import { useRouter } from "next/router";
 import Slider from "../src/components/Slider";
 import GridCard, { GridCardProps } from "../src/components/GridCard";
 import { BsDiscord, BsMedium, BsTwitter } from "react-icons/bs";
-import { styled } from "@mui/system";
+
 import AdvisorCard, { AdvisorCardProps } from "../src/components/AdvisorCard";
 import firestore from "../firebase/clientApp";
 import { AbiItem } from "web3-utils";
@@ -26,6 +29,8 @@ import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import Web3 from "web3";
 import Typewriter from "typewriter-effect";
 import { NextSeo } from "next-seo";
+import Card from "@mui/material/Card";
+import { styled, alpha } from "@mui/system";
 // import {
 //   collection,
 //   QueryDocumentSnapshot,
@@ -39,12 +44,26 @@ import { NextSeo } from "next-seo";
 // } from "@firebase/firestore";
 import { useSnackbar } from "notistack";
 import useSWR from "swr";
+import ari from "../../public/ari.jpeg";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
   color: "white",
+}));
+
+export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
+  maxWidth: "404px",
+  background:
+    theme.palette.mode === "dark"
+      ? `rgba( 255, 255, 255, 0.2 )`
+      : alpha(theme.palette.primary.light, 0.2),
+  backdropFilter: `blur( 8px )`,
+  WebkitBackdropFilter: `blur( 8px )`,
+  padding: "16px",
+  borderRadius: "20px",
+  boxShadow: "none",
 }));
 
 // getStaticProps / getServerSideProps
@@ -249,13 +268,13 @@ export default function Index() {
           cardType: "summary_large_image",
         }}
       />
-      
+
       <Container className="wrapper home-page common-wrapper" maxWidth={false}>
-      <div className="star-wrapper">
+        <div className="star-wrapper">
           <div id="stars"></div>
           <div id="stars2"></div>
           <div id="stars3"></div>
-          </div>
+        </div>
         {/* First Fold */}
         <Grid
           container
@@ -270,7 +289,7 @@ export default function Index() {
             <div className="line"></div>
             <div className="line"></div>
           </div>
-         
+
           <Grid item md={6} className="main-heading-wrapper">
             <Box sx={{ minHeight: "271px" }}>
               <Typography variant="h1" className="main-heading">
@@ -322,6 +341,146 @@ export default function Index() {
           </Grid>
         </Grid>
 
+        {/* new fold added */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box>
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                sx={{ mt: 10, mb: 6 }}
+                style={{ lineHeight: "normal" }}
+              >
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  The FashionVerse &nbsp; <br></br>
+                </Typography>
+                <i>is your Digital Fashion Retailer</i>
+              </Typography>
+            </Box>
+            <Typography
+              variant="subtitle1"
+              className="sub-heading with-small-font"
+              align="center"
+            >
+              {/* Build your First Digital <br /> Wardrobe */}
+              {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+              We work with brands in providing you with a range <br></br> of
+              clothing and accessories wearable on your avatars across
+              metaverses.
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          className="custom-container"
+          sx={{ mb: 8 }}
+          alignItems="stretch"
+        >
+          <Grid item xs={12}>
+            <Grid
+              container
+              alignItems="stretch"
+              justifyContent="center"
+              spacing={8}
+            >
+              <Grid item xs={12} md={4}>
+                <FashionItemCardContainer className="custom-card with-description">
+                  <List>
+                    <ListItem disablePadding>
+                      <ListItemText
+                        primary="Enabling Self Expression in Web3"
+                        secondary={
+                          <React.Fragment>
+                            <Typography
+                              sx={{ display: "inline" }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              Every fashion piece has a meaning behind it -
+                              purchase inclusive and limitless clothing
+                            </Typography>
+                          </React.Fragment>
+                        }
+                      />
+                    </ListItem>
+                  </List>
+                </FashionItemCardContainer>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <FashionItemCardContainer className="custom-card with-description">
+                  <List>
+                    <ListItem disablePadding>
+                      <ListItemText
+                        primary="Utility for NFTs"
+                        secondary={
+                          <React.Fragment>
+                            <Typography
+                              sx={{ display: "inline" }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              Dress up your avatar in Decentraland by minting
+                              select NFTs on The FashionVerse
+                            </Typography>
+                          </React.Fragment>
+                        }
+                      />
+                    </ListItem>
+                  </List>
+                </FashionItemCardContainer>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <FashionItemCardContainer className="custom-card with-description">
+                  <List>
+                    <ListItem disablePadding>
+                      <ListItemText
+                        primary="Uplifting Digital Fashion Brands"
+                        secondary={
+                          <React.Fragment>
+                            <Typography
+                              sx={{ display: "inline" }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              We empower the creator economy of designers in
+                              building the digital fashion economy
+                            </Typography>
+                          </React.Fragment>
+                        }
+                      />
+                    </ListItem>
+                  </List>
+                </FashionItemCardContainer>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
         {/* Drops */}
         <Grid
           container
@@ -353,6 +512,7 @@ export default function Index() {
           </Grid>
           <Grid item xs={12}>
             <Box
+              className="custom-slider-box"
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -374,12 +534,12 @@ export default function Index() {
                   //   whileHover={{ scale: 1.05 }}
                   //   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                   // >
-                    <GridCard
-                      {...props}
-                      noBrand
-                      key={props.id}
-                      href={props.href}
-                    />
+                  <GridCard
+                    {...props}
+                    noBrand
+                    key={props.id}
+                    href={props.href}
+                  />
                   // </motion.div>
                 ))}
               />
@@ -460,7 +620,7 @@ export default function Index() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                     > */}
-                      <GridCard {...props} key={props.id + "-ahsdkh"} />
+                    <GridCard {...props} key={props.id + "-ahsdkh"} />
                     {/* </motion.div> */}
                   </div>
                 ))}
@@ -480,15 +640,19 @@ export default function Index() {
           <Grid item xs={12}>
             <span className="divider"></span>
             <Box sx={{ my: 10 }}>
-              <Typography variant="h2" className="secondary-heading">
-                OUR&nbsp;
+              <Typography
+                sx={{ textTransform: "uppercase" }}
+                variant="h2"
+                className="secondary-heading"
+              >
+                We are trusted by&nbsp;
                 <Typography
                   variant="h2"
                   color="primary"
                   component="span"
                   className="gradient-text"
                 >
-                  <b>ADVISORS</b>
+                  <b>prominent personalities</b>
                 </Typography>
               </Typography>
             </Box>
@@ -883,45 +1047,48 @@ const BRANDS: GridCardProps[] = [
 ];
 
 const ADVISORS: AdvisorCardProps[] = [
-  {
-    id: "klaose",
-    src: "https://source.unsplash.com/random/900×700/?person",
-    alt: "advisor brand",
-    name: "Shivam Sharma",
-    title: "Blockchain and Smart Contracts Advisor",
-    background: "Blockchain Engineer at Polygon",
-  },
+  // {
+  //   id: "klaose",
+  //   src: "https://source.unsplash.com/random/900×700/?person",
+  //   alt: "advisor brand",
+  //   name: "Ari Lightman",
+  //   title: "Web3 and NFTs",
+  //   background: "Carnegie Mellon Distinguished Professor of Digital Media and Marketing",
+  // },
   {
     id: "j7hausa",
-    src: "https://source.unsplash.com/random/900×700/?hispanic",
+    src: "/ari.jpeg",
     alt: "advisor brand",
     name: "Ari Lightman",
     title: "Web3 and NFT Advisor",
     background: "Carnegie Mellon Professor of Digital Media and Marketing",
+    link: "https://www.linkedin.com/in/arilightman/",
   },
   {
     id: "jk8hay62ua",
-    src: "https://source.unsplash.com/random/900×700/?actress",
+    src: "/richard.jpeg",
     alt: "advisor brand",
-    name: "Baek Kim",
-    title: "Business and Web3 Strategy Advisor",
-    background: "Partner at Hashed and Carnegie Mellon grad",
+    name: "Richard Brown",
+    title: "Community Building and Token Economics ",
+    background: "Founder of SCRF and ex-Head of Core Community at MakerDAO",
+    link: "https://www.linkedin.com/in/richardgbrown/",
   },
   {
     id: "kl8j26ags",
-    src: "https://source.unsplash.com/random/900×700/?actor",
+    src: "/amanda.jpeg",
     alt: "advisor brand",
-    name: "JP Ren",
-    title: "Business Strategy Advisor",
-    background: "Y Combinator Alum and Snapjoy Co-Founder",
+    name: "Amanda Bopp",
+    title: "Digital Fashion",
+    background: "Vice President of North America Marketing at Kate Spade",
+    link: "https://www.linkedin.com/in/amanda-bopp-943b964/",
   },
-  {
-    id: "l03fg7h",
-    src: "https://source.unsplash.com/random/900×700/?asian",
-    alt: "advisor brand",
-    name: "Oliver Quin",
-    title: "Technical Advisor",
-    background:
-      "Software Engineer at Syndicate Protocol and Carnegie Mellon grad",
-  },
+  // {
+  //   id: "l03fg7h",
+  //   src: "https://source.unsplash.com/random/900×700/?asian",
+  //   alt: "advisor brand",
+  //   name: "Oliver Quin",
+  //   title: "Technical Advisor",
+  //   background:
+  //     "Software Engineer at Syndicate Protocol and Carnegie Mellon grad",
+  // },
 ];

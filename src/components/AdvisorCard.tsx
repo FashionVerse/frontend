@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { styled, alpha, useTheme } from "@mui/system";
+import { CardActionArea } from "@mui/material";
+import Link from "next/link";
 
 export interface AdvisorCardProps {
   src: string;
@@ -12,6 +14,7 @@ export interface AdvisorCardProps {
   name: string;
   title: string;
   background: string;
+  link: string;
 }
 
 const AdvisorCardContainer = styled(Card)(({ theme }) => ({
@@ -32,29 +35,30 @@ export default function AdvisorCard(props: AdvisorCardProps) {
   } = useTheme();
   return (
     <AdvisorCardContainer className="custom-card">
-      <figure>
-      <CardMedia
-        component="img"
-        height="300"
-        image={props.src}
-        
-        alt={props.alt}
-      />
-      </figure>
-      <CardContent>
-        <Typography variant="h5" sx={{ fontWeight: 600 }} component="div">
-          {props.name}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          color={mode === "dark" ? "primary" : "secondary"}
-        >
-          {props.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {props.background}
-        </Typography>
-      </CardContent>
+        <CardActionArea target="_blank" href={props.link}>
+            <figure>
+              <CardMedia
+                component="img"
+                height="300"
+                image={props.src}
+                alt={props.alt}
+              />
+            </figure>
+            <CardContent>
+              <Typography variant="h5" sx={{ fontWeight: 600 }} component="div">
+                {props.name}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color={mode === "dark" ? "primary" : "secondary"}
+              >
+                {props.title}
+              </Typography>
+              <Typography sx={{minHeight: 45}} variant="body2" color="text.secondary">
+                {props.background}
+              </Typography>
+            </CardContent>
+        </CardActionArea>
     </AdvisorCardContainer>
   );
 }

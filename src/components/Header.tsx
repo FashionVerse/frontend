@@ -171,24 +171,26 @@ export default function Header() {
               <BsMoonStars />
             )}
           </IconButton> */}
-
+          {/* 
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ ease: "easeOut", delay: 0.1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-          >
+          > */}
+          <div className="customize-logo">
             <Logo size="70px" withText>
               <Typography
-                fontWeight={300}
+                fontWeight={400}
                 sx={{ ml: "8px", letterSpacing: 3 }}
                 variant="h4"
               >
-                <strong>FASHION</strong>VERSE
+                The<strong>FASHION</strong>VERSE
               </Typography>
             </Logo>
-          </motion.div>
+          </div>
+          {/* </motion.div> */}
           <div className="blankDiv" style={{ flexGrow: 1 }} />
           <Stack direction="row" gap={3} alignItems={"center"}>
             <Stack
@@ -198,7 +200,11 @@ export default function Header() {
               sx={{ mr: 4, fontSize: "1.2rem" }}
             >
               <Link href={"/brands"} color="inherit" hoverStyle>
-                <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>Brands</Typography>
+                <Typography
+                  sx={{ fontWeight: 600, textTransform: "uppercase" }}
+                >
+                  Brands
+                </Typography>
               </Link>
               {!drops ? (
                 <ListMenu items={[]}>
@@ -207,7 +213,7 @@ export default function Header() {
                       cursor: "pointer",
                       ":hover": { transform: "scale(1.125)" },
                       fontWeight: 600,
-                      textTransform: "uppercase" 
+                      textTransform: "uppercase",
                     }}
                   >
                     Drops
@@ -220,7 +226,7 @@ export default function Header() {
                       cursor: "pointer",
                       // ":hover": { transform: "scale(1.125)" },
                       fontWeight: 600,
-                      textTransform: "uppercase" 
+                      textTransform: "uppercase",
                     }}
                   >
                     Drops
@@ -239,7 +245,11 @@ export default function Header() {
             </Typography>
           </ListMenu> */}
               <Link href={"/resources"} color="inherit" hoverStyle>
-                <Typography sx={{ fontWeight: 600, textTransform: "uppercase"  }}>Resources</Typography>
+                <Typography
+                  sx={{ fontWeight: 600, textTransform: "uppercase" }}
+                >
+                  Resources
+                </Typography>
               </Link>
             </Stack>
             <Tooltip title="Connect Wallet">
@@ -319,7 +329,7 @@ export default function Header() {
                 label="Dark Mode"
                 sx={{ position: "fixed" }}
               /> */}
-           
+
               <FormControlLabel
                 onChange={() => {
                   colorMode.toggleColorMode();
@@ -329,13 +339,10 @@ export default function Header() {
                 label=""
                 checked={theme.palette.mode === "dark"}
               />
-              
             </FormGroup>
-            
           </Stack>
         </Stack>
       </Container>
-      
     </header>
   );
 }

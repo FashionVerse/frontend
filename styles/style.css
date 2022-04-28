@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@100;200;300;400;500;600;700;800;900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 /* @font-face {
   font-family: 'Quirell';
   src: url('../styles/fonts/Quirell.woff2') format('woff2'),
@@ -16,6 +17,15 @@
        url('../styles/fonts/Quirell400.ttf') format('truetype'),
        url('../styles/fonts/Quirell400.svg#Quirell400') format('svg');
 } */
+
+@font-face {
+  font-family: "Versailles";
+  src: url("../styles/fonts/Versailles-Regular.woff2") format("woff2"),
+    url("../styles/fonts/Versailles-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "AmalineTrialRegular400";
@@ -161,16 +171,16 @@ body{
   display: none;
 } */
 /* With old mui */
-body{
-  padding-right:0 !important;
-  overflow:auto !important;
+body {
+  padding-right: 0 !important;
+  overflow: auto !important;
 }
 .header {
   position: fixed;
   z-index: 1;
   width: 100%;
   top: 0;
-  left:0;
+  left: 0;
   -webkit-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
   padding-top: 30px;
@@ -183,6 +193,22 @@ body{
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
   background: #fff;
   z-index: 1111;
+}
+.customize-logo {
+  transition: all 0.3s;
+}
+.customize-logo h4 {
+  font-family: "Versailles";
+}
+.customize-logo h4 strong {
+  font-family: "Montserrat";
+}
+.stick-header .customize-logo span {
+  width: 55px !important;
+  height: 55px !important;
+}
+.stick-header .customize-logo h4 {
+  font-size: 2rem;
 }
 .bg-style-dark .stick-header {
   background: linear-gradient(270.98deg, #01f0ff 1.94%, rgba(0, 0, 0) 50.07%);
@@ -203,7 +229,6 @@ header + div {
   background: rgba(0, 0, 0, 0.5);
   /* padding:10px;
   border-radius: 100%; */
-
 }
 
 .custom-container {
@@ -1591,7 +1616,7 @@ header + div {
 }
 
 .bg-style-dark .home-page {
-  background: url("/top-right-home.png") right 2.1% no-repeat,
+  background: url("/top-right-home.png") right 1.9% no-repeat,
     url("/top-left-home.png") left 2.1% no-repeat,
     url("/home-page-middle-bg-blend.svg") center 53% no-repeat,
     url("/bottom-right.png") bottom right no-repeat,
@@ -1599,7 +1624,7 @@ header + div {
   background-size: auto, auto, auto, auto, auto;
 }
 .bg-style-light .home-page {
-  background: url("/top-right-home-white.png") right 2.1% no-repeat,
+  background: url("/top-right-home-white.png") right 1.9% no-repeat,
     url("/top-left-home-white.png") left 2.1% no-repeat,
     url("/home-page-middle-bg-blend.svg") center 52% no-repeat,
     url("/bottom-right-white.png") bottom right no-repeat,
@@ -1785,7 +1810,7 @@ header + div {
 }
 
 .main-heading .gradient-text {
-  font-family: "AmalineTrialRegular400";
+  font-family: "font-family: 'Versailles';";
   /* background: linear-gradient(
     90.98deg,
     #01f0ff 1.94%,
@@ -1874,12 +1899,19 @@ header + div {
 } */
 .common-fold svg {
   z-index: 111;
-  width: 83px;
+  width: 63px;
   height: auto;
 }
+/* .custom-slider-box{
+  padding: 0 45px;
+} */
+
 .common-fold .keen-slider__slide {
   padding: 0 16px;
 }
+/* .common-fold .keen-slider{
+  padding: 0 30px;
+} */
 .bottom-info {
   padding: 26px 0;
 }
@@ -1984,12 +2016,26 @@ header + div {
 .bg-style-light .custom-card {
   border: 1px solid #fff;
 }
-.bg-style-light .keen-slider .custom-card:hover {
+/* .bg-style-light .keen-slider .custom-card:hover {
   box-shadow: 0 0 16px 0 #fff;
-}
+} */
 .custom-card {
   cursor: pointer;
   box-shadow: none;
+}
+.custom-card.with-description {
+  max-width: none;
+  padding: 14px 30px 16px;
+  height: 100%;
+}
+.custom-card.with-description .MuiListItemText-primary {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  min-height: 78px;
+}
+.custom-card.with-description .MuiListItemText-root {
+  margin-top: 0;
 }
 .custom-card figure {
   overflow: hidden;
@@ -2142,4 +2188,48 @@ header + div {
     black 100%
   );
   z-index: 1;
+}
+
+/* designer-info-box */
+.designer-info-box {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-radius: 30px;
+  list-style-type: none;
+  /* border-image: linear-gradient(to right, #22CAFF, #1288CB);
+  border-image-slice: 1; */
+  /* position: relative; */
+  border: 3px solid transparent;
+  background: linear-gradient(rgba(0, 0, 0) 50.07%, #000) padding-box,
+    linear-gradient(to right, #22caff, #1288cb) border-box;
+  padding: 25px;
+}
+.designer-info-box li {
+  width: 33%;
+  border-image: linear-gradient(to right, #00f0ff, #61caeb);
+  border-image-slice: 1;
+  border-right: 3px solid transparent;
+}
+.designer-info-box li:last-child {
+  border-right: none;
+}
+/* .designer-info-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -5px;
+  border-radius: 100px;
+  background: linear-gradient(to right, #22caff, #1288cb);
+} */
+.brand-page-inner .designer-info-box .secondary-heading .gradient-text {
+  font-size: 30px;
 }

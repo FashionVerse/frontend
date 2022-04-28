@@ -159,20 +159,20 @@ export default function BrandPage() {
   function ImageGallery() {
     return (
       <ImageList
-          sx={{ width: "100%", height: "100%" }}
-          // variant="quilted"
-          rowHeight={572}
-          className="parralex-image"
-        >
-          <ImageListItem>
-            <img
-              {...srcset(data.brand.coverSrc, 400)}
-              alt={data.brand.title}
-              loading="eager"
-              style={{ objectFit: "cover" }}
-            />
-          </ImageListItem>
-        </ImageList>
+        sx={{ width: "100%", height: "100%" }}
+        // variant="quilted"
+        rowHeight={572}
+        className="parralex-image"
+      >
+        <ImageListItem>
+          <img
+            {...srcset(data.brand.coverSrc, 400)}
+            alt={data.brand.title}
+            loading="eager"
+            style={{ objectFit: "cover" }}
+          />
+        </ImageListItem>
+      </ImageList>
       // <ImageList
       //   sx={{ width: "100%", height: "100%" }}
       //   // variant="quilted"
@@ -254,8 +254,8 @@ export default function BrandPage() {
               backgroundImage: "url(" + data.brand.avatarSrc + ")",
               boxShadow: "0 0 16px 0 #c0c0c0",
               whileHover: {
-                boxShadow: "0 0 16px 0 #c0c0c0"
-              }
+                boxShadow: "0 0 16px 0 #c0c0c0",
+              },
             }}
           />
         </Box>
@@ -268,15 +268,83 @@ export default function BrandPage() {
           alignItems="center"
           className="custom-container"
         >
+           <Grid
+            container
+            direction="row"
+            spacing={4}
+          >
           <Grid item xs={12} sx={{ mt: 28, mb: 4 }}>
-            <span className="divider"></span>
+            <ul className="designer-info-box">
+              <li>
+                <Typography variant="h2" className="secondary-heading">
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    component="span"
+                    className="gradient-text"
+                  >
+                    DESIGNER
+                  </Typography>
+                </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  className="sub-heading with-small-font"
+                  align="center"
+                >
+                  {data.brand.contributor}
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="h2" className="secondary-heading">
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    component="span"
+                    className="gradient-text"
+                  >
+                    Drop Category
+                  </Typography>
+                </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  className="sub-heading with-small-font"
+                  align="center"
+                >
+                  {data.brand.contributor}
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="h2" className="secondary-heading">
+                  <Typography
+                    variant="h2"
+                    color="primary"
+                    component="span"
+                    className="gradient-text"
+                  >
+                    Unique Designs
+                  </Typography>
+                </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  className="sub-heading with-small-font"
+                  align="center"
+                >
+                  {data.brand.contributor}
+                </Typography>
+              </li>
+            </ul>
+            <span  className="divider"></span>
+
             <Box>
               <Typography
                 variant="h1"
                 className="main-heading"
                 align="center"
                 textTransform="uppercase"
-                sx={{ mt: 10, mb: 0 }}
+                sx={{ mt: 7, mb: 0 }}
               >
                 <Typography
                   variant="h1"
@@ -303,7 +371,6 @@ export default function BrandPage() {
                 /> */}
                 {data.brand.description}
               </Typography>
-
               <Typography
                 variant="h2"
                 className="secondary-heading"
@@ -315,7 +382,7 @@ export default function BrandPage() {
                   component="span"
                   className="gradient-text"
                 >
-                  CONTRIBUTING DESIGNER
+                  Collection Name
                 </Typography>
               </Typography>
 
@@ -328,8 +395,7 @@ export default function BrandPage() {
               </Typography>
             </Box>
           </Grid>
-
-          
+          </Grid>
 
           <Grid
             container
@@ -349,7 +415,7 @@ export default function BrandPage() {
               })
             ) : (
               <h2
-              className="no-items-available"
+                className="no-items-available"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -361,7 +427,6 @@ export default function BrandPage() {
               </h2>
             )}
           </Grid>
-
         </Grid>
 
         {/* <Typography

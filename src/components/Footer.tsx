@@ -29,15 +29,17 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
+               <div className="customize-logo">
               <Logo size="70px" withText>
                 <Typography
-                  fontWeight={300}
-                  sx={{ ml: "8px", letterSpacing: 3 }}
-                  variant="h4"
+               fontWeight={400}
+               sx={{ ml: "8px", letterSpacing: 3 }}
+               variant="h4"
                 >
-                  <strong>FASHION</strong>VERSE
+                  The<strong>FASHION</strong>VERSE
                 </Typography>
               </Logo>
+              </div>
             </motion.div>
             <Typography
               variant="subtitle1"

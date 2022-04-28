@@ -7,31 +7,42 @@ import { motion } from "framer-motion";
 type SliderProps = {
   slideArray: any[];
 };
+const ResizePlugin = (slider) => {
+  const observer = new ResizeObserver(function () {
+    slider.update();
+  });
 
+  slider.on("created", () => {
+    observer.observe(slider.container);
+  });
+  slider.on("destroyed", () => {
+    observer.unobserve(slider.container);
+  });
+};
 export default function Slider({ slideArray }: SliderProps) {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [loaded, setLoaded] = useState(false);
-  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-    initial: 0,
-    loop: true,
-    breakpoints: {
-      "(min-width: 400px)": {
-        slides: { perView: 2, spacing: 2 },
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
+    {
+      initial: 0,
+      loop: true,
+      breakpoints: {
+        "(min-width: 400px)": {
+          slides: { perView: 2, spacing: 2 },
+        },
+        "(min-width: 1000px)": {
+          slides: { perView: 3, spacing: 8 },
+        },
       },
-      "(min-width: 1000px)": {
-        slides: { perView: 2, spacing: 8 },
+      slideChanged(slider) {
+        setCurrentSlide(slider.track.details.rel);
       },
-      "(min-width: 1366px)": {
-        slides: { perView: 3, spacing: 8 },
+      created() {
+        setLoaded(true);
       },
     },
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);
-    },
-    created() {
-      setLoaded(true);
-    },
-  });
+    [ResizePlugin]
+  );
 
   return (
     // <Box
@@ -97,7 +108,7 @@ export default function Slider({ slideArray }: SliderProps) {
           />
         </motion.div>
       )}
-      </>
+    </>
     // </Box>
   );
 }
@@ -113,7 +124,7 @@ function Arrow(props: {
         fontSize="2em"
         color="#22CAFF"
         onClick={props.onClick}
-        // style={{ position: "absolute", top: "40%", left: 0, cursor:"pointer" }}
+        // style={{ position: "relative", top: "40%", left: "-44px", cursor:"pointer" }}
       />
     );
   } else
@@ -122,7 +133,7 @@ function Arrow(props: {
         fontSize="2em"
         color="#22CAFF"
         onClick={props.onClick}
-        // style={{ position: "absolute", top: "40%", right: 0 ,cursor:"pointer" }}
+        // style={{ position: "relative", top: "40%", right: "-44px" ,cursor:"pointer" }}
       />
     );
 }
