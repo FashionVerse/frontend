@@ -134,10 +134,15 @@ export default function Footer() {
 const ABOUT_LINKS = [
   {
     label: "About us",
-    href: "https://www.notion.so/The-FashionVerse-Inc-f6e6a8b81d7e44e0bcff50039a813d75",
+    href: "https://www.notion.so/The-FashionVerse-Inc-Community-81d0d0a9e79e4db3964987511170e2c1",
     id: "asdjas",
   },
-  { label: "Blog", href: "blog", id: "kaijsa" },
+  {
+    label: "FAQs",
+    href: "https://www.notion.so/Frequently-Asked-Questions-03f878292e3b4f30875ec4e3884896bd",
+    id: "asdja",
+  },
+  { label: "Blog", href: "https://medium.com/@FashionVerse", id: "kaijsa" },
   // { label: "Legal & Privacy", href: "legal", id: "lakosa" },
   // { label: "Cookie policies", href: "cookie-policy", id: "kaijsy" },
   // { label: "Cookie preferences", href: "cookie-preferences", id: "lauhsn" },
