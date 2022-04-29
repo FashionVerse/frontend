@@ -134,10 +134,15 @@ export default function Footer() {
 const ABOUT_LINKS = [
   {
     label: "About us",
-    href: "https://www.notion.so/The-FashionVerse-Inc-f6e6a8b81d7e44e0bcff50039a813d75",
+    href: "https://www.notion.so/The-FashionVerse-Inc-Community-81d0d0a9e79e4db3964987511170e2c1",
     id: "asdjas",
   },
-  { label: "Blog", href: "blog", id: "kaijsa" },
+  {
+    label: "FAQs",
+    href: "https://www.notion.so/Frequently-Asked-Questions-03f878292e3b4f30875ec4e3884896bd",
+    id: "asdja",
+  },
+  { label: "Blog", href: "https://medium.com/@FashionVerse", id: "kaijsa" },
   // { label: "Legal & Privacy", href: "legal", id: "lakosa" },
   // { label: "Cookie policies", href: "cookie-policy", id: "kaijsy" },
   // { label: "Cookie preferences", href: "cookie-preferences", id: "lauhsn" },
@@ -145,5 +150,7 @@ const ABOUT_LINKS = [
 
 const SUPPORT_LINKS = [
   { label: "Contact us", href: "contact", id: "lpokiu" },
+  { label: "Suggestion Form", href: "https://docs.google.com/forms/d/e/1FAIpQLSerQnqtUGZSnUEHFgbd2Unmdv0_0tcnIS1YVIJjp3D5BzKfjg/viewform?usp=sf_link", id: "abcd" },
+  { label: "Questions Form", href: "https://docs.google.com/forms/d/e/1FAIpQLSdFo9dZhe-19nwXYOlQbwiZzr_jk9R7I85SYBje33PCeQ6yeA/viewform?usp=sf_link", id: "xyz" },
   // { label: "Bug bounty", href: "bug-bounty", id: "qwerty" },
 ];
