@@ -77,18 +77,18 @@ function CardDialog(props: CardDialogProps) {
 
   const { open, onClose } = props;
 
-  var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
+  var rarityCategory: "Bronze" | "Silver" | "Gold" | "Platinum";
   if(props.rarity >=30 ){
-    rarityCategory = "Semi-rare";
+    rarityCategory = "Bronze";
   }
   else if (props.rarity >=15 && props.rarity < 30){
-    rarityCategory = "Super-rare";
+    rarityCategory = "Silver";
   }
   else if (props.rarity >=5 && props.rarity < 15){
-    rarityCategory = "Ultra-rare";
+    rarityCategory = "Gold";
   }
   if(props.rarity < 50 ){
-    rarityCategory = "Extremely-rare";
+    rarityCategory = "Platinum";
   }
 
   return (

@@ -29,7 +29,7 @@ export interface FashionItemCardProps {
   price: any;
   rarity: number;
   collection: any;
-  rarityCategory?: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
+  rarityCategory?: "Bronze" | "Silver" | "Gold" | "Platinum";
   hideAddToBag?: boolean;
   hidePrice?: boolean;
   expandable?: boolean;
@@ -115,19 +115,19 @@ export default function FashionItemCard(props: FashionItemCardProps) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   var rarityCategory:
-    | "Semi-rare"
-    | "Super-rare"
-    | "Ultra-rare"
-    | "Extremely-rare";
+    | "Bronze"
+    | "Silver"
+    | "Gold"
+    | "Platinum";
   if (props.rarity >= 30) {
-    rarityCategory = "Semi-rare";
+    rarityCategory = "Bronze";
   } else if (props.rarity >= 15 && props.rarity < 30) {
-    rarityCategory = "Super-rare";
+    rarityCategory = "Silver";
   } else if (props.rarity >= 5 && props.rarity < 15) {
-    rarityCategory = "Ultra-rare";
+    rarityCategory = "Gold";
   }
   if (props.rarity < 5) {
-    rarityCategory = "Extremely-rare";
+    rarityCategory = "Platinum";
   }
 
   if (isLoading) {

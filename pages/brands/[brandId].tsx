@@ -70,7 +70,7 @@ export default function BrandPage() {
         price: item.price,
         rarity: item.totalSupply,
         collection: item.collection,
-        rarityCategory: "Semi-rare",
+        rarityCategory: "Bronze",
         expandable: false,
       });
     });
@@ -248,6 +248,7 @@ export default function BrandPage() {
               position: "absolute",
               bottom: "-170px",
               zIndex: 2,
+              fill: "contain",
               left: "50%",
               transform: "translate(-50%, 0)",
               overflow: "hidden",

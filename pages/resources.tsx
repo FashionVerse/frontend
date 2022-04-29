@@ -143,10 +143,10 @@ export default function Resources() {
                       {description}
                     </Typography>
                     <GradientButton
-                      href={href}
                       variant="contained"
                       color="primary"
                       size="large"
+                      onClick={()=>{window.open(href)}}
                     >
                       <Typography variant="subtitle1">
                         <b>{buttonText}</b>
@@ -168,27 +168,27 @@ const RESOURCE_INFO = [
   {
     id: "ajaskas",
     buttonText: "Getting Started",
-    href: "#",
+    href: "https://www.notion.so/Getting-Started-on-The-FashionVerse-Marketplace-0ef16aa498ab4530a6d19809ed58c706",
     description:
       "Learn how to set up your wallet, browse through the platform, and purchase your first piece of digital clothing",
   },
   {
     id: "ajaskas",
     buttonText: "Designer Collaborations",
-    href: "#",
+    href: "https://www.notion.so/How-can-you-launch-a-collection-with-The-FashionVerse-f636e30a17f343868f13ea0aef6e0bdb",
     description:
       "A fashion designer? Learn more about our collaboration policies and launch your digital brand with us!",
   },
   {
     id: "ajaskas",
     buttonText: "About FashionVerse",
-    href: "https://glib-party-b08.notion.site/The-FashionVerse-Inc-Community-81d0d0a9e79e4db3964987511170e2c1",
+    href: "https://www.notion.so/The-FashionVerse-Inc-Community-81d0d0a9e79e4db3964987511170e2c1",
     description: "Find out more about our mission, roadmap, team, and progress",
   },
   {
     id: "ajaskas",
     buttonText: "Genesis Collection",
-    href: "https://docs.google.com/document/d/1s9yWrtnbdsu-LX0KZ5ledULVFwHYWxQOslSxiLtoJiQ/edit",
+    href: "https://www.notion.so/The-Genesis-Collection-df2cd389dbba4833b756c66e7c6b229b",
     description: "Browse through the details of our genesis collection",
   },
 ];

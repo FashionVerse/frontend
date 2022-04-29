@@ -212,7 +212,7 @@ export default function DropPage() {
             price: item.price,
             rarity: item.totalSupply,
             collection: item.collection,
-            rarityCategory: "Semi-rare",
+            rarityCategory: "Bronze",
             expandable: false,
           });
         });
@@ -706,10 +706,10 @@ const itemData = [
 ];
 
 const RARITY_DATA: Option[] = [
-  { value: "Semi rare", id: "123kjaasd", selected: false },
-  { value: "Ultra rare", id: "asdasioqdoj", selected: false },
-  { value: "Super rare", id: "asdaiuqas", selected: false },
-  { value: "Extremely rare", id: "98ujkacc", selected: false },
+  { value: "Bronze", id: "123kjaasd", selected: false },
+  { value: "Silver", id: "asdasioqdoj", selected: false },
+  { value: "Gold", id: "asdaiuqas", selected: false },
+  { value: "Platinum", id: "98ujkacc", selected: false },
 ];
 
 const PRICE_DATA: Option[] = [
