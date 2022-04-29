@@ -581,6 +581,7 @@ export default function DropPage() {
               className="side-spacing"
               spacing={4}
               sx={{ mt: 2, mb: 10 }}
+              justifyContent= "center"
             >
               <Grid item xs={12}>
                 <Stack direction="row" gap={2} sx={{ px: 1 }}>

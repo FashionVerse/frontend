@@ -45,7 +45,7 @@ export default function Footer() {
               variant="subtitle1"
               color="textSecondary"
               gutterBottom
-              sx={{ mt: 2, color: "#8393AF", fontWeight: 700 }}
+              sx={{ mt: 2, color: "#8393AF"}}
             >
               The Fashion, Inc. is an NFT marketplace for 3D digital clothing
               that enables the user to build an metaverse compatible digital
@@ -70,7 +70,7 @@ export default function Footer() {
           <Typography
             variant="h6"
             color="textSecondary"
-            sx={{ fontWeight: 400, color: "#000000" }}
+            sx={{ fontWeight: 700, color: "#000000" }}
           >
             About
           </Typography>
@@ -91,7 +91,7 @@ export default function Footer() {
           <Typography
             variant="h6"
             color="textSecondary"
-            sx={{ fontWeight: 400, color: "#000000" }}
+            sx={{ fontWeight: 700, color: "#000000" }}
           >
             Support
           </Typography>

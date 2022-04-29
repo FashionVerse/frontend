@@ -401,6 +401,7 @@ export default function BrandPage() {
             container
             className="side-spacing"
             direction="row"
+            justifyContent= "center"
             spacing={4}
             sx={{ mt: 2, mb: 10 }}
           >

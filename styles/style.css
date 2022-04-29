@@ -183,9 +183,36 @@ body {
   left: 0;
   -webkit-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
-  padding-top: 30px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
+.header .custom-container {
+  z-index: 2;
+  position: relative;
+}
+.header:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* transition: background 3s linear; */
+  opacity: 0;
+  transition: opacity 0.4s linear;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.bg-style-dark .header:hover:before {
+  background: linear-gradient(270.98deg, #01f0ff 1.94%, rgba(0, 0, 0) 50.07%);
+  opacity: 1;
+  transition: opacity 0.4s linear;
+  box-shadow: 0 0 15px 0 rgba(1, 240, 255, 0.4);
+}
+/* .bg-style-light .header:hover:before {
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+  background: linear-gradient(270.98deg, #01f0ff 1.94%, rgba(0, 0, 0) 50.07%);
+} */
+
 .header.stick-header {
   padding-top: 10px;
 }
@@ -1610,10 +1637,10 @@ header + div {
 }
 
 /* Home page */
-.bg-style-light .main-heading-wrapper {
+/* .bg-style-light .main-heading-wrapper {
   position: relative;
   background: #fff;
-}
+} */
 
 .bg-style-dark .home-page {
   background: url("/top-right-home.png") right 1.9% no-repeat,
@@ -1747,6 +1774,9 @@ header + div {
 /* first-fold */
 .first-fold {
   padding-bottom: 97px;
+}
+.first-fold .sub-heading{
+  font-size: 49px;
 }
 .first-fold .keen-slider {
   height: 100%;
@@ -2016,12 +2046,22 @@ header + div {
 .bg-style-light .custom-card {
   border: 1px solid #fff;
 }
+.bg-style-dark .custom-card {
+  /* background: rgba(34, 202, 255,  0.4); */
+  /* background: linear-gradient(180deg, rgba(0, 163, 255, 0.8) 0%, rgba(34, 202, 255,  0.4) 100%); */
+  /* background: linear-gradient(180deg, rgba(0, 163, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 100%); */
+}
+.bg-style-dark .custom-card .bottom-info .MuiListItemText-root span:last-child{
+ color:#fff;
+}
 /* .bg-style-light .keen-slider .custom-card:hover {
   box-shadow: 0 0 16px 0 #fff;
 } */
 .custom-card {
   cursor: pointer;
   box-shadow: none;
+  /* backdrop-filter: none; */
+
 }
 .custom-card.with-description {
   max-width: none;
@@ -2090,7 +2130,7 @@ header + div {
 }
 .footer li a .MuiTypography-root {
   color: #8393af;
-  font-weight: 700;
+  font-weight: 400;
 }
 .email-box p {
   color: #8393af;
@@ -2106,7 +2146,7 @@ header + div {
 /* brand inner page */
 .brand-page-inner,
 .dropsContainer {
-  padding-top: 211px;
+  padding-top: 184px;
 }
 .side-spacing {
   padding-left: 160px;

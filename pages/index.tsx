@@ -312,7 +312,7 @@ export default function Index() {
                 {/* Build your First Digital <br /> Wardrobe */}
                 <Typewriter
                   options={{
-                    strings: ["  Build Your First Digital <br /> Wardrobe."],
+                    strings: ["Build Your  Digital Wardrobe."],
                     autoStart: true,
                     loop: true,
                   }}

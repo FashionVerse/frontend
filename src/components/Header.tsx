@@ -17,9 +17,14 @@ import Tooltip from "@mui/material/Tooltip";
 import ListMenu from "./ListMenu";
 import useSWR from "swr";
 import Image from "next/image";
-import wallet from "../../public/wallet.svg";
-import wardrobe from "../../public/wardrobe.svg";
-import cart from "../../public/shopping-cart.svg";
+import walletDark from "../../public/wallet-dark.png";
+import walletWhite from "../../public/wallet-light.png";
+import wardrobeDark from "../../public/wardrobe-dark.png";
+import wardrobeWhite from "../../public/wardrobe-white.png";
+import cartDark from "../../public/cart-dark.png";
+import cartWhite from "../../public/cart-white.png";
+// import wardrobe from "../../public/wardrobe.png";
+// import cart from "../../public/shopping-cart.png";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
@@ -268,7 +273,9 @@ export default function Header() {
                   <NavIconButton sx={{ ml: "16px" }} size="small">
                     {/* <BsWallet /> */}
                     <Image
-                      src={wallet}
+                      src={
+                        theme.palette.mode === "dark" ? walletWhite : walletDark
+                      }
                       alt="wallet"
                       width="29px"
                       height="29px"
@@ -293,7 +300,9 @@ export default function Header() {
                   <NavIconButton size="small">
                     {/* <BsDoorOpen /> */}
                     <Image
-                      src={wardrobe}
+                      src={
+                        theme.palette.mode === "dark" ?  wardrobeWhite: wardrobeDark
+                      }
                       alt="wardrobe"
                       width="29px"
                       height="29px"
@@ -317,7 +326,14 @@ export default function Header() {
                 >
                   <NavIconButton size="small">
                     {/* <BsHandbag /> */}
-                    <Image src={cart} alt="cart" width="29px" height="30px" />
+                    <Image
+                      src={
+                        theme.palette.mode === "dark" ? cartWhite : cartDark
+                      }
+                      alt="cart"
+                      width="29px"
+                      height="30px"
+                    />
                   </NavIconButton>
                 </motion.div>
               </Link>

@@ -151,10 +151,11 @@ export default function Brands() {
             </Grid>
 
             <Grid
-              sx={{ marginTop: "-30px", marginBottom: "40px" }}
+              sx={{ marginBottom: "40px" }}
               container
               direction="row"
               spacing={4}
+              justifyContent= "center"
             >
               {arr.map((props) => (
                 <Grid item xs={12} sm={6} lg={4} key={props.id}>
