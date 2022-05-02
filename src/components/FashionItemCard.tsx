@@ -20,6 +20,7 @@ import firestore from "../../firebase/clientApp";
 import Web3 from "web3";
 import { useRouter } from "next/router";
 import etheriumIcon from "../../public/etherium-icon.svg";
+import { useSnackbar } from "notistack";
 
 export interface FashionItemCardProps {
   id: string;
@@ -58,6 +59,8 @@ async function addToBag() {
 
 export default function FashionItemCard(props: FashionItemCardProps) {
   const router = useRouter();
+
+  const { enqueueSnackbar } = useSnackbar();
 
   async function setCart() {
     if (typeof window["ethereum"] !== "undefined") {
@@ -102,6 +105,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
         const content = await rawResponse.json();
 
         console.log(content);
+        enqueueSnackbar("Item added to bag", { variant: "success" });
       } else {
         alert("Connect to Wallet");
         router.replace("/");

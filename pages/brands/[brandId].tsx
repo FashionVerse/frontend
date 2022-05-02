@@ -313,7 +313,7 @@ export default function BrandPage() {
                   className="sub-heading with-small-font"
                   align="center"
                 >
-                  {data.brand.contributor}
+                  {data.drop === null ? "": data.drop.title}
                 </Typography>
               </li>
               <li>
@@ -333,7 +333,7 @@ export default function BrandPage() {
                   className="sub-heading with-small-font"
                   align="center"
                 >
-                  {data.brand.contributor}
+                  {data.totalItems}
                 </Typography>
               </li>
             </ul>
@@ -385,15 +385,23 @@ export default function BrandPage() {
                 >
                   Collection Name
                 </Typography>
+
+                <Typography
+                variant="h3"
+                className="sub-heading"
+                align="center">
+                {data.collection === null ? "": data.collection.title}
+                </Typography>
+                
               </Typography>
 
-              <Typography
+              {/* <Typography
                 variant="subtitle1"
                 className="sub-heading with-small-font"
                 align="center"
               >
                 {data.brand.contributor}
-              </Typography>
+              </Typography> */}
             </Box>
           </Grid>
           </Grid>

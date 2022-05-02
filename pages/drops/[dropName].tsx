@@ -116,7 +116,7 @@ export default function DropPage() {
     try {
       const bodyItem = {
         rarity: [],
-        brands: [],
+        brand: [],
         price: [],
       };
       const rarity = methods.getValues().rarity;
@@ -125,7 +125,7 @@ export default function DropPage() {
 
       brand.map((brandItem) => {
         if (brandItem.selected) {
-          bodyItem.brands.push(brandItem.id);
+          bodyItem.brand.push(brandItem.id);
         }
       });
 
@@ -186,7 +186,8 @@ export default function DropPage() {
       });
 
       console.log(bodyItem);
-
+      console.log("ROUTER")
+      console.log(router.query)
       const response = await fetch(
         process.env.API_URL + "/api/getItems?&page=" + page,
         {
