@@ -16,6 +16,7 @@ import { collection, setDoc, doc } from "firebase/firestore";
 import firestore from "../../firebase/clientApp";
 import Web3 from "web3";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 
 export interface CardDialogProps extends FashionItemCardProps {
   open: boolean;
