@@ -77,7 +77,7 @@ export default function Footer() {
           <List dense={true}>
             {ABOUT_LINKS.map(({ id, label, href }) => (
               <ListItem key={id} disableGutters>
-                <Link href={href} noLinkStyle>
+                <Link href={href} target="_blank" noLinkStyle>
                   <ListItemText
                     primary={label}
                     primaryTypographyProps={{ color: "textPrimary" }}
@@ -98,7 +98,7 @@ export default function Footer() {
           <List dense={true}>
             {SUPPORT_LINKS.map(({ id, label, href }) => (
               <ListItem key={id} disableGutters>
-                <Link href={href} noLinkStyle>
+                <Link href={href} target="_blank" noLinkStyle>
                   <ListItemText
                     primary={label}
                     sx={{ color: "#8393AF", fontWeight: 700 }}

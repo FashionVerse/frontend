@@ -82,7 +82,7 @@ const GridCard = (props: GridCardProps) => {
                 position: "relative",
                 overflow: "hidden",
                 borderBottomRightRadius: "4px",
-                backgroundColor: topLeftImage.bgColor,
+                backgroundColor: "white",
               }}
             >
               <Image
@@ -103,7 +103,7 @@ const GridCard = (props: GridCardProps) => {
                 borderBottomLeftRadius: "4px",
                 position: "relative",
                 overflow: "hidden",
-                backgroundColor: topRightImage.bgColor,
+                backgroundColor: "white",
               }}
             >
               <Image
@@ -123,7 +123,7 @@ const GridCard = (props: GridCardProps) => {
                 position: "relative",
                 overflow: "hidden",
                 borderTopRightRadius: "4px",
-                backgroundColor: bottomLeftImage.bgColor,
+                backgroundColor: "white",
               }}
             >
               <Image
@@ -143,7 +143,7 @@ const GridCard = (props: GridCardProps) => {
                 borderTopLeftRadius: "4px",
                 position: "relative",
                 overflow: "hidden",
-                backgroundColor: bottomRightImage.bgColor,
+                backgroundColor: "white",
               }}
             >
               <Image

@@ -70,7 +70,7 @@ export default function BrandPage() {
         price: item.price,
         rarity: item.totalSupply,
         collection: item.collection,
-        rarityCategory: "Semi-rare",
+        rarityCategory: "Bronze",
         expandable: false,
       });
     });
@@ -248,6 +248,7 @@ export default function BrandPage() {
               position: "absolute",
               bottom: "-170px",
               zIndex: 2,
+              fill: "contain",
               left: "50%",
               transform: "translate(-50%, 0)",
               overflow: "hidden",
@@ -312,7 +313,7 @@ export default function BrandPage() {
                   className="sub-heading with-small-font"
                   align="center"
                 >
-                  {data.brand.contributor}
+                  {data.drop === null ? "": data.drop.title}
                 </Typography>
               </li>
               <li>
@@ -332,7 +333,7 @@ export default function BrandPage() {
                   className="sub-heading with-small-font"
                   align="center"
                 >
-                  {data.brand.contributor}
+                  {data.totalItems}
                 </Typography>
               </li>
             </ul>
@@ -384,15 +385,23 @@ export default function BrandPage() {
                 >
                   Collection Name
                 </Typography>
+
+                <Typography
+                variant="h3"
+                className="sub-heading"
+                align="center">
+                {data.collection === null ? "": data.collection.title}
+                </Typography>
+                
               </Typography>
 
-              <Typography
+              {/* <Typography
                 variant="subtitle1"
                 className="sub-heading with-small-font"
                 align="center"
               >
                 {data.brand.contributor}
-              </Typography>
+              </Typography> */}
             </Box>
           </Grid>
           </Grid>

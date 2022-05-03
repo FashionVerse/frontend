@@ -171,7 +171,7 @@ export default function Product() {
     );
   console.log("Product Id ", productId);
 
-  const { data, error } = useSWR(
+  var { data, error } = useSWR(
     process.env.API_URL + "/api/getItems?id=" + productId,
     fetcher
   );
@@ -192,7 +192,30 @@ export default function Product() {
         <AnimLogo />
       </Box>
     );
-  console.log("data fetched", data);
+
+    console.log("data fetched", data);
+
+    var rarityCategory;
+  if(data.totalSupply >=30 ){
+    rarityCategory = "Bronze";
+  }
+  else if (data.totalSupply >=15 && data.totalSupply < 30){
+    rarityCategory = "Silver";
+  }
+  else if (data.totalSupply >=5 && data.totalSupply < 15){
+    rarityCategory = "Gold";
+  }
+  if(data.totalSupply < 5 ){
+    rarityCategory = "Platinum";
+  }
+
+  data = {...data, rarityCategory: rarityCategory}
+
+
+
+
+
+  
   const {
     palette: { mode },
   } = useTheme();
@@ -478,7 +501,7 @@ export default function Product() {
                 >
                   <span className="tw-font-semibold">Rarity:</span>
                   <div className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500">
-                    Ultra Rare
+                    {data.rarityCategory}
                   </div>
                 </Typography>
 

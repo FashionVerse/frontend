@@ -16,6 +16,7 @@ import { collection, setDoc, doc } from "firebase/firestore";
 import firestore from "../../firebase/clientApp";
 import Web3 from "web3";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 
 export interface CardDialogProps extends FashionItemCardProps {
   open: boolean;
@@ -30,65 +31,120 @@ export interface EnlargedFashionCardProps extends FashionItemCardProps {
 function CardDialog(props: CardDialogProps) {
   const router = useRouter();
 
-  async function setCart(){
-    if(typeof window['ethereum'] !== 'undefined'){
-      const ethereum = window['ethereum'];
-  if (ethereum) {
-      var provider = new ethers.providers.Web3Provider(ethereum);
+  // async function setCart(){
+  //   if(typeof window['ethereum'] !== 'undefined'){
+  //     const ethereum = window['ethereum'];
+  // if (ethereum) {
+  //     var provider = new ethers.providers.Web3Provider(ethereum);
 
-  }
+  // }
   
-  const isMetaMaskConnected = async () => {
-    const accounts = await provider.listAccounts();
-    return accounts.length > 0;
-  }
-    const connected = await isMetaMaskConnected();
-    if(connected){
-      const accounts = await ethereum.enable();
-      const account = accounts[0];
-      console.log(account)
-      setIsLoading(true);
-      await setDoc(doc(firestore, "cart", account), {
-        id: account,
+  // const isMetaMaskConnected = async () => {
+  //   const accounts = await provider.listAccounts();
+  //   return accounts.length > 0;
+  // }
+  //   const connected = await isMetaMaskConnected();
+  //   if(connected){
+  //     const accounts = await ethereum.enable();
+  //     const account = accounts[0];
+  //     console.log(account)
+  //     setIsLoading(true);
+  //     await setDoc(doc(firestore, "cart", account), {
+  //       id: account,
 
-      });
-      await setDoc(doc(firestore, "/cart/"+account+"/items", props.itemId), {
-        id: props.itemId,
-        brand: props.brand.id,
-        collection: props.collection.id,
-        amount: 1,
+  //     });
+  //     await setDoc(doc(firestore, "/cart/"+account+"/items", props.itemId), {
+  //       id: props.itemId,
+  //       brand: props.brand.id,
+  //       collection: props.collection.id,
+  //       amount: 1,
 
-      });
+  //     });
 
       
 
-      setIsLoading(false);
+  //     setIsLoading(false);
       
-    } else {
-      alert("Connect to Wallet")
-      router.replace("/");
-    }
+  //   } else {
+  //     alert("Connect to Wallet")
+  //     router.replace("/");
+  //   }
 
+  //   } else {
+  //     alert("MetaMask not installed")
+  //   }
+  // }
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  async function setCart() {
+    if (typeof window["ethereum"] !== "undefined") {
+      const ethereum = window["ethereum"];
+      if (ethereum) {
+        var provider = new ethers.providers.Web3Provider(ethereum);
+      }
+
+      const isMetaMaskConnected = async () => {
+        const accounts = await provider.listAccounts();
+        return accounts.length > 0;
+      };
+      const connected = await isMetaMaskConnected();
+      if (connected) {
+        const accounts = await ethereum.enable();
+        const account = accounts[0];
+        // await setDoc(doc(firestore, "cart", account), {
+        //   id: account,
+
+        // });
+        // await setDoc(doc(firestore, "/cart/"+account+"/items", props.itemId), {
+        //   id: props.itemId,
+        //   collection: props.collection.id,
+        //   amount: 1,
+
+        // });
+
+        const rawResponse = await fetch(
+          process.env.API_URL + "/api/addItemToBag",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              item: props.id.toString(),
+              account: account,
+            }),
+          }
+        ).catch();
+        const content = await rawResponse.json();
+
+        console.log(content);
+        enqueueSnackbar("Item added to bag", { variant: "success" });
+      } else {
+        alert("Connect to Wallet");
+        router.replace("/");
+      }
     } else {
-      alert("MetaMask not installed")
+      alert("MetaMask not installed");
     }
   }
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { open, onClose } = props;
 
-  var rarityCategory: "Semi-rare" | "Super-rare" | "Ultra-rare" | "Extremely-rare";
+  var rarityCategory: "Bronze" | "Silver" | "Gold" | "Platinum";
   if(props.rarity >=30 ){
-    rarityCategory = "Semi-rare";
+    rarityCategory = "Bronze";
   }
   else if (props.rarity >=15 && props.rarity < 30){
-    rarityCategory = "Super-rare";
+    rarityCategory = "Silver";
   }
   else if (props.rarity >=5 && props.rarity < 15){
-    rarityCategory = "Ultra-rare";
+    rarityCategory = "Gold";
   }
   if(props.rarity < 50 ){
-    rarityCategory = "Extremely-rare";
+    rarityCategory = "Platinum";
   }
 
   return (
