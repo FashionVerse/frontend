@@ -105,7 +105,7 @@ export default function Resources() {
                 <Typography
                   variant="h1"
                   className="secondary-heading"
-                  sx={{ mt: 10, mb: 10 }}
+                  sx={{ mt: 10, mb: 6 }}
                 >
                   <Typography
                     variant="h1"
@@ -120,7 +120,7 @@ export default function Resources() {
             </Grid>
           </Grid>
           <Grid
-            sx={{ marginTop: "20px", marginBottom: "40px" }}
+            sx={{ mt: 3, mb: 10 }}
             container
             direction="row"
             justifyContent="center"
@@ -129,32 +129,33 @@ export default function Resources() {
           >
             {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
               <Grid item xs={12} sm={6} lg={4} key={id}>
-                  <GridCardContainer className="custom-card">
-                    <Box
-                      sx={{
-                        textAlign: "center",
-                      }}
+                <GridCardContainer className="custom-card">
+                  <Box
+                    sx={{
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      align="center"
+                      sx={{ mb: 4 }}
                     >
-                      <Typography
-                        variant="subtitle1"
-                        align="center"
-                        sx={{ mb: 4 }}
-                      >
-                        {description}
+                      {description}
+                    </Typography>
+                    <GradientButton
+                      onClick={() => {
+                        window.open(href);
+                      }}
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                    >
+                      <Typography variant="subtitle1">
+                        <b>{buttonText}</b>
                       </Typography>
-                      <GradientButton
-                       onClick={()=>{window.open(href)}}
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                      >
-                        <Typography variant="subtitle1">
-                          <b>{buttonText}</b>
-                        </Typography>
-                      </GradientButton>
-                    </Box>
-                  </GridCardContainer>
-             
+                    </GradientButton>
+                  </Box>
+                </GridCardContainer>
               </Grid>
             ))}
           </Grid>
