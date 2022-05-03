@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import Footer from "../src/components/Footer";
 import Head from "next/head";
 import { Button, Container, Typography, Grid, Paper, Box } from "@mui/material";
-import { styled } from "@mui/system";
 import { NextSeo } from "next-seo";
+import { styled, alpha, useTheme } from "@mui/system";
 
 const GradientButton = styled(Button)(({ theme }) => ({
   background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.secondary.main} 90%)`,
@@ -18,7 +18,28 @@ const BlueShadowPaper = styled(Paper)(({ theme }) => ({
   background: theme.palette.mode === "dark" ? "#121212" : "#FFF",
 }));
 
+const GridCardContainer = styled(Paper)(({ theme }) => ({
+  width: "100%",
+  // maxWidth: "403px",
+  borderRadius: "24px",
+  padding: "0 26px",
+  paddingBottom: "0px",
+  minHeight: "276px",
+  background:
+    theme.palette.mode === "dark"
+      ? `rgba( 255, 255, 255, 0.2 )`
+      : alpha(theme.palette.primary.light, 0.2),
+  backdropFilter: `blur( 8px )`,
+  WebkitBackdropFilter: `blur( 8px )`,
+  boxShadow: "none",
+  display: "flex",
+  alignItems: "center",
+}));
+
 export default function Resources() {
+  const {
+    palette: { mode },
+  } = useTheme();
   return (
     <>
       <Head>
@@ -65,98 +86,78 @@ export default function Resources() {
       >
         <Grid
           container
-          spacing={0}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          className="custom-container  common-fold"
-        >
-          <Grid item xs={12}>
-            <span className="divider"></span>
-            <Box>
-              <Typography
-                variant="h1"
-                className="secondary-heading"
-                sx={{ mt: 10, mb: 10 }}
-              >
-                <Typography
-                  variant="h1"
-                  color="primary"
-                  component="span"
-                  className="gradient-text"
-                >
-                  RESOURCES
-                </Typography>
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-
-        <Grid
-          sx={{ marginTop: "20px", marginBottom: "40px" }}
-          container
           direction="row"
           justifyContent="center"
           alignItems="center"
           className="custom-container common-fold"
         >
-          {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
-            <Grid
-              sx={{ marginBottom: "100px" }}
-              item
-              xs={12}
-              sm={12}
-              md={5}
-              key={id}
-            >
-              <motion.div
-                // className="drops_hover_cursor"
-                style={{
-                  cursor: "pointer",
-                }}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ ease: "easeOut", delay: 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-              >
-                <BlueShadowPaper
-                  elevation={2}
-                  sx={{
-                    maxWidth: "360px",
-                    aspectRatio: "1/1",
-                    margin: "auto",
-                    borderRadius: "10px",
-                    padding: "0 32px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center"
-                  }}
+          <Grid
+            container
+            spacing={0}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            className="custom-container  common-fold"
+          >
+            <Grid item xs={12}>
+              <span className="divider"></span>
+              <Box>
+                <Typography
+                  variant="h1"
+                  className="secondary-heading"
+                  sx={{ mt: 10, mb: 10 }}
                 >
-                  <Box
-                    sx={{
-                      textAlign: "center"
-                    }}
-                  >     
-                    <Typography variant="subtitle1" align="center" sx={{ mb: 4 }}>
-                      {description}
-                    </Typography>
-                    <GradientButton
-                      href={href}
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                    >
-                      <Typography variant="subtitle1">
-                        <b>{buttonText}</b>
-                      </Typography>
-                    </GradientButton>
-                  </Box>
-                </BlueShadowPaper>
-              </motion.div>
+                  <Typography
+                    variant="h1"
+                    color="primary"
+                    component="span"
+                    className="gradient-text"
+                  >
+                    RESOURCES
+                  </Typography>
+                </Typography>
+              </Box>
             </Grid>
-          ))}
+          </Grid>
+          <Grid
+            sx={{ marginTop: "20px", marginBottom: "40px" }}
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={4}
+          >
+            {RESOURCE_INFO.map(({ id, href, buttonText, description }) => (
+              <Grid item xs={12} sm={6} lg={4} key={id}>
+                  <GridCardContainer className="custom-card">
+                    <Box
+                      sx={{
+                        textAlign: "center",
+                      }}
+                    >
+                      <Typography
+                        variant="subtitle1"
+                        align="center"
+                        sx={{ mb: 4 }}
+                      >
+                        {description}
+                      </Typography>
+                      <GradientButton
+                        href={href}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                      >
+                        <Typography variant="subtitle1">
+                          <b>{buttonText}</b>
+                        </Typography>
+                      </GradientButton>
+                    </Box>
+                  </GridCardContainer>
+             
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
         <Footer />
       </Container>
