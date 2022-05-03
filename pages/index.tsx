@@ -15,6 +15,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemButton,
 } from "@mui/material";
 import { BiRocket } from "react-icons/bi";
 import { useRouter } from "next/router";
@@ -57,12 +58,12 @@ export const FashionItemCardContainer = styled(Card)(({ theme }) => ({
   maxWidth: "404px",
   background:
     theme.palette.mode === "dark"
-      ? `rgba( 255, 255, 255, 0.2 )`
-      : alpha(theme.palette.primary.light, 0.2),
+      ? `rgba( 51,121,157 )`
+      : alpha(theme.palette.primary.light, 0.4),
   backdropFilter: `blur( 8px )`,
   WebkitBackdropFilter: `blur( 8px )`,
   padding: "16px",
-  borderRadius: "20px",
+  borderRadius: "6px",
   boxShadow: "none",
 }));
 
@@ -341,146 +342,6 @@ export default function Index() {
           </Grid>
         </Grid>
 
-        {/* new fold added */}
-        <Grid
-          container
-          spacing={0}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          className="custom-container second-fold section-spacing common-fold"
-        >
-          <Grid item xs={12}>
-            <span className="divider"></span>
-            <Box>
-              <Typography
-                variant="h2"
-                className="secondary-heading"
-                sx={{ mt: 10, mb: 6 }}
-                style={{ lineHeight: "normal" }}
-              >
-                <Typography
-                  variant="h2"
-                  color="primary"
-                  component="span"
-                  className="gradient-text"
-                >
-                  The FashionVerse &nbsp; <br></br>
-                </Typography>
-                <i>is your Digital Fashion Retailer</i>
-              </Typography>
-            </Box>
-            <Typography
-              variant="subtitle1"
-              className="sub-heading with-small-font"
-              align="center"
-            >
-              {/* Build your First Digital <br /> Wardrobe */}
-              {/* <Typewriter
-                  options={{
-                    strings: [data.brand.description],
-                    autoStart: true,
-                    loop: true,
-                  }}
-                /> */}
-              We work with brands in providing you with a range <br></br> of
-              clothing and accessories wearable on your avatars across
-              metaverses.
-            </Typography>
-          </Grid>
-        </Grid>
-
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          className="custom-container"
-          sx={{ mb: 8 }}
-          alignItems="stretch"
-        >
-          <Grid item xs={12}>
-            <Grid
-              container
-              alignItems="stretch"
-              justifyContent="center"
-              spacing={8}
-            >
-              <Grid item xs={12} md={4}>
-                <FashionItemCardContainer className="custom-card with-description">
-                  <List>
-                    <ListItem disablePadding>
-                      <ListItemText
-                        primary="Enabling Self Expression in Web3"
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              sx={{ display: "inline" }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                            >
-                              Every fashion piece has a meaning behind it -
-                              purchase inclusive and limitless clothing
-                            </Typography>
-                          </React.Fragment>
-                        }
-                      />
-                    </ListItem>
-                  </List>
-                </FashionItemCardContainer>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <FashionItemCardContainer className="custom-card with-description">
-                  <List>
-                    <ListItem disablePadding>
-                      <ListItemText
-                        primary="Utility for NFTs"
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              sx={{ display: "inline" }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                            >
-                              Dress up your avatar in Decentraland by minting
-                              select NFTs on The FashionVerse
-                            </Typography>
-                          </React.Fragment>
-                        }
-                      />
-                    </ListItem>
-                  </List>
-                </FashionItemCardContainer>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <FashionItemCardContainer className="custom-card with-description">
-                  <List>
-                    <ListItem disablePadding>
-                      <ListItemText
-                        primary="Uplifting Digital Fashion Brands"
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              sx={{ display: "inline" }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                            >
-                              We empower the creator economy of designers in
-                              building the digital fashion economy
-                            </Typography>
-                          </React.Fragment>
-                        }
-                      />
-                    </ListItem>
-                  </List>
-                </FashionItemCardContainer>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-
         {/* Drops */}
         <Grid
           container
@@ -628,6 +489,207 @@ export default function Index() {
             </Box>
           </Grid>
         </Grid>
+
+        {/* new fold added */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box>
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                sx={{ mt: 10, mb: 6 }}
+                style={{ lineHeight: "normal" }}
+              >
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  The FashionVerse &nbsp; <br></br>
+                </Typography>
+                <i>is your Digital Fashion Retailer</i>
+              </Typography>
+            </Box>
+            <Typography
+              variant="subtitle1"
+              className="sub-heading with-small-font"
+              align="center"
+            >
+              {/* Build your First Digital <br /> Wardrobe */}
+              {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+              Our NFTs are tied with Metaverse and Tangible Wearability
+            </Typography>
+            <List className="custom-list">
+              <ListItem disablePadding>
+                <ListItemText primary="Gold and Platinum NFTs give you access to claim the piece’s Decentraland compatible NFT in subsequent drops. " />
+              </ListItem>
+              <ListItem disablePadding>
+                <ListItemText primary="Soon, we will release phygital NFTs with both metaverse wearability and a tangible piece catered to your fit." />
+              </ListItem>
+            </List>
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container same-fold section-spacing common-fold"
+        >
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box>
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                sx={{ mt: 10 }}
+                style={{ lineHeight: "normal" }}
+              >
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  Every unique design &nbsp; <br></br>
+                </Typography>
+                <i>is available in select quantities</i>
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid
+            container
+            alignItems="stretch"
+            justifyContent="center"
+            spacing={8}
+            sx={{ mt: 2 }}
+          >
+            <Grid item xs={12} md={3}>
+              <FashionItemCardContainer className="custom-card with-description bronze">
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemText
+                      primary="Bronze"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            30 NFTs
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </FashionItemCardContainer>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FashionItemCardContainer className="custom-card with-description silver">
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemText
+                      primary="Silver"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            20 NFTs
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </FashionItemCardContainer>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FashionItemCardContainer className="custom-card with-description gold">
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemText
+                      primary="Gold"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            12 NFTs
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </FashionItemCardContainer>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FashionItemCardContainer className="custom-card with-description platinum">
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemText
+                      primary="Platinum"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            1 of 1 NFT
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </FashionItemCardContainer>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          className="custom-container"
+          sx={{ mb: 8 }}
+          alignItems="stretch"
+        >
+          <Grid item xs={12}>
+
+
+            
+          </Grid>
+        </Grid> */}
 
         {/* Advisors */}
         <Grid

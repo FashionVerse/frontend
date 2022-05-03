@@ -208,6 +208,12 @@ body {
   transition: opacity 0.4s linear;
   box-shadow: 0 0 15px 0 rgba(1, 240, 255, 0.4);
 }
+.bg-style-light .header:hover:before {
+  background: #fff;
+  opacity: 1;
+  transition: opacity 0.4s linear;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+}
 /* .bg-style-light .header:hover:before {
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
   background: linear-gradient(270.98deg, #01f0ff 1.94%, rgba(0, 0, 0) 50.07%);
@@ -1643,17 +1649,17 @@ header + div {
 } */
 
 .bg-style-dark .home-page {
-  background: url("/top-right-home.png") right 1.9% no-repeat,
-    url("/top-left-home.png") left 2.1% no-repeat,
-    url("/home-page-middle-bg-blend.svg") center 65% no-repeat,
+  background: url("/top-right-home.png") right 1.7% no-repeat,
+    url("/top-left-home.png") left 1.7% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center 38% no-repeat,
     url("/bottom-right.png") bottom right no-repeat,
     url("/bottom-left.png") bottom left no-repeat;
   background-size: auto, auto, auto, auto, auto;
 }
 .bg-style-light .home-page {
-  background: url("/top-right-home-white.png") right 1.9% no-repeat,
-    url("/top-left-home-white.png") left 2.1% no-repeat,
-    url("/home-page-middle-bg-blend.svg") center 65% no-repeat,
+  background: url("/top-right-home-white.png") right 1.7% no-repeat,
+    url("/top-left-home-white.png") left 1.7% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center 38% no-repeat,
     url("/bottom-right-white.png") bottom right no-repeat,
     url("/bottom-left-white.png") bottom left no-repeat;
   background-size: auto, auto, 100%, auto, auto;
@@ -1721,7 +1727,7 @@ header + div {
   background: url("/top-right-home-white.png") right 2.1% no-repeat,
     url("/top-left-home-white.png") left 2.1% no-repeat,
     /* url("/home-page-middle-bg-blend.svg") center 50% no-repeat, */
-    url("/bottom-right-white.png") bottom right no-repeat,
+      url("/bottom-right-white.png") bottom right no-repeat,
     url("/bottom-left-white.png") bottom left no-repeat;
   background-size: auto, auto, auto, auto, auto;
 }
@@ -1773,9 +1779,9 @@ header + div {
 
 /* first-fold */
 .first-fold {
-  padding-bottom: 97px;
+  padding-bottom: 47px;
 }
-.first-fold .sub-heading{
+.first-fold .sub-heading {
   font-size: 49px;
 }
 .first-fold .keen-slider {
@@ -2051,8 +2057,8 @@ header + div {
   /* background: linear-gradient(180deg, rgba(0, 163, 255, 0.8) 0%, rgba(34, 202, 255,  0.4) 100%); */
   /* background: linear-gradient(180deg, rgba(0, 163, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 100%); */
 }
-.bg-style-dark .custom-card .bottom-info .MuiListItemText-root span:last-child{
- color:#fff;
+.bg-style-dark .custom-card .bottom-info .MuiListItemText-root span:last-child {
+  color: #fff;
 }
 /* .bg-style-light .keen-slider .custom-card:hover {
   box-shadow: 0 0 16px 0 #fff;
@@ -2061,7 +2067,6 @@ header + div {
   cursor: pointer;
   box-shadow: none;
   /* backdrop-filter: none; */
-
 }
 .custom-card.with-description {
   max-width: none;
@@ -2073,6 +2078,66 @@ header + div {
   font-weight: 600;
   margin-bottom: 10px;
   min-height: 78px;
+}
+.same-fold .custom-card.with-description {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.same-fold .custom-card.with-description .MuiListItemText-primary {
+  min-height: 70px;
+  font-size: 2em;
+  margin: 0;
+  text-transform: uppercase;
+color: #000;
+  text-shadow: 0px 3px 10px rgb(0 0 0 / 70%);
+}
+.same-fold
+  .custom-card.with-description
+  .MuiListItemText-primary.MuiTypography-root {
+  font-weight: 700;
+  color: #000;
+  font-size: 2em;
+}
+.same-fold .custom-card.with-description .MuiTypography-root {
+  font-weight: 600;
+  font-size: 1em;
+  color: #000;
+}
+.same-fold .custom-card:hover{
+  box-shadow: 0px 45px 100px rgb(0 0 0 / 40%);
+}
+
+.same-fold .custom-card.bronze {
+  background: rgba(201, 174, 93, 1);
+}
+/* .same-fold .custom-card.silver:hover{
+  box-shadow: 
+     0px 45px 100px rgba(0, 0, 0, .4),
+     inset 0 0 0 1000px rgba(192, 192, 192, 1);
+} */
+.same-fold .custom-card.silver {
+  background: rgba(192, 192, 192, 1);
+  /* box-shadow: 
+     0px 45px 100px rgba(0, 0, 0, .4),
+     inset 0 0 0 1000px rgba(192, 192, 192, 1); */
+}
+.same-fold .custom-card.gold {
+  background: rgba(251, 205, 4, 1);
+  /* box-shadow: 
+     0px 45px 100px rgba(0, 0, 0, .4),
+     inset 0 0 0 1000px rgba(251, 205, 4, 1); */
+}
+.same-fold .custom-card.platinum {
+  background: rgba(229, 228, 226, 1);
+  /* box-shadow: 
+     0px 45px 100px rgba(0, 0, 0, .4),
+     inset 0 0 0 1000px rgba(229, 228, 226, 1)
+     ; */
+}
+.same-fold .custom-card li {
+  text-align: center;
 }
 .custom-card.with-description .MuiListItemText-root {
   margin-top: 0;
@@ -2086,12 +2151,13 @@ header + div {
 }
 .custom-card:hover {
   box-shadow: 0 0 16px 0 #c0c0c0;
+  /* box-shadow: 0px 45px 100px rgb(0 0 0 / 40%); */
 }
 .custom-card:hover img {
   transform: scale(1.05);
 }
 .bg-style-dark .custom-card:hover {
-  box-shadow: 0 0 16px 0 rgba(1, 240, 255, 0.4);
+  box-shadow: 0 0 16px 0 rgba(51,121,157, 0.8);
 }
 /* fifth fold */
 .fifth-fold .secondary-heading .gradient-text {
@@ -2272,4 +2338,28 @@ header + div {
 } */
 .brand-page-inner .designer-info-box .secondary-heading .gradient-text {
   font-size: 30px;
+}
+.custom-list{
+  max-width: 100%;
+  margin: auto;
+  margin-top: 20px;
+  padding-left: 300px;
+}
+.custom-list li{
+  /* text-align:center; */
+  position:relative;
+  padding-left:25px;
+}
+.custom-list li:before{
+  content: "";
+  position:absolute;
+  left:0;
+  top:12px;
+  width:12px;
+  height:12px;
+  background:#fff;
+  border-radius:100%;
+}
+.bg-style-light .custom-list li:before{
+  background:#000;
 }

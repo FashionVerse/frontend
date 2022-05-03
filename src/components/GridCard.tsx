@@ -41,8 +41,8 @@ const GridCardContainer = styled(Paper)(({ theme }) => ({
   paddingBottom: "0px",
   background:
     theme.palette.mode === "dark"
-      ? `rgba( 255, 255, 255, 0.2 )`
-      : alpha(theme.palette.primary.light, 0.2),
+      ? `rgba( 51,121,157 )`
+      : alpha(theme.palette.primary.light, 0.4),
   backdropFilter: `blur( 8px )`,
   WebkitBackdropFilter: `blur( 8px )`,
   marginTop: "12px",
