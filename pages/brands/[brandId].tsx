@@ -253,6 +253,8 @@ export default function BrandPage() {
               transform: "translate(-50%, 0)",
               overflow: "hidden",
               backgroundImage: "url(" + data.brand.avatarSrc + ")",
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
               boxShadow: "0 0 16px 0 #c0c0c0",
               whileHover: {
                 boxShadow: "0 0 16px 0 #c0c0c0",

@@ -47,7 +47,7 @@ const GridCardContainer = styled(Paper)(({ theme }) => ({
   WebkitBackdropFilter: `blur( 8px )`,
   marginTop: "12px",
   marginBottom: "12px",
-  boxShadow: "none"
+  boxShadow: "none",
 }));
 
 const GridCard = (props: GridCardProps) => {
@@ -68,112 +68,116 @@ const GridCard = (props: GridCardProps) => {
   const router = useRouter();
 
   return (
-    <GridCardContainer className="custom-card"
+    <GridCardContainer
+      className="custom-card"
       onClick={() => (props.href ? router.push(props.href) : null)}
     >
       {/* <Stack justifyContent={"space-between"}> */}
-        <Grid container spacing={2}>
-          <Grid item md={6}>
-            <Box
-              sx={{
-                width: "100%",
-                aspectRatio: "1/1",
-                borderRadius: "18px",
-                position: "relative",
-                overflow: "hidden",
-                borderBottomRightRadius: "4px",
-                backgroundColor: "white",
-              }}
-            >
-              <Image
-                src={topLeftImage.toString()}
-                alt="grid card"
-                layout="fill"
-                className="fashion-card-image"
-                objectFit="cover"
-              />
-            </Box>
-          </Grid>
-          <Grid item md={6}>
-            <Box
-              sx={{
-                width: "100%",
-                aspectRatio: "1/1",
-                borderRadius: "18px",
-                borderBottomLeftRadius: "4px",
-                position: "relative",
-                overflow: "hidden",
-                backgroundColor: "white",
-              }}
-            >
-              <Image
-                src={topRightImage.toString()}
-                alt="grid card"
-                layout="fill"
-                objectFit="cover"
-              />
-            </Box>
-          </Grid>
-          <Grid item md={6}>
-            <Box
-              sx={{
-                width: "100%",
-                aspectRatio: "1/1",
-                borderRadius: "18px",
-                position: "relative",
-                overflow: "hidden",
-                borderTopRightRadius: "4px",
-                backgroundColor: "white",
-              }}
-            >
-              <Image
-                src={bottomLeftImage.toString()}
-                alt="grid card"
-                layout="fill"
-                objectFit="cover"
-              />
-            </Box>
-          </Grid>
-          <Grid item md={6}>
-            <Box
-              sx={{
-                width: "100%",
-                aspectRatio: "1/1",
-                borderRadius: "18px",
-                borderTopLeftRadius: "4px",
-                position: "relative",
-                overflow: "hidden",
-                backgroundColor: "white",
-              }}
-            >
-              <Image
-                src={bottomRightImage.toString()}
-                alt="grid card"
-                layout="fill"
-                objectFit="cover"
-              />
-            </Box>
-          </Grid>
-        </Grid>
-        <List className="bottom-info" sx={{  pl: props.noBrand ? 1 : 0 }}>
-          <ListItem disablePadding>
-            {!props.noBrand && (
-              <ListItemAvatar>
-                <Avatar src={avatarSrc}  sx={{ width: 61, height: 61 }} />
-              </ListItemAvatar>
-            )}
-            <ListItemText
-              primary={title}
-              secondary={subtitle}
-              primaryTypographyProps={{ variant: "h6", fontWeight: 700 }}
-              secondaryTypographyProps={{
-                variant: "caption",
-                color: mode === "dark" ? "primary" : "secondary",
-                // mt: -0.8,
-              }}
+      <Grid container spacing={2}>
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: "100%",
+              aspectRatio: "1/1",
+              borderRadius: "18px",
+              position: "relative",
+              overflow: "hidden",
+              borderBottomRightRadius: "4px",
+              backgroundColor: "white",
+            }}
+          >
+            <Image
+              src={topLeftImage.toString()}
+              alt="grid card"
+              layout="fill"
+              className="fashion-card-image"
+              objectFit="cover"
             />
-          </ListItem>
-        </List>
+          </Box>
+        </Grid>
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: "100%",
+              aspectRatio: "1/1",
+              borderRadius: "18px",
+              borderBottomLeftRadius: "4px",
+              position: "relative",
+              overflow: "hidden",
+              backgroundColor: "white",
+            }}
+          >
+            <Image
+              src={topRightImage.toString()}
+              alt="grid card"
+              layout="fill"
+              objectFit="cover"
+            />
+          </Box>
+        </Grid>
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: "100%",
+              aspectRatio: "1/1",
+              borderRadius: "18px",
+              position: "relative",
+              overflow: "hidden",
+              borderTopRightRadius: "4px",
+              backgroundColor: "white",
+            }}
+          >
+            <Image
+              src={bottomLeftImage.toString()}
+              alt="grid card"
+              layout="fill"
+              objectFit="cover"
+            />
+          </Box>
+        </Grid>
+        <Grid item md={6}>
+          <Box
+            sx={{
+              width: "100%",
+              aspectRatio: "1/1",
+              borderRadius: "18px",
+              borderTopLeftRadius: "4px",
+              position: "relative",
+              overflow: "hidden",
+              backgroundColor: "white",
+            }}
+          >
+            <Image
+              src={bottomRightImage.toString()}
+              alt="grid card"
+              layout="fill"
+              objectFit="cover"
+            />
+          </Box>
+        </Grid>
+      </Grid>
+      <List className="bottom-info" sx={{ pl: props.noBrand ? 1 : 0 }}>
+        <ListItem disablePadding>
+          {!props.noBrand && (
+            <ListItemAvatar>
+              <Avatar
+                src={avatarSrc}
+                sx={{ width: 61, height: 61, objectFit: "contain" }}
+              />
+            </ListItemAvatar>
+          )}
+          <ListItemText
+            primary={title}
+            secondary={subtitle}
+            primaryTypographyProps={{ variant: "h6", fontWeight: 700 }}
+            secondaryTypographyProps={{
+              variant: "caption",
+              color: mode === "dark" ? "primary" : "secondary",
+              // mt: -0.8,
+            }}
+          />
+        </ListItem>
+      </List>
       {/* </Stack> */}
     </GridCardContainer>
   );

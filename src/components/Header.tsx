@@ -18,11 +18,11 @@ import ListMenu from "./ListMenu";
 import useSWR from "swr";
 import Image from "next/image";
 import walletDark from "../../public/wallet-dark.png";
-import walletWhite from "../../public/wallet-light.png";
+import walletWhite from "../../public/wallet.svg";
 import wardrobeDark from "../../public/wardrobe-dark.png";
-import wardrobeWhite from "../../public/wardrobe-white.png";
+import wardrobeWhite from "../../public/wardrobe.svg";
 import cartDark from "../../public/cart-dark.png";
-import cartWhite from "../../public/cart-white.png";
+import cartWhite from "../../public/shopping-cart.svg";
 // import wardrobe from "../../public/wardrobe.png";
 // import cart from "../../public/shopping-cart.png";
 import FormGroup from "@mui/material/FormGroup";
@@ -273,8 +273,11 @@ export default function Header() {
                   <NavIconButton sx={{ ml: "16px" }} size="small">
                     {/* <BsWallet /> */}
                     <Image
+                      // src={
+                      //   theme.palette.mode === "dark" ? walletWhite : walletDark
+                      // }
                       src={
-                        theme.palette.mode === "dark" ? walletWhite : walletDark
+                        walletWhite
                       }
                       alt="wallet"
                       width="29px"
@@ -300,8 +303,11 @@ export default function Header() {
                   <NavIconButton size="small">
                     {/* <BsDoorOpen /> */}
                     <Image
+                      // src={
+                      //   theme.palette.mode === "dark" ?  wardrobeWhite: wardrobeDark
+                      // }
                       src={
-                        theme.palette.mode === "dark" ?  wardrobeWhite: wardrobeDark
+                        wardrobeWhite
                       }
                       alt="wardrobe"
                       width="29px"
@@ -327,8 +333,11 @@ export default function Header() {
                   <NavIconButton size="small">
                     {/* <BsHandbag /> */}
                     <Image
+                      // src={
+                      //   theme.palette.mode === "dark" ? cartWhite : cartDark
+                      // }
                       src={
-                        theme.palette.mode === "dark" ? cartWhite : cartDark
+                        cartWhite
                       }
                       alt="cart"
                       width="29px"

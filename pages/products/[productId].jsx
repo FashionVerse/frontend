@@ -193,29 +193,22 @@ export default function Product() {
       </Box>
     );
 
-    console.log("data fetched", data);
+  console.log("data fetched", data);
 
-    var rarityCategory;
-  if(data.totalSupply >=30 ){
+  var rarityCategory;
+  if (data.totalSupply >= 30) {
     rarityCategory = "Bronze";
-  }
-  else if (data.totalSupply >=15 && data.totalSupply < 30){
+  } else if (data.totalSupply >= 15 && data.totalSupply < 30) {
     rarityCategory = "Silver";
-  }
-  else if (data.totalSupply >=5 && data.totalSupply < 15){
+  } else if (data.totalSupply >= 5 && data.totalSupply < 15) {
     rarityCategory = "Gold";
   }
-  if(data.totalSupply < 5 ){
+  if (data.totalSupply < 5) {
     rarityCategory = "Platinum";
   }
 
-  data = {...data, rarityCategory: rarityCategory}
+  data = { ...data, rarityCategory: rarityCategory };
 
-
-
-
-
-  
   const {
     palette: { mode },
   } = useTheme();
@@ -282,7 +275,11 @@ export default function Product() {
           className="custom-container common-fold1"
         >
           <Grid
-            sx={{ marginTop: "20px", marginBottom: "100px", alignItems: "center" }}
+            sx={{
+              marginTop: "20px",
+              marginBottom: "100px",
+              alignItems: "center",
+            }}
             container
             direction="row"
             spacing={4}
@@ -492,29 +489,43 @@ export default function Product() {
                   {/* </motion.div> */}
                 </Link>
 
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  component="div"
-                  className="tw-font-light"
-                  sx={{ marginBottom: "10px" }}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    flexDirection: "column",
+                  }}
                 >
-                  <span className="tw-font-semibold">Rarity:</span>
-                  <div className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500">
-                    {data.rarityCategory}
-                  </div>
-                </Typography>
-
-                <div>
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    component="div"
+                    className="tw-font-light"
+                    sx={{
+                      marginBottom: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span className="tw-font-semibold">Rarity:&nbsp;</span>
+                    <div className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500">
+                      {data.rarityCategory}
+                    </div>
+                  </Typography>
                   {data.available != 0 ? (
                     <Typography
                       variant="subtitle1"
                       gutterBottom
                       component="div"
                       className="tw-font-semibold"
-                      sx={{ marginBottom: "10px", fontWeight: "600" }}
+                      sx={{
+                        marginBottom: "10px",
+                        fontWeight: "600",
+                        display: "flex",
+                        alignItems: "flex-start",
+                      }}
                     >
-                      Total Available:{" "}
+                      Total Available:&nbsp;
                       <div className="tw-font-semibold pl-2">
                         {data.available}
                       </div>
@@ -529,16 +540,24 @@ export default function Product() {
                       Currently Unavailable
                     </Typography>
                   )}
-                </div>
+                </Box>
 
-                <Box sx={{ marginBottom: "30px", display: "flex", alignItems: "center" }}>
+                <Box
+                  sx={{
+                    marginBottom: "30px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Typography
-                    variant="h2"
+                    variant="subtitle1"
                     gutterBottom
                     component="div"
-                    className="tw-font-medium"
+                    className="tw-font-semibold"
                     sx={{
-                      fontSize: "h6.fontSize", mr: 2
+                      // fontSize: "h6.fontSize",
+                      fontWeight: "600",
+                      mr: 2,
                     }}
                   >
                     Current Price:
@@ -547,10 +566,10 @@ export default function Product() {
                     variant="h3"
                     gutterBottom
                     component="div"
-                    className="tw-font-bold"
+                    className="tw-font-semibold pl-2"
                     sx={{
-                      fontSize: "h4.fontSize",
-                      fontWeight: 700,
+                      fontSize: "2.42857rem",
+                      fontWeight: 600,
                     }}
                   >
                     <img
