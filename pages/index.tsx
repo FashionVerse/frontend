@@ -692,7 +692,7 @@ export default function Index() {
         </Grid> */}
 
         {/* Advisors */}
-        <Grid
+        {/* <Grid
           container
           direction="row"
           justifyContent="center"
@@ -731,7 +731,7 @@ export default function Index() {
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
                   <AdvisorCard {...props} />
-                  {/* <motion.div
+                  <motion.div
                     // className="drops_hover_cursor"
                     style={{
                       cursor: "pointer",
@@ -743,14 +743,14 @@ export default function Index() {
                     whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                   >
                     <AdvisorCard {...props} />
-                  </motion.div> */}
+                  </motion.div>
                 </Grid>
               ))}
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
         {/* Community */}
-        <Grid
+        {/* <Grid
           container
           direction="row"
           justifyContent="center"
@@ -809,7 +809,7 @@ export default function Index() {
               <BsMedium fontSize={"2em"} color="#515151" />
             </IconButton>
           </Stack>
-        </Grid>
+        </Grid> */}
         <Footer />
       </Container>
     </>
