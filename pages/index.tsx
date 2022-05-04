@@ -750,7 +750,7 @@ export default function Index() {
           </Grid>
         </Grid> */}
         {/* Community */}
-        {/* <Grid
+        <Grid
           container
           direction="row"
           justifyContent="center"
@@ -809,7 +809,7 @@ export default function Index() {
               <BsMedium fontSize={"2em"} color="#515151" />
             </IconButton>
           </Stack>
-        </Grid> */}
+        </Grid>
         <Footer />
       </Container>
     </>
