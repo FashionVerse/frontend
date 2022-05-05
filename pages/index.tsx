@@ -46,6 +46,7 @@ import { styled, alpha } from "@mui/system";
 import { useSnackbar } from "notistack";
 import useSWR from "swr";
 import ari from "../../public/ari.jpeg";
+import RightImage from "../public/right-image.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -497,15 +498,21 @@ export default function Index() {
           direction="row"
           justifyContent="center"
           alignItems="center"
-          className="custom-container second-fold section-spacing common-fold"
+          className="custom-container second-fold section-spacing fashion-verse"
         >
-          <Grid item xs={12}>
+          <Grid  sx={{  mb: 10 }} item xs={12}>
             <span className="divider"></span>
+          </Grid>
+
+          <Grid item xs={12} lg={6}>
+          <Image  src={RightImage} alt="RightImage"  objectFit="cover" />
+          </Grid>
+          <Grid item xs={12} lg={6}>
             <Box>
               <Typography
                 variant="h2"
                 className="secondary-heading"
-                sx={{ mt: 10, mb: 6 }}
+                sx={{  mb: 4, pb: 1 }}
                 style={{ lineHeight: "normal" }}
               >
                 <Typography
@@ -514,9 +521,9 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
-                  The FashionVerse &nbsp; <br></br>
+                  The Fashion Verse  <br></br>
                 </Typography>
-                <i>is your Digital Fashion Retailer</i>
+                <i>is your Digital Fashion <br></br> Retailer</i>
               </Typography>
             </Box>
             <Typography
@@ -582,6 +589,27 @@ export default function Index() {
             sx={{ mt: 2 }}
           >
             <Grid item xs={12} md={3}>
+              {/* <FashionItemCardContainer className="custom-card with-description bronze">
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemText
+                      primary="Bronze"
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            30 NFTs
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </FashionItemCardContainer> */}
               <FashionItemCardContainer className="custom-card with-description bronze">
                 <List>
                   <ListItem disablePadding>

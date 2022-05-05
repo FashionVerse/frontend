@@ -1970,8 +1970,44 @@ header + div {
   color: #8393af;
 }
 .section-spacing {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.fashion-verse.section-spacing{
+  padding-bottom:0;
+}
+.fashion-verse .secondary-heading{
+  text-align:left;
+  font-size: 55px;
+  position:relative;
+}
+.fashion-verse .secondary-heading:before{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 167px;
+  height: 1px;
+  border-radius: 3px;
+  background: #fff;
+}
+.bg-style-light .fashion-verse .secondary-heading:before{
+  background: linear-gradient(
+    90.98deg,
+    #01f0ff 39.94%,
+    rgba(35, 105, 209, 0.64) 100.07%
+  );
+}
+
+
+.fashion-verse .secondary-heading .gradient-text{
+  font-size: 55px;
+}
+.fashion-verse .sub-heading.with-small-font{
+  text-align:left;
+  max-width:100%;
+  color: #01f4ff;
+  /* font-size: 22px; */
 }
 /* Third fold */
 /* .brands-section{
@@ -2086,31 +2122,42 @@ header + div {
   justify-content: center;
 }
 .same-fold .custom-card.with-description .MuiListItemText-primary {
-  min-height: 70px;
-  font-size: 2em;
+  min-height: auto;
+  font-size: 20px;
   margin: 0;
   text-transform: uppercase;
-color: #000;
+color: #fff;
   text-shadow: 0px 3px 10px rgb(0 0 0 / 70%);
 }
 .same-fold
   .custom-card.with-description
   .MuiListItemText-primary.MuiTypography-root {
   font-weight: 700;
-  color: #000;
-  font-size: 2em;
+  color: #fff;
+  font-size: 20px;
+  min-height: auto;
 }
 .same-fold .custom-card.with-description .MuiTypography-root {
-  font-weight: 600;
-  font-size: 1em;
-  color: #000;
+  font-weight: 400;
+  font-size: 19px;
+  color: #fff;
 }
+.same-fold .custom-card{
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+  background-color: transparent;
+}
+
 .same-fold .custom-card:hover{
-  box-shadow: 0px 45px 100px rgb(0 0 0 / 40%);
+  /* box-shadow: 0px 45px 100px rgb(0 0 0 / 40%); */
+  box-shadow:none !important;
 }
 
 .same-fold .custom-card.bronze {
-  background: rgba(201, 174, 93, 1);
+  /* background: rgba(201, 174, 93, 1); */
+  background-image: url("/Bronze.png");
+  
 }
 /* .same-fold .custom-card.silver:hover{
   box-shadow: 
@@ -2118,19 +2165,22 @@ color: #000;
      inset 0 0 0 1000px rgba(192, 192, 192, 1);
 } */
 .same-fold .custom-card.silver {
-  background: rgba(192, 192, 192, 1);
+  background-image: url("/Silver.png");
+  /* background: rgba(192, 192, 192, 1); */
   /* box-shadow: 
      0px 45px 100px rgba(0, 0, 0, .4),
      inset 0 0 0 1000px rgba(192, 192, 192, 1); */
 }
 .same-fold .custom-card.gold {
-  background: rgba(251, 205, 4, 1);
+  background-image: url("/Gold.png");
+  /* background: rgba(251, 205, 4, 1); */
   /* box-shadow: 
      0px 45px 100px rgba(0, 0, 0, .4),
      inset 0 0 0 1000px rgba(251, 205, 4, 1); */
 }
 .same-fold .custom-card.platinum {
-  background: rgba(229, 228, 226, 1);
+  background-image: url("/Platinum.png");
+  /* background: rgba(229, 228, 226, 1); */
   /* box-shadow: 
      0px 45px 100px rgba(0, 0, 0, .4),
      inset 0 0 0 1000px rgba(229, 228, 226, 1)
@@ -2147,7 +2197,13 @@ color: #000;
   margin: 0;
 }
 .custom-card img {
-  transition: all 0.3s ease-in-out 0s;
+  transition: transform 0.3s ease-in-out ;
+  /* -webkit-transition: -moz-transform .3s ease-in-out ; 
+-moz-transition: -webkit-transform .3s ease-in-out ;  */
+/* -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out; */
 }
 .custom-card .MuiAvatar-root img{
 object-fit: fill;
@@ -2158,6 +2214,7 @@ object-fit: fill;
 }
 .custom-card:hover img {
   transform: scale(1.05);
+  -webkit-transform:scale(1.05);
 }
 .bg-style-dark .custom-card:hover {
   box-shadow: 0 0 16px 0 rgba(51,121,157, 0.8);
@@ -2344,16 +2401,28 @@ object-fit: fill;
 }
 .custom-list{
   max-width: 100%;
-  margin: auto;
   margin-top: 20px;
-  padding-left: 300px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
 }
 .custom-list li{
   /* text-align:center; */
-  position:relative;
-  padding-left:25px;
+  position: relative;
+  width: 48.5%;
+  background-color: #02131d;
+  border-radius: 4px;
+  padding: 12px 15px 18px 45px;
+  align-items: flex-start;
+  background-image: url("/star.png");
+  background-repeat: no-repeat;
+  background-position: 11px 21px;
+  background-size: 18px;
 }
-.custom-list li:before{
+.custom-list li span{
+ color:#fff;
+}
+/* .custom-list li:before{
   content: "";
   position:absolute;
   left:0;
@@ -2365,4 +2434,4 @@ object-fit: fill;
 }
 .bg-style-light .custom-list li:before{
   background:#000;
-}
+} */

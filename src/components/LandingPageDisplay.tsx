@@ -12,8 +12,9 @@ import AnimLogo from "./AnimLogo";
 import useSWR from "swr";
 import Link from "next/link";
 import etheriumIcon from "../../public/etherium-icon.svg";
-import Gif from "../../public/clothes.gif";
-
+import flowerBomb from "../../public/FlowerBombDress.gif";
+import stripeSuit from "../../public/PinStripeSuit.gif";
+import purpuleDress from "../../public/purpule-dress.webp";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -61,7 +62,7 @@ function FeaturedDisplay() {
             }
           />
         )}
-        {data.items.map((item) => (
+        {/* {data.items.map((item) => (
           <Stack
             key={item._id}
             className="keen-slider__slide"
@@ -70,7 +71,7 @@ function FeaturedDisplay() {
               // gap: "12px",
             }}
           >
-            {/* <Viewer
+            <Viewer
               width="500px"
               height="400px"
               imgLink={item.nft.metadata.image}
@@ -85,7 +86,7 @@ function FeaturedDisplay() {
                   ".glb"
                 }
               />
-            </Viewer> */}
+            </Viewer>
          
             <div className="gif-outer" >
               <Image  src={Gif} alt="gif"  objectFit="cover" />
@@ -97,18 +98,47 @@ function FeaturedDisplay() {
                   variant="contained"
                   size="small"
                   color="primary"
-                  // startIcon={<SiEthereum />}
                   startIcon={<Image src={etheriumIcon} alt="etherium icon" />}
-                  // className="tw-fixed tw-z-index-5 tw-bottom-1/4 md:tw-bottom-[1%] tw-left-[20%] tw-translate-x-[21%] md:tw-translate-x-[25%] md:tw-translate-y-0 -tw-translate-y-1/4 tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50"
+                  
                   className="tw-shadow-xl tw-shadow-cyan-500/50 hover:tw-shadow-cyan-100/50 cost-btn"
                 >
-                  {/* {Web3.utils.fromWei(item.price.toString().slice(0, 2), "ether") + " ETH"} */}
+                  {Web3.utils.fromWei(item.price.toString().slice(0, 2), "ether") + " ETH"}
                   {item.price.toString() + " ETH"}
                 </Button>
               </Link>
              
           </Stack>
-        ))}
+        ))} */}
+        <Stack
+          className="keen-slider__slide"
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <div className="gif-outer">
+            <Image src={flowerBomb} alt="gif" objectFit="cover" />
+          </div>
+        </Stack>
+        <Stack
+          className="keen-slider__slide"
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <div className="gif-outer">
+            <Image src={stripeSuit} alt="gif" objectFit="cover" />
+          </div>
+        </Stack>
+        <Stack
+          className="keen-slider__slide"
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <div className="gif-outer">
+            <Image src={purpuleDress} alt="gif" objectFit="cover" />
+          </div>
+        </Stack>
       </div>
     </>
   );
@@ -124,7 +154,7 @@ export default function LandingPageDisplay(props) {
         width: "542px",
         position: "relative",
         top: "12px",
-        height: "100%"
+        height: "100%",
       }}
     >
       <FeaturedDisplay />
@@ -149,7 +179,7 @@ function Arrow(props: {
           left: 0,
           zIndex: "5",
           cursor: "pointer",
-          marginTop: "-32px"
+          marginTop: "-32px",
         }}
       />
     );
@@ -164,7 +194,7 @@ function Arrow(props: {
           top: "50%",
           right: 0,
           cursor: "pointer",
-          marginTop: "-32px"
+          marginTop: "-32px",
         }}
       />
     );

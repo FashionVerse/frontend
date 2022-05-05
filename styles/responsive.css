@@ -1,7 +1,5 @@
 @media screen and (max-width: 1679px) {
-  .custom-list{
-    padding-left: 170px;
-  }
+  
   .bottom-info .MuiListItemText-root span:last-child{
     min-height: 48px;
   }
@@ -51,9 +49,7 @@
   }
 }
 @media screen and (max-width: 1439px) {
-  .custom-list {
-    padding-left: 130px;
-}
+
   .first-fold .sub-heading {
     font-size: 42px;
 }
@@ -72,9 +68,7 @@
 }
 
 @media screen and (max-width: 1364px) {
-   .custom-list {
-    padding-left: 80px;
-}
+  
   .first-fold .sub-heading {
     font-size: 40px;
 }
