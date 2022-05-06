@@ -51,7 +51,7 @@ export default function Footer() {
               that enables the user to build an metaverse compatible digital
               closet.
             </Typography>
-            <List className="email-box">
+            <List className="email-box" onClick={()=>{window.open('mailto:community@thefashionverse.io');}}>
               <ListItem disableGutters>
                 <ListItemAvatar sx={{ mr: -1, mt: 1, ml: 0.5 }}>
                   <BsEnvelope style={{ fontSize: "2rem" }} />
@@ -149,7 +149,7 @@ const ABOUT_LINKS = [
 ];
 
 const SUPPORT_LINKS = [
-  { label: "Contact us", href: "contact", id: "lpokiu" },
+  { label: "Contact us", href: "mailto:community@thefashionverse.io", id: "lpokiu" },
   { label: "Suggestion Form", href: "https://docs.google.com/forms/d/e/1FAIpQLSerQnqtUGZSnUEHFgbd2Unmdv0_0tcnIS1YVIJjp3D5BzKfjg/viewform?usp=sf_link", id: "abcd" },
   { label: "Questions Form", href: "https://docs.google.com/forms/d/e/1FAIpQLSdFo9dZhe-19nwXYOlQbwiZzr_jk9R7I85SYBje33PCeQ6yeA/viewform?usp=sf_link", id: "xyz" },
   // { label: "Bug bounty", href: "bug-bounty", id: "qwerty" },
