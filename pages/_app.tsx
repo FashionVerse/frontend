@@ -6,7 +6,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import { Container, PaletteMode, Typography, Box } from "@mui/material";
+import {
+  Container,
+  PaletteMode,
+  Typography,
+  Box,
+  Alert,
+  AlertTitle,
+} from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
 import "../styles/tailwind.css";
 import "../styles/style.css";
@@ -19,7 +26,7 @@ import Header from "../src/components/Header";
 import { MantineProvider } from "@mantine/core";
 import { ColorSchemeProvider, ColorScheme } from "@mantine/core";
 import { DefaultSeo } from "next-seo";
-import SEO from '../next-seo.config';
+import SEO from "../next-seo.config";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -31,7 +38,7 @@ export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("light");
   const [colorScheme, setColorScheme] = React.useState<ColorScheme>("dark");
-  
+
   React.useEffect(() => {
     setMode(localStorage.getItem("dark-mode") === "light" ? "dark" : "dark");
     setColorScheme(
@@ -83,7 +90,15 @@ export default function MyApp(props: any) {
   });
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-  
+  // const [drops, setDrops] = React.useState(null);
+  const [removeAlert, setStickyHeader] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", () =>
+        setStickyHeader(window.pageYOffset > 100)
+      );
+    }
+  }, []);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -106,14 +121,14 @@ export default function MyApp(props: any) {
               }}
             > */}
             {/* { console.log("mode1", mode)} */}
-              <div
-                className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
-                // style={{
-                //   marginTop: "-24px",
-                //   paddingTop: "24px",
-                // }}
-              >
-                {/* {!width || width > 999 ? (
+            <div
+              className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
+              // style={{
+              //   marginTop: "-24px",
+              //   paddingTop: "24px",
+              // }}
+            >
+              {/* {!width || width > 999 ? (
                 <SnackbarProvider>
                   <Component {...pageProps} />
                 </SnackbarProvider>
@@ -134,15 +149,29 @@ export default function MyApp(props: any) {
                   </Typography>
                 </Box>
               )} */}
-                <Header />
+              <Header />
 
-                <SnackbarProvider>
-                  <AnimateSharedLayout>
-                    <DefaultSeo {...SEO} />
-                    <Component {...pageProps} />
-                  </AnimateSharedLayout>
-                </SnackbarProvider>
-              </div>
+              <SnackbarProvider>
+                <AnimateSharedLayout>
+                  <DefaultSeo {...SEO} />
+
+                  <Component {...pageProps} />
+                </AnimateSharedLayout>
+              </SnackbarProvider>
+              <Alert
+                sx={{
+                  position: "fixed",
+                  bottom: "0",
+                  zIndex: "11",
+                }}
+                severity="info"
+                className={`alert-custom ${removeAlert ? "remove-alert" : ""}`}
+              >
+                <AlertTitle>Info</AlertTitle>
+                Please view on a <strong>Desktop Screen</strong> for an
+                enjoyable experience.
+              </Alert>
+            </div>
             {/* </Container> */}
           </ThemeProvider>
         </MantineProvider>

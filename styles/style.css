@@ -2438,3 +2438,7 @@ object-fit: fill;
 .bg-style-light .custom-list li:before{
   background:#000;
 } */
+
+.remove-alert{
+  display:none;
+}
