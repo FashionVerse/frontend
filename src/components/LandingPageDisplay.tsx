@@ -15,6 +15,7 @@ import etheriumIcon from "../../public/etherium-icon.svg";
 import flowerBomb from "../../public/FlowerBombDress.gif";
 import stripeSuit from "../../public/PinStripeSuit.gif";
 import purpuleDress from "../../public/purpule-dress.webp";
+import layeredTee from "../../public/90S_LayeredTee_Gif-min.gif";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -136,7 +137,7 @@ function FeaturedDisplay() {
           }}
         >
           <div className="gif-outer">
-            <Image src={purpuleDress} alt="gif" objectFit="cover" />
+            <Image src={layeredTee} alt="gif" objectFit="cover" />
           </div>
         </Stack>
       </div>

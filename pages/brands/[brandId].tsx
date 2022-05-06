@@ -394,6 +394,13 @@ export default function BrandPage() {
                 align="center">
                 {data.collection === null ? "": data.collection.title}
                 </Typography>
+
+                <Typography
+                variant="h3"
+                className="sub-heading with-small-font"
+                align="center">
+                {data.collection === null ? "": data.collection.description}
+                </Typography>
                 
               </Typography>
 
