@@ -186,7 +186,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
               />
             </ListItemAvatar>
             <ListItemText
-              primary={props.nft.description}
+              primary={props.nft.name}
               secondary={props.brand.title}
               secondaryTypographyProps={{ style: { marginTop: "-2px" } }}
               primaryTypographyProps={{ style: { fontWeight: "700" } }}
@@ -218,8 +218,8 @@ export default function FashionItemCard(props: FashionItemCardProps) {
                 alt="etherium icon"
               />
               <Typography variant="h6" sx={{ ml: 1 }}>
-                {/* {Web3.utils.fromWei( props.price.toString(), 'ether')} */}
-                {props.price.toString()}
+                {Web3.utils.fromWei( props.price.toString(), 'ether')}
+                {/* {props.price.toString()} */}
               </Typography>
             </Stack>
           )}

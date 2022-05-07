@@ -23,6 +23,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Gif from "../../public/clothes.gif";
+import Web3 from "web3";
 
 const fetcher = (url) =>
   fetch(url, { method: "POST" }).then((res) => res.json());
@@ -319,8 +320,10 @@ export default function Product() {
                         width: "500px",
                         height: "400px",
                       }}
-                      src={Gif}
+                      src={data.nft.metadata.gif}
                       alt="gif"
+                      width= "500px"
+                        height= "400px"
                       objectFit="cover"
                     />
                   </div>
@@ -582,7 +585,7 @@ export default function Product() {
                       src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
                       size="24"
                     />{" "}
-                    {data.price} ETH
+                    {Web3.utils.fromWei( data.price.toString(), 'ether')} ETH
                   </Typography>
                 </Box>
 
