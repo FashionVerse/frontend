@@ -89,6 +89,27 @@ export default function Bag() {
     }
   }
 
+
+  async function deleteItem(bagId){
+    try {
+      const response = await fetch(
+        process.env.API_URL + "/api/deleteItemFromBag",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({id: bagId}),
+        }
+      );
+
+    } catch (e){
+      console.log(e);
+    }
+  }
+
+
   async function getItems(account) {
     const arr = [];
 
@@ -161,17 +182,20 @@ export default function Bag() {
           quantity: item.quantity,
           available: item.available,
           nftContract: item.nft.nftContract,
+          bagId: item.bagId
         });
       });
 
       console.log(itemData);
     } catch {
-      enqueueSnackbar("Failed to load items", { variant: "error" });
+      // enqueueSnackbar("Failed to load items", { variant: "error" });
       console.log("Failed");
     }
 
     return arr;
   }
+
+
 
   async function purchaseItems() {
     const account = await walletInit();
@@ -217,8 +241,7 @@ export default function Bag() {
             .createMarketSale(nftContract, items, token, amounts)
             .send({ from: account, value: totalCost });
           setIsLoading(false);
-          console.log(receipt);
-          enqueueSnackbar("Your item's have been purchased sucessfully");
+          enqueueSnackbar("Your items have been purchased sucessfully", { variant: "success" });
         } else {
           alert("Nothing to purchase");
         }
@@ -293,6 +316,8 @@ export default function Bag() {
     .map((c) => c.price * c.quantity)
     .reduce((a, b) => a + b, 0);
 
+    console.log(data)
+
   function CheckoutCard({ quantity, ...rest }: CheckoutCardProps) {
     console.log("REST");
     console.log(rest);
@@ -365,6 +390,7 @@ export default function Bag() {
                           const updatedQuantity = state[idx].quantity;
                           walletInit().then((account) => {
                             if (account !== false) {
+                              
                             }
                           });
                         }
@@ -404,22 +430,24 @@ export default function Bag() {
                 sx={{ display: "flex", alignItems: "center", gap: "4px" }}
               >
                 <SiEthereum fontSize="1.25rem" />
-                {rest.price}
+                {Web3.utils.fromWei(rest.price, "ether")}
               </Typography>
               <Button
                 color="error"
                 startIcon={<BsTrash />}
                 onClick={() => {
+
                   setData(
                     produce((state) => {
                       state = state.filter((s) => s.id !== rest.id);
                       return state;
                     })
                   );
-                  walletInit().then((account) => {
-                    if (account !== false) {
-                    }
-                  });
+
+
+                  deleteItem(rest.bagId).then(()=>{
+                    enqueueSnackbar("Removed item from bag", { variant: "success" });
+                  })
                 }}
               >
                 Remove
@@ -519,13 +547,13 @@ export default function Bag() {
               >
                 <Stack gap={2}>
                   <Typography variant="h5">
-                    {"Total Cost: " + toFixedIfNecessary(totalCost, 4) + " ETH"}
+                    {"Total Cost: " + Web3.utils.fromWei(totalCost.toString(), "ether") + " ETH"}
                   </Typography>
                   <GradientButton
                     color="primary"
                     sx={{ borderRadius: "12px" }}
                     onClick={() => {
-                      purchaseItems();
+                      purchaseItems()
                     }}
                   >
                     <Typography variant="h5">Purchase</Typography>

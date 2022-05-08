@@ -22,7 +22,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Gif from "../../public/clothes.gif";
 import Web3 from "web3";
 
 const fetcher = (url) =>
@@ -463,10 +462,7 @@ export default function Product() {
                   {/* </motion.div> */}
                 </Link>
 
-                <Link
-                  href={"/collections/" + data.collection._id}
-                  className="!tw-cursor-pointer"
-                >
+                
                   {/* <motion.div
                   // className="drops_hover_cursor"
                   style={{
@@ -490,7 +486,6 @@ export default function Product() {
                     </span>
                   </Typography>
                   {/* </motion.div> */}
-                </Link>
 
                 <Box
                   sx={{

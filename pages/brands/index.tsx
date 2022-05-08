@@ -35,7 +35,7 @@ export default function Brands() {
     process.env.API_URL + "/api/getBrands?page=" + page,
     fetcher
   );
-  if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
+  // if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
   const arr: GridCardProps[] = [];
   if (data) {
     console.log("data ", data);
