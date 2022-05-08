@@ -44,6 +44,7 @@ const GradientButton = styled(Button)(({ theme }) => ({
 
 interface CheckoutCardProps extends FashionItemCardProps {
   quantity: number;
+  bagId: number;
 }
 function toFixedIfNecessary(value, dp) {
   return +parseFloat(value).toFixed(dp);
@@ -79,8 +80,7 @@ export default function Bag() {
         const account = accounts[0];
         return account;
       } else {
-        alert("Connect to Wallet");
-        router.replace("/");
+        router.replace("/wallets");
         return false;
       }
     } else {

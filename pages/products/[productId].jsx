@@ -66,7 +66,6 @@ function AnimatedButton(props) {
         }
         console.log(content);
       } else {
-        alert("Connect to Wallet");
         router.replace("/wallets");
       }
     } else {
@@ -430,7 +429,8 @@ export default function Product() {
 
                 <Link
                   href={"/brands/" + data.brand.url}
-                  className="!tw-cursor-pointer"
+                  // className="tw-cursor-pointer"
+                  style={{cursor:'pointer'}}
                 >
                   {/* <motion.div
                   // className="drops_hover_cursor"

@@ -144,11 +144,11 @@ export default function Brands() {
               </Box>
             </Grid>
 
-            <Grid item xs={12} sx={{ mb: 5 }}>
+            {/* <Grid item xs={12} sx={{ mb: 5 }}>
               <Stack direction="row" gap={2} sx={{ px: 1 }}>
                 <CheckBoxSelect formStateName="drops" label="Drop" />
               </Stack>
-            </Grid>
+            </Grid> */}
 
             <Grid
               sx={{ marginBottom: "40px" }}

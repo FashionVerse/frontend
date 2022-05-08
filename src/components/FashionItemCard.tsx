@@ -108,7 +108,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
         enqueueSnackbar("Item added to bag", { variant: "success" });
       } else {
         alert("Connect to Wallet");
-        router.replace("/");
+        router.replace("/wallets");
       }
     } else {
       alert("MetaMask not installed");

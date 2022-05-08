@@ -122,8 +122,7 @@ function CardDialog(props: CardDialogProps) {
         console.log(content);
         enqueueSnackbar("Item added to bag", { variant: "success" });
       } else {
-        alert("Connect to Wallet");
-        router.replace("/");
+        router.replace("/wallets");
       }
     } else {
       alert("MetaMask not installed");

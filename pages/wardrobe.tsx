@@ -74,8 +74,7 @@ export default function Wardrobe() {
         const account = accounts[0];
         return account;
       } else {
-        alert("Connect to Wallet");
-        router.replace("/");
+        router.replace("/wallets");
         return false;
       }
     } else {
