@@ -15,15 +15,15 @@ const Model = (props) => {
     console.log(arraybuffer)
     const blob = new Blob( [ arraybuffer ], { type: 'application/octet-stream' } );
     if(document.getElementById('product-container')){
-      const link = document.getElementById('product-container').appendChild( document.createElement( 'a' ) );
-      link.href = URL.createObjectURL( blob );
-      link.rel="ar";
-      link.style = "top: 0; right: 0; position: absolute;";
-      const img = link.appendChild(document.createElement('img'));
-      img.src="https://threejs.org/examples/files/arkit.png";
-      img.widht="100";
-      img.id="button";
-      link.download = 'asset.usdz';
+      // const link = document.getElementById('product-container').appendChild( document.createElement( 'a' ) );
+      // link.href = URL.createObjectURL( blob );
+      // link.rel="ar";
+      // link.style = "top: 0; right: 0; position: absolute;";
+      // const img = link.appendChild(document.createElement('img'));
+      // img.src="https://threejs.org/examples/files/arkit.png";
+      // img.widht="100";
+      // img.id="button";
+      // link.download = 'asset.usdz';
     }
     console.log(gltf.scene);
     console.log(blob)
