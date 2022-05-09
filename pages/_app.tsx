@@ -6,19 +6,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../src/createEmotionCache";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
-import {
-  Container,
-  PaletteMode,
-  Typography,
-  Box,
-  Alert,
-  AlertTitle,
-} from "@mui/material";
+import { Container, PaletteMode, Typography, Box } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
 import "../styles/tailwind.css";
 import "../styles/style.css";
-import "../styles/style-new.css";
-import "../styles/responsive.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
 import { AnimateSharedLayout } from "framer-motion";
@@ -26,7 +17,7 @@ import Header from "../src/components/Header";
 import { MantineProvider } from "@mantine/core";
 import { ColorSchemeProvider, ColorScheme } from "@mantine/core";
 import { DefaultSeo } from "next-seo";
-import SEO from "../next-seo.config";
+import SEO from '../next-seo.config';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -36,13 +27,12 @@ export const ColorModeContext = React.createContext({
 
 export default function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const [mode, setMode] = React.useState<PaletteMode>("light");
-  const [colorScheme, setColorScheme] = React.useState<ColorScheme>("dark");
-
+  const [mode, setMode] = React.useState<PaletteMode>("dark");
+  const [colorScheme, setColorScheme] = React.useState<ColorScheme>("light");
   React.useEffect(() => {
-    setMode(localStorage.getItem("dark-mode") === "light" ? "dark" : "dark");
+    setMode(localStorage.getItem("dark-mode") === "dark" ? "dark" : "light");
     setColorScheme(
-      localStorage.getItem("dark-mode") === "light" ? "dark" : "light"
+      localStorage.getItem("dark-mode") === "dark" ? "dark" : "light"
     );
   }, []);
   const colorMode = React.useMemo(
@@ -59,7 +49,6 @@ export default function MyApp(props: any) {
     localStorage.setItem("dark-mode", mode);
   }, [mode]);
 
-  const font = "'Montserrat', sans-serif";
   const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
     palette: {
       mode,
@@ -70,9 +59,9 @@ export default function MyApp(props: any) {
         main: "#0266C1",
       },
     },
-    // spacing: [0, 4, 8, 16, 32, 64],
     typography: {
-      fontFamily: font,
+      //fontFamily: ["Crimson Pro", "serif"].join(","),
+
       button: {
         textTransform: "none",
       },
@@ -104,31 +93,30 @@ export default function MyApp(props: any) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>TheFashionVerse</title>
+        <title>The FashionVerse</title>
       </Head>
       <ColorModeContext.Provider value={colorMode}>
         <MantineProvider theme={{ colorScheme: colorScheme }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {/* <Container
+            <Container
               maxWidth={false}
               disableGutters
               sx={{
                 backgroundImage:
                   mode === "dark"
-                    ? "#000"
+                    ? "#121212"
                     : "linear-gradient(to right, #eeeeee, #ffffff)",
               }}
-            > */}
-            {/* { console.log("mode1", mode)} */}
-            <div
-              className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
-              // style={{
-              //   marginTop: "-24px",
-              //   paddingTop: "24px",
-              // }}
             >
-              {/* {!width || width > 999 ? (
+              <div
+                className={mode === "dark" ? "bg-style-dark" : "bg-style-light"}
+                style={{
+                  marginTop: "-24px",
+                  paddingTop: "24px",
+                }}
+              >
+                {/* {!width || width > 999 ? (
                 <SnackbarProvider>
                   <Component {...pageProps} />
                 </SnackbarProvider>
@@ -149,30 +137,16 @@ export default function MyApp(props: any) {
                   </Typography>
                 </Box>
               )} */}
-              <Header />
+                <Header />
 
-              <SnackbarProvider>
-                <AnimateSharedLayout>
-                  <DefaultSeo {...SEO} />
-
-                  <Component {...pageProps} />
-                </AnimateSharedLayout>
-              </SnackbarProvider>
-              <Alert
-                sx={{
-                  position: "fixed",
-                  bottom: "0",
-                  zIndex: "11",
-                }}
-                severity="info"
-                className={`alert-custom ${removeAlert ? "remove-alert" : ""}`}
-              >
-                <AlertTitle>Info</AlertTitle>
-                Please view on a <strong>Desktop Screen</strong> for an
-                enjoyable experience.
-              </Alert>
-            </div>
-            {/* </Container> */}
+                <SnackbarProvider>
+                  <AnimateSharedLayout>
+                    <DefaultSeo {...SEO} />
+                    <Component {...pageProps} />
+                  </AnimateSharedLayout>
+                </SnackbarProvider>
+              </div>
+            </Container>
           </ThemeProvider>
         </MantineProvider>
       </ColorModeContext.Provider>

@@ -1,18 +1,17 @@
 {
-        "title": "Asset Metadata",
-        "type": "object",
-        "properties": {
-            "name": {
-                "type": "string",
-                "description": "FashionVerse NFT"
-            },
-            "description": {
-                "type": "string",
-                "description": "NFT for FashionVerse"
-            },
-            "image": {
-                "type": "string",
-                "description": "https://ipfs.io/ipfs/QmYav1MxdjHRTyE5s1tRp3vWu595K4F7aXykiCMmits5gv"
-        }
-    }
+        "name": "Test",
+        "description": "Test Description",
+        "image": "",
+        "external_url": "g",
+        "gif": "",
+        "attributes": [
+            {
+                "trait_type": "Brand", 
+                "value": "Test"
+              }, 
+              {
+                "trait_type": "Collection", 
+                "value": "Test"
+              }
+        ]
 }

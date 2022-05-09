@@ -94,7 +94,7 @@ export default function Index() {
   // const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
   const { data: brandData, error: brandError } = getBrands();
   if (brandError) {
-    enqueueSnackbar("Failed to load brands", { variant: "error" });
+    // enqueueSnackbar("Failed to load brands", { variant: "error" });
     console.log("Failed");
   }
   const brands: GridCardProps[] = [];
@@ -126,7 +126,7 @@ export default function Index() {
   // const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
   const { data: dropData, error: dropError } = getDrops();
   if (dropError) {
-    enqueueSnackbar("Failed to load drops", { variant: "error" });
+    // enqueueSnackbar("Failed to load drops", { variant: "error" });
     console.log("Failed");
   }
   const drops: GridCardProps[] = [];

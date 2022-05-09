@@ -90,7 +90,7 @@ export default function DropPage() {
 
   const { data: dropData, error: dropError } = getDrop(dropName);
   if (dropError) {
-    enqueueSnackbar("Failed to load drops", { variant: "error" });
+    // enqueueSnackbar("Failed to load drops", { variant: "error" });
     console.log("Failed");
   }
   // const drops: GridCardProps[] = [];
@@ -111,7 +111,7 @@ export default function DropPage() {
     // });
   }
 
-  async function getItems() {
+  async function getItems(page) {
     const items: FashionItemCardProps[] = [];
     try {
       const bodyItem = {
@@ -185,11 +185,8 @@ export default function DropPage() {
         }
       });
 
-      console.log(bodyItem);
-      console.log("ROUTER")
-      console.log(router.query)
       const response = await fetch(
-        process.env.API_URL + "/api/getItems?&page=" + page,
+        process.env.API_URL + "/api/getItems?dropName=" + page,
         {
           method: "POST",
           headers: {
@@ -220,7 +217,7 @@ export default function DropPage() {
       }
     } catch (e) {
       console.log(e);
-      enqueueSnackbar("Failed to load items", { variant: "error" });
+      // enqueueSnackbar("Failed to load items", { variant: "error" });
       console.log("Failed");
     }
     return items;
@@ -427,7 +424,7 @@ export default function DropPage() {
         });
         methods.setValue("brand", brands);
 
-        getItems().then((value) => {
+        getItems(dropName).then((value) => {
           console.log(value);
           setItems(value);
         });
@@ -594,7 +591,7 @@ export default function DropPage() {
                   <GradientButton
                     onClick={() => {
                       setLoading(true);
-                      getItems().then((items) => {
+                      getItems(dropName).then((items) => {
                         setItems(items);
                         setLoading(false);
                       });
