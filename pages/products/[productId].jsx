@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Viewer from "../../src/components/Viewer";
 import Model from "../../src/components/Model";
 import useSWR from "swr";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import { Button, Typography, Box, Container, Grid, Card } from "@mui/material";
+import { Button, Typography, Box, Container, Grid, Card, getListItemAvatarUtilityClass } from "@mui/material";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -23,9 +23,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Web3 from "web3";
-
-const fetcher = (url) =>
-  fetch(url, { method: "POST" }).then((res) => res.json());
 
 function AnimatedButton(props) {
   const router = useRouter();
@@ -150,69 +147,77 @@ export default function Product() {
   const [open, setOpen] = useState(false);
   const [fullWidth, setFullWidth] = useState(true);
   const [maxWidth, setMaxWidth] = useState("md");
+  
   const router = useRouter();
   const { productId } = router.query;
 
-  if (!productId)
-    return (
-      <Box
-        sx={{
-          height: "100vh",
-          width: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "auto",
-        }}
-      >
-        <AnimLogo />
-      </Box>
-    );
-  console.log("Product Id ", productId);
+  // if (!productId)
+  //   return (
+  //     <Box
+  //       sx={{
+  //         height: "100vh",
+  //         width: "100vh",
+  //         display: "flex",
+  //         alignItems: "center",
+  //         justifyContent: "center",
+  //         margin: "auto",
+  //       }}
+  //     >
+  //       <AnimLogo />
+  //     </Box>
+  //   );
 
-  var { data, error } = useSWR(
-    process.env.API_URL + "/api/getItems?id=" + productId,
-    fetcher
-  );
+        async function getItem(productId){
+          const response = await fetch(
+            process.env.API_URL + "/api/getItems?id=" + productId,
+            {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
-  if (error) return <div>failed to load</div>;
-  if (!data)
-    return (
-      <Box
-        sx={{
-          height: "100vh",
-          width: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "auto",
-        }}
-      >
-        <AnimLogo />
-      </Box>
-    );
+          const data = await response.json();
+        
+          if (!data)
+            return (
+              <Box
+                sx={{
+                  height: "100vh",
+                  width: "100vh",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "auto",
+                }}
+              >
+                <AnimLogo />
+              </Box>
+            );
+        
+          var rarityCategory;
+          if (data.totalSupply >= 30) {
+            rarityCategory = "Bronze";
+          } else if (data.totalSupply >= 15 && data.totalSupply < 30) {
+            rarityCategory = "Silver";
+          } else if (data.totalSupply >= 5 && data.totalSupply < 15) {
+            rarityCategory = "Gold";
+          }
+          if (data.totalSupply < 5) {
+            rarityCategory = "Platinum";
+          }
+        
+          return { ...data, rarityCategory: rarityCategory };
+        }
 
-  console.log("data fetched", data);
-
-  var rarityCategory;
-  if (data.totalSupply >= 30) {
-    rarityCategory = "Bronze";
-  } else if (data.totalSupply >= 15 && data.totalSupply < 30) {
-    rarityCategory = "Silver";
-  } else if (data.totalSupply >= 5 && data.totalSupply < 15) {
-    rarityCategory = "Gold";
-  }
-  if (data.totalSupply < 5) {
-    rarityCategory = "Platinum";
-  }
-
-  data = { ...data, rarityCategory: rarityCategory };
+  
 
   const {
     palette: { mode },
   } = useTheme();
 
-  // const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('sm');
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -221,7 +226,32 @@ export default function Product() {
     setOpen(false);
   };
 
-  return (
+  useEffect(()=>{
+    getItem(productId).then((val)=>{
+      console.log(val)
+      setData(val)}).catch((e)=>{})
+  }, [router.isReady])
+
+  const [data, setData] = useState(null);
+
+
+  if(!data){
+
+  return <Box
+  sx={{
+    height: "100vh",
+    width: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "auto",
+  }}
+>
+  <AnimLogo />
+</Box> 
+  }
+
+   return (
     <>
       <NextSeo
         title="Using More of Config"
