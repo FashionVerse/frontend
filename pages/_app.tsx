@@ -95,7 +95,7 @@ export default function MyApp(props: any) {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () =>
-        setStickyHeader(window.pageYOffset > 100)
+        setStickyHeader(window.pageYOffset > 80)
       );
     }
   }, []);

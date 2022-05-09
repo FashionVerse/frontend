@@ -93,6 +93,17 @@
   }
 }
 
+@media screen and (min-width: 1025px) {
+  .alert-custom{
+    display:none;
+  }
+}
+
+/* @media screen and (min-width: 1024px) {
+  .alert-custom{
+    bottom: 36px;
+  }
+} */
 @media screen and (max-width: 1000px) {
   .bottom-info .MuiListItemText-root span:first-child {
     font-size: 22px;
