@@ -28,9 +28,12 @@ export default function Slider({ slideArray }: SliderProps) {
       loop: true,
       breakpoints: {
         "(min-width: 400px)": {
-          slides: { perView: 2, spacing: 2 },
+          slides: { perView: 1, spacing: 2 },
         },
-        "(min-width: 1000px)": {
+        "(min-width: 767px)": {
+          slides: { perView: 2, spacing: 8 },
+        },
+        "(min-width: 1025px)": {
           slides: { perView: 3, spacing: 8 },
         },
       },

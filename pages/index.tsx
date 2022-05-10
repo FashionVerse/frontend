@@ -423,6 +423,8 @@ export default function Index() {
               justifyContent="space-between"
               alignItems="center"
               sx={{ mx: 16, my: 10 }}
+              className="our-partner"
+              
             >
               <Typography
                 variant="h2"
@@ -500,14 +502,14 @@ export default function Index() {
           alignItems="center"
           className="custom-container second-fold section-spacing fashion-verse"
         >
-          <Grid  sx={{  mb: 10 }} item xs={12}>
+          <Grid className="with-spacing"  sx={{  mb: 10 }} item xs={12}>
             <span className="divider"></span>
           </Grid>
 
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} md={6}>
           <Image  src={RightImage} alt="RightImage"  objectFit="cover" />
           </Grid>
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} md={6}>
             <Box>
               <Typography
                 variant="h2"
@@ -587,6 +589,7 @@ export default function Index() {
             justifyContent="center"
             spacing={8}
             sx={{ mt: 2 }}
+            className="badge-container"
           >
             <Grid item xs={12} md={3}>
               {/* <FashionItemCardContainer className="custom-card with-description bronze">

@@ -10,6 +10,7 @@ import { Container, PaletteMode, Typography, Box } from "@mui/material";
 import { useWindowSize } from "../src/useWindowSize";
 import "../styles/tailwind.css";
 import "../styles/style.css";
+import "../styles/responsive.css";
 import "keen-slider/keen-slider.min.css";
 import { SnackbarProvider } from "notistack";
 import { AnimateSharedLayout } from "framer-motion";
@@ -17,7 +18,7 @@ import Header from "../src/components/Header";
 import { MantineProvider } from "@mantine/core";
 import { ColorSchemeProvider, ColorScheme } from "@mantine/core";
 import { DefaultSeo } from "next-seo";
-import SEO from '../next-seo.config';
+import SEO from "../next-seo.config";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -60,7 +61,7 @@ export default function MyApp(props: any) {
       },
     },
     typography: {
-      //fontFamily: ["Crimson Pro", "serif"].join(","),
+      fontFamily: ["Montserrat", "serif"].join(","),
 
       button: {
         textTransform: "none",
@@ -78,7 +79,8 @@ export default function MyApp(props: any) {
     // },
   });
 
-  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const theme = React.useMemo(() => createTheme(
+    getDesignTokens(mode)), [mode]);
   // const [drops, setDrops] = React.useState(null);
   const [removeAlert, setStickyHeader] = React.useState(false);
   React.useEffect(() => {

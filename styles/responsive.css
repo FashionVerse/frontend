@@ -1,11 +1,10 @@
 @media screen and (max-width: 1679px) {
-  
-  .bottom-info .MuiListItemText-root span:last-child{
+  .bottom-info .MuiListItemText-root span:last-child {
     min-height: 48px;
   }
   .first-fold .sub-heading {
     font-size: 47px;
-}
+  }
   .designer-info-box {
     width: calc(100% - 30px);
   }
@@ -49,10 +48,9 @@
   }
 }
 @media screen and (max-width: 1439px) {
-
   .first-fold .sub-heading {
     font-size: 42px;
-}
+  }
   /* .myNewBox {
     width: 590px;
     height: 590px;
@@ -68,10 +66,12 @@
 }
 
 @media screen and (max-width: 1364px) {
-  
+  .bottom-info .MuiListItemText-root span:first-child {
+    font-size: 19px;
+  }
   .first-fold .sub-heading {
     font-size: 40px;
-}
+  }
   .side-spacing {
     padding-left: 60px;
     padding-right: 60px;
@@ -92,10 +92,76 @@
     padding-bottom: 50px;
   }
 }
+@media screen and (max-width: 1279px) {
+  .footer{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .badge-container{margin-top: 0;}
+  .badge-container .MuiGrid-root {
+    padding-top: 0;
+  }
+  .our-partner {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  .secondary-heading .gradient-text,
+  .secondary-heading {
+    font-size: 40px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .fashion-verse .secondary-heading,
+  .fashion-verse .secondary-heading .gradient-text {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  .fashion-verse .sub-heading.with-small-font{
+    font-size: 21px;
+    line-height: normal;
+  }
+  .with-spacing{
+    margin-bottom: 50px;
+  }
+  .custom-list li span{
+    font-size: 1rem;
+  }
+  .first-fold {
+    padding-bottom: 0;
+  }
+  .slider-box {
+    max-width: 370px;
+  }
+  .custom-navbar {
+    gap: 12px;
+  }
+  .main-heading .gradient-text,
+  .main-heading {
+    font-size: 45px;
+    line-height: normal;
+  }
+  .first-fold .sub-heading {
+    font-size: 30px;
+  }
+  .custom-navbar .navbar-inner {
+    gap: 18px;
+    margin-right: 0;
+  }
+  .common-wrapper,
+  .header {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .customize-logo h4 {
+    font-size: 30px;
+    letter-spacing: 0;
+  }
+}
 
 @media screen and (min-width: 1025px) {
-  .alert-custom{
-    display:none;
+  .alert-custom {
+    display: none;
   }
 }
 

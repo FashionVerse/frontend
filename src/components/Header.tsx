@@ -197,10 +197,11 @@ export default function Header() {
           </div>
           {/* </motion.div> */}
           <div className="blankDiv" style={{ flexGrow: 1 }} />
-          <Stack direction="row" gap={3} alignItems={"center"}>
+          <Stack className="custom-navbar" direction="row" gap={3} alignItems={"center"}>
             <Stack
               direction="row"
               gap={6}
+              className="navbar-inner"
               alignItems={"center"}
               sx={{ mr: 4, fontSize: "1.2rem" }}
             >

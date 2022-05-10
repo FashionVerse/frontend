@@ -152,11 +152,13 @@ export default function LandingPageDisplay(props) {
         margin: "auto",
         display: "flex",
         alignItems: "center",
-        width: "542px",
+        maxWidth: "542px",
         position: "relative",
         top: "12px",
         height: "100%",
+        // border: "1px solid red"
       }}
+      className="slider-box"
     >
       <FeaturedDisplay />
     </Box>

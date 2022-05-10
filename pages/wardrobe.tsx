@@ -314,7 +314,7 @@ export default function Wardrobe() {
             </Stack>
           </Grid>
           {activePage === "nfts" ? (
-            <Grid item spacing={8} sx={{ mb: 16 }}>
+            <Grid item   className="wardrobe-item-wrapper"  sx={{ mb: 16 }}>
               {items.map((props) => (
                 // <Grid item xs={12} sm={6} md={4} key={props.id}>
                 <Box
@@ -323,6 +323,7 @@ export default function Wardrobe() {
                     alignItems: "center",
                     justifyContent: "center",
                   }}
+                  className="wardrobe-item"
                 >
                   {/* <FashionItemCard {...props} hideAddToBag expandable /> */}
                   <WardrobeCard {...props} />
