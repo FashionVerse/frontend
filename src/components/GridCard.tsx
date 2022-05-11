@@ -74,7 +74,7 @@ const GridCard = (props: GridCardProps) => {
     >
       {/* <Stack justifyContent={"space-between"}> */}
       <Grid container spacing={2}>
-        <Grid item md={6}>
+        <Grid item xs={6}>
           <Box
             sx={{
               width: "100%",
@@ -95,7 +95,7 @@ const GridCard = (props: GridCardProps) => {
             />
           </Box>
         </Grid>
-        <Grid item md={6}>
+        <Grid item xs={6}>
           <Box
             sx={{
               width: "100%",
@@ -115,7 +115,7 @@ const GridCard = (props: GridCardProps) => {
             />
           </Box>
         </Grid>
-        <Grid item md={6}>
+        <Grid item xs={6}>
           <Box
             sx={{
               width: "100%",
@@ -135,7 +135,7 @@ const GridCard = (props: GridCardProps) => {
             />
           </Box>
         </Grid>
-        <Grid item md={6}>
+        <Grid item xs={6}>
           <Box
             sx={{
               width: "100%",

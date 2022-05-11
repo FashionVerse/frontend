@@ -1,4 +1,8 @@
 @media screen and (max-width: 1679px) {
+  .wardrobe-item {
+    width: calc(24% - 3.5px);
+    margin: 0 7px 30px;
+  }
   .bottom-info .MuiListItemText-root span:last-child {
     min-height: 48px;
   }
@@ -48,6 +52,10 @@
   }
 }
 @media screen and (max-width: 1439px) {
+  .wardrobe-item {
+    width: calc(32% - 5px);
+    margin: 0 10px 30px;
+  }
   .first-fold .sub-heading {
     font-size: 42px;
   }
@@ -93,11 +101,16 @@
   }
 }
 @media screen and (max-width: 1279px) {
-  .footer{
+  .wardrobe-item {
+    width: calc(48% - 5px);
+  }
+  .footer {
     padding-left: 0;
     padding-right: 0;
   }
-  .badge-container{margin-top: 0;}
+  .badge-container {
+    margin-top: 0;
+  }
   .badge-container .MuiGrid-root {
     padding-top: 0;
   }
@@ -117,14 +130,14 @@
     margin-top: 0;
     margin-bottom: 20px;
   }
-  .fashion-verse .sub-heading.with-small-font{
+  .fashion-verse .sub-heading.with-small-font {
     font-size: 21px;
     line-height: normal;
   }
-  .with-spacing{
+  .with-spacing {
     margin-bottom: 50px;
   }
-  .custom-list li span{
+  .custom-list li span {
     font-size: 1rem;
   }
   .first-fold {
@@ -159,6 +172,12 @@
   }
 }
 
+@media screen and (max-width: 1023px) {
+  .wardrobe-item {
+    width: calc(47% - 5px);
+  }
+}
+
 @media screen and (min-width: 1025px) {
   .alert-custom {
     display: none;
@@ -170,6 +189,99 @@
     bottom: 36px;
   }
 } */
+@media screen and (max-width: 899px) {
+  .mobile-mode {
+    position: relative;
+    right: 50px;
+  }
+  .bm-burger-button {
+    display: block;
+  }
+  .footer {
+    padding-bottom: 10px;
+  }
+  .footer-headings {
+    margin-top: 20px;
+  }
+  .badge-container .MuiGrid-root {
+    margin-bottom: 40px;
+  }
+  .badge-container .MuiGrid-root:nth-child(3),
+  .badge-container .MuiGrid-root:last-child {
+    margin-bottom: 0;
+  }
+  .fashion-verse.section-spacing {
+    padding-bottom: 50px;
+  }
+  .fashion-verse .secondary-heading br,
+  .fashion-verse .secondary-heading .gradient-text br {
+    display: none;
+  }
+  .fashion-verse .secondary-heading,
+  .fashion-verse .secondary-heading .gradient-text {
+    text-align: center;
+  }
+  .fashion-verse .secondary-heading:before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .fashion-verse .sub-heading.with-small-font {
+    text-align: center;
+  }
+  .with-spacing {
+    margin-bottom: 20px;
+  }
+  .our-partner {
+    margin: 20px 0 0;
+  }
+  .bottom-info .MuiListItemText-root span:first-child {
+    font-size: 18px;
+  }
+  .bottom-info .MuiListItemText-root span:last-child {
+    font-size: 14px;
+  }
+  .bottom-info {
+    padding: 16px 0;
+  }
+  .common-fold .keen-slider__slide {
+    padding: 0 10px;
+  }
+  .custom-card {
+    padding: 15px;
+    margin-bottom: 0;
+  }
+  .common-fold svg {
+    width: 33px;
+  }
+  .first-fold {
+    padding-bottom: 47px;
+  }
+  .main-heading .gradient-text,
+  .main-heading {
+    text-align: center;
+  }
+  .gif-outer {
+    width: 300px;
+  }
+  .slider-box {
+    max-width: 470px;
+  }
+  header + div {
+    margin-top: -120px;
+    padding-top: 250px;
+  }
+  .first-fold.custom-container {
+    width: calc(100% + 16px);
+    margin-left: -16px;
+  }
+  .main-heading-wrapper {
+    order: 2;
+    padding-top: 36px;
+  }
+  .main-heading-wrapper .MuiBox-root {
+    min-height: auto;
+  }
+}
 @media screen and (max-width: 1000px) {
   .bottom-info .MuiListItemText-root span:first-child {
     font-size: 22px;
@@ -202,7 +314,14 @@
   }
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 599px) {
+  .wardrobe-item {
+    width: 100%;
+    margin: 0 0 20px;
+  }
+}
+
+/* @media screen and (max-width: 820px) {
   .css-rjelc5-MuiStack-root {
     flex-wrap: wrap;
     justify-content: center;
@@ -261,15 +380,15 @@
   }
   .checkOutItems .css-hfzt2e-MuiPaper-root-MuiCard-root {
     max-width: 100%;
-  }
+  } */
 
-  /*--New--*/
-  .blankDiv {
+/*--New--*/
+/* .blankDiv {
     display: block;
   }
-}
+} */
 
-@media screen and (max-width: 769px) {
+/* @media screen and (max-width: 769px) {
   .keen-slider__slide {
     width: 100% !important;
     max-width: 100% !important;
@@ -321,16 +440,16 @@
   .css-1x7d6t-MuiTypography-root {
     margin: 0 0 20px 0;
   }
-}
+} */
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
   .css-6w9oil-MuiStack-root {
     gap: 15px;
     margin-right: 10px;
   }
   .css-iaykeu-MuiStack-root {
     grid-gap: 0px;
-    /* gap: 8px; */
+    gap: 8px;
   }
   a.active .MuiBox-root span {
     width: 35px;
@@ -502,9 +621,9 @@
     .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-6.MuiGrid-grid-md-4.css-11l5t4l-MuiGrid-root {
     margin-bottom: 30px;
   }
-}
+} */
 
-@media screen and (max-width: 376px) {
+/* @media screen and (max-width: 376px) {
   .css-14rpj3o-MuiButtonBase-root-MuiIconButton-root {
     margin-right: 20px;
   }
@@ -549,4 +668,4 @@
   .brandsInner .MuiTypography-root .css-f9kd3n-MuiTypography-root {
     margin-top: 30px;
   }
-}
+} */

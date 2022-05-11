@@ -29,29 +29,34 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             >
-               <div className="customize-logo">
-              <Logo size="70px" withText>
-                <Typography
-               fontWeight={400}
-               sx={{ ml: "8px", letterSpacing: 3 }}
-               variant="h4"
-                >
-                  The<strong>FASHION</strong>VERSE
-                </Typography>
-              </Logo>
+              <div className="customize-logo">
+                <Logo size="70px" withText>
+                  <Typography
+                    fontWeight={400}
+                    sx={{ ml: "8px", letterSpacing: 3 }}
+                    variant="h4"
+                  >
+                    The<strong>FASHION</strong>VERSE
+                  </Typography>
+                </Logo>
               </div>
             </motion.div>
             <Typography
               variant="subtitle1"
               color="textSecondary"
               gutterBottom
-              sx={{ mt: 2, color: "#8393AF"}}
+              sx={{ mt: 2, color: "#8393AF" }}
             >
               The Fashion, Inc. is an NFT marketplace for 3D digital clothing
               that enables the user to build an metaverse compatible digital
               closet.
             </Typography>
-            <List className="email-box" onClick={()=>{window.open('mailto:community@thefashionverse.io');}}>
+            <List
+              className="email-box"
+              onClick={() => {
+                window.open("mailto:community@thefashionverse.io");
+              }}
+            >
               <ListItem disableGutters>
                 <ListItemAvatar sx={{ mr: -1, mt: 1, ml: 0.5 }}>
                   <BsEnvelope style={{ fontSize: "2rem" }} />
@@ -66,7 +71,14 @@ export default function Footer() {
             </List>
           </Stack>
         </Grid>
-        <Grid item xs={12} md={2} sx={{ mt: 8 }} className="footer-headings">
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={2}
+          sx={{ mt: 8 }}
+          className="footer-headings"
+        >
           <Typography
             variant="h6"
             color="textSecondary"
@@ -87,7 +99,14 @@ export default function Footer() {
             ))}
           </List>
         </Grid>
-        <Grid item xs={12} md={2} sx={{ mt: 8 }} className="footer-headings">
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={2}
+          sx={{ mt: 8 }}
+          className="footer-headings"
+        >
           <Typography
             variant="h6"
             color="textSecondary"
@@ -149,8 +168,20 @@ const ABOUT_LINKS = [
 ];
 
 const SUPPORT_LINKS = [
-  { label: "Contact us", href: "mailto:community@thefashionverse.io", id: "lpokiu" },
-  { label: "Suggestion Form", href: "https://docs.google.com/forms/d/e/1FAIpQLSerQnqtUGZSnUEHFgbd2Unmdv0_0tcnIS1YVIJjp3D5BzKfjg/viewform?usp=sf_link", id: "abcd" },
-  { label: "Questions Form", href: "https://docs.google.com/forms/d/e/1FAIpQLSdFo9dZhe-19nwXYOlQbwiZzr_jk9R7I85SYBje33PCeQ6yeA/viewform?usp=sf_link", id: "xyz" },
+  {
+    label: "Contact us",
+    href: "mailto:community@thefashionverse.io",
+    id: "lpokiu",
+  },
+  {
+    label: "Suggestion Form",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSerQnqtUGZSnUEHFgbd2Unmdv0_0tcnIS1YVIJjp3D5BzKfjg/viewform?usp=sf_link",
+    id: "abcd",
+  },
+  {
+    label: "Questions Form",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSdFo9dZhe-19nwXYOlQbwiZzr_jk9R7I85SYBje33PCeQ6yeA/viewform?usp=sf_link",
+    id: "xyz",
+  },
   // { label: "Bug bounty", href: "bug-bounty", id: "qwerty" },
 ];

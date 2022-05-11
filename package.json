@@ -40,6 +40,7 @@
     "notistack": "^2.0.3",
     "prop-types": "latest",
     "react": "latest",
+    "react-burger-menu": "^3.0.6",
     "react-dom": "latest",
     "react-hook-form": "^7.27.0",
     "react-icons": "^4.3.1",

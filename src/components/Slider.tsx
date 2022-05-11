@@ -30,7 +30,7 @@ export default function Slider({ slideArray }: SliderProps) {
         "(min-width: 400px)": {
           slides: { perView: 1, spacing: 2 },
         },
-        "(min-width: 767px)": {
+        "(min-width: 768px)": {
           slides: { perView: 2, spacing: 8 },
         },
         "(min-width: 1025px)": {

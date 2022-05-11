@@ -15,7 +15,7 @@ export interface WardrobeCardProps {
 }
 
 const WardrobeCardContainer = styled(Card)(({ theme }) => ({
-  maxWidth: "375px",
+  width: "100%",
   background:
     theme.palette.mode === "dark"
       ? `rgba( 51,121,157 )`

@@ -292,7 +292,7 @@ export default function Index() {
             <div className="line"></div>
           </div>
 
-          <Grid item md={6} className="main-heading-wrapper">
+          <Grid item xs={12} md={6} className="main-heading-wrapper">
             <Box sx={{ minHeight: "271px" }}>
               <Typography variant="h1" className="main-heading">
                 <Typography
@@ -322,7 +322,7 @@ export default function Index() {
               </Typography>
             </Box>
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
             <Box
               className="myNewBox"
               // sx={{
@@ -424,7 +424,6 @@ export default function Index() {
               alignItems="center"
               sx={{ mx: 16, my: 10 }}
               className="our-partner"
-              
             >
               <Typography
                 variant="h2"
@@ -502,19 +501,19 @@ export default function Index() {
           alignItems="center"
           className="custom-container second-fold section-spacing fashion-verse"
         >
-          <Grid className="with-spacing"  sx={{  mb: 10 }} item xs={12}>
+          <Grid className="with-spacing" sx={{ mb: 10 }} item xs={12}>
             <span className="divider"></span>
           </Grid>
 
           <Grid item xs={12} md={6}>
-          <Image  src={RightImage} alt="RightImage"  objectFit="cover" />
+            <Image src={RightImage} alt="RightImage" objectFit="cover" />
           </Grid>
           <Grid item xs={12} md={6}>
             <Box>
               <Typography
                 variant="h2"
                 className="secondary-heading"
-                sx={{  mb: 4, pb: 1 }}
+                sx={{ mb: 4, pb: 1 }}
                 style={{ lineHeight: "normal" }}
               >
                 <Typography
@@ -523,9 +522,11 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
-                  The Fashion Verse  <br></br>
+                  The Fashion Verse <br></br>
                 </Typography>
-                <i>is your Digital Fashion <br></br> Retailer</i>
+                <i>
+                  is your Digital Fashion <br></br> Retailer
+                </i>
               </Typography>
             </Box>
             <Typography
@@ -591,7 +592,7 @@ export default function Index() {
             sx={{ mt: 2 }}
             className="badge-container"
           >
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               {/* <FashionItemCardContainer className="custom-card with-description bronze">
                 <List>
                   <ListItem disablePadding>
@@ -635,7 +636,7 @@ export default function Index() {
                 </List>
               </FashionItemCardContainer>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <FashionItemCardContainer className="custom-card with-description silver">
                 <List>
                   <ListItem disablePadding>
@@ -658,7 +659,7 @@ export default function Index() {
                 </List>
               </FashionItemCardContainer>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <FashionItemCardContainer className="custom-card with-description gold">
                 <List>
                   <ListItem disablePadding>
@@ -681,7 +682,7 @@ export default function Index() {
                 </List>
               </FashionItemCardContainer>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <FashionItemCardContainer className="custom-card with-description platinum">
                 <List>
                   <ListItem disablePadding>

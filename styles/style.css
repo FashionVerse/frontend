@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @font-face {
   font-family: "Versailles";
@@ -1955,15 +1955,15 @@ header + div {
   padding-top: 50px;
   padding-bottom: 50px;
 }
-.fashion-verse.section-spacing{
-  padding-bottom:0;
+.fashion-verse.section-spacing {
+  padding-bottom: 0;
 }
-.fashion-verse .secondary-heading{
-  text-align:left;
+.fashion-verse .secondary-heading {
+  text-align: left;
   font-size: 55px;
-  position:relative;
+  position: relative;
 }
-.fashion-verse .secondary-heading:before{
+.fashion-verse .secondary-heading:before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -1973,7 +1973,7 @@ header + div {
   border-radius: 3px;
   background: #fff;
 }
-.bg-style-light .fashion-verse .secondary-heading:before{
+.bg-style-light .fashion-verse .secondary-heading:before {
   background: linear-gradient(
     90.98deg,
     #01f0ff 39.94%,
@@ -1981,13 +1981,12 @@ header + div {
   );
 }
 
-
-.fashion-verse .secondary-heading .gradient-text{
+.fashion-verse .secondary-heading .gradient-text {
   font-size: 55px;
 }
-.fashion-verse .sub-heading.with-small-font{
-  text-align:left;
-  max-width:100%;
+.fashion-verse .sub-heading.with-small-font {
+  text-align: left;
+  max-width: 100%;
   color: #01f4ff;
   /* font-size: 22px; */
 }
@@ -2108,7 +2107,7 @@ header + div {
   font-size: 20px;
   margin: 0;
   text-transform: uppercase;
-color: #fff;
+  color: #fff;
   text-shadow: 0px 3px 10px rgb(0 0 0 / 70%);
 }
 .same-fold
@@ -2124,22 +2123,21 @@ color: #fff;
   font-size: 19px;
   color: #fff;
 }
-.same-fold .custom-card{
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:contain;
+.same-fold .custom-card {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   background-color: transparent;
 }
 
-.same-fold .custom-card:hover{
+.same-fold .custom-card:hover {
   /* box-shadow: 0px 45px 100px rgb(0 0 0 / 40%); */
-  box-shadow:none !important;
+  box-shadow: none !important;
 }
 
 .same-fold .custom-card.bronze {
   /* background: rgba(201, 174, 93, 1); */
   background-image: url("/Bronze.png");
-  
 }
 /* .same-fold .custom-card.silver:hover{
   box-shadow: 
@@ -2179,19 +2177,19 @@ color: #fff;
   margin: 0;
 }
 .custom-card img {
-  transition: transform 0.3s ease-in-out ;
+  transition: transform 0.3s ease-in-out;
   /* -webkit-transition: -moz-transform .3s ease-in-out ; 
 -moz-transition: -webkit-transform .3s ease-in-out ;  */
-/* -webkit-transition: all .3s ease-in-out;
+  /* -webkit-transition: all .3s ease-in-out;
     -moz-transition: all .3s ease-in-out;
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out; */
 }
-.custom-card:hover .MuiAvatar-root img{
+.custom-card:hover .MuiAvatar-root img {
   transform: scale(1);
 }
-.custom-card .MuiAvatar-root img{
-object-fit: fill;
+.custom-card .MuiAvatar-root img {
+  object-fit: fill;
 }
 .custom-card:hover {
   box-shadow: 0 0 16px 0 #c0c0c0;
@@ -2199,10 +2197,10 @@ object-fit: fill;
 }
 .custom-card:hover img {
   transform: scale(1.05);
-  -webkit-transform:scale(1.05);
+  -webkit-transform: scale(1.05);
 }
 .bg-style-dark .custom-card:hover {
-  box-shadow: 0 0 16px 0 rgba(51,121,157, 0.8);
+  box-shadow: 0 0 16px 0 rgba(51, 121, 157, 0.8);
 }
 /* fifth fold */
 .fifth-fold .secondary-heading .gradient-text {
@@ -2384,14 +2382,14 @@ object-fit: fill;
 .brand-page-inner .designer-info-box .secondary-heading .gradient-text {
   font-size: 30px;
 }
-.custom-list{
+.custom-list {
   max-width: 100%;
   margin-top: 20px;
-  display:flex;
-  flex-wrap:wrap;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
-.custom-list li{
+.custom-list li {
   /* text-align:center; */
   position: relative;
   width: 48.5%;
@@ -2404,8 +2402,8 @@ object-fit: fill;
   background-position: 11px 21px;
   background-size: 18px;
 }
-.custom-list li span{
- color:#fff;
+.custom-list li span {
+  color: #fff;
 }
 /* .custom-list li:before{
   content: "";
@@ -2421,16 +2419,101 @@ object-fit: fill;
   background:#000;
 } */
 
-.remove-alert{
-  display:none;
+.remove-alert {
+  display: none;
 }
 
 /* wradrobe page */
-.wardrobe-item-wrapper{
+.wardrobe-item-wrapper {
   display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
-.wardrobe-item{
+.wardrobe-item {
   margin-bottom: 40px;
+  width: calc(24% - 5px);
+  margin: 0 10px 40px;
+}
+/* Mobile navbar */
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  right: 15px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #fff;
+  height: 3px !important;
+  opacity: 1 !important;
+}
+.bg-style-light .bm-burger-bars {
+  background: #000;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #fff;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.stick-header .bm-menu-wrap {
+  top:81px;
+}
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+  left:0;
+  top: 101px;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+  background: rgba( 51,121,157 );
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0) !important;
+  left: 0;
+  top: 81px;
+}
+.bm-burger-button{
+  display:none;
 }

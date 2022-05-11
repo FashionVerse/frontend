@@ -28,6 +28,7 @@ import cartWhite from "../../public/shopping-cart.svg";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import { slide as Menu } from "react-burger-menu";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -197,7 +198,14 @@ export default function Header() {
           </div>
           {/* </motion.div> */}
           <div className="blankDiv" style={{ flexGrow: 1 }} />
-          <Stack className="custom-navbar" direction="row" gap={3} alignItems={"center"}>
+
+          <Stack
+            className="custom-navbar"
+            direction="row"
+            gap={3}
+            alignItems={"center"}
+            sx={{ display: { xs: "none", md: "flex" } }}
+          >
             <Stack
               direction="row"
               gap={6}
@@ -258,6 +266,7 @@ export default function Header() {
                 </Typography>
               </Link>
             </Stack>
+
             <Tooltip title="Connect Wallet">
               <Link href={"/wallets"} color="inherit" noLinkStyle>
                 <motion.div
@@ -277,9 +286,7 @@ export default function Header() {
                       // src={
                       //   theme.palette.mode === "dark" ? walletWhite : walletDark
                       // }
-                      src={
-                        walletWhite
-                      }
+                      src={walletWhite}
                       alt="wallet"
                       width="29px"
                       height="29px"
@@ -307,9 +314,7 @@ export default function Header() {
                       // src={
                       //   theme.palette.mode === "dark" ?  wardrobeWhite: wardrobeDark
                       // }
-                      src={
-                        wardrobeWhite
-                      }
+                      src={wardrobeWhite}
                       alt="wardrobe"
                       width="29px"
                       height="29px"
@@ -337,9 +342,7 @@ export default function Header() {
                       // src={
                       //   theme.palette.mode === "dark" ? cartWhite : cartDark
                       // }
-                      src={
-                        cartWhite
-                      }
+                      src={cartWhite}
                       alt="cart"
                       width="29px"
                       height="30px"
@@ -367,6 +370,151 @@ export default function Header() {
               />
             </FormGroup>
           </Stack>
+          <Menu className="mobile-menu">
+            <Link href={"/brands"} color="inherit" hoverStyle>
+              <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
+                Brands
+              </Typography>
+            </Link>
+            {!drops ? (
+              <ListMenu items={[]}>
+                <Typography
+                  sx={{
+                    cursor: "pointer",
+                    ":hover": { transform: "scale(1.125)" },
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Drops
+                </Typography>
+              </ListMenu>
+            ) : (
+              <ListMenu items={drops}>
+                <Typography
+                  sx={{
+                    cursor: "pointer",
+                    // ":hover": { transform: "scale(1.125)" },
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Drops
+                </Typography>
+              </ListMenu>
+            )}
+
+            <Link href={"/resources"} color="inherit" hoverStyle>
+              <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
+                Resources
+              </Typography>
+            </Link>
+            <Tooltip title="Connect Wallet">
+              <Link href={"/wallets"} color="inherit" noLinkStyle>
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.25 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <NavIconButton sx={{ ml: "16px" }} size="small">
+                    {/* <BsWallet /> */}
+                    <Image
+                      // src={
+                      //   theme.palette.mode === "dark" ? walletWhite : walletDark
+                      // }
+                      src={walletWhite}
+                      alt="wallet"
+                      width="29px"
+                      height="29px"
+                    />
+                  </NavIconButton>
+                </motion.div>
+              </Link>
+            </Tooltip>
+            <Tooltip title="Digital Wardrobe">
+              <Link href={"/wardrobe"} color="inherit" noLinkStyle>
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.25 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <NavIconButton size="small">
+                    {/* <BsDoorOpen /> */}
+                    <Image
+                      // src={
+                      //   theme.palette.mode === "dark" ?  wardrobeWhite: wardrobeDark
+                      // }
+                      src={wardrobeWhite}
+                      alt="wardrobe"
+                      width="29px"
+                      height="29px"
+                    />
+                  </NavIconButton>
+                </motion.div>
+              </Link>
+            </Tooltip>
+            <Tooltip title="Shopping Cart">
+              <Link href={"/bag"} color="inherit" noLinkStyle>
+                <motion.div
+                  // className="drops_hover_cursor"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ ease: "easeOut", delay: 0.1 }}
+                  whileHover={{ scale: 1.25 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <NavIconButton size="small">
+                    {/* <BsHandbag /> */}
+                    <Image
+                      // src={
+                      //   theme.palette.mode === "dark" ? cartWhite : cartDark
+                      // }
+                      src={cartWhite}
+                      alt="cart"
+                      width="29px"
+                      height="30px"
+                    />
+                  </NavIconButton>
+                </motion.div>
+              </Link>
+            </Tooltip>
+          </Menu>
+          <FormGroup
+            className="mobile-mode"
+            sx={{ display: { xs: "flex", md: "none" } }}
+          >
+            {/* <FormControlLabel
+                onClick={colorMode.toggleColorMode}
+                control={<Switch defaultChecked />}
+                label="Dark Mode"
+                sx={{ position: "fixed" }}
+              /> */}
+
+            <FormControlLabel
+              onChange={() => {
+                colorMode.toggleColorMode();
+              }}
+              className="custom-switch"
+              control={<MaterialUISwitch />}
+              label=""
+              checked={theme.palette.mode === "dark"}
+            />
+          </FormGroup>
         </Stack>
       </Container>
     </header>
