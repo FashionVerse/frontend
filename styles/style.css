@@ -2128,6 +2128,7 @@ header + div {
   background-position: center;
   background-size: contain;
   background-color: transparent;
+  backdrop-filter: none;
 }
 
 .same-fold .custom-card:hover {
@@ -2468,28 +2469,35 @@ header + div {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #fff;
+  height: 24px !important;
 }
 
 /*
 Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
-.stick-header .bm-menu-wrap {
+/* .stick-header .bm-menu-wrap {
   top:81px;
-}
+} */
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
-  left:0;
-  top: 101px;
+  left: 0;
+  top: 0;
 }
 
 /* General sidebar styles */
 .bm-menu {
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-  background: rgba( 51,121,157 );
+  padding: 1.2em 15px 0;
+  font-size: 2.15em;
+  background: rgba(51, 121, 157);
+}
+.bm-item-list {
+  color: #fff;
+}
+.bm-item-list p {
+  font-size: 24px;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -2497,15 +2505,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
   fill: #373a47;
 }
 
-/* Wrapper for item list */
-.bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
-}
-
 /* Individual item */
 .bm-item {
   display: inline-block;
+  margin-bottom: 25px;
+}
+.navbar-inner a {
+  text-decoration: none;
 }
 
 /* Styling of overlay */
@@ -2514,6 +2520,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
   left: 0;
   top: 81px;
 }
-.bm-burger-button{
-  display:none;
+.bm-burger-button {
+  display: none;
+}
+.stick-header .bm-burger-button {
+  top: 25px;
 }

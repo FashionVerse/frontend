@@ -46,7 +46,7 @@ const ListMenu: React.FC<Props> = ({ children, ...props }) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        onMouseOver={handleClick}
+        // onMouseOver={handleClick}
       >
         {children}
       </div>

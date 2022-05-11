@@ -189,7 +189,51 @@
     bottom: 36px;
   }
 } */
+
+@media screen and (max-width: 1000px) {
+  .bottom-info .MuiListItemText-root span:first-child {
+    font-size: 22px;
+  }
+  .css-iaykeu-MuiStack-root {
+    gap: 16px;
+  }
+  .css-rfu3cm-MuiTypography-root {
+    font-size: 2.5rem;
+  }
+  .css-zb9jej-MuiTypography-root {
+    font-size: 2rem;
+  }
+  .css-1fh410u-MuiGrid-root {
+    width: 100%;
+    margin-left: 0;
+  }
+  .css-1fh410u-MuiGrid-root > .MuiGrid-item {
+    padding: 15px;
+  }
+  .css-p9z0ox-MuiTypography-root {
+    margin-top: 100px;
+    margin-bottom: 150px;
+  }
+  .css-99pbpe-MuiPaper-root {
+    max-width: 370px;
+  }
+  .css-w968tk-MuiTypography-root {
+    font-size: 2rem;
+  }
+}
 @media screen and (max-width: 899px) {
+  .keen-slider > svg {
+    z-index: 1 !important;
+  }
+  .header .bm-item-list .MuiButtonBase-root {
+    margin-left: 0;
+  }
+  .header {
+    z-index: 6;
+  }
+  .custom-navbar {
+    padding-right: 40px;
+  }
   .mobile-mode {
     position: relative;
     right: 50px;
@@ -241,10 +285,13 @@
     font-size: 14px;
   }
   .bottom-info {
-    padding: 16px 0;
+    padding: 16px 0 0;
   }
   .common-fold .keen-slider__slide {
-    padding: 0 10px;
+    padding: 0 5px;
+  }
+  .bottom-info .MuiListItemText-root span:first-child {
+    font-size: 18px;
   }
   .custom-card {
     padding: 15px;
@@ -254,7 +301,7 @@
     width: 33px;
   }
   .first-fold {
-    padding-bottom: 47px;
+    padding-bottom: 17px;
   }
   .main-heading .gradient-text,
   .main-heading {
@@ -282,39 +329,133 @@
     min-height: auto;
   }
 }
-@media screen and (max-width: 1000px) {
-  .bottom-info .MuiListItemText-root span:first-child {
-    font-size: 22px;
-  }
-  .css-iaykeu-MuiStack-root {
-    gap: 16px;
-  }
-  .css-rfu3cm-MuiTypography-root {
-    font-size: 2.5rem;
-  }
-  .css-zb9jej-MuiTypography-root {
-    font-size: 2rem;
-  }
-  .css-1fh410u-MuiGrid-root {
-    width: 100%;
-    margin-left: 0;
-  }
-  .css-1fh410u-MuiGrid-root > .MuiGrid-item {
-    padding: 15px;
-  }
-  .css-p9z0ox-MuiTypography-root {
-    margin-top: 100px;
-    margin-bottom: 150px;
-  }
-  .css-99pbpe-MuiPaper-root {
-    max-width: 370px;
-  }
-  .css-w968tk-MuiTypography-root {
-    font-size: 2rem;
+@media screen and (max-width: 767px) {
+
+  .bm-burger-button {
+    top: 26px;
   }
 }
-
 @media screen and (max-width: 599px) {
+  .third-fold.section-spacing{
+    padding-bottom: 0;
+  }
+  .bottom-info .MuiListItemText-root span:last-child{
+    min-height: auto;
+  }
+  .bm-menu-wrap{
+    width: 240px !important;
+  }
+  .badge-container .MuiGrid-root:nth-child(3){
+    margin-bottom: 40px;
+  }
+  .bm-item {
+    margin-bottom: 20px;
+}
+  .bm-item-list p {
+    font-size: 18px;
+}
+  .footer .customize-logo h4{
+    display: block;
+    font-size: 30px;
+  }
+  .fifth-fold .MuiBox-root{
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+  .custom-list li{
+    width: 100%;
+  }
+  .custom-list li + li{
+    margin-top: 20px;
+  }
+  .fashion-verse .secondary-heading, .fashion-verse .secondary-heading .gradient-text{
+    font-size: 30px;
+    margin-bottom:30px;
+  }
+  .exploere-all-btn{
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .custom-card{
+    padding: 10px;
+  }
+  .section-spacing {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+  
+  .first-fold .sub-heading {
+    font-size: 22px;
+    margin-top: 14px;
+}
+  .main-heading .gradient-text, .main-heading{
+    font-size: 40px;
+  }
+  .main-heading-wrapper{
+    padding-top: 36px !important;
+  }
+  .stick-header .bm-burger-button{
+    top: 20px;
+  }
+  .header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .gif-outer {
+    width: 250px;
+}
+  .first-fold .MuiGrid-root {
+     padding-left: 0;
+  }
+  .first-fold.custom-container {
+    width: 100%;
+    margin-left: 0;
+}
+  header + div {
+    padding-top: 200px;
+}
+ .email-box p{
+    word-break: break-all;
+  }
+  .secondary-heading .gradient-text, .secondary-heading{
+    font-size: 30px;
+  }
+  .myNewBox{
+    height: 470px;
+    background-size: cover;
+  }
+  .slider-box {
+    max-width: 342px;
+}
+  .our-partner{
+    flex-direction: column;
+    display: flex;
+  }
+  .main-heading .gradient-text, .main-heading{
+    flex-direction: column;
+    display: flex;
+  }
+ 
+  /* .bg-style-dark,
+  .bg-style-light {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  } */
+  .customize-logo h4 {
+    font-size: 20px;
+    display: none;
+  }
+  .bm-burger-button {
+    top: 20px;
+  }
+  .customize-logo .MuiBox-root span,
+  .stick-header .customize-logo span {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  /* .customize-logo h4 {
+    display: none;
+  } */
   .wardrobe-item {
     width: 100%;
     margin: 0 0 20px;
