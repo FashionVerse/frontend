@@ -109,6 +109,25 @@ export default function Bag() {
     }
   }
 
+  async function clearBag(account){
+    try {
+      const response = await fetch(
+        process.env.API_URL + "/api/clearBag",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({account: account}),
+        }
+      );
+
+    } catch (e){
+      console.log(e);
+    }
+  }
+
 
   async function getItems(account) {
     const arr = [];
@@ -235,20 +254,26 @@ export default function Bag() {
 
           setIsLoading(true);
 
-          console.log(amounts);
-
-          const receipt = await marketContract.methods
+          await marketContract.methods
             .createMarketSale(nftContract, items, token, amounts)
             .send({ from: account, value: totalCost });
           setIsLoading(false);
           enqueueSnackbar("Your items have been purchased sucessfully", { variant: "success" });
+          await clearBag(account);
+          router.push("/wardrobe");
         } else {
           alert("Nothing to purchase");
         }
       } catch (e) {
         setIsLoading(false);
-        enqueueSnackbar("An error occurred");
-        console.log(e);
+        if(e.code == 4001){
+          enqueueSnackbar(e.message, {variant: "error"});
+        } else {
+          enqueueSnackbar("Your items are being purchased, kindly check in after sometime.", { variant: "success" });
+          await clearBag(account);
+          router.push("/wardrobe");
+        }
+    
         // router.reload()
       }
       // if(data.length > 0){
@@ -325,7 +350,7 @@ export default function Bag() {
     return (
       <>
         <NextSeo
-          title="Using More of Config"
+          title="Bag"
           description="This example uses more of the available config options."
           canonical="https://www.canonical.ie/"
           openGraph={{

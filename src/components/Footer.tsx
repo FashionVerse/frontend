@@ -47,7 +47,7 @@ export default function Footer() {
               gutterBottom
               sx={{ mt: 2, color: "#8393AF" }}
             >
-              The Fashion, Inc. is an NFT marketplace for 3D digital clothing
+              The FashionVerse, Inc. is an NFT marketplace for 3D digital clothing
               that enables the user to build an metaverse compatible digital
               closet.
             </Typography>

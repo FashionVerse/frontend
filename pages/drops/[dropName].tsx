@@ -430,7 +430,7 @@ export default function DropPage() {
         });
       })
       .catch((e) => {});
-  }, [router.isReady]);
+  }, [dropName]);
 
   // const [items, setItems] = React.useState(null);
   // const [brands, setBrands] = React.useState(null);
@@ -485,7 +485,7 @@ export default function DropPage() {
   return (
     <>
       <NextSeo
-        title="Using More of Config"
+        // title="Using More of Config"
         description="This example uses more of the available config options."
         canonical="https://www.canonical.ie/"
         openGraph={{

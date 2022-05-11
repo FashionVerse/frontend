@@ -117,7 +117,7 @@ function FeaturedDisplay() {
           }}
         >
           <div className="gif-outer">
-            <Image src={flowerBomb} alt="gif" objectFit="cover" />
+            <Image src={layeredTee} alt="gif" objectFit="cover" />
           </div>
         </Stack>
         <Stack
@@ -137,7 +137,7 @@ function FeaturedDisplay() {
           }}
         >
           <div className="gif-outer">
-            <Image src={layeredTee} alt="gif" objectFit="cover" />
+            <Image src={flowerBomb} alt="gif" objectFit="cover" />
           </div>
         </Stack>
       </div>

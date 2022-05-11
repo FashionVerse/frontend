@@ -56,7 +56,7 @@ export default function Wallets() {
   return (
     <>
       <NextSeo
-        title="Using More of Config"
+        title="Wallet"
         description="This example uses more of the available config options."
         canonical="https://www.canonical.ie/"
         openGraph={{
