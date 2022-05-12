@@ -60,7 +60,7 @@ export default function Brands() {
       <Box
         sx={{
           height: "100vh",
-          width: "100vh",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -125,7 +125,7 @@ export default function Brands() {
             className="custom-container"
           >
             <Grid item xs={12}>
-              <span className="divider"></span>
+              {/* <span className="divider"></span> */}
               <Box>
                 <Typography
                   variant="h1"

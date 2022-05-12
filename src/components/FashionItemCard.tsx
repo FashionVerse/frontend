@@ -139,7 +139,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
       <Box
         sx={{
           height: "100vh",
-          width: "100vh",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -155,6 +155,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
     <>
       <FashionItemCardContainer className="custom-card">
         <Box
+        className="clothe-wrapper"
           sx={{
             minWidth: "300px",
             aspectRatio: "1/1",
@@ -170,6 +171,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
             alt="NFT"
             layout="fill"
             objectFit="contain"
+            
           />
         </Box>
         <Stack
@@ -177,10 +179,12 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           justifyContent="space-between"
           alignItems="center"
           sx={{ mt: 2 }}
+          className="fashion-card-inner-wrapper"
         >
-          <ListItem disablePadding>
+          <ListItem  disablePadding>
             <ListItemAvatar sx={{ mr: -1 }}>
               <Avatar
+             
                 src={props.brand.avatarSrc}
                 sx={{ height: "36px", width: "36px" }}
               />
@@ -192,7 +196,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
               primaryTypographyProps={{ style: { fontWeight: "700" } }}
             />
           </ListItem>
-          <Stack sx={{ minWidth: "70px" }}>
+          <Stack className="d-flex" sx={{ minWidth: "70px" }}>
             <Typography variant="caption">Rarity</Typography>
             <Typography variant="caption" sx={{ mt: "-2px" }}>
               {rarityCategory}

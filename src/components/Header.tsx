@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, Stack, styled, Typography } from "@mui/material";
+import { Badge, Container, Stack, styled, Typography } from "@mui/material";
 import { ColorModeContext } from "../../pages/_app";
 import { IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -214,7 +214,7 @@ export default function Header() {
               sx={{ mr: 4, fontSize: "1.2rem" }}
             >
               <Link
-                sx={{ display: { xs: "none", md: "flex" } }}
+                // sx={{ display: { xs: "none", md: "flex" } }}
                 href={"/brands"}
                 color="inherit"
                 hoverStyle
@@ -264,12 +264,7 @@ export default function Header() {
               Drops
             </Typography>
           </ListMenu> */}
-              <Link
-                sx={{ display: { xs: "none", md: "flex" } }}
-                href={"/resources"}
-                color="inherit"
-                hoverStyle
-              >
+              <Link href={"/resources"} color="inherit" hoverStyle>
                 <Typography
                   sx={{ fontWeight: 600, textTransform: "uppercase" }}
                 >
@@ -358,6 +353,7 @@ export default function Header() {
                 >
                   <NavIconButton size="small">
                     {/* <BsHandbag /> */}
+                    <Badge badgeContent={4} color="primary">
                     <Image
                       // src={
                       //   theme.palette.mode === "dark" ? cartWhite : cartDark
@@ -367,6 +363,7 @@ export default function Header() {
                       width="29px"
                       height="30px"
                     />
+                    </Badge>
                   </NavIconButton>
                 </motion.div>
               </Link>
@@ -390,7 +387,7 @@ export default function Header() {
               />
             </FormGroup>
           </Stack>
-          <Menu className="mobile-menu" >
+          <Menu className="mobile-menu">
             <Link href={"/brands"} color="inherit" hoverStyle>
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Brands

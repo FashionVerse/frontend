@@ -250,7 +250,7 @@ header + div {
   width: 1600px;
   margin-left: auto;
   margin-right: auto;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   padding-left: 0;
   padding-right: 0;
 }
@@ -2513,6 +2513,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .navbar-inner a {
   text-decoration: none;
 }
+/* .navbar-inner a:hover{
+  color:rgba( 51,121,157 );
+} */
 
 /* Styling of overlay */
 .bm-overlay {

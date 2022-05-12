@@ -144,7 +144,7 @@ export default function BrandPage() {
       <Box
         sx={{
           height: "100vh",
-          width: "100vh",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -417,7 +417,7 @@ export default function BrandPage() {
 
           <Grid
             container
-            className="side-spacing"
+            className="side-spacing custom-card-drop"
             direction="row"
             justifyContent= "center"
             spacing={4}
@@ -427,7 +427,7 @@ export default function BrandPage() {
               arr.map((props) => {
                 console.log(props);
                 return (
-                  <Grid item xs={12} sm={6} md={4} key={props.id}>
+                  <Grid item xs={12} sm={6} lg={4} key={props.id}>
                     <FashionItemCard {...props} expandable />
                   </Grid>
                 );

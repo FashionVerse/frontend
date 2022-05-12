@@ -100,7 +100,7 @@ export default function Resources() {
             className="custom-container  common-fold"
           >
             <Grid item xs={12}>
-              <span className="divider"></span>
+              {/* <span className="divider"></span> */}
               <Box>
                 <Typography
                   variant="h1"

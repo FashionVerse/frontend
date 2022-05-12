@@ -4,6 +4,7 @@ export default function AnimLogo(props) {
   return (
     <>
     <motion.svg 
+  
       height={props.height ||"142"}
       width={props.wight ||"124"} viewBox="0 0 71 62" fill="none" xmlns="http://www.w3.org/2000/svg"
     >

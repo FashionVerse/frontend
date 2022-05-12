@@ -101,6 +101,25 @@
   }
 }
 @media screen and (max-width: 1279px) {
+  .footer {
+    padding-bottom: 10px;
+  }
+
+  .custom-card {
+    max-width: 100%;
+  }
+  .side-spacing,
+  .dropsContainer .footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .parralex-image li {
+    height: 341px !important;
+  }
+  .dropsContainer.common-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .wardrobe-item {
     width: calc(48% - 5px);
   }
@@ -222,6 +241,26 @@
   }
 }
 @media screen and (max-width: 899px) {
+  .d-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  .d-flex span {
+    margin-right: 10px;
+  }
+  .fashion-card-inner-wrapper
+    .MuiListItemText-root
+    .MuiTypography-root:first-child {
+    font-size: 17px;
+  }
+  .custom-card-drop .fashion-card-inner-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-inner a {
+    display: none;
+  }
   .keen-slider > svg {
     z-index: 1 !important;
   }
@@ -245,8 +284,12 @@
     padding-bottom: 10px;
   }
   .footer-headings {
+    margin-top: 0;
+  }
+  .footer-headings + .footer-headings {
     margin-top: 20px;
   }
+
   .badge-container .MuiGrid-root {
     margin-bottom: 40px;
   }
@@ -330,112 +373,160 @@
   }
 }
 @media screen and (max-width: 767px) {
-
+  .fashion-card-inner-wrapper
+    .MuiListItemText-root
+    .MuiTypography-root:first-child {
+    font-size: 15px;
+  }
   .bm-burger-button {
     top: 26px;
   }
+  .clothe-wrapper {
+    min-width: 100%;
+  }
 }
 @media screen and (max-width: 599px) {
-  .third-fold.section-spacing{
+  #logo-container svg{
+    width: 100% !important;
+  }
+  .connect-wallet .main-heading{
+    margin: 20px 0;
+  }
+  .dropsContainer .sub-heading {
+    font-size: 19px;
+  }
+
+  .parralex-image {
+    margin-top: 0;
+  }
+  .dropsContainer .main-heading {
+    margin-top: 40px;
+  }
+  .fashion-card-inner-wrapper
+    .MuiListItemText-root
+    .MuiTypography-root:first-child {
+    font-size: 18px;
+  }
+  .side-spacing {
+    margin-bottom: 30px;
+  }
+  .cta-wrapper {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .cta-wrapper .MuiOutlinedInput-root {
+    width: 100%;
+  }
+  .cta-wrapper div,
+  .cta-wrapper .MuiButton-root {
+    width: 47%;
+  }
+  .third-fold.section-spacing {
     padding-bottom: 0;
   }
-  .bottom-info .MuiListItemText-root span:last-child{
+  .bottom-info .MuiListItemText-root span:last-child {
     min-height: auto;
   }
-  .bm-menu-wrap{
+  .bm-menu-wrap {
     width: 240px !important;
   }
-  .badge-container .MuiGrid-root:nth-child(3){
+  .badge-container .MuiGrid-root:nth-child(3) {
     margin-bottom: 40px;
   }
   .bm-item {
     margin-bottom: 20px;
-}
+  }
   .bm-item-list p {
     font-size: 18px;
-}
-  .footer .customize-logo h4{
+  }
+  .footer .customize-logo h4 {
     display: block;
     font-size: 30px;
   }
-  .fifth-fold .MuiBox-root{
+  .fifth-fold .MuiBox-root {
     margin-top: 60px;
     margin-bottom: 50px;
   }
-  .custom-list li{
+  .custom-list li {
     width: 100%;
   }
-  .custom-list li + li{
+  .custom-list li + li {
     margin-top: 20px;
   }
-  .fashion-verse .secondary-heading, .fashion-verse .secondary-heading .gradient-text{
+  .fashion-verse .secondary-heading,
+  .fashion-verse .secondary-heading .gradient-text {
     font-size: 30px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
   }
-  .exploere-all-btn{
+  .exploere-all-btn {
     width: 100%;
     margin-bottom: 30px;
   }
-  .custom-card{
+  .custom-card {
     padding: 10px;
   }
   .section-spacing {
     padding-top: 40px;
     padding-bottom: 40px;
-}
-  
+  }
+
   .first-fold .sub-heading {
     font-size: 22px;
     margin-top: 14px;
-}
-  .main-heading .gradient-text, .main-heading{
+  }
+  .main-heading .gradient-text,
+  .main-heading {
     font-size: 40px;
   }
-  .main-heading-wrapper{
+  .main-heading-wrapper {
     padding-top: 36px !important;
   }
-  .stick-header .bm-burger-button{
+  .stick-header .bm-burger-button {
     top: 20px;
   }
-  .header{
+  .header {
     padding-top: 10px;
     padding-bottom: 10px;
   }
   .gif-outer {
     width: 250px;
-}
+  }
   .first-fold .MuiGrid-root {
-     padding-left: 0;
+    padding-left: 0;
   }
   .first-fold.custom-container {
     width: 100%;
     margin-left: 0;
-}
+  }
   header + div {
     padding-top: 200px;
-}
- .email-box p{
+  }
+  .email-box p {
     word-break: break-all;
   }
-  .secondary-heading .gradient-text, .secondary-heading{
+  .secondary-heading .gradient-text,
+  .secondary-heading {
     font-size: 30px;
   }
-  .myNewBox{
+  .myNewBox {
     height: 470px;
     background-size: cover;
   }
   .slider-box {
     max-width: 342px;
-}
-  .our-partner{
+  }
+  .our-partner {
     flex-direction: column;
     display: flex;
   }
-  .main-heading .gradient-text, .main-heading{
+  .main-heading .gradient-text,
+  .main-heading {
     flex-direction: column;
     display: flex;
   }
- 
+
   /* .bg-style-dark,
   .bg-style-light {
     margin-top: 0 !important;

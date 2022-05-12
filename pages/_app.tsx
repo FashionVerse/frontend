@@ -79,8 +79,7 @@ export default function MyApp(props: any) {
     // },
   });
 
-  const theme = React.useMemo(() => createTheme(
-    getDesignTokens(mode)), [mode]);
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
   // const [drops, setDrops] = React.useState(null);
   const [removeAlert, setStickyHeader] = React.useState(false);
   React.useEffect(() => {
@@ -140,7 +139,6 @@ export default function MyApp(props: any) {
                 </Box>
               )} */}
                 <Header />
-
                 <SnackbarProvider>
                   <AnimateSharedLayout>
                     <DefaultSeo {...SEO} />

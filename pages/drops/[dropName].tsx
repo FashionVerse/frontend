@@ -446,7 +446,7 @@ export default function DropPage() {
       <Box
         sx={{
           height: "100vh",
-          width: "100vh",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -536,8 +536,8 @@ export default function DropPage() {
             alignItems="center"
             className="custom-container"
           >
-            <Grid item xs={12} sx={{ mt: 10, mb: 4 }}>
-              <span className="divider"></span>
+            <Grid item xs={12} >
+              {/* <span className="divider"></span> */}
               <Box>
                 <Typography
                   variant="h1"
@@ -576,13 +576,13 @@ export default function DropPage() {
 
             <Grid
               container
-              className="side-spacing"
+              className="side-spacing custom-card-drop"
               spacing={4}
               sx={{ mt: 2, mb: 10 }}
               justifyContent= "center"
             >
               <Grid item xs={12}>
-                <Stack direction="row" gap={2} sx={{ px: 1 }}>
+                <Stack className="cta-wrapper" direction="row" gap={2} sx={{ px: 1 }}>
                   <CheckBoxSelect formStateName="rarity" label="Rarity" />
                   <CheckBoxSelect formStateName="price" label="Price" />
                   <div style={{ flexGrow: 1 }} />
@@ -606,7 +606,7 @@ export default function DropPage() {
                 items.map((props) => {
                   console.log(props);
                   return (
-                    <Grid item xs={12} sm={6} md={4} key={props.id}>
+                    <Grid item xs={12} sm={6} lg={4} key={props.id}>
                       <FashionItemCard {...props} expandable />
                     </Grid>
                   );

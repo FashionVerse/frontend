@@ -186,7 +186,7 @@ export default function Product() {
               <Box
                 sx={{
                   height: "100vh",
-                  width: "100vh",
+                  width: "100%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -240,7 +240,7 @@ export default function Product() {
   return <Box
   sx={{
     height: "100vh",
-    width: "100vh",
+    width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
