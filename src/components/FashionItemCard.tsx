@@ -106,6 +106,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
 
         console.log(content);
         enqueueSnackbar("Item added to bag", { variant: "success" });
+        window.location.reload();
       } else {
         alert("Connect to Wallet");
         router.replace("/wallets");

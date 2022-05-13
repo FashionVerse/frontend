@@ -30,6 +30,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { stack as Menu } from "react-burger-menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { ethers } from "ethers";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -135,27 +136,67 @@ export default function Header() {
 
   // }, [])
 
-  const getDrops = () => {
-    const { data, error } = useSWR(
-      process.env.API_URL + "/api/getDrops",
-      fetcher
+  // const getDrops = () => {
+  //   const { data, error } = useSWR(
+  //     process.env.API_URL + "/api/getDrops",
+  //     fetcher
+  //   );
+  //   return { data: data, error: error };
+  // };
+
+  async function getDrops() {
+    try {
+    const response = await fetch(
+      process.env.API_URL + "/api/getDrops"
     );
-    return { data: data, error: error };
+
+    const data = await response.json();
+    return data
+    } catch (e) {
+      console.log(e)
+    }
   };
 
-  const { data: dropData, error: dropError } = getDrops();
+  // const { data: dropData, error: dropError } = getDrops();
 
-  const drops = [];
-  if (dropData) {
-    console.log("drops ", dropData);
-    dropData.drops.forEach((drop) => {
-      drops.push({
-        id: drop._id,
-        label: drop.title,
-        href: "/drops/" + drop.url,
-      });
-    });
+  
+
+
+  async function getBag() {
+    try {
+    if (typeof window["ethereum"] !== "undefined") {
+      const ethereum = window["ethereum"];
+      if (ethereum) {
+        var provider = new ethers.providers.Web3Provider(ethereum);
+      }
+
+      const isMetaMaskConnected = async () => {
+        const accounts = await provider.listAccounts();
+        return accounts.length > 0;
+      };
+
+      const connected = await isMetaMaskConnected();
+      if (connected) {
+        const accounts = await ethereum.enable();
+        const account = accounts[0];
+        const response = await fetch(
+          process.env.API_URL + "/api/getItemsFromBag?account="+account,
+        );
+
+        const data = await response.json()
+        return data;
+      } 
+    }
+
+    return {items: []};
+  } catch(e) {
+    console.log(e);
   }
+  }
+
+
+
+  
 
   // const [drops, setDrops] = React.useState(null);
   const [stickyHeader, setStickyHeader] = React.useState(false);
@@ -165,7 +206,38 @@ export default function Header() {
         setStickyHeader(window.pageYOffset > 100)
       );
     }
+
+    setLoading(true)
+
+    getBag().then((data)=>{
+      setBagData(data);
+
+      getDrops().then((dropData)=>{
+        const drops = [];
+    console.log("drops ", dropData);
+    dropData.drops.forEach((drop) => {
+      drops.push({
+        id: drop._id,
+        label: drop.title,
+        href: "/drops/" + drop.url,
+      });
+    });
+
+    setDrops(drops);
+
+    setLoading(false);
+
+      })
+    });
   }, []);
+
+  const [bagData, setBagData] = React.useState(null);
+  const [drops, setDrops] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+
+  if(loading){
+    return <div></div>
+  }
 
   return (
     <header className={`header ${stickyHeader ? "stick-header" : ""}`}>
@@ -353,7 +425,33 @@ export default function Header() {
                 >
                   <NavIconButton size="small">
                     {/* <BsHandbag /> */}
-                    <Badge badgeContent={4} color="primary">
+
+                    
+                  {
+                    !bagData ?  <Image
+                    // src={
+                    //   theme.palette.mode === "dark" ? cartWhite : cartDark
+                    // }
+                    src={cartWhite}
+                    alt="cart"
+                    width="29px"
+                    height="30px"
+                  /> : <Badge badgeContent={bagData.items.length} color="primary">
+
+                  <Image
+                    // src={
+                    //   theme.palette.mode === "dark" ? cartWhite : cartDark
+                    // }
+                    src={cartWhite}
+                    alt="cart"
+                    width="29px"
+                    height="30px"
+                  />
+                  </Badge>
+                  }
+
+                {/* <Badge badgeContent={4} color="primary">
+
                     <Image
                       // src={
                       //   theme.palette.mode === "dark" ? cartWhite : cartDark
@@ -363,7 +461,7 @@ export default function Header() {
                       width="29px"
                       height="30px"
                     />
-                    </Badge>
+                    </Badge> */}
                   </NavIconButton>
                 </motion.div>
               </Link>
