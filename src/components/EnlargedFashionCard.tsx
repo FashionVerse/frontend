@@ -121,6 +121,7 @@ function CardDialog(props: CardDialogProps) {
 
         console.log(content);
         enqueueSnackbar("Item added to bag", { variant: "success" });
+        window.location.reload();
       } else {
         router.replace("/wallets");
       }
