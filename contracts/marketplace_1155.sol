@@ -116,6 +116,7 @@ contract NFTMarket is ReentrancyGuard, AccessControl, ERC1155Holder {
         uint i = 0;
         while(i < itemIds.length) {
             idToMarketItem[itemIds[i]].price = prices[i];
+            i++;
         }
     }
 

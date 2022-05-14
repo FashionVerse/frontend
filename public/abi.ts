@@ -1453,4 +1453,4 @@ export const nftAbi = [
 ]
 
 export const nftAddress = '0xFD839c45D3530647A8848F892bca429A7B762F5b'
-export const marketAddress = '0xD2C96174f18F45075B4BB9da971f77706eB511F0'
+export const marketAddress = '0x92159920Ed3b31c836139809E1960481B68acbBe'
