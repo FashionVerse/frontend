@@ -105,6 +105,7 @@ export default function Wardrobe() {
             src: item.metadata.image,
             alt: "image",
             quantity: item.amount,
+            contract: item.token_address
           });
         });
 
@@ -301,7 +302,15 @@ export default function Wardrobe() {
                   className="wardrobe-item"
                 >
                   {/* <FashionItemCard {...props} hideAddToBag expandable /> */}
+                  <div onClick={()=>{
+                    window.open("https://testnets.opensea.io/assets/"+props.contract+"/"+props.id)
+                  }}
+                  style={{
+                    cursor: "pointer"
+                  }}
+                  >
                   <WardrobeCard {...props} />
+                  </div>
                 </Box>
                 // </Grid>
               ))}
