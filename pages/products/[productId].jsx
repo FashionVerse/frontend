@@ -630,6 +630,22 @@ export default function Product() {
                     </Button>
                   )}
                 </motion.div>
+
+                <Button
+                      variant="contained"
+                      size="large"
+                      sx={{ color: "#fff", width: "400px", marginTop: "20px"}}
+                      onClick={()=>{
+                        window.open(
+                          "https://testnets.opensea.io/assets/" +
+                            data.nft.nftContract +
+                            "/" +
+                            data.nft.tokenId
+                        );
+                      }}
+                    >
+                       View on OpenSea
+                    </Button>
               </Box>
             </Grid>
           </Grid>
