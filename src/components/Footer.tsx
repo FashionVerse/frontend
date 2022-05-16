@@ -12,6 +12,7 @@ import {
   ListItemText,
   Avatar,
   IconButton,
+  ListItemButton,
 } from "@mui/material";
 import { BsEnvelope } from "react-icons/bs";
 import { motion } from "framer-motion";
@@ -47,26 +48,29 @@ export default function Footer() {
               gutterBottom
               sx={{ mt: 2, color: "#8393AF" }}
             >
-              The FashionVerse, Inc. is an NFT marketplace for 3D digital clothing
-              that enables the user to build an metaverse compatible digital
-              closet.
+              The FashionVerse, Inc. is an NFT marketplace for 3D digital
+              clothing that enables the user to build an metaverse compatible
+              digital closet.
             </Typography>
             <List
               className="email-box"
-              onClick={() => {
-                window.open("mailto:community@thefashionverse.io");
-              }}
             >
               <ListItem disableGutters>
                 <ListItemAvatar sx={{ mr: -1, mt: 1, ml: 0.5 }}>
                   <BsEnvelope style={{ fontSize: "2rem" }} />
                 </ListItemAvatar>
-                <ListItemText
-                  primary="Support email"
-                  sx={{ fontWeight: 400, color: "#8393AF" }}
-                  secondary="community@thefashionverse.io"
-                  primaryTypographyProps={{ variant: "caption" }}
-                />
+                <ListItemButton
+                  component="a"
+                  href="mailto:community@thefashionverse.io"
+                  target="_blank"
+                >
+                  <ListItemText
+                    primary="Support email"
+                    sx={{ fontWeight: 400, color: "#8393AF" }}
+                    secondary="community@thefashionverse.io"
+                    primaryTypographyProps={{ variant: "caption" }}
+                  />
+                </ListItemButton>
               </ListItem>
             </List>
           </Stack>

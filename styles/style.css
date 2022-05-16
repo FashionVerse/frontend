@@ -1691,7 +1691,7 @@ header + div {
 .bg-style-light .brand-page-inner {
   background: url("/top-right-home-white.png") right 2.1% no-repeat,
     url("/top-left-home-white.png") left 2.1% no-repeat,
-    url("/home-page-middle-bg-blend.svg") center 89% no-repeat,
+    /* url("/home-page-middle-bg-blend.svg") center 105% no-repeat, */
     url("/bottom-right-white.png") bottom right no-repeat,
     url("/bottom-left-white.png") bottom left no-repeat;
   background-size: auto, auto, 100%, auto, auto;
@@ -2539,3 +2539,4 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .btn-wrapper button{
   width:100%;
 }
+

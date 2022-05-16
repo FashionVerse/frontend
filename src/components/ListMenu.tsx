@@ -63,7 +63,8 @@ const ListMenu: React.FC<Props> = ({ children, ...props }) => {
       }}
       PaperProps={{  
         style: {  
-          backgroundColor: "rgba(0,0,0,0.05)",  
+          backgroundColor: "rgba(255, 255, 255, 0.7)",  
+          color: "#000",
           backdropFilter: "blur(5px)",
           borderRadius: "15px",
         },  
@@ -114,8 +115,9 @@ const ListMenu: React.FC<Props> = ({ children, ...props }) => {
       onClose={handleClose}
       PaperProps={{  
         style: {  
-          backgroundColor: "rgba(0,0,0,0.05)",  
+          backgroundColor: "rgba(255, 255, 255, 0.7)",  
           backdropFilter: "blur(5px)",
+          color: "#000",
           borderRadius: "15px",
         },  
       }} 
