@@ -176,6 +176,8 @@ export default function Product() {
   //   );
 
   async function getItem(productId) {
+    console.log("GETTING ITEMS");
+    console.log(productId);
     const response = await fetch(
       process.env.API_URL + "/api/getItems?id=" + productId,
       {
@@ -233,13 +235,16 @@ export default function Product() {
   };
 
   useEffect(() => {
+    if (!productId) {
+      return;
+    }
     getItem(productId)
       .then((val) => {
         console.log(val);
         setData(val);
       })
       .catch((e) => {});
-  }, [router.isReady]);
+  }, [productId]);
 
   const [data, setData] = useState(null);
 
@@ -265,7 +270,7 @@ export default function Product() {
       <NextSeo
         title={data.nft.metadata.name}
         description={data.nft.metadata.description}
-        canonical={"https://www.thefashionverse.io/products/"+productId+"/"}
+        canonical={"https://www.thefashionverse.io/products/" + productId + "/"}
         twitter={{
           handle: "@FashionVerseInc",
           cardType: "summary_large_image",
@@ -309,7 +314,7 @@ export default function Product() {
                 }}
               >
                 <Box
-                className="image-box"
+                  className="image-box"
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -377,6 +382,7 @@ export default function Product() {
                       >
                         <Box
                           noValidate
+                          className="responsive-viewer"
                           component="form"
                           sx={{
                             display: "flex",
@@ -445,20 +451,8 @@ export default function Product() {
 
                 <Link
                   href={"/brands/" + data.brand.url}
-                  // className="tw-cursor-pointer"
                   style={{ cursor: "pointer" }}
                 >
-                  {/* <motion.div
-                  // className="drops_hover_cursor"
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                > */}
                   <div className="tw-flex tw-flex-row tw-gap-4 tw-items-center ">
                     <Image
                       src={data.brand.avatarSrc}
@@ -475,20 +469,8 @@ export default function Product() {
                       {data.brand.title}
                     </Typography>
                   </div>
-                  {/* </motion.div> */}
                 </Link>
 
-                {/* <motion.div
-                  // className="drops_hover_cursor"
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                > */}
                 <Typography
                   variant="subtitle1"
                   gutterBottom
@@ -500,7 +482,6 @@ export default function Product() {
                     {data.collection.title}
                   </span>
                 </Typography>
-                {/* </motion.div> */}
 
                 <Box
                   sx={{
@@ -579,7 +560,7 @@ export default function Product() {
                     variant="h3"
                     gutterBottom
                     component="div"
-                    className="tw-font-semibold pl-2 eth-price" 
+                    className="tw-font-semibold pl-2 eth-price"
                     sx={{
                       fontSize: "2.42857rem",
                       fontWeight: 600,
@@ -598,33 +579,67 @@ export default function Product() {
                     {Web3.utils.fromWei(data.price.toString(), "ether")} ETH
                   </Typography>
                 </Box>
-
-                <motion.div
-                  // className="drops_hover_cursor"
-                  style={{
-                    cursor: "pointer",
+                <Box
+                  className="btn-wrapper"
+                  sx={{
+                    marginBottom: "30px",
+                    display: "flex",
+                    alignItems: "center",
                   }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ ease: "easeOut", delay: 0.1 }}
-                  whileHover={{ scale: 1.015 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                 >
-                  {data.available != 0 ? (
-                    <>
-                      <AnimatedButton id={data._id} />
-                    </>
-                  ) : (
+                  <motion.div
+                    style={{
+                      cursor: "pointer",
+                    }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ ease: "easeOut", delay: 0.1 }}
+                    whileHover={{ scale: 1.015 }}
+                    whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                  >
+                    {data.available != 0 ? (
+                      <>
+                        <AnimatedButton id={data._id} />
+                      </>
+                    ) : (
+                      <Button
+                        disabled
+                        variant="contained"
+                        size="large"
+                        sx={{ color: "#fff", width: "400px" }}
+                      >
+                        <AccountBalanceWalletIcon /> Add To Bag
+                      </Button>
+                    )}
+                  </motion.div>
+                  <motion.div
+                    style={{
+                      cursor: "pointer",
+                    }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ ease: "easeOut", delay: 0.1 }}
+                    whileHover={{ scale: 1.015 }}
+                    whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                  >
                     <Button
-                      disabled
                       variant="contained"
+                      className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500"
                       size="large"
-                      sx={{ color: "#fff", width: "400px" }}
+                      sx={{ color: "#fff", ml: 2 }}
+                      onClick={() => {
+                        window.open(
+                          "https://testnets.opensea.io/assets/" +
+                            data.nft.nftContract +
+                            "/" +
+                            data.nft.tokenId
+                        );
+                      }}
                     >
-                      <AccountBalanceWalletIcon /> Add To Bag
+                      View on OpenSea
                     </Button>
-                  )}
-                </motion.div>
+                  </motion.div>
+                </Box>
               </Box>
             </Grid>
           </Grid>
