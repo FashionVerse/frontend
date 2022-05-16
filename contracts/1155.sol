@@ -1,63 +1,58 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC1155/extensions/ERC1155SupplyUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
+import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
 import "@openzeppelin/contracts/utils/Counters.sol"; 
+import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
-contract TheFashionVerseToken is Initializable, ERC1155Upgradeable, AccessControlUpgradeable, PausableUpgradeable, ERC1155SupplyUpgradeable, UUPSUpgradeable {
-    bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
-    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
+contract TheFashionVerseToken is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply, IERC2981 {
 
     mapping (uint256 => string) private _tokenURIs;
     using Counters for Counters.Counter; 
     Counters.Counter private _tokenIds; 
 
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() initializer {
-        __ERC1155_init("");
-        __AccessControl_init();
-        __Pausable_init();
-        __ERC1155Supply_init();
-        __UUPSUpgradeable_init();
+    string public name;
+    string public symbol;
+    address private _recipient;
+    uint private _royalty;
 
-        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _grantRole(URI_SETTER_ROLE, msg.sender);
-        _grantRole(PAUSER_ROLE, msg.sender);
-        _grantRole(MINTER_ROLE, msg.sender);
-        _grantRole(UPGRADER_ROLE, msg.sender);
+    constructor() ERC1155("") {
+        name = "TheFashionVerseToken";
+        symbol = "FVT";
+        _recipient = owner();
+        _royalty = 0;
     }
 
-    function initialize() initializer public {
-        
-    }
-
-    function setURI(string memory newuri) public onlyRole(URI_SETTER_ROLE) {
+    function setURI(string memory newuri) public onlyOwner {
         _setURI(newuri);
     }
 
-    function pause() public onlyRole(PAUSER_ROLE) {
+    function pause() public onlyOwner {
         _pause();
     }
 
-    function unpause() public onlyRole(PAUSER_ROLE) {
+    function unpause() public onlyOwner {
         _unpause();
     }
 
+    function mint(address account, uint256 id, uint256 amount, bytes memory data)
+        public
+        onlyOwner
+    {
+        _mint(account, id, amount, data);
+    }
+
     function mintToken(string memory tokenURI, uint256 amount)
-    public onlyRole(MINTER_ROLE) returns(uint256) { 
+    public onlyOwner returns(uint256) { 
         uint256 newItemId = _tokenIds.current(); 
         _mint(msg.sender, newItemId, amount, "");
         _setTokenUri(newItemId, tokenURI); 
         _tokenIds.increment(); 
         return newItemId; 
-    } 
+    }
 
     function uri(uint256 tokenId) override public view 
     returns (string memory) { 
@@ -69,28 +64,50 @@ contract TheFashionVerseToken is Initializable, ERC1155Upgradeable, AccessContro
          _tokenURIs[tokenId] = tokenURI; 
     }
 
+    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
+        public
+        onlyOwner
+    {
+        _mintBatch(to, ids, amounts, data);
+    }
+
     function _beforeTokenTransfer(address operator, address from, address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
         internal
         whenNotPaused
-        override(ERC1155Upgradeable, ERC1155SupplyUpgradeable)
+        override(ERC1155, ERC1155Supply)
     {
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
 
-    function _authorizeUpgrade(address newImplementation)
-        internal
-        onlyRole(UPGRADER_ROLE)
-        override
-    {}
+    function _setRoyalties(address newRecipient) internal {
+        require(newRecipient != address(0), "Royalties: new recipient is the zero address");
+        _recipient = newRecipient;
+    }
 
-    // The following functions are overrides required by Solidity.
+    function setRoyalties(address newRecipient) external onlyOwner {
+        _setRoyalties(newRecipient);
+    }
+
+    function royaltyInfo(uint256 _tokenId, uint256 _salePrice) external view override
+        returns (address receiver, uint256 royaltyAmount)
+    {
+        return (_recipient, (_salePrice * _royalty) / 10000);
+    }
+
+    function setRoyaltyPercent(uint256 percent) public onlyOwner {
+        _royalty = percent;
+    }
 
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC1155Upgradeable, AccessControlUpgradeable)
+        virtual
+        override(ERC1155, IERC165)
         returns (bool)
     {
-        return super.supportsInterface(interfaceId);
+        return (
+            interfaceId == type(IERC2981).interfaceId ||
+            super.supportsInterface(interfaceId)
+        );
     }
 }

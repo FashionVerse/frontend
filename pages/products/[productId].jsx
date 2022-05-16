@@ -176,6 +176,8 @@ export default function Product() {
   //   );
 
   async function getItem(productId) {
+    console.log("GETTING ITEMS")
+    console.log(productId)
     const response = await fetch(
       process.env.API_URL + "/api/getItems?id=" + productId,
       {
@@ -233,13 +235,16 @@ export default function Product() {
   };
 
   useEffect(() => {
+    if(!productId){
+      return;
+    }
     getItem(productId)
       .then((val) => {
         console.log(val);
         setData(val);
       })
       .catch((e) => {});
-  }, [router.isReady]);
+  }, [productId]);
 
   const [data, setData] = useState(null);
 
