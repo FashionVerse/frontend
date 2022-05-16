@@ -323,7 +323,7 @@ export default function Product() {
                         width: "500px",
                         height: "400px",
                       }}
-                      src={data.nft.metadata.gif}
+                      src={data.nft.metadata.image}
                       alt="gif"
                       width= "500px"
                         height= "400px"
@@ -340,7 +340,7 @@ export default function Product() {
                       marginTop: "20px",
                     }}
                   >
-                    Open in 3d
+                    Open in 3D
                   </Button>
 
                   {/* Adding Modal for viewer */}
