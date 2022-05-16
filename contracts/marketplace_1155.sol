@@ -73,6 +73,11 @@ contract NFTMarket is ReentrancyGuard, AccessControl, ERC1155Holder {
 
     mapping(uint256 => MarketItem) private idToMarketItem;
 
+    address[] private whitelistedAddresses;
+
+    bool public onlyWhitelisted = false;
+
+
     function updatePay(address payable pay) public {
         require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
         _pay = pay;
@@ -80,6 +85,39 @@ contract NFTMarket is ReentrancyGuard, AccessControl, ERC1155Holder {
 
     function checkPay() public view returns (address) {
         return _pay;
+    }
+
+    function updateWhitelistedAddresses(address[] calldata addresses) public nonReentrant {
+        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+        whitelistedAddresses = addresses;
+    }
+
+    function isAddressWhitelisted(address _user) public view returns (bool) {
+        uint i = 0;
+        while(i < whitelistedAddresses.length) {
+            if(whitelistedAddresses[i] == _user){
+                return true;
+            }
+            i++;
+        }
+
+        return false;
+    }
+
+    function updateOnlyWhitelisted(bool value) public nonReentrant {
+        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+        onlyWhitelisted = value;
+    }
+
+    function changePrices(uint256[] calldata itemIds, uint256[] calldata prices) public nonReentrant {
+        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+        require(itemIds.length == prices.length, "Invalid arguments");
+
+        uint i = 0;
+        while(i < itemIds.length) {
+            idToMarketItem[itemIds[i]].price = prices[i];
+            i++;
+        }
     }
 
     
@@ -116,6 +154,11 @@ contract NFTMarket is ReentrancyGuard, AccessControl, ERC1155Holder {
         uint256[] memory tokenIds,
         uint256[] memory amounts
         ) public payable nonReentrant {
+
+            if(onlyWhitelisted){
+                require(isAddressWhitelisted(msg.sender), "User not whitelisted.");
+            }
+
             require(getPrice(itemIds, tokenIds, amounts) == msg.value, "Enter valid amount");
             IERC1155(nftContract).safeBatchTransferFrom(address(this), msg.sender, tokenIds, amounts, "");
             _pay.transfer(msg.value);

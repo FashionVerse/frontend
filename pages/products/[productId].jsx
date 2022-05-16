@@ -263,36 +263,11 @@ export default function Product() {
   return (
     <>
       <NextSeo
-        // title="Using More of Config"
-        description="This example uses more of the available config options."
-        canonical="https://www.canonical.ie/"
-        openGraph={{
-          url: "https://www.url.ie/a",
-          title: "Open Graph Title",
-          description: "Open Graph Description",
-          images: [
-            {
-              url: "https://www.example.ie/og-image-01.jpg",
-              width: 800,
-              height: 600,
-              alt: "Og Image Alt",
-              type: "image/jpeg",
-            },
-            {
-              url: "https://www.example.ie/og-image-02.jpg",
-              width: 900,
-              height: 800,
-              alt: "Og Image Alt Second",
-              type: "image/jpeg",
-            },
-            { url: "https://www.example.ie/og-image-03.jpg" },
-            { url: "https://www.example.ie/og-image-04.jpg" },
-          ],
-          site_name: "SiteName",
-        }}
+        title={data.nft.metadata.name}
+        description={data.nft.metadata.description}
+        canonical={"https://www.thefashionverse.io/products/"+productId+"/"}
         twitter={{
-          handle: "@handle",
-          site: "@site",
+          handle: "@FashionVerseInc",
           cardType: "summary_large_image",
         }}
       />
@@ -359,7 +334,7 @@ export default function Product() {
                         width: "500px",
                         height: "400px",
                       }}
-                      src={data.nft.metadata.gif}
+                      src={data.nft.metadata.image}
                       alt="gif"
                       width="500px"
                       height="400px"
@@ -376,7 +351,7 @@ export default function Product() {
                       marginTop: "20px",
                     }}
                   >
-                    Open in 3d
+                    Open in 3D
                   </Button>
 
                   {/* Adding Modal for viewer */}

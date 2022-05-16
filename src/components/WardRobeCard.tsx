@@ -12,6 +12,7 @@ export interface WardrobeCardProps {
   src: string;
   alt: string;
   quantity: string;
+  contract: string;
 }
 
 const WardrobeCardContainer = styled(Card)(({ theme }) => ({

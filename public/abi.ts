@@ -226,6 +226,24 @@ export const marketAbi =  [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "itemIds",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "prices",
+				"type": "uint256[]"
+			}
+		],
+		"name": "changePrices",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "checkPay",
 		"outputs": [
@@ -424,6 +442,25 @@ export const marketAbi =  [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "isAddressWhitelisted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "itemId",
 				"type": "uint256"
@@ -513,6 +550,19 @@ export const marketAbi =  [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "onlyWhitelisted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "bytes32",
@@ -583,12 +633,38 @@ export const marketAbi =  [
 	{
 		"inputs": [
 			{
+				"internalType": "bool",
+				"name": "value",
+				"type": "bool"
+			}
+		],
+		"name": "updateOnlyWhitelisted",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address payable",
 				"name": "pay",
 				"type": "address"
 			}
 		],
 		"name": "updatePay",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "addresses",
+				"type": "address[]"
+			}
+		],
+		"name": "updateWhitelistedAddresses",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1377,4 +1453,4 @@ export const nftAbi = [
 ]
 
 export const nftAddress = '0xFD839c45D3530647A8848F892bca429A7B762F5b'
-export const marketAddress = '0xD2C96174f18F45075B4BB9da971f77706eB511F0'
+export const marketAddress = '0x92159920Ed3b31c836139809E1960481B68acbBe'

@@ -205,13 +205,13 @@ export default function Bag() {
         });
       });
 
-      console.log(itemData);
+      return {...itemData, items: arr}
     } catch {
       // enqueueSnackbar("Failed to load items", { variant: "error" });
       console.log("Failed");
     }
 
-    return arr;
+    return {whitelisted: false, isWhiteEnabled: false, items: arr};
   }
 
 
@@ -325,7 +325,9 @@ export default function Bag() {
       if (account !== false) {
         getItems(account)
           .then((value) => {
-            setData(value);
+            setData(value.items);
+            setIsUserWhitelisted(value.whitelisted);
+            setIsWhitelisted(value.isWhiteEnabled);
             setIsLoading(false);
           })
           .catch((e) => {
@@ -336,6 +338,8 @@ export default function Bag() {
   }, []);
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isWhitelisted, setIsWhitelisted] = React.useState(null);
+  const [isUserWhitelisted, setIsUserWhitelisted] = React.useState(null);
 
   const totalCost: any = data
     .map((c) => c.price * c.quantity)
@@ -580,12 +584,15 @@ export default function Bag() {
                     onClick={() => {
                       purchaseItems()
                     }}
+                    disabled={isWhitelisted && !isUserWhitelisted}
                   >
                     <Typography variant="h5">Purchase</Typography>
                   </GradientButton>
                 </Stack>
               </Stack>
             )}
+
+            {isWhitelisted && !isUserWhitelisted ? (<p style={{color: "red", justifyContent: "flex-end"}}>Account not whitelisted</p>) : <div></div>}
           </BlueShadowPaper>
         </Container>
       </Grid>
