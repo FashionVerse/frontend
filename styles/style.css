@@ -1724,7 +1724,7 @@ header + div {
 .bg-style-light .dropsContainer {
   background: url("/top-right-home-white.png") right 2.1% no-repeat,
     url("/top-left-home-white.png") left 2.1% no-repeat,
-    url("/home-page-middle-bg-blend.svg") center 89% no-repeat,
+    url("/home-page-middle-bg-blend.svg") center -251% no-repeat,
     url("/bottom-right-white.png") bottom right no-repeat,
     url("/bottom-left-white.png") bottom left no-repeat;
   background-size: auto, auto, auto, auto, auto;
@@ -2259,6 +2259,10 @@ header + div {
 .dropsContainer {
   padding-top: 184px;
 }
+/* .dropsContainer  .main-heading .gradient-text{
+  color: #01f4ff;
+  background
+} */
 .side-spacing {
   padding-left: 160px;
   padding-right: 160px;
