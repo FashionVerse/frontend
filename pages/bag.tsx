@@ -387,16 +387,15 @@ export default function Bag() {
             cardType: "summary_large_image",
           }}
         />
-        <Grid container gap={2}>
-          <Grid item xs={5}>
+        <Grid container spacing={3}  alignItems="center">
+          <Grid item sm={6} xs={12}>
             <FashionItemCard {...rest} hideAddToBag hidePrice expandable />
           </Grid>
+
           <Grid
             item
-            container
-            direction="column"
-            justifyContent="center"
-            xs={6}
+            sm={6}
+            xs={12}
           >
             <Stack
               direction="row"
@@ -483,6 +482,7 @@ export default function Bag() {
               </Button>
             </Stack>
           </Grid>
+
         </Grid>
       </>
     );
@@ -520,7 +520,6 @@ export default function Bag() {
         className="custom-container"
       >
         <Grid item xs={12}>
-          <span className="divider"></span>
           <Box>
             <Typography
               variant="h1"
@@ -538,14 +537,14 @@ export default function Bag() {
             </Typography>
           </Box>
         </Grid>
-        <Container maxWidth="md" className="checkOutItems">
+        <Container maxWidth="md" className="checkOutItems custom-card-drop">
           <BlueShadowPaper
             sx={{
               borderRadius: "32px",
               mb: 16,
             }}
           >
-            <Stack gap={4} sx={{ px: 4, py: 6 }}>
+            <Stack className="checkout-spacing" gap={4} sx={{ px: 4, py: 6 }}>
               <Typography
                 sx={{
                   textAlign: "left",
@@ -561,7 +560,7 @@ export default function Bag() {
                   lineHeight: "normal",
                 }}
               >
-                {totalCost > 0 ? "Items in Order" : <p style={{textAlign: "center"}}> No Items in Order </p>}
+                {totalCost > 0 ? "Items in Order" : <p className="no-items" style={{textAlign: "center"}}> No Items in Order </p>}
               </Typography>
               {data.map((props) => (
                 <CheckoutCard {...props} />
@@ -573,6 +572,7 @@ export default function Bag() {
                 direction="row"
                 justifyContent={"flex-end"}
                 sx={{ px: 8, pb: 4 }}
+                className="total-cost"
               >
                 <Stack gap={2}>
                   <Typography variant="h5">
@@ -592,7 +592,7 @@ export default function Bag() {
               </Stack>
             )}
 
-            {isWhitelisted && !isUserWhitelisted ? (<p style={{color: "red", justifyContent: "flex-end"}}>Account not whitelisted</p>) : <div></div>}
+            {isWhitelisted && !isUserWhitelisted ? (<p className="account-status" style={{color: "red", justifyContent: "flex-end"}}>Account not whitelisted</p>) : <div></div>}
           </BlueShadowPaper>
         </Container>
       </Grid>

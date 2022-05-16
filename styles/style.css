@@ -2186,9 +2186,9 @@ header + div {
     -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out; */
 }
-.custom-card:hover .MuiAvatar-root img {
+/* .custom-card:hover .MuiAvatar-root img {
   transform: scale(1);
-}
+} */
 .custom-card .MuiAvatar-root img {
   object-fit: fill;
 }
@@ -2196,10 +2196,10 @@ header + div {
   box-shadow: 0 0 16px 0 #c0c0c0;
   /* box-shadow: 0px 45px 100px rgb(0 0 0 / 40%); */
 }
-.custom-card:hover img {
+/* .custom-card:hover img {
   transform: scale(1.05);
   -webkit-transform: scale(1.05);
-}
+} */
 .bg-style-dark .custom-card:hover {
   box-shadow: 0 0 16px 0 rgba(51, 121, 157, 0.8);
 }
@@ -2436,6 +2436,9 @@ header + div {
   width: calc(24% - 5px);
   margin: 0 10px 40px;
 }
+.wardrobe-item > div{
+  width:100%;
+}
 /* Mobile navbar */
 /* Position and sizing of burger button */
 .bm-burger-button {
@@ -2528,4 +2531,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .stick-header .bm-burger-button {
   top: 25px;
+}
+.account-status{
+  padding: 30px;
+  justify-content: flex-end;
+  display: flex;
 }

@@ -94,7 +94,7 @@ export default function Wardrobe() {
           process.env.API_URL + "/api/getNFTs?account=" + account
         );
         const items = await response.json();
-          console.log("ITEMS");
+        console.log("ITEMS");
         console.log(items);
 
         items.map((item) => {
@@ -105,7 +105,7 @@ export default function Wardrobe() {
             src: item.metadata.image,
             alt: "image",
             quantity: item.amount,
-            contract: item.token_address
+            contract: item.token_address,
           });
         });
 
@@ -212,6 +212,7 @@ export default function Wardrobe() {
               alignItems="center"
               direction="row"
               sx={{ mt: 8, mb: 10 }}
+              className="wardrobe-heading"
             >
               <Typography
                 variant="h3"
@@ -272,6 +273,7 @@ export default function Wardrobe() {
                 onChange={setActivePage}
                 fullWidth
                 size="lg"
+                className="custom-tabs"
                 radius="lg"
                 color="blue"
                 transitionDuration={700}
@@ -290,7 +292,7 @@ export default function Wardrobe() {
             </Stack>
           </Grid>
           {activePage === "nfts" ? (
-            <Grid item   className="wardrobe-item-wrapper"  sx={{ mb: 16 }}>
+            <Grid item className="wardrobe-item-wrapper" sx={{ mb: 16 }}>
               {items.map((props) => (
                 // <Grid item xs={12} sm={6} md={4} key={props.id}>
                 <Box
@@ -302,14 +304,45 @@ export default function Wardrobe() {
                   className="wardrobe-item"
                 >
                   {/* <FashionItemCard {...props} hideAddToBag expandable /> */}
-                  <div onClick={()=>{
-                    window.open("https://testnets.opensea.io/assets/"+props.contract+"/"+props.id)
-                  }}
-                  style={{
-                    cursor: "pointer"
-                  }}
+                  <div
+                    onClick={() => {
+                      window.open(
+                        "https://testnets.opensea.io/assets/" +
+                          props.contract +
+                          "/" +
+                          props.id
+                      );
+                    }}
+                    style={{
+                      cursor: "pointer",
+                    }}
                   >
-                  <WardrobeCard {...props} />
+                    {items.length > 0 ? (
+                      <WardrobeCard {...props} />
+                    ) : (
+                      <Grid
+                        item
+                        xs={12}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          height: "40vh",
+                        }}
+                      >
+                        <h2
+                          className="no-items-available"
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            margin: "auto",
+                          }}
+                        >
+                          No Items in Your Wardrobe
+                        </h2>
+                      </Grid>
+                    )}
                   </div>
                 </Box>
                 // </Grid>
