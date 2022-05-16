@@ -513,6 +513,12 @@
   }
 }
 @media screen and (max-width: 599px) {
+  .btn-wrapper div{
+    width:100% !important;
+  }
+  .btn-wrapper button{
+    width:100%;
+  }
   .common-fold1 .product-spacing{
     margin-bottom: 20px;
   }
