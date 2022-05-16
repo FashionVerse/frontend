@@ -325,17 +325,6 @@ export default function Header() {
                   </Typography>
                 </ListMenu>
               )}
-              {/* <ListMenu items={drops}>
-            <Typography
-              sx={{
-                cursor: "pointer",
-                ":hover": { transform: "scale(1.125)" },
-                fontWeight: 600,
-              }}
-            >
-              Drops
-            </Typography>
-          </ListMenu> */}
               <Link href={"/resources"} color="inherit" hoverStyle>
                 <Typography
                   sx={{ fontWeight: 600, textTransform: "uppercase" }}

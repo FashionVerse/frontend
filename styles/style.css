@@ -2129,6 +2129,7 @@ header + div {
   background-size: contain;
   background-color: transparent;
   backdrop-filter: none;
+  cursor: auto;
 }
 
 .same-fold .custom-card:hover {
@@ -2402,23 +2403,14 @@ header + div {
   background-repeat: no-repeat;
   background-position: 11px 21px;
   background-size: 18px;
+  transition: all 0.3s;
+}
+.custom-list li:hover{
+  box-shadow: 0px 45px 100px rgb(0 0 0 / 40%);
 }
 .custom-list li span {
   color: #fff;
 }
-/* .custom-list li:before{
-  content: "";
-  position:absolute;
-  left:0;
-  top:12px;
-  width:12px;
-  height:12px;
-  background:#fff;
-  border-radius:100%;
-}
-.bg-style-light .custom-list li:before{
-  background:#000;
-} */
 
 .remove-alert {
   display: none;

@@ -91,13 +91,13 @@ export default function MyApp(props: any) {
   }, []);
 
   return (
-    <CacheProvider value={emotionCache}>
+    <CacheProvider value={emotionCache} >
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>The FashionVerse</title>
       </Head>
-      <ColorModeContext.Provider value={colorMode}>
-        <MantineProvider theme={{ colorScheme: colorScheme }}>
+      <ColorModeContext.Provider value={colorMode} >
+        <MantineProvider theme={{ colorScheme: colorScheme }}  >
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container

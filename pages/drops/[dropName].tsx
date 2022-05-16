@@ -511,7 +511,7 @@ export default function DropPage() {
             alignItems="center"
             className="custom-container"
           >
-            <Grid item xs={12} >
+            <Grid item xs={12} sx={{  px: 2}}>
               {/* <span className="divider"></span> */}
               <Box>
                 <Typography

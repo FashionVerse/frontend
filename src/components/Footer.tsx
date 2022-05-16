@@ -168,11 +168,11 @@ const ABOUT_LINKS = [
 ];
 
 const SUPPORT_LINKS = [
-  {
-    label: "Contact us",
-    href: "mailto:community@thefashionverse.io",
-    id: "lpokiu",
-  },
+  // {
+  //   label: "Contact us",
+  //   href: "mailto:community@thefashionverse.io",
+  //   id: "lpokiu",
+  // },
   {
     label: "Suggestion Form",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSerQnqtUGZSnUEHFgbd2Unmdv0_0tcnIS1YVIJjp3D5BzKfjg/viewform?usp=sf_link",
