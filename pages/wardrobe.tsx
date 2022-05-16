@@ -342,9 +342,17 @@ export default function Wardrobe() {
                 height: "40vh",
               }}
             >
-              <Typography variant="h3" color="textSecondary">
-                Coming Soon...
-              </Typography>
+              <h2
+                className="no-items-available"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "auto",
+                }}
+              >
+                Coming Soon…
+              </h2>
             </Grid>
           )}
         </Grid>

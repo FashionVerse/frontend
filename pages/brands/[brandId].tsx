@@ -260,6 +260,7 @@ export default function BrandPage() {
                 boxShadow: "0 0 16px 0 #c0c0c0",
               },
             }}
+            className="brand-avatar"
           />
         </Box>
 
@@ -276,7 +277,7 @@ export default function BrandPage() {
             direction="row"
             spacing={4}
           >
-          <Grid item xs={12} sx={{ mt: 28, mb: 4 }}>
+          <Grid className="desginer-info-outer" item xs={12} sx={{ mt: 28, mb: 4 }}>
             <ul className="designer-info-box">
               <li>
                 <Typography variant="h2" className="secondary-heading">
@@ -347,7 +348,7 @@ export default function BrandPage() {
                 className="main-heading"
                 align="center"
                 textTransform="uppercase"
-                sx={{ mt: 7, mb: 0 }}
+                sx={{ mt: 7, mb: 4 }}
               >
                 <Typography
                   variant="h1"
@@ -378,6 +379,7 @@ export default function BrandPage() {
                 variant="h2"
                 className="secondary-heading"
                 sx={{ mt: 8 }}
+                style={{marginBottom: "20px"}}
               >
                 <Typography
                   variant="h2"
@@ -387,10 +389,11 @@ export default function BrandPage() {
                 >
                   Collection Name
                 </Typography>
-
+                </Typography>
                 <Typography
                 variant="h3"
                 className="sub-heading"
+                sx={{mb: 4}}
                 align="center">
                 {data.collection === null ? "": data.collection.title}
                 </Typography>
@@ -402,7 +405,7 @@ export default function BrandPage() {
                 {data.collection === null ? "": data.collection.description}
                 </Typography>
                 
-              </Typography>
+              
 
               {/* <Typography
                 variant="subtitle1"

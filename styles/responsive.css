@@ -101,6 +101,15 @@
   }
 }
 @media screen and (max-width: 1279px) {
+  .brand-avatar {
+    width: 270px;
+  }
+  .designer-info-box .sub-heading.with-small-font {
+    font-size: 18px;
+  }
+  .designer-info-box .secondary-heading {
+    margin: 0;
+  }
   .footer {
     padding-bottom: 10px;
   }
@@ -109,14 +118,16 @@
     max-width: 100%;
   }
   .side-spacing,
-  .dropsContainer .footer {
+  .dropsContainer .footer,
+  .brand-page-inner .footer {
     padding-left: 15px;
     padding-right: 15px;
   }
   .parralex-image li {
     height: 341px !important;
   }
-  .dropsContainer.common-wrapper {
+  .dropsContainer.common-wrapper,
+  .brand-page-inner.common-wrapper {
     padding-left: 0;
     padding-right: 0;
   }
@@ -189,19 +200,22 @@
     font-size: 30px;
     letter-spacing: 0;
   }
+  .product-detail-wrapper .MuiTypography-h1{
+    font-size: 2rem;
+  }
 }
-
+@media screen and (min-width: 1025px) {
+  .alert-custom {
+    display: none;
+  }
+}
 @media screen and (max-width: 1023px) {
   .wardrobe-item {
     width: calc(47% - 5px);
   }
 }
 
-@media screen and (min-width: 1025px) {
-  .alert-custom {
-    display: none;
-  }
-}
+
 
 /* @media screen and (min-width: 1024px) {
   .alert-custom{
@@ -241,6 +255,47 @@
   }
 }
 @media screen and (max-width: 899px) {
+ .product-spacing .product-image-wrapper{
+    padding-top:0 ;
+  }
+  .common-fold1 .product-spacing{
+  margin-top: 0;
+  margin-bottom: 50px;
+  }
+  .brand-avatar {
+    width: 210px;
+    bottom: -120px;
+  }
+  .brand-page-inner .sub-heading.with-small-font {
+    max-width: 94%;
+    font-size: 24px;
+    line-height: 33px;
+  }
+  .dropsContainer .no-items-available {
+    margin-top: 80px !important;
+  }
+  .brand-page-inner,
+  .dropsContainer {
+    padding-top: 214px;
+  }
+
+  .parralex-image {
+    margin: 0;
+  }
+  .brand-page-inner .designer-info-box .secondary-heading .gradient-text {
+    font-size: 27px;
+  }
+  .designer-info-box .secondary-heading {
+    margin-bottom: 10px;
+  }
+
+  .designer-info-box .sub-heading.with-small-font {
+    line-height: normal;
+    max-width: 100%;
+  }
+  .designer-info-box {
+    padding: 21px 15px;
+  }
   .d-flex {
     display: flex;
     flex-direction: row;
@@ -373,6 +428,41 @@
   }
 }
 @media screen and (max-width: 767px) {
+  .brand-page-inner .sub-heading.with-small-font {
+    font-size: 17px;
+    line-height: 25px;
+  }
+  .brand-page-inner .sub-heading {
+    font-size: 28px;
+  }
+  .designer-info-box li {
+    width: 100%;
+    border-right: none;
+    border-image: linear-gradient(to right, #00f0ff, #61caeb);
+    border-image-slice: 1;
+    border-bottom: 3px solid transparent;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+  .designer-info-box li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .designer-info-box {
+    flex-direction: column;
+  }
+  .brand-page-inner,
+  .dropsContainer {
+    padding-top: 194px;
+  }
+  .desginer-info-outer {
+    margin-top: 144px;
+  }
+  .brand-avatar {
+    width: 140px;
+    bottom: -80px;
+  }
   .fashion-card-inner-wrapper
     .MuiListItemText-root
     .MuiTypography-root:first-child {
@@ -386,10 +476,27 @@
   }
 }
 @media screen and (max-width: 599px) {
-  #logo-container svg{
+  .product-detail-wrapper .tw-font-semibold{
+    font-size: 1rem;
+  }
+  .product-detail-wrapper .eth-price{
+    font-size: 2rem;
+  }
+  .product-detail-wrapper .MuiBox-root{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .image-box{
+    padding: 15px;
+  }
+  .no-items-available {
+    width: 90%;
+    margin-right: 2px !important;
+  }
+  #logo-container svg {
     width: 100% !important;
   }
-  .connect-wallet .main-heading{
+  .connect-wallet .main-heading {
     margin: 20px 0;
   }
   .dropsContainer .sub-heading {
@@ -422,6 +529,9 @@
   .cta-wrapper div,
   .cta-wrapper .MuiButton-root {
     width: 47%;
+  }
+  .cta-wrapper div:nth-child(3) {
+    display: none;
   }
   .third-fold.section-spacing {
     padding-bottom: 0;

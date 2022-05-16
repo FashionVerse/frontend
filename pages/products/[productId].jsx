@@ -4,7 +4,15 @@ import Viewer from "../../src/components/Viewer";
 import Model from "../../src/components/Model";
 import useSWR from "swr";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import { Button, Typography, Box, Container, Grid, Card, getListItemAvatarUtilityClass } from "@mui/material";
+import {
+  Button,
+  Typography,
+  Box,
+  Container,
+  Grid,
+  Card,
+  getListItemAvatarUtilityClass,
+} from "@mui/material";
 import GridCard, { GridCardProps } from "../../src/components/GridCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -147,7 +155,7 @@ export default function Product() {
   const [open, setOpen] = useState(false);
   const [fullWidth, setFullWidth] = useState(true);
   const [maxWidth, setMaxWidth] = useState("md");
-  
+
   const router = useRouter();
   const { productId } = router.query;
 
@@ -167,52 +175,50 @@ export default function Product() {
   //     </Box>
   //   );
 
-        async function getItem(productId){
-          const response = await fetch(
-            process.env.API_URL + "/api/getItems?id=" + productId,
-            {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-            }
-          );
+  async function getItem(productId) {
+    const response = await fetch(
+      process.env.API_URL + "/api/getItems?id=" + productId,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-          const data = await response.json();
-        
-          if (!data)
-            return (
-              <Box
-                sx={{
-                  height: "100vh",
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "auto",
-                }}
-              >
-                <AnimLogo />
-              </Box>
-            );
-        
-          var rarityCategory;
-          if (data.totalSupply >= 30) {
-            rarityCategory = "Bronze";
-          } else if (data.totalSupply >= 15 && data.totalSupply < 30) {
-            rarityCategory = "Silver";
-          } else if (data.totalSupply >= 5 && data.totalSupply < 15) {
-            rarityCategory = "Gold";
-          }
-          if (data.totalSupply < 5) {
-            rarityCategory = "Platinum";
-          }
-        
-          return { ...data, rarityCategory: rarityCategory };
-        }
+    const data = await response.json();
 
-  
+    if (!data)
+      return (
+        <Box
+          sx={{
+            height: "100vh",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "auto",
+          }}
+        >
+          <AnimLogo />
+        </Box>
+      );
+
+    var rarityCategory;
+    if (data.totalSupply >= 30) {
+      rarityCategory = "Bronze";
+    } else if (data.totalSupply >= 15 && data.totalSupply < 30) {
+      rarityCategory = "Silver";
+    } else if (data.totalSupply >= 5 && data.totalSupply < 15) {
+      rarityCategory = "Gold";
+    }
+    if (data.totalSupply < 5) {
+      rarityCategory = "Platinum";
+    }
+
+    return { ...data, rarityCategory: rarityCategory };
+  }
 
   const {
     palette: { mode },
@@ -226,32 +232,35 @@ export default function Product() {
     setOpen(false);
   };
 
-  useEffect(()=>{
-    getItem(productId).then((val)=>{
-      console.log(val)
-      setData(val)}).catch((e)=>{})
-  }, [router.isReady])
+  useEffect(() => {
+    getItem(productId)
+      .then((val) => {
+        console.log(val);
+        setData(val);
+      })
+      .catch((e) => {});
+  }, [router.isReady]);
 
   const [data, setData] = useState(null);
 
-
-  if(!data){
-
-  return <Box
-  sx={{
-    height: "100vh",
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "auto",
-  }}
->
-  <AnimLogo />
-</Box> 
+  if (!data) {
+    return (
+      <Box
+        sx={{
+          height: "100vh",
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "auto",
+        }}
+      >
+        <AnimLogo />
+      </Box>
+    );
   }
 
-   return (
+  return (
     <>
       <NextSeo
         // title="Using More of Config"
@@ -301,7 +310,7 @@ export default function Product() {
           direction="row"
           justifyContent="center"
           alignItems="center"
-          className="custom-container common-fold1"
+          className="custom-container common-fold1 "
         >
           <Grid
             sx={{
@@ -312,8 +321,9 @@ export default function Product() {
             container
             direction="row"
             spacing={4}
+            className="product-spacing"
           >
-            <Grid item lg={6}>
+            <Grid item md={6} xs={12} className="product-image-wrapper">
               <div
                 id="product-container"
                 class="tw-shadow-2xl tw-shadow-white/50"
@@ -324,6 +334,7 @@ export default function Product() {
                 }}
               >
                 <Box
+                className="image-box"
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -350,8 +361,8 @@ export default function Product() {
                       }}
                       src={data.nft.metadata.gif}
                       alt="gif"
-                      width= "500px"
-                        height= "400px"
+                      width="500px"
+                      height="400px"
                       objectFit="cover"
                     />
                   </div>
@@ -427,7 +438,7 @@ export default function Product() {
                 </Box>
               </div>
             </Grid>
-            <Grid item lg={6}>
+            <Grid item md={6} xs={12} className="product-detail-wrapper">
               <Box
                 sx={{
                   padding: "0 20px 20px;",
@@ -460,7 +471,7 @@ export default function Product() {
                 <Link
                   href={"/brands/" + data.brand.url}
                   // className="tw-cursor-pointer"
-                  style={{cursor:'pointer'}}
+                  style={{ cursor: "pointer" }}
                 >
                   {/* <motion.div
                   // className="drops_hover_cursor"
@@ -473,7 +484,7 @@ export default function Product() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                 > */}
-                  <div className="tw-flex tw-flex-col md:tw-flex-row tw-gap-4 tw-items-center tw-pr-5">
+                  <div className="tw-flex tw-flex-row tw-gap-4 tw-items-center ">
                     <Image
                       src={data.brand.avatarSrc}
                       width="40"
@@ -492,8 +503,7 @@ export default function Product() {
                   {/* </motion.div> */}
                 </Link>
 
-                
-                  {/* <motion.div
+                {/* <motion.div
                   // className="drops_hover_cursor"
                   style={{
                     cursor: "pointer",
@@ -504,18 +514,18 @@ export default function Product() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                 > */}
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    component="div"
-                    className="tw-font-light"
-                    sx={{ marginTop: "10px" }}
-                  >
-                    <span className="tw-font-semibold">
-                      {data.collection.title}
-                    </span>
-                  </Typography>
-                  {/* </motion.div> */}
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  component="div"
+                  className="tw-font-light"
+                  sx={{ marginTop: "10px" }}
+                >
+                  <span className="tw-font-semibold">
+                    {data.collection.title}
+                  </span>
+                </Typography>
+                {/* </motion.div> */}
 
                 <Box
                   sx={{
@@ -594,7 +604,7 @@ export default function Product() {
                     variant="h3"
                     gutterBottom
                     component="div"
-                    className="tw-font-semibold pl-2"
+                    className="tw-font-semibold pl-2 eth-price" 
                     sx={{
                       fontSize: "2.42857rem",
                       fontWeight: 600,
@@ -610,7 +620,7 @@ export default function Product() {
                       src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
                       size="24"
                     />{" "}
-                    {Web3.utils.fromWei( data.price.toString(), 'ether')} ETH
+                    {Web3.utils.fromWei(data.price.toString(), "ether")} ETH
                   </Typography>
                 </Box>
 
