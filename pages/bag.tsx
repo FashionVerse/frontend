@@ -254,13 +254,19 @@ export default function Bag() {
 
           setIsLoading(true);
 
-          await marketContract.methods
+           marketContract.methods
             .createMarketSale(nftContract, items, token, amounts)
-            .send({ from: account, value: totalCost });
-          setIsLoading(false);
-          enqueueSnackbar("Your items have been purchased sucessfully", { variant: "success" });
-          await clearBag(account);
-          router.push("/wardrobe");
+            .send({ from: account, value: totalCost }).on('confirmation', async function(confirmationNumber, receipt){
+              setIsLoading(false);
+              enqueueSnackbar("Your items have been purchased sucessfully", { variant: "success" });
+              await clearBag(account);
+              window.open("/wardrobe","_self")
+            }).on('error', async function (error) {
+              enqueueSnackbar("Your items are being purchased, kindly check in after sometime.", { variant: "success" });
+              await clearBag(account);
+              window.open("/wardrobe","_self")
+            });
+          
         } else {
           alert("Nothing to purchase");
         }
@@ -271,7 +277,7 @@ export default function Bag() {
         } else {
           enqueueSnackbar("Your items are being purchased, kindly check in after sometime.", { variant: "success" });
           await clearBag(account);
-          router.push("/wardrobe");
+          window.open("/wardrobe","_self")
         }
     
         // router.reload()
@@ -475,6 +481,7 @@ export default function Bag() {
 
                   deleteItem(rest.bagId).then(()=>{
                     enqueueSnackbar("Removed item from bag", { variant: "success" });
+                    window.location.reload();
                   })
                 }}
               >
