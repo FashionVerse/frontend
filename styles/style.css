@@ -2539,4 +2539,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .btn-wrapper button{
   width:100%;
 }
-
+.custom-card.h-100{
+  height:100%;
+}

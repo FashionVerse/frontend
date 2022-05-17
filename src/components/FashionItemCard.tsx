@@ -119,11 +119,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
   const [enlarged, setEnlarged] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  var rarityCategory:
-    | "Bronze"
-    | "Silver"
-    | "Gold"
-    | "Platinum";
+  var rarityCategory: "Bronze" | "Silver" | "Gold" | "Platinum";
   if (props.rarity >= 30) {
     rarityCategory = "Bronze";
   } else if (props.rarity >= 15 && props.rarity < 30) {
@@ -154,9 +150,9 @@ export default function FashionItemCard(props: FashionItemCardProps) {
 
   return (
     <>
-      <FashionItemCardContainer className="custom-card">
+      <FashionItemCardContainer className="custom-card h-100">
         <Box
-        className="clothe-wrapper"
+          className="clothe-wrapper"
           sx={{
             minWidth: "300px",
             aspectRatio: "1/1",
@@ -172,7 +168,6 @@ export default function FashionItemCard(props: FashionItemCardProps) {
             alt="NFT"
             layout="fill"
             objectFit="contain"
-            
           />
         </Box>
         <Stack
@@ -182,10 +177,9 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           sx={{ mt: 2 }}
           className="fashion-card-inner-wrapper"
         >
-          <ListItem  disablePadding>
+          <ListItem disablePadding>
             <ListItemAvatar sx={{ mr: -1 }}>
               <Avatar
-             
                 src={props.brand.avatarSrc}
                 sx={{ height: "36px", width: "36px" }}
               />
@@ -194,7 +188,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
               primary={props.nft.name}
               secondary={props.brand.title}
               secondaryTypographyProps={{ style: { marginTop: "-2px" } }}
-              primaryTypographyProps={{ style: { fontWeight: "700" } }}
+              primaryTypographyProps={{ style: { fontWeight: "700", } }}
             />
           </ListItem>
           <Stack className="d-flex" sx={{ minWidth: "70px" }}>
@@ -223,7 +217,7 @@ export default function FashionItemCard(props: FashionItemCardProps) {
                 alt="etherium icon"
               />
               <Typography variant="h6" sx={{ ml: 1 }}>
-                {Web3.utils.fromWei( props.price.toString(), 'ether')}
+                {Web3.utils.fromWei(props.price.toString(), "ether")}
                 {/* {props.price.toString()} */}
               </Typography>
             </Stack>
