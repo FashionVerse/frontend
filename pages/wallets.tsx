@@ -5,6 +5,7 @@ import { styled } from "@mui/system";
 const ModelViewer = require("@metamask/logo");
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
+import { useSnackbar } from "notistack";
 
 const StyledPaper = styled(Paper)({
   maxWidth: "340px",
@@ -18,20 +19,26 @@ const StyledPaper = styled(Paper)({
   background: `rgba( 255, 255, 255, 0.08 )`,
 });
 
-async function connectWallet() {
-  if (typeof window["ethereum"] !== "undefined") {
-    try {
-      await window["ethereum"].enable();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  } else {
-    alert("Metamask is not installed!");
-  }
-}
+
 
 export default function Wallets() {
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  async function connectWallet() {
+    if (typeof window["ethereum"] !== "undefined") {
+      try {
+        await window["ethereum"].enable();
+        enqueueSnackbar("Wallet connected", { variant: "success" });
+        return true;
+      } catch (e) {
+        return false;
+      }
+    } else {
+      alert("Metamask is not installed!");
+    }
+  }
+
   React.useEffect(() => {
     const viewer = ModelViewer({
       // Dictates whether width & height are px or multiplied
