@@ -339,7 +339,7 @@ export default function Product() {
                         width: "500px",
                         height: "400px",
                       }}
-                      src={data.nft.metadata.image}
+                      src={data.nft.metadata.gif}
                       alt="gif"
                       width="500px"
                       height="400px"
