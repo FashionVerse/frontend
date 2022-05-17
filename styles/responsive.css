@@ -507,6 +507,12 @@
   }
 }
 @media screen and (max-width: 599px) {
+  .email-box a{
+    padding-left: 0;
+  }
+  .email-box  p{
+    font-size: 17px;
+  }
   .fifth-fold .secondary-heading {
     display: flex;
     flex-direction: column;
@@ -684,8 +690,11 @@
     padding-top: 10px;
     padding-bottom: 10px;
   }
-  .gif-outer {
+  /* .gif-outer {
     width: 250px;
+  } */
+  .gif-outer {
+    width: 190px;
   }
   .first-fold .MuiGrid-root {
     padding-left: 0;

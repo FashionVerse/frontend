@@ -49,7 +49,7 @@ export default function Footer() {
               sx={{ mt: 2, color: "#8393AF" }}
             >
               The FashionVerse, Inc. is an NFT marketplace for 3D digital
-              clothing that enables the user to build an metaverse compatible
+              clothing that enables the user to build a metaverse compatible
               digital closet.
             </Typography>
             <List

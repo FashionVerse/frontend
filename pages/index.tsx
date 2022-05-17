@@ -238,7 +238,7 @@ export default function Index() {
     <>
       <NextSeo
         title="The FashionVerse"
-        description="The FashionVerse, Inc. is an NFT marketplace for 3D digital clothing that enables the user to build an metaverse compatible digital closet."
+        description="The FashionVerse, Inc. is an NFT marketplace for 3D digital clothing that enables the user to build a metaverse compatible digital closet."
         canonical="https://www.thefashionverse.io/"
         twitter={{
           handle: "@FashionVerseInc",
