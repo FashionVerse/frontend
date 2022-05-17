@@ -397,7 +397,7 @@ export default function Header() {
               </Link>
             </Tooltip>
             <Tooltip
-              sx={{ display: { xs: "none", md: "flex" } }}
+              // sx={{ display: { xs: "none", md: "flex" } }}
               title="Shopping Cart"
             >
               <Link href={"/bag"} color="inherit" noLinkStyle>
@@ -495,11 +495,11 @@ export default function Header() {
                 Digital Wardrobe
               </Typography>
             </Link>
-            <Link href={"/bag"} color="inherit" hoverStyle>
+            {/* <Link href={"/bag"} color="inherit" hoverStyle>
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Shopping Cart
               </Typography>
-            </Link>
+            </Link> */}
           </Menu>
         </Stack>
       </Container>

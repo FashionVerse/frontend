@@ -507,6 +507,10 @@
   }
 }
 @media screen and (max-width: 599px) {
+  .dropsContainer .no-items-available{
+    width: 100%;
+    margin-left: 30px !important;
+  }
   .email-box a{
     padding-left: 0;
   }
