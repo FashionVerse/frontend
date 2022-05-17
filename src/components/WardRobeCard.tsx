@@ -29,6 +29,7 @@ const WardrobeCardContainer = styled(Card)(({ theme }) => ({
 
 export default function WardrobeCard(props: WardrobeCardProps) {
   return (
+    
     <WardrobeCardContainer>
       <Box
         sx={{
@@ -62,5 +63,6 @@ export default function WardrobeCard(props: WardrobeCardProps) {
         </Typography>
       </Box>
     </WardrobeCardContainer>
+
   );
 }
