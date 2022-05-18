@@ -293,6 +293,8 @@
   }
   .dropsContainer .no-items-available {
     margin-top: 80px !important;
+    width: 100%;
+    margin-left: 30px !important;
   }
   .brand-page-inner,
   .dropsContainer {
@@ -562,7 +564,7 @@
   }
   .brand-page-inner .no-items-available {
     width: 100%;
-    margin-left: 30px;
+    margin-left: 30px !important;
   }
   .bottom-info .MuiListItemText-root span:first-child {
     font-size: 16px;

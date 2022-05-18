@@ -224,9 +224,14 @@ export default function Header() {
   const [bagData, setBagData] = React.useState(null);
   const [drops, setDrops] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [isOpen, setOpen] = React.useState(false);
+  const handleIsOpen = () => {
+    setOpen(!isOpen);
+  };
 
-
+  const closeSideBar = () => {
+    setOpen(false);
+  };
   if (loading) {
     return <div></div>;
   }
@@ -469,23 +474,48 @@ export default function Header() {
               />
             </FormGroup>
           </Stack>
-          <Menu className="mobile-menu" isOpen={open}>
-            <Link onClick={() => setOpen(!open)} href={"/brands"} color="inherit" hoverStyle>
+          <Menu
+            className="mobile-menu"
+            isOpen={isOpen}
+            onOpen={handleIsOpen}
+            onClose={handleIsOpen}
+          >
+            <Link
+              onClick={closeSideBar}
+              href={"/brands"}
+              color="inherit"
+              hoverStyle
+            >
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Brands
               </Typography>
             </Link>
-            <Link onClick={() => setOpen(!open)} href={"/resources"} color="inherit" hoverStyle>
+            <Link
+              onClick={closeSideBar}
+              href={"/resources"}
+              color="inherit"
+              hoverStyle
+            >
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Resources
               </Typography>
             </Link>
-            <Link onClick={() => setOpen(!open)} href={"/wallets"} color="inherit" hoverStyle>
+            <Link
+              onClick={closeSideBar}
+              href={"/wallets"}
+              color="inherit"
+              hoverStyle
+            >
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Connect Wallet
               </Typography>
             </Link>
-            <Link onClick={() => setOpen(!open)} href={"/wardrobe"} color="inherit" hoverStyle>
+            <Link
+              onClick={closeSideBar}
+              href={"/wardrobe"}
+              color="inherit"
+              hoverStyle
+            >
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Digital Wardrobe
               </Typography>
