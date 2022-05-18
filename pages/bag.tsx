@@ -242,7 +242,7 @@ export default function Bag() {
           ));
           await window["ethereum"].request({
             method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0x4" }], // chainId must be in hexadecimal numbers
+            params: [{ chainId: "0x1" }], // chainId must be in hexadecimal numbers
           });
 
           const marketContract = new web3.eth.Contract(
