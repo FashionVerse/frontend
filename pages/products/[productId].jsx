@@ -629,7 +629,7 @@ export default function Product() {
                       sx={{ color: "#fff", ml: 2 }}
                       onClick={() => {
                         window.open(
-                          "https://testnets.opensea.io/assets/" +
+                          "https://opensea.io/assets/" +
                             data.nft.nftContract +
                             "/" +
                             data.nft.tokenId

@@ -307,7 +307,7 @@ export default function Wardrobe() {
                   <div
                     onClick={() => {
                       window.open(
-                        "https://testnets.opensea.io/assets/" +
+                        "https://opensea.io/assets/" +
                           props.contract +
                           "/" +
                           props.id
