@@ -74,6 +74,9 @@
 }
 
 @media screen and (max-width: 1364px) {
+  .navbar-inner{
+    margin-right: 0;
+  }
   .bottom-info .MuiListItemText-root span:first-child {
     font-size: 19px;
   }
