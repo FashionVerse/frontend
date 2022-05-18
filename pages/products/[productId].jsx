@@ -536,6 +536,7 @@ export default function Product() {
                   )}
                 </Box>
 
+                    {data.price == data.originalPrice ?
                 <Box
                   sx={{
                     marginBottom: "30px",
@@ -576,9 +577,99 @@ export default function Product() {
                       src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
                       size="24"
                     />{" "}
-                    {Web3.utils.fromWei(data.price.toString(), "ether")} ETH
+                    { Web3.utils.fromWei(data.price.toString(), "ether")} ETH
                   </Typography>
-                </Box>
+                </Box> :<div> <Box
+                  sx={{
+                    marginBottom: "30px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    component="div"
+                    className="tw-font-semibold"
+                    sx={{
+                      // fontSize: "h6.fontSize",
+                      fontWeight: "600",
+                      mr: 2,
+                    }}
+                  >
+                    Original Price:
+                  </Typography>
+                  <Typography
+                    variant="h3"
+                    gutterBottom
+                    component="div"
+                    className="tw-font-semibold pl-2 eth-price"
+                    sx={{
+                      fontSize: "2.42857rem",
+                      fontWeight: 600,
+                      color: "red"
+                    }}
+                  >
+                    <img
+                      alt="ETH"
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        objectFit: "contain",
+                      }}
+                      src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
+                      size="24"
+                    />{" "}
+                     <span><s>{Web3.utils.fromWei(data.originalPrice.toString(), "ether")}</s></span> ETH
+                  </Typography>
+                  
+                </Box> 
+
+<Box
+sx={{
+  marginBottom: "30px",
+  display: "flex",
+  alignItems: "center",
+}}
+>
+<Typography
+  variant="subtitle1"
+  gutterBottom
+  component="div"
+  className="tw-font-semibold"
+  sx={{
+    // fontSize: "h6.fontSize",
+    fontWeight: "600",
+    mr: 2,
+  }}
+>
+  Current Price:
+</Typography>
+<Typography
+  variant="h3"
+  gutterBottom
+  component="div"
+  className="tw-font-semibold pl-2 eth-price"
+  sx={{
+    fontSize: "2.42857rem",
+    fontWeight: 600,
+  }}
+>
+  <img
+    alt="ETH"
+    style={{
+      width: "24px",
+      height: "24px",
+      objectFit: "contain",
+    }}
+    src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
+    size="24"
+  />{" "}
+  { Web3.utils.fromWei(data.price.toString(), "ether")} ETH
+</Typography>
+</Box>
+</div>
+                }
                 <Box
                   className="btn-wrapper"
                   sx={{
