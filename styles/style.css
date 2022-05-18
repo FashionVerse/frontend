@@ -2484,13 +2484,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
   height: 100%;
   left: 0;
   top: 0;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / 40%);
 }
 
 /* General sidebar styles */
 .bm-menu {
   padding: 1.2em 15px 0;
   font-size: 2.15em;
-  background: rgba(51, 121, 157);
+  background: rgba(12, 42, 55, 0.9);
 }
 .bm-item-list {
   color: #fff;

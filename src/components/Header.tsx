@@ -146,57 +146,48 @@ export default function Header() {
 
   async function getDrops() {
     try {
-    const response = await fetch(
-      process.env.API_URL + "/api/getDrops"
-    );
+      const response = await fetch(process.env.API_URL + "/api/getDrops");
 
-    const data = await response.json();
-    return data
+      const data = await response.json();
+      return data;
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  };
+  }
 
   // const { data: dropData, error: dropError } = getDrops();
 
-  
-
-
   async function getBag() {
     try {
-    if (typeof window["ethereum"] !== "undefined") {
-      const ethereum = window["ethereum"];
-      if (ethereum) {
-        var provider = new ethers.providers.Web3Provider(ethereum);
+      if (typeof window["ethereum"] !== "undefined") {
+        const ethereum = window["ethereum"];
+        if (ethereum) {
+          var provider = new ethers.providers.Web3Provider(ethereum);
+        }
+
+        const isMetaMaskConnected = async () => {
+          const accounts = await provider.listAccounts();
+          return accounts.length > 0;
+        };
+
+        const connected = await isMetaMaskConnected();
+        if (connected) {
+          const accounts = await ethereum.enable();
+          const account = accounts[0];
+          const response = await fetch(
+            process.env.API_URL + "/api/getItemsFromBag?account=" + account
+          );
+
+          const data = await response.json();
+          return data;
+        }
       }
 
-      const isMetaMaskConnected = async () => {
-        const accounts = await provider.listAccounts();
-        return accounts.length > 0;
-      };
-
-      const connected = await isMetaMaskConnected();
-      if (connected) {
-        const accounts = await ethereum.enable();
-        const account = accounts[0];
-        const response = await fetch(
-          process.env.API_URL + "/api/getItemsFromBag?account="+account,
-        );
-
-        const data = await response.json()
-        return data;
-      } 
+      return { items: [] };
+    } catch (e) {
+      console.log(e);
     }
-
-    return {items: []};
-  } catch(e) {
-    console.log(e);
   }
-  }
-
-
-
-  
 
   // const [drops, setDrops] = React.useState(null);
   const [stickyHeader, setStickyHeader] = React.useState(false);
@@ -207,36 +198,37 @@ export default function Header() {
       );
     }
 
-    setLoading(true)
+    setLoading(true);
 
-    getBag().then((data)=>{
+    getBag().then((data) => {
       setBagData(data);
 
-      getDrops().then((dropData)=>{
+      getDrops().then((dropData) => {
         const drops = [];
-    console.log("drops ", dropData);
-    dropData.drops.forEach((drop) => {
-      drops.push({
-        id: drop._id,
-        label: drop.title,
-        href: "/drops/" + drop.url,
+        console.log("drops ", dropData);
+        dropData.drops.forEach((drop) => {
+          drops.push({
+            id: drop._id,
+            label: drop.title,
+            href: "/drops/" + drop.url,
+          });
+        });
+
+        setDrops(drops);
+
+        setLoading(false);
       });
-    });
-
-    setDrops(drops);
-
-    setLoading(false);
-
-      })
     });
   }, []);
 
   const [bagData, setBagData] = React.useState(null);
   const [drops, setDrops] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-  if(loading){
-    return <div></div>
+
+  if (loading) {
+    return <div></div>;
   }
 
   return (
@@ -415,31 +407,34 @@ export default function Header() {
                   <NavIconButton size="small">
                     {/* <BsHandbag /> */}
 
-                    
-                  {
-                    !bagData ?  <Image
-                    // src={
-                    //   theme.palette.mode === "dark" ? cartWhite : cartDark
-                    // }
-                    src={cartWhite}
-                    alt="cart"
-                    width="29px"
-                    height="30px"
-                  /> : <Badge badgeContent={bagData.items.length} color="primary">
+                    {!bagData ? (
+                      <Image
+                        // src={
+                        //   theme.palette.mode === "dark" ? cartWhite : cartDark
+                        // }
+                        src={cartWhite}
+                        alt="cart"
+                        width="29px"
+                        height="30px"
+                      />
+                    ) : (
+                      <Badge
+                        badgeContent={bagData.items.length}
+                        color="primary"
+                      >
+                        <Image
+                          // src={
+                          //   theme.palette.mode === "dark" ? cartWhite : cartDark
+                          // }
+                          src={cartWhite}
+                          alt="cart"
+                          width="29px"
+                          height="30px"
+                        />
+                      </Badge>
+                    )}
 
-                  <Image
-                    // src={
-                    //   theme.palette.mode === "dark" ? cartWhite : cartDark
-                    // }
-                    src={cartWhite}
-                    alt="cart"
-                    width="29px"
-                    height="30px"
-                  />
-                  </Badge>
-                  }
-
-                {/* <Badge badgeContent={4} color="primary">
+                    {/* <Badge badgeContent={4} color="primary">
 
                     <Image
                       // src={
@@ -474,23 +469,23 @@ export default function Header() {
               />
             </FormGroup>
           </Stack>
-          <Menu className="mobile-menu">
-            <Link href={"/brands"} color="inherit" hoverStyle>
+          <Menu className="mobile-menu" isOpen={open}>
+            <Link onClick={() => setOpen(!open)} href={"/brands"} color="inherit" hoverStyle>
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Brands
               </Typography>
             </Link>
-            <Link href={"/resources"} color="inherit" hoverStyle>
+            <Link onClick={() => setOpen(!open)} href={"/resources"} color="inherit" hoverStyle>
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Resources
               </Typography>
             </Link>
-            <Link href={"/wallets"} color="inherit" hoverStyle>
+            <Link onClick={() => setOpen(!open)} href={"/wallets"} color="inherit" hoverStyle>
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Connect Wallet
               </Typography>
             </Link>
-            <Link href={"/wardrobe"} color="inherit" hoverStyle>
+            <Link onClick={() => setOpen(!open)} href={"/wardrobe"} color="inherit" hoverStyle>
               <Typography sx={{ fontWeight: 600, textTransform: "uppercase" }}>
                 Digital Wardrobe
               </Typography>
