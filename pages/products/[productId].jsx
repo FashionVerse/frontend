@@ -451,7 +451,7 @@ export default function Product() {
 
                 <Link
                   href={"/brands/" + data.brand.url}
-                  style={{ cursor: "pointer" }}
+                  
                 >
                   <div className="tw-flex tw-flex-row tw-gap-4 tw-items-center ">
                     <Image
@@ -459,12 +459,14 @@ export default function Product() {
                       width="40"
                       height="40"
                       className="tw-rounded-full"
+                      style={{ cursor: "pointer" }}
                     />
                     <Typography
                       variant="subtitle1"
                       gutterBottom
                       component="div"
                       className="tw-font-light"
+                      style={{ cursor: "pointer" }}
                     >
                       {data.brand.title}
                     </Typography>
