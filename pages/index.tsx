@@ -47,6 +47,7 @@ import { useSnackbar } from "notistack";
 import useSWR from "swr";
 import ari from "../../public/ari.jpeg";
 import RightImage from "../public/right-image.png";
+import Sneaker from "../public/sneaker.png"
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -317,6 +318,114 @@ export default function Index() {
             </Box>
           </Grid>
         </Grid>
+
+        {/* Free Mint */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          
+          
+          
+
+          
+          <Grid item xs={12} md={12}>
+          <Box>
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                paddingBottom={5}
+              >
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  FREE&nbsp;
+                </Typography>
+                <i>MINT</i>
+              </Typography>
+
+              
+            </Box>
+
+            
+              <Grid
+                container
+                justifyContent="center"
+              >
+              <GradientButton
+                color="primary"
+                className="exploere-all-btn"
+                size="large"
+                sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                href="/free-mint"
+              >
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Claim Now
+                </Typography>
+              </GradientButton>
+              </Grid>
+
+
+            
+              
+            <Typography
+              variant="subtitle1"
+              className="sub-heading with-small-font"
+              align="center"
+              paddingTop={5}
+            >
+              {/* Build your First Digital <br /> Wardrobe */}
+              {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+              FOR THE FIRST 500 WALLETS
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              className="sub-heading with-small-font"
+              align="center"
+            >
+              {/* Build your First Digital <br /> Wardrobe */}
+              {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+               FashionVerse branded Basketball Sneaker with Decentraland Wearability
+            </Typography>
+            
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Grid
+              container
+              spacing={0}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
+            <Image src={Sneaker} alt="sneaker" objectFit="cover" />
+            
+            </Grid>
+            
+            
+          </Grid>
+
+          
+        </Grid>
+
 
         {/* Drops */}
         <Grid
