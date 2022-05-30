@@ -310,7 +310,7 @@ export default function Product() {
                         width: "500px",
                         height: "400px",
                       }}
-                      src="https://firebasestorage.googleapis.com/v0/b/fashionverse-77907.appspot.com/o/NFTs%2FFree%20Mint%2FFV%20Branded%20Sneakers%2FFreeMint_Gif.gif?alt=media&token=15f37211-383b-4399-bde4-38b25772777f"
+                      src="https://gateway.thefashionverse.io/ipfs/QmQv8915dT2wcrVBmFiEQUUHa7zjXFcQ5RCkYVez21X5VH"
                       alt="gif"
                       width="500px"
                       height="500px"
