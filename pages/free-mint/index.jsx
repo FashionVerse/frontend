@@ -370,7 +370,7 @@ export default function Product() {
                           >
                             <Model
                               link=
-                                "https://firebasestorage.googleapis.com/v0/b/fashionverse-77907.appspot.com/o/NFTs%2FFree%20Mint%2FFV%20Branded%20Sneakers%2FFV_Sneakers.glb?alt=media&token=60d0e6ce-062e-45b6-a775-900d6d013f75"
+                                "https://gateway.thefashionverse.io/ipfs/QmXjCo2G99CfSiHkBhKEzRTdFH3sqHWg2qM6oQsjjB71zX?filename=nft.glb"
                               
                               imgLink="https://firebasestorage.googleapis.com/v0/b/fashionverse-77907.appspot.com/o/NFTs%2FFree%20Mint%2FFV%20Branded%20Sneakers%2FFV%20Sneaker2.png?alt=media&token=9eea013d-b7dc-47da-b8c8-49d4b618805e"
                             ></Model>
