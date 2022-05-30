@@ -47,7 +47,9 @@ import { useSnackbar } from "notistack";
 import useSWR from "swr";
 import ari from "../../public/ari.jpeg";
 import RightImage from "../public/right-image.png";
-import Sneaker from "../public/sneaker.png"
+import Sneaker from "../public/sneaker.png";
+import Sneaker1 from "../public/sneaker1.png";
+import Sneaker2 from "../public/sneaker2.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -230,7 +232,7 @@ export default function Index() {
           margin: "auto",
         }}
       >
-        <AnimLogo/>
+        <AnimLogo />
       </Box>
     );
   }
@@ -328,18 +330,15 @@ export default function Index() {
           alignItems="center"
           className="custom-container second-fold section-spacing common-fold"
         >
-          
-          
-          
-
-          
           <Grid item xs={12} md={12}>
-          <Box>
-              <Typography
-                variant="h2"
-                className="secondary-heading"
-                paddingBottom={5}
-              >
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ mx: 16, my: 10 }}
+              className="our-partner"
+            >
+              <Typography variant="h2" className="secondary-heading">
                 <Typography
                   variant="h2"
                   color="primary"
@@ -351,15 +350,6 @@ export default function Index() {
                 <i>MINT</i>
               </Typography>
 
-              
-            </Box>
-
-            
-              <Grid
-                container
-                justifyContent="center"
-              >
-                
               <GradientButton
                 color="primary"
                 className="exploere-all-btn"
@@ -371,16 +361,26 @@ export default function Index() {
                   Claim Now
                 </Typography>
               </GradientButton>
+            </Box>
+
+            <Grid container direction="row" justifyContent="center">
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker1} alt="sneaker" />
               </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker} alt="sneaker" />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker2} alt="sneaker" />
+              </Grid>
+            </Grid>
 
-
-            
-              
             <Typography
-              variant="subtitle1"
-              className="sub-heading with-small-font"
-              align="center"
-              paddingTop={5}
+              variant="h2"
+                  color="primary"
+                  className="gradient-text fashion-verse"
+                  align="center"
+                  fontFamily="Montserrat"
             >
               {/* Build your First Digital <br /> Wardrobe */}
               {/* <Typewriter
@@ -394,7 +394,7 @@ export default function Index() {
             </Typography>
             <Typography
               variant="subtitle1"
-              className="sub-heading with-small-font"
+              className="sub-heading with-small-font fashion-verse"
               align="center"
             >
               {/* Build your First Digital <br /> Wardrobe */}
@@ -405,28 +405,24 @@ export default function Index() {
                     loop: true,
                   }}
                 /> */}
-               FashionVerse branded Basketball Sneaker with Decentraland Wearability
+              FashionVerse branded Basketball Sneaker with Decentraland
+              Wearability
             </Typography>
-            
           </Grid>
-          <Grid item xs={12} md={12}>
-            <Grid
-              container
-              spacing={0}
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-            >
-            <Image src={Sneaker} alt="sneaker" objectFit="cover" />
-            
-            </Grid>
-            
-            
+          <Grid
+            container
+            xs={12}
+            md={4}
+            spacing={0}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* <Image src={Sneaker1} alt="sneaker"  />
+          <Image src={Sneaker} alt="sneaker" />
+          <Image src={Sneaker2} alt="sneaker"/> */}
           </Grid>
-
-          
         </Grid>
-
 
         {/* Drops */}
         <Grid
