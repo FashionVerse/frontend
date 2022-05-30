@@ -359,6 +359,7 @@ export default function Index() {
                 container
                 justifyContent="center"
               >
+                
               <GradientButton
                 color="primary"
                 className="exploere-all-btn"

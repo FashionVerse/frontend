@@ -310,7 +310,7 @@ export default function Product() {
                         width: "500px",
                         height: "400px",
                       }}
-                      src="https://gateway.thefashionverse.io/ipfs/QmQv8915dT2wcrVBmFiEQUUHa7zjXFcQ5RCkYVez21X5VH"
+                      src="https://gateway.thefashionverse.io/ipfs/QmZfXztgXMcgSNcoJqFp4y3sHiqzUcznHnYdLN7Ncdtmu6"
                       alt="gif"
                       width="500px"
                       height="500px"
