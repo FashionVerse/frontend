@@ -332,8 +332,7 @@ export default function Index() {
         >
           <Grid item xs={12} md={12}>
             <Box
-              display="flex"
-              justifyContent="space-between"
+              justifyContent="center"
               alignItems="center"
               sx={{ mx: 16, my: 10 }}
               className="our-partner"
@@ -350,6 +349,12 @@ export default function Index() {
                 <i>MINT</i>
               </Typography>
 
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              padding={3}
+            >
               <GradientButton
                 color="primary"
                 className="exploere-all-btn"
@@ -361,19 +366,8 @@ export default function Index() {
                   Claim Now
                 </Typography>
               </GradientButton>
+              </Grid>
             </Box>
-
-            <Grid container direction="row" justifyContent="center">
-              <Grid item xs={12} md={4}>
-                <Image src={Sneaker1} alt="sneaker" />
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Image src={Sneaker} alt="sneaker" />
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Image src={Sneaker2} alt="sneaker" />
-              </Grid>
-            </Grid>
 
             <Typography
               variant="h2"
@@ -390,7 +384,7 @@ export default function Index() {
                     loop: true,
                   }}
                 /> */}
-              FOR THE FIRST 500 WALLETS
+              FOR THE FIRST 457 WALLETS
             </Typography>
             <Typography
               variant="subtitle1"
@@ -408,6 +402,20 @@ export default function Index() {
               FashionVerse branded Basketball Sneaker with Decentraland
               Wearability
             </Typography>
+
+            <Grid container direction="row" justifyContent="center">
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker1} alt="sneaker" />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker} alt="sneaker" />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker2} alt="sneaker" />
+              </Grid>
+            </Grid>
+
+            
           </Grid>
           <Grid
             container
