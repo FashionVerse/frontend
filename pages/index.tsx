@@ -384,7 +384,7 @@ export default function Index() {
                     loop: true,
                   }}
                 /> */}
-              FOR THE FIRST 457 WALLETS
+              457 MINTS REMAINING
             </Typography>
             <Typography
               variant="subtitle1"
@@ -399,7 +399,7 @@ export default function Index() {
                     loop: true,
                   }}
                 /> */}
-              FashionVerse branded Basketball Sneaker with Decentraland
+              Basketball Sneaker with Decentraland
               Wearability
             </Typography>
 
