@@ -86,7 +86,7 @@ function AnimatedButton(props) {
           )
 
         marketContract.methods
-            .createMarketSale(nftAddress, ["20"], ["19"], ["1"])
+            .createMarketSale(nftAddress, ["21"], ["20"], ["1"])
             .send({ from: account, value: "1" }).on('transactionHash', function(){
               alert("Successfully claimed");
               window.open("/wardrobe","_self")
@@ -213,11 +213,7 @@ export default function Product() {
           }
         ).catch();
         const content = await rawResponse.json();
-          if (!content.claimed && content.whitelisted){
-            return true;
-          }
-
-          return false;
+        return !content.claimed;
       } else {
         alert("Connect to Metamask");
         router.replace("/wallets");
