@@ -47,6 +47,9 @@ import { useSnackbar } from "notistack";
 import useSWR from "swr";
 import ari from "../../public/ari.jpeg";
 import RightImage from "../public/right-image.png";
+import Sneaker from "../public/sneaker.png";
+import Sneaker1 from "../public/sneaker1.png";
+import Sneaker2 from "../public/sneaker2.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -229,7 +232,7 @@ export default function Index() {
           margin: "auto",
         }}
       >
-        <AnimLogo/>
+        <AnimLogo />
       </Box>
     );
   }
@@ -315,6 +318,117 @@ export default function Index() {
             /> */}
               <LandingPageDisplay expandable />
             </Box>
+          </Grid>
+        </Grid>
+
+        {/* Free Mint */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          <Grid item xs={12} md={12}>
+            <Box
+              justifyContent="center"
+              alignItems="center"
+              sx={{ mx: 16, my: 10 }}
+              className="our-partner"
+            >
+              <Typography variant="h2" className="secondary-heading">
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  FREE&nbsp;
+                </Typography>
+                <i>MINT</i>
+              </Typography>
+
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              padding={3}
+            >
+              <GradientButton
+                color="primary"
+                className="exploere-all-btn"
+                size="large"
+                sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                href="/free-mint"
+              >
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Claim Now
+                </Typography>
+              </GradientButton>
+              </Grid>
+            </Box>
+
+            <Typography
+              variant="h2"
+                  color="primary"
+                  className="gradient-text fashion-verse"
+                  align="center"
+                  fontFamily="Montserrat"
+            >
+              {/* Build your First Digital <br /> Wardrobe */}
+              {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+              457 MINTS REMAINING
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              className="sub-heading with-small-font fashion-verse"
+              align="center"
+            >
+              {/* Build your First Digital <br /> Wardrobe */}
+              {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+              Basketball Sneaker with Decentraland
+              Wearability
+            </Typography>
+
+            <Grid container direction="row" justifyContent="center">
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker1} alt="sneaker" />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker} alt="sneaker" />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Sneaker2} alt="sneaker" />
+              </Grid>
+            </Grid>
+
+            
+          </Grid>
+          <Grid
+            container
+            xs={12}
+            md={4}
+            spacing={0}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* <Image src={Sneaker1} alt="sneaker"  />
+          <Image src={Sneaker} alt="sneaker" />
+          <Image src={Sneaker2} alt="sneaker"/> */}
           </Grid>
         </Grid>
 
