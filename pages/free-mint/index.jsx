@@ -244,7 +244,7 @@ export default function Product() {
         }}
       />
       <Head>
-        <title>Product</title>
+        <title>Free Mint</title>
       </Head>
 
       <Container
@@ -483,6 +483,19 @@ export default function Product() {
                     whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                   >
                   </motion.div>
+                  <Button
+                      variant="contained"
+                      className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500"
+                      size="large"
+                      sx={{ color: "#fff", ml: 2 }}
+                      onClick={() => {
+                        window.open(
+                          "https://opensea.io/assets/ethereum/0xd2c96174f18f45075b4bb9da971f77706eb511f0/20" 
+                        );
+                      }}
+                    >
+                      View on OpenSea
+                    </Button>
                 </Box>
               </Box>
             </Grid>

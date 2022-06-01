@@ -170,6 +170,10 @@ export default function Index() {
   //   });
   // }
 
+  React.useEffect(()=> {
+    enqueueSnackbar("Scroll down to claim a Sneaker Free Mint", { variant: "info" });
+  }, [])
+
   // React.useEffect(() => {
   //   async function getBrands() {
   //     const arr: GridCardProps[] = [];
