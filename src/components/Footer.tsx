@@ -37,7 +37,7 @@ export default function Footer() {
                     sx={{ ml: "8px", letterSpacing: 3 }}
                     variant="h4"
                   >
-                    The<strong>FASHION</strong>VERSE
+                    THE<strong>FASHION</strong>VERSE
                   </Typography>
                 </Logo>
               </div>
