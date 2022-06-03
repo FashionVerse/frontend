@@ -388,7 +388,7 @@ export default function Index() {
                     loop: true,
                   }}
                 /> */}
-              457 MINTS REMAINING
+              375 MINTS REMAINING
             </Typography>
             <Typography
               variant="subtitle1"
