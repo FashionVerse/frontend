@@ -717,7 +717,7 @@ sx={{
                   >
                     <Button
                       variant="contained"
-                      className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500"
+                      color="secondary"
                       size="large"
                       sx={{ color: "#fff", ml: 2 }}
                       onClick={() => {

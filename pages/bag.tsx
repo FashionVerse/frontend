@@ -254,6 +254,9 @@ export default function Bag() {
 
           setIsLoading(true);
 
+          console.log("ACCOUNT");
+          console.log(account);
+
            marketContract.methods
             .createMarketSale(nftContract, items, token, amounts)
             .send({ from: account, value: totalCost }).on('confirmation', async function(confirmationNumber, receipt){

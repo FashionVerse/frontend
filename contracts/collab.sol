@@ -84,7 +84,7 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
         IERC1155(nftContract).safeTransferFrom(msg.sender, address(this), tokenId, amount, "");
     }
 
-    function claimCollab(uint256 id, uint256 tokenId, uint256 amount) public payable nonReentrant {
+    function claimCollab(uint256 id, uint256 tokenId, uint256 amount) public payable nonReentrant whenNotPaused {
         CollabItem memory collabItem = idToCollabItem[id];
         require(amount > 0, "Amount should be greater than zero");
         require(msg.value == collabItem.price, "Invalid price");
@@ -101,6 +101,12 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
     function isEligible(uint id, address userAddress, uint tokenId, uint amount) public view returns(bool) {
         CollabItem memory collabItem = idToCollabItem[id];
         require(claimed[id][msg.sender] + amount <= collabItem.maxClaim, "Fully claimed");
+        require(!collabItem.cancelled, "Item cancelled");
+        require(!collabItem.locked, "Item locked");
+
+        if(collabItem.collabContract == address(0)){
+            return true;
+        } else {
 
         if(collabItem.tokenType == TokenType.ERC721) {
             if(collabItem.collabTokenIds.length > 0) {
@@ -133,25 +139,39 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
                 }
                 return false;
             }
-        }
-
+        } 
+    } 
         return false;
+    }
+
+    function cancelCollab(
+        uint256 id
+        ) public nonReentrant {
+        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+        require(idToCollabItem[id].cancelled != true, "Item is already cancelled");
+        uint256 balance = IERC1155(idToCollabItem[id].nftContract).balanceOf(address(this), idToCollabItem[id].tokenId);
+        IERC1155(idToCollabItem[id].nftContract).safeTransferFrom(address(this), idToCollabItem[id].seller, idToCollabItem[id].tokenId, balance, "");
+        idToCollabItem[id].cancelled = true;
+    }
+
+    function lockCollab(
+        uint256 id
+        ) public nonReentrant {
+        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+        require(idToCollabItem[id].locked != true, "Item is already locked");
+        idToCollabItem[id].locked = true;
+    }
+
+    function unlockCollab(
+        uint256 id
+        ) public nonReentrant {
+        require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
+        require(idToCollabItem[id].locked != false, "Item is already unlocked");
+        idToCollabItem[id].locked = false;
     }
 
     function getCollabItem(uint256 id) public view returns(CollabItem memory) {
         return idToCollabItem[id];
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    
 }
