@@ -55,7 +55,7 @@ function AnimatedButton(props) {
         });
 
         const web3 = (window["web3"] = new Web3(
-          window["web3"].currentProvider
+          window["ethereum"]
         ));
 
         const marketContract = new web3.eth.Contract(

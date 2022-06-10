@@ -60,7 +60,7 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
     mapping(uint256 => CollabItem) private idToCollabItem;
     mapping(uint256 => mapping(address => uint256)) private claimed;
 
-    function createCollabItem(address nftContract, uint256 tokenId, uint256 amount, address collabContract, uint256[] calldata collabTokenIds, address escrow, uint256 maxClaim, uint256 price, uint8 tokenTypeNum) public onlyRole(MINTER_ROLE) whenNotPaused {
+    function createItem(address nftContract, uint256 tokenId, uint256 amount, address collabContract, uint256[] calldata collabTokenIds, address escrow, uint256 maxClaim, uint256 price, uint8 tokenTypeNum) public onlyRole(MINTER_ROLE) whenNotPaused {
         TokenType tokenType = TokenType(tokenTypeNum);
 
         _id.increment();
@@ -84,7 +84,7 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
         IERC1155(nftContract).safeTransferFrom(msg.sender, address(this), tokenId, amount, "");
     }
 
-    function claimCollab(uint256 id, uint256 tokenId, uint256 amount) public payable nonReentrant whenNotPaused {
+    function claimItem(uint256 id, uint256 tokenId, uint256 amount) public payable nonReentrant whenNotPaused {
         CollabItem memory collabItem = idToCollabItem[id];
         require(amount > 0, "Amount should be greater than zero");
         require(msg.value == collabItem.price, "Invalid price");
@@ -144,7 +144,7 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
         return false;
     }
 
-    function cancelCollab(
+    function cancelItem(
         uint256 id
         ) public nonReentrant {
         require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
@@ -154,7 +154,7 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
         idToCollabItem[id].cancelled = true;
     }
 
-    function lockCollab(
+    function lockItem(
         uint256 id
         ) public nonReentrant {
         require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
@@ -162,7 +162,7 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
         idToCollabItem[id].locked = true;
     }
 
-    function unlockCollab(
+    function unlockItem(
         uint256 id
         ) public nonReentrant {
         require(hasRole(MINTER_ROLE, msg.sender), "Caller is not a minter");
@@ -170,7 +170,7 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
         idToCollabItem[id].locked = false;
     }
 
-    function getCollabItem(uint256 id) public view returns(CollabItem memory) {
+    function getItem(uint256 id) public view returns(CollabItem memory) {
         return idToCollabItem[id];
     }
 

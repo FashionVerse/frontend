@@ -21,6 +21,7 @@ import { BiRocket } from "react-icons/bi";
 import { useRouter } from "next/router";
 import Slider from "../src/components/Slider";
 import GridCard, { GridCardProps } from "../src/components/GridCard";
+import SingleGridCard from "../src/components/SingleGridCard";
 import { BsDiscord, BsMedium, BsTwitter } from "react-icons/bs";
 
 import AdvisorCard, { AdvisorCardProps } from "../src/components/AdvisorCard";
@@ -50,6 +51,10 @@ import RightImage from "../public/right-image.png";
 import Sneaker from "../public/sneaker.png";
 import Sneaker1 from "../public/sneaker1.png";
 import Sneaker2 from "../public/sneaker2.png";
+
+import Jacket from "../public/jacket.png";
+import Coat from "../public/coat.png";
+import Puffer from "../public/puffer.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -94,6 +99,14 @@ export default function Index() {
     return { data: data, error: error };
   };
 
+  const getCommunity = () => {
+    const { data, error } = useSWR(
+      process.env.API_URL + "/api/getCommunity?size=5",
+      fetcher
+    );
+    return { data: data, error: error };
+  };
+
   // const { data, error } = useSWR(process.env.API_URL+'/api/getBrands?size=5', fetcher)
   const { data: brandData, error: brandError } = getBrands();
   if (brandError) {
@@ -101,6 +114,7 @@ export default function Index() {
     console.log("Failed");
   }
   const brands: GridCardProps[] = [];
+  const communities: GridCardProps[] = [];
   if (brandData) {
     console.log("data ", brandData);
     brandData.brands.forEach((item) => {
@@ -114,6 +128,29 @@ export default function Index() {
         subtitle: item.subtitle,
         id: item._id,
         href: "brands/" + item.url,
+      });
+    });
+  }
+
+  const { data: communityData, error: communityError } = getCommunity();
+  if (communityError) {
+    // enqueueSnackbar("Failed to load brands", { variant: "error" });
+    console.log("Failed");
+  }
+  const community: GridCardProps[] = [];
+  if (communityData) {
+    console.log("data ", communityData);
+    communityData.community.forEach((item) => {
+      communities.push({
+        topLeftImage: item.gridImages[0],
+        topRightImage: item.gridImages[1],
+        bottomLeftImage: item.gridImages[2],
+        bottomRightImage: item.gridImages[3],
+        avatarSrc: item.avatarSrc,
+        title: item.title,
+        subtitle: item.subtitle,
+        id: item._id,
+        href: "community/" + item.url,
       });
     });
   }
@@ -223,7 +260,7 @@ export default function Index() {
 
   // const [brands, setBrands] = React.useState<GridCardProps[] | null>(null);
 
-  if (!brandData || !dropData) {
+  if (!brandData || !dropData || !communityData) {
     // TODO: Add proper loader
     return (
       <Box
@@ -322,6 +359,83 @@ export default function Index() {
             /> */}
               <LandingPageDisplay expandable />
             </Box>
+          </Grid>
+        </Grid>
+
+        {/* Streetwear is now live */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          <Grid item xs={12} md={12}>
+            <Box
+              justifyContent="center"
+              alignItems="center"
+              sx={{ mx: 16, my: 10 }}
+              className="our-partner"
+            >
+              <Typography variant="h2" className="secondary-heading">
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  STREETWEAR&nbsp;
+                </Typography>
+                <i>IS NOW LIVE</i>
+              </Typography>
+
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              padding={3}
+            >
+              <GradientButton
+                color="primary"
+                className="exploere-all-btn"
+                size="large"
+                sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                href="/drops/street-wear"
+              >
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Check it out
+                </Typography>
+              </GradientButton>
+              </Grid>
+            </Box>
+
+            <Grid container direction="row" justifyContent="center">
+              <Grid item xs={12} md={4}>
+                <Image src={Jacket} alt="sneaker" />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Coat} alt="sneaker" />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Image src={Puffer} alt="sneaker" />
+              </Grid>
+            </Grid>
+
+            
+          </Grid>
+          <Grid
+            container
+            xs={12}
+            md={4}
+            spacing={0}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* <Image src={Sneaker1} alt="sneaker"  />
+          <Image src={Sneaker} alt="sneaker" />
+          <Image src={Sneaker2} alt="sneaker"/> */}
           </Grid>
         </Grid>
 
@@ -433,6 +547,90 @@ export default function Index() {
             {/* <Image src={Sneaker1} alt="sneaker"  />
           <Image src={Sneaker} alt="sneaker" />
           <Image src={Sneaker2} alt="sneaker"/> */}
+          </Grid>
+        </Grid>
+
+        {/* Brands */}
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container section-spacing third-fold common-fold"
+        >
+          <Grid item xs={12}>
+            <span className="divider"></span>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ mx: 16, my: 10 }}
+              className="our-partner"
+            >
+              <Typography
+                variant="h2"
+                className="secondary-heading"
+                // sx={{ mt: 10, mb: 10 }}
+              >
+                LATEST&nbsp;
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
+                  <b>COLLABS</b>
+                </Typography>
+              </Typography>
+              <GradientButton
+                variant="contained"
+                color="primary"
+                className="exploere-all-btn"
+                size="large"
+                sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                startIcon={<BiRocket />}
+                href="/community"
+              >
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Explore All
+                </Typography>
+              </GradientButton>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                position: "relative",
+                // paddingLeft: "32px",
+              }}
+            >
+              <Slider
+                slideArray={communities.map((props) => (
+                  <div
+                    onClick={() => {
+                      router.push(props.href);
+                    }}
+                  >
+                    {/* <motion.div
+                      // className="drops_hover_cursor"
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ ease: "easeOut", delay: 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                    > */}
+                    <SingleGridCard {...props} key={props.id + "-ahsdkh"} />
+                    {/* </motion.div> */}
+                  </div>
+                ))}
+              />
+            </Box>
           </Grid>
         </Grid>
 
