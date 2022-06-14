@@ -32,6 +32,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Web3 from "web3";
 import { collabAbi, collabAddress } from "../../public/abi";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 function AnimatedButton(props) {
   const router = useRouter();
@@ -54,7 +55,7 @@ function AnimatedButton(props) {
       if (connected) {
         await window["ethereum"].request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x4" }],
+          params: [{ chainId: "0x1" }],
         });
 
         const web3 = (window["web3"] = new Web3(
@@ -290,12 +291,13 @@ export default function Product() {
     getItem(collabId)
       .then((val) => {
         setData(val);
-        isEligible(data.collabId).then((val)=>{
-            setEligible(val);
-        })
-
+        isEligible(val.collabId).then((val)=>{
+          setEligible(val);
       })
-      .catch((e) => {});
+
+      }).catch((e) => {});
+
+      
   }, [collabId]);
 
   const [data, setData] = useState(null);
@@ -512,6 +514,24 @@ export default function Product() {
                     flexDirection: "column",
                   }}
                 >
+                  <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      component="div"
+                      className="tw-font-semibold"
+                      sx={{
+                        marginBottom: "10px",
+                        fontWeight: "600",
+                        display: "flex",
+                        alignItems: "flex-start",
+                      }}
+                    >
+                      <InfoOutlinedIcon />&nbsp;
+                      Note:&nbsp;
+                      <div className="tw-font-semibold pl-2">
+                        you need to own an NFT from the {data.community.title} collection
+                      </div>
+                    </Typography>
                   {data.available != 0 ? (
                     <Typography
                       variant="subtitle1"

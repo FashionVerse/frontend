@@ -16,16 +16,11 @@ contract Collab is ReentrancyGuard, AccessControl, ERC1155Holder, Pausable {
 
     Counters.Counter private _id;
 
-    address payable owner;
-    address payable _pay;
-
     enum TokenType{ERC721, ERC1155}
 
     constructor() {
-        owner = payable(msg.sender);
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(MINTER_ROLE, msg.sender);
-        _pay = owner;
     }
 
     function pause() public onlyRole(MINTER_ROLE) {
