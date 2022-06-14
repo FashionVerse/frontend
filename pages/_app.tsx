@@ -19,6 +19,8 @@ import { MantineProvider } from "@mantine/core";
 import { ColorSchemeProvider, ColorScheme } from "@mantine/core";
 import { DefaultSeo } from "next-seo";
 import SEO from "../next-seo.config";
+import { Web3ReactProvider } from '@web3-react/core'
+import { Web3Provider } from "@ethersproject/providers";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -27,6 +29,11 @@ export const ColorModeContext = React.createContext({
 });
 
 export default function MyApp(props: any) {
+
+  function getLibrary(provider) {
+    return new Web3Provider(provider);
+  }
+
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const [mode, setMode] = React.useState<PaletteMode>("dark");
   const [colorScheme, setColorScheme] = React.useState<ColorScheme>("light");
@@ -91,6 +98,7 @@ export default function MyApp(props: any) {
   }, []);
 
   return (
+    <Web3ReactProvider getLibrary={getLibrary}>
     <CacheProvider value={emotionCache} >
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -151,6 +159,7 @@ export default function MyApp(props: any) {
         </MantineProvider>
       </ColorModeContext.Provider>
     </CacheProvider>
+    </Web3ReactProvider>
   );
 }
 

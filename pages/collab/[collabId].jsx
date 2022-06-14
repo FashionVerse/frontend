@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Viewer from "../../src/components/Viewer";
 import Model from "../../src/components/Model";
-import useSWR from "swr";
+import { AbiItem } from "web3-utils";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import {
   Button,
@@ -31,10 +31,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Web3 from "web3";
+import { collabAbi, collabAddress } from "../../public/abi";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 function AnimatedButton(props) {
   const router = useRouter();
-  async function setCart() {
+
+
+  async function claim() {
     if (typeof window["ethereum"] !== "undefined") {
       const ethereum = window["ethereum"];
       if (ethereum) {
@@ -42,34 +46,48 @@ function AnimatedButton(props) {
       }
 
       const isMetaMaskConnected = async () => {
-        const accounts = await provider.listAccounts();
+        const accounts = await window["ethereum"].request({
+          method: "eth_requestAccounts",
+        });
         return accounts.length > 0;
       };
       const connected = await isMetaMaskConnected();
       if (connected) {
+        await window["ethereum"].request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x1" }],
+        });
+
+        const web3 = (window["web3"] = new Web3(
+          window["ethereum"]
+        ));
+
+        const collabContract = new web3.eth.Contract(
+          collabAbi,
+          collabAddress
+        );
+
+        
+
         const accounts = await ethereum.enable();
-        const account = accounts[0];
-        const rawResponse = await fetch(
-          process.env.API_URL + "/api/addItemToBag",
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              item: props.id.toString(),
-              account: account,
-            }),
+        const account = accounts[0].toLowerCase();
+        console.log(account)
+
+        try {
+
+        collabContract.methods
+            .claimItem(props.id, 0, 1)
+            .send({ from: account, value: props.price }).on('transactionHash', function(){
+              alert("Successfully claimed");
+              window.open("/wardrobe","_self")
+            }).on('error', async function (error) {
+              console.log("ERROR")
+              console.log(error)
+              
+            });
+          } catch(e) {
+              console.log(e)
           }
-        ).catch();
-        const content = await rawResponse.json();
-        if (content.status === "ok") {
-          setIsAnimating(2);
-        } else {
-          setIsAnimating(0);
-        }
-        console.log(content);
       } else {
         router.replace("/wallets");
       }
@@ -77,6 +95,7 @@ function AnimatedButton(props) {
       alert("MetaMask not installed");
     }
   }
+  
   const [isAnimating, setIsAnimating] = useState(0);
   return (
     <>
@@ -98,13 +117,13 @@ function AnimatedButton(props) {
         variant="contained"
         size="large"
         onClick={() => {
-          setIsAnimating(1);
-          setCart();
+
+          claim();
         }}
         style={isAnimating === 0 ? { display: "flex" } : { display: "none" }}
         sx={{ color: "#fff", width: 1 }}
       >
-        <AccountBalanceWalletIcon /> Add To Bag
+        <AccountBalanceWalletIcon /> Claim
       </Button>
       <Button
         variant="contained"
@@ -122,7 +141,7 @@ function AnimatedButton(props) {
         >
           <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z"></path>
         </svg>
-        Adding
+        Claiming
       </Button>
       <Button
         variant="contained"
@@ -130,7 +149,7 @@ function AnimatedButton(props) {
         style={isAnimating === 2 ? { display: "flex" } : { display: "none" }}
         sx={{ color: "#fff", width: 1 }}
       >
-        <DoneAllIcon /> Added To Bag
+        <DoneAllIcon /> Claimed
       </Button>
       {/* <motion.button 
         style={isAnimating===1? {display:"flex"}:{display:"none"}}
@@ -157,9 +176,9 @@ export default function Product() {
   const [maxWidth, setMaxWidth] = useState("md");
 
   const router = useRouter();
-  const { productId } = router.query;
+  const { collabId } = router.query;
 
-  // if (!productId)
+  // if (!collabId)
   //   return (
   //     <Box
   //       sx={{
@@ -175,11 +194,11 @@ export default function Product() {
   //     </Box>
   //   );
 
-  async function getItem(productId) {
+  async function getItem(collabId) {
     console.log("GETTING ITEMS");
-    console.log(productId);
+    console.log(collabId);
     const response = await fetch(
-      process.env.API_URL + "/api/getItems?id=" + productId,
+      process.env.API_URL + "/api/getCollab?id=" + collabId,
       {
         method: "POST",
         headers: {
@@ -190,6 +209,9 @@ export default function Product() {
     );
 
     const data = await response.json();
+
+    console.log("DATA;")
+    console.log(data)
 
     if (!data)
       return (
@@ -207,19 +229,47 @@ export default function Product() {
         </Box>
       );
 
-    var rarityCategory;
-    if (data.totalSupply >= 30) {
-      rarityCategory = "Bronze";
-    } else if (data.totalSupply >= 15 && data.totalSupply < 30) {
-      rarityCategory = "Silver";
-    } else if (data.totalSupply >= 5 && data.totalSupply < 15) {
-      rarityCategory = "Gold";
-    }
-    if (data.totalSupply < 5) {
-      rarityCategory = "Platinum";
-    }
+    
 
-    return { ...data, rarityCategory: rarityCategory };
+    return { ...data };
+  }
+
+  async function isEligible(id) {
+    if (typeof window["ethereum"] !== "undefined") {
+        const ethereum = window["ethereum"];
+        if (ethereum) {
+          var provider = new ethers.providers.Web3Provider(ethereum);
+        }
+  
+        const isMetaMaskConnected = async () => {
+          const accounts = await provider.listAccounts();
+          return accounts.length > 0;
+        };
+        const connected = await isMetaMaskConnected();
+        if (connected) {
+          const accounts = await ethereum.enable();
+          const account = accounts[0];
+          const rawResponse = await fetch(
+            process.env.API_URL + "/api/isEligibleForCollab?account="+account+"&id="+id,
+            {
+              method: "GET",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            }
+          ).catch();
+          const content = await rawResponse.json();
+          return content.eligible;
+        } else {
+          alert("Connect to Metamask");
+          router.replace("/wallets");
+        }
+      } else {
+        alert("MetaMask not installed");
+        return false;
+      }
+
   }
 
   const {
@@ -235,18 +285,24 @@ export default function Product() {
   };
 
   useEffect(() => {
-    if (!productId) {
+    if (!collabId) {
       return;
     }
-    getItem(productId)
+    getItem(collabId)
       .then((val) => {
-        console.log(val);
         setData(val);
+        isEligible(val.collabId).then((val)=>{
+          setEligible(val);
       })
-      .catch((e) => {});
-  }, [productId]);
+
+      }).catch((e) => {});
+
+      
+  }, [collabId]);
 
   const [data, setData] = useState(null);
+  const [eligible, setEligible] = useState(false);
+
 
   if (!data) {
     return (
@@ -268,9 +324,9 @@ export default function Product() {
   return (
     <>
       <NextSeo
-        title={data.nft.metadata.name}
-        description={data.nft.metadata.description}
-        canonical={"https://www.thefashionverse.io/products/" + productId + "/"}
+        title={"Title"}
+        description={"Description"}
+        canonical={"https://www.thefashionverse.io/products/" + collabId + "/"}
         twitter={{
           handle: "@FashionVerseInc",
           cardType: "summary_large_image",
@@ -339,7 +395,7 @@ export default function Product() {
                         width: "500px",
                         height: "400px",
                       }}
-                      src={data.nft.metadata.gif}
+                      src={data.nft.metadata.image}
                       alt="gif"
                       width="500px"
                       height="500px"
@@ -449,41 +505,7 @@ export default function Product() {
                   {data.nft.metadata.name}
                 </Typography>
 
-                <Link
-                  href={"/brands/" + data.brand.url}
-                  
-                >
-                  <div className="tw-flex tw-flex-row tw-gap-4 tw-items-center ">
-                    <Image
-                      src={data.brand.avatarSrc}
-                      width="40"
-                      height="40"
-                      className="tw-rounded-full"
-                      style={{ cursor: "pointer" }}
-                    />
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      component="div"
-                      className="tw-font-light"
-                      style={{ cursor: "pointer" }}
-                    >
-                      {data.brand.title}
-                    </Typography>
-                  </div>
-                </Link>
-
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  component="div"
-                  className="tw-font-light"
-                  sx={{ marginTop: "10px" }}
-                >
-                  <span className="tw-font-semibold">
-                    {data.collection.title}
-                  </span>
-                </Typography>
+               
 
                 <Box
                   sx={{
@@ -493,21 +515,23 @@ export default function Product() {
                   }}
                 >
                   <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    component="div"
-                    className="tw-font-light"
-                    sx={{
-                      marginBottom: "10px",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span className="tw-font-semibold">Rarity:&nbsp;</span>
-                    <div className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500">
-                      {data.rarityCategory}
-                    </div>
-                  </Typography>
+                      variant="subtitle1"
+                      gutterBottom
+                      component="div"
+                      className="tw-font-semibold"
+                      sx={{
+                        marginBottom: "10px",
+                        fontWeight: "600",
+                        display: "flex",
+                        alignItems: "flex-start",
+                      }}
+                    >
+                      <InfoOutlinedIcon />&nbsp;
+                      Note:&nbsp;
+                      <div className="tw-font-semibold pl-2">
+                        you need to own an NFT from the {data.community.title} collection
+                      </div>
+                    </Typography>
                   {data.available != 0 ? (
                     <Typography
                       variant="subtitle1"
@@ -538,7 +562,6 @@ export default function Product() {
                   )}
                 </Box>
 
-                    {data.price == data.originalPrice ?
                 <Box
                   sx={{
                     marginBottom: "30px",
@@ -581,97 +604,7 @@ export default function Product() {
                     />{" "}
                     { Web3.utils.fromWei(data.price.toString(), "ether")} ETH
                   </Typography>
-                </Box> :<div> <Box
-                  sx={{
-                    marginBottom: "30px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    component="div"
-                    className="tw-font-semibold"
-                    sx={{
-                      // fontSize: "h6.fontSize",
-                      fontWeight: "600",
-                      mr: 2,
-                    }}
-                  >
-                    Original Price:
-                  </Typography>
-                  <Typography
-                    variant="h3"
-                    gutterBottom
-                    component="div"
-                    className="tw-font-semibold pl-2 eth-price"
-                    sx={{
-                      fontSize: "2.42857rem",
-                      fontWeight: 600,
-                      color: "red"
-                    }}
-                  >
-                    <img
-                      alt="ETH"
-                      style={{
-                        width: "24px",
-                        height: "24px",
-                        objectFit: "contain",
-                      }}
-                      src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
-                      size="24"
-                    />{" "}
-                     <span><s>{Web3.utils.fromWei(data.originalPrice.toString(), "ether")}</s></span> ETH
-                  </Typography>
-                  
                 </Box> 
-
-<Box
-sx={{
-  marginBottom: "30px",
-  display: "flex",
-  alignItems: "center",
-}}
->
-<Typography
-  variant="subtitle1"
-  gutterBottom
-  component="div"
-  className="tw-font-semibold"
-  sx={{
-    // fontSize: "h6.fontSize",
-    fontWeight: "600",
-    mr: 2,
-  }}
->
-  Current Price:
-</Typography>
-<Typography
-  variant="h3"
-  gutterBottom
-  component="div"
-  className="tw-font-semibold pl-2 eth-price"
-  sx={{
-    fontSize: "2.42857rem",
-    fontWeight: 600,
-  }}
->
-  <img
-    alt="ETH"
-    style={{
-      width: "24px",
-      height: "24px",
-      objectFit: "contain",
-    }}
-    src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg"
-    size="24"
-  />{" "}
-  { Web3.utils.fromWei(data.price.toString(), "ether")} ETH
-</Typography>
-</Box>
-</div>
-                }
                 <Box
                   className="btn-wrapper"
                   sx={{
@@ -690,9 +623,9 @@ sx={{
                     whileHover={{ scale: 1.015 }}
                     whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                   >
-                    {data.available != 0 ? (
+                    {data.available != 0 && eligible ? (
                       <>
-                        <AnimatedButton id={data._id} />
+                        <AnimatedButton id={data.collabId} price={data.price} />
                       </>
                     ) : (
                       <Button
@@ -701,7 +634,7 @@ sx={{
                         size="large"
                         sx={{ color: "#fff", width: "400px" }}
                       >
-                        <AccountBalanceWalletIcon /> Add To Bag
+                        <AccountBalanceWalletIcon /> Claim
                       </Button>
                     )}
                   </motion.div>
@@ -715,6 +648,7 @@ sx={{
                     whileHover={{ scale: 1.015 }}
                     whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
                   >
+
                     <Button
                       variant="contained"
                       color="secondary"

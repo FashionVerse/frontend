@@ -55,7 +55,7 @@ function AnimatedButton(props) {
         });
 
         const web3 = (window["web3"] = new Web3(
-          window["web3"].currentProvider
+          window["ethereum"]
         ));
 
         const marketContract = new web3.eth.Contract(
@@ -485,7 +485,7 @@ export default function Product() {
                   </motion.div>
                   <Button
                       variant="contained"
-                      className="tw-animate-gradient-x tw-font-bold tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-l tw-from-rose-400 tw-via-fuchsia-500 tw-to-indigo-500"
+                      color="secondary"
                       size="large"
                       sx={{ color: "#fff", ml: 2 }}
                       onClick={() => {

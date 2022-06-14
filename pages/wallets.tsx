@@ -6,6 +6,12 @@ const ModelViewer = require("@metamask/logo");
 import { motion } from "framer-motion";
 import { NextSeo } from "next-seo";
 import { useSnackbar } from "notistack";
+import { WalletLinkConnector } from "@web3-react/walletlink-connector";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { useWeb3React } from '@web3-react/core';
+import { Button } from "@mui/material";
+import Image from "next/image";
+import CoinbaseLogo from "../public/coinbase.png";
 
 const StyledPaper = styled(Paper)({
   maxWidth: "340px",
@@ -19,24 +25,56 @@ const StyledPaper = styled(Paper)({
   background: `rgba( 255, 255, 255, 0.08 )`,
 });
 
+const CoinbaseWallet = new WalletLinkConnector({
+  url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+  appName: "TheFashionVerse",
+  supportedChainIds: [1],
+ });
+ 
+ 
+ const Injected = new InjectedConnector({
+  supportedChainIds: [1]
+ });
+
 
 
 export default function Wallets() {
 
   const { enqueueSnackbar } = useSnackbar();
+  const { activate, deactivate } = useWeb3React();
 
-  async function connectWallet() {
-    if (typeof window["ethereum"] !== "undefined") {
+  async function connectWallet(id) {
+    deactivate();
+    if(id == "metamask") {
+
       try {
-        await window["ethereum"].enable();
+          if (typeof window['ethereum'] !== "undefined") {
+    let provider = window['ethereum'];
+    // edge case if MM and CBW are both installed
+    if (window['ethereum'].providers?.length) {
+      window['ethereum'].providers.forEach(async (p) => {
+        if (p.isMetaMask) provider = p;
+      });
+    }
+    await provider.request({
+      method: "eth_requestAccounts",
+      params: [],
+    });
+  }
+  return true
+      } catch (e) {
+        return false;
+      }
+    } else {
+      try {
+        await activate(CoinbaseWallet);
         enqueueSnackbar("Wallet connected", { variant: "success" });
         return true;
       } catch (e) {
         return false;
       }
-    } else {
-      alert("Metamask is not installed!");
     }
+    
   }
 
   React.useEffect(() => {
@@ -63,7 +101,7 @@ export default function Wallets() {
   return (
     <>
       <NextSeo
-        title="Wallet"
+        title="The FashionVerse"
         description="Connect your wallet."
         canonical="https://www.thefashionverse.io/wallets/"
         twitter={{
@@ -102,8 +140,9 @@ export default function Wallets() {
           </Grid>
 
           {WALLETS.map(({ id, href, name, src, alt }) => (
+            id == 'metamask' ? 
             <Grid sx={{mt: 2, mb: 6}} item xs={12} key={id} style={{ cursor: "pointer" }}>
-              <motion.div
+                <motion.div
                 // className="drops_hover_cursor"
                 style={{
                   cursor: "pointer",
@@ -117,7 +156,7 @@ export default function Wallets() {
                 <StyledPaper
                   variant="outlined"
                   onClick={() => {
-                    connectWallet();
+                    connectWallet(id);
                   }}
                   className="tw-shadow-xl tw-shadow-cyan-500/40 hover:tw-shadow-cyan-100/50"
                 >
@@ -127,6 +166,22 @@ export default function Wallets() {
                   </Typography>
                 </StyledPaper>
               </motion.div>
+            </Grid> : <Grid sx={{mt: 2, mb: 6}} item xs={12} key={id} style={{ cursor: "pointer" }}>
+                <StyledPaper
+                  variant="outlined"
+                  onClick={() => {
+                    connectWallet(id);
+                  }}
+                  className="tw-shadow-xl tw-shadow-cyan-500/40 hover:tw-shadow-cyan-100/50"
+                >
+                  <div id="logo-container">
+                    <Image src={CoinbaseLogo}></Image>
+                  </div>
+                  <Typography variant="h5" sx={{ mt: 2 }}>
+                    {name}
+                  </Typography>
+                </StyledPaper>
+
             </Grid>
           ))}
         </Grid>
@@ -138,8 +193,15 @@ export default function Wallets() {
 
 const WALLETS = [
   {
-    id: "hj7ay5",
+    id: "metamask",
     name: "MetaMask",
+    src: "/metamask.png",
+    href: "#",
+    alt: "MetaMask logo",
+  },
+  {
+    id: "coinbase",
+    name: "Coinbase Wallet",
     src: "/metamask.png",
     href: "#",
     alt: "MetaMask logo",

@@ -238,7 +238,7 @@ export default function Bag() {
             params: [{ chainId: "0x1" }],
           });
           const web3 = (window["web3"] = new Web3(
-            window["web3"].currentProvider
+            window["ethereum"]
           ));
           await window["ethereum"].request({
             method: "wallet_switchEthereumChain",
@@ -253,6 +253,9 @@ export default function Bag() {
           const nftContract = data[0].nftContract;
 
           setIsLoading(true);
+
+          console.log("ACCOUNT");
+          console.log(account);
 
            marketContract.methods
             .createMarketSale(nftContract, items, token, amounts)
