@@ -15,29 +15,13 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useRouter } from "next/router";
-import FashionItemCard, {
-  FashionItemCardProps,
-} from "../src/components/FashionItemCard";
-import firestore from "../firebase/clientApp";
-import {
-  collection,
-  QueryDocumentSnapshot,
-  DocumentData,
-  query,
-  where,
-  limit,
-  getDocs,
-  doc,
-  getDoc,
-  collectionGroup,
-} from "@firebase/firestore";
-import { motion } from "framer-motion";
-import { AbiItem } from "web3-utils";
 import { useSnackbar } from "notistack";
 import Web3 from "web3";
 import { nftAbi, marketAbi, marketAddress } from "../public/abi";
 import { ethers } from "ethers";
 import WardrobeCard from "../src/components/WardRobeCard";
+import MetalookCard from "../src/components/MetalookCard";
+import FinalMetalookCard from "../src/components/FinalMetalookCard";
 import { NextSeo } from "next-seo";
 
 const GradientButton = styled(Button)(({ theme }) => ({
@@ -110,38 +94,80 @@ export default function Wardrobe() {
         });
 
         return arr;
-        // for (const id of querySnapshot.docs) {
-
-        //   //const item = await getDoc(doc(collection(firestore, "items"), id.data().id));
-        //   const marketContract = new web3.eth.Contract(marketAbi, marketAddress);
-        //   const item = await marketContract.methods.getItem(id.data().id).call();
-        //   const collectionDoc = await getDoc(doc(collection(firestore, "collections"), collectionName));
-        //   const brand = await getDoc(doc(collection(firestore, "brands"), collectionDoc.data().brand));
-        //   const contract = new web3.eth.Contract(nftAbi, item.nftContract);
-
-        //   const nft = await contract.methods.tokenURI(item.tokenIds[0]).call();
-        //   const response = await fetch(nft);
-
-        //   if(!response.ok)
-        //     enqueueSnackbar(response.statusText)
-
-        //   const json = await response.json()
-        //   const date = new Date(parseInt(item.releaseTime) * 1000);
-        //   if(parseInt(item.available) > 0 && Date.now() > date){
-        //     arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}})
-        //   }
-
-        // }
-        // console.log(arr)
-        // return arr;
       } else {
         alert("Connect your wallet");
       }
     }
+
+    async function getMetalook() {
+      const account = await walletInit();
+      if (account != false) {
+        const arr = [];
+        const ids = [];
+
+        const response = await fetch(
+          process.env.API_URL + "/api/getMetalook?account=" + account
+        );
+        const items = await response.json();
+        console.log(items)
+
+        items.map((item) => {
+          arr.push({
+            id: item.token_id,
+            name: item.metadata.name,
+            description: item.metadata.description,
+            src: item.metadata.image,
+            alt: "image",
+            quantity: item.amount,
+            contract: item.token_address,
+            metalook: item.metalook,
+            account: account
+          });
+        });
+
+        return arr;
+      } else {
+        alert("Connect your wallet");
+      }
+    }
+
+    async function getUploadedMetalook() {
+      const account = await walletInit();
+      if (account != false) {
+        const arr = [];
+        const ids = [];
+
+        const response = await fetch(
+          process.env.API_URL + "/api/getUploadedMetalook?account=" + account
+        );
+        const items = await response.json();
+        console.log(items)
+
+        items.map((item) => {
+          arr.push({
+            id: item.metalook.tokenId,
+            name: item.metadata.name,
+            description: item.metadata.description,
+            src: item.metalook.metalookImage,
+            metalook: item.metalook,
+          });
+        });
+
+        return arr;
+      } else {
+        alert("Connect your wallet");
+      }
+    }
+
     getItems()
       .then((value) => {
         setItems(value);
-        console.log(items);
+        getMetalook().then((value) => {
+          setMetalooks(value);
+          getUploadedMetalook().then((value) => {
+            setFinalMetalooks(value);
+          })
+        })
       })
       .catch((e) => {
         enqueueSnackbar(e.message);
@@ -164,8 +190,10 @@ export default function Wardrobe() {
   }, []);
 
   const [items, setItems] = React.useState(null);
+  const [metalooks, setMetalooks] = React.useState(null);
+  const [finalMetalooks, setFinalMetalooks] = React.useState(null);
 
-  if (!items) {
+  if (!items || !metalooks || !finalMetalooks) {
     return (
       <Box
         sx={{
@@ -280,7 +308,7 @@ export default function Wardrobe() {
                 transitionTimingFunction="linear"
                 data={[
                   { label: "VIEW FASHION NFTS", value: "nfts" },
-                  { label: "VIEW AVATAR", value: "avatar" },
+                  { label: "METALOOK", value: "avatar" },
                 ]}
                 sx={() => ({
                   backgroundColor: "rgba(0,0,0,0.05)",
@@ -349,28 +377,107 @@ export default function Wardrobe() {
               ))}
             </Grid>
           ) : (
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "40vh",
-              }}
-            >
-              <h2
-                className="no-items-available"
-                style={{
+            <Grid item style={{
+              width: "100%", textAlign: "center"}}>
+              <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                >Metalooks</Typography>
+                {finalMetalooks.length > 0 ?
+                <Grid item className="wardrobe-item-wrapper" sx={{ mb: 16 }}>
+            {finalMetalooks.map((props) => (
+              // <Grid item xs={12} sm={6} md={4} key={props.id}>
+              <Box
+                sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  margin: "auto",
+                }}
+                className="wardrobe-item"
+              >
+                {/* <FashionItemCard {...props} hideAddToBag expandable /> */}
+                <div
+                >
+                    <FinalMetalookCard {...props} />
+
+                </div>
+              </Box>
+              // </Grid>
+            ))} 
+              
+          </Grid> : (
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "40vh",
                 }}
               >
-                Coming Soon…
-              </h2>
-            </Grid>
+                <h2
+                  className="no-items-available"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "auto",
+                  }}
+                >
+                  No Metalooks in Your Wardrobe
+                </h2>
+              </Grid>
+            )
+          }
+               <span className="divider" style={{margin: 40, display: "inline-block"}}></span>
+            <Grid item className="wardrobe-item-wrapper" sx={{ mb: 16 }}>
+            {metalooks.map((props) => (
+              // <Grid item xs={12} sm={6} md={4} key={props.id}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                className="wardrobe-item"
+              >
+                {/* <FashionItemCard {...props} hideAddToBag expandable /> */}
+                <div
+                >
+                  {metalooks.length > 0 ? (
+                    <MetalookCard {...props} />
+                  ) : (
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "40vh",
+                      }}
+                    >
+                      <h2
+                        className="no-items-available"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          margin: "auto",
+                        }}
+                      >
+                        No Items in Your Wardrobe
+                      </h2>
+                    </Grid>
+                  )}
+                </div>
+              </Box>
+              // </Grid>
+            ))}
+          </Grid>
+          </Grid>
           )}
         </Grid>
         <Footer />

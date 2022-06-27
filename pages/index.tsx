@@ -52,9 +52,10 @@ import Sneaker from "../public/sneaker.png";
 import Sneaker1 from "../public/sneaker1.png";
 import Sneaker2 from "../public/sneaker2.png";
 
-import Jacket from "../public/jacket.png";
-import Coat from "../public/coat.png";
-import Puffer from "../public/puffer.png";
+import Sweater from "../public/sweater.png";
+import Tux from "../public/tux.png";
+import Dress from "../public/dress.png";
+
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -207,9 +208,11 @@ export default function Index() {
   //   });
   // }
 
-  React.useEffect(()=> {
-    enqueueSnackbar("Scroll down to claim a Sneaker Free Mint", { variant: "info" });
-  }, [])
+  React.useEffect(() => {
+    enqueueSnackbar("Scroll down to claim a Sneaker Free Mint", {
+      variant: "info",
+    });
+  }, []);
 
   // React.useEffect(() => {
   //   async function getBrands() {
@@ -320,24 +323,17 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
-                  GENESIS
+                  DIGITAL
                 </Typography>
-                <i>COLLECTION</i>
+                <i>FASHION</i>
               </Typography>
               <Typography
                 sx={{ mt: 3 }}
                 variant="subtitle1"
                 className="sub-heading"
-                align="center"
               >
                 {/* Build your First Digital <br /> Wardrobe */}
-                <Typewriter
-                  options={{
-                    strings: ["Build Your  Digital Wardrobe."],
-                    autoStart: true,
-                    loop: true,
-                  }}
-                />
+                For Your Virtual Wardrobe
               </Typography>
             </Box>
           </Grid>
@@ -385,44 +381,42 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
-                  STREETWEAR&nbsp;
+                  EVENING WEAR&nbsp;
                 </Typography>
                 <i>IS NOW LIVE</i>
               </Typography>
 
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              padding={3}
-            >
-              <GradientButton
-                color="primary"
-                className="exploere-all-btn"
-                size="large"
-                sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
-                href="/drops/street-wear"
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                padding={3}
               >
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                  Check it out
-                </Typography>
-              </GradientButton>
+                <GradientButton
+                  color="primary"
+                  className="exploere-all-btn"
+                  size="large"
+                  sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                  href="/drops/evening-wear"
+                >
+                  <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    Check it out
+                  </Typography>
+                </GradientButton>
               </Grid>
             </Box>
 
             <Grid container direction="row" justifyContent="center">
               <Grid item xs={12} md={4}>
-                <Image src={Jacket} alt="sneaker" />
+                <Image src={Sweater} alt="sneaker" />
               </Grid>
               <Grid item xs={12} md={4}>
-                <Image src={Coat} alt="sneaker" />
+                <Image src={Dress} alt="sneaker" />
               </Grid>
               <Grid item xs={12} md={4}>
-                <Image src={Puffer} alt="sneaker" />
+                <Image src={Tux} alt="sneaker" />
               </Grid>
             </Grid>
-
-            
           </Grid>
           <Grid
             container
@@ -467,32 +461,32 @@ export default function Index() {
                 <i>MINT</i>
               </Typography>
 
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              padding={3}
-            >
-              <GradientButton
-                color="primary"
-                className="exploere-all-btn"
-                size="large"
-                sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
-                href="/free-mint"
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                padding={3}
               >
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                  Claim Now
-                </Typography>
-              </GradientButton>
+                <GradientButton
+                  color="primary"
+                  className="exploere-all-btn"
+                  size="large"
+                  sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                  href="/free-mint"
+                >
+                  <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    Claim Now
+                  </Typography>
+                </GradientButton>
               </Grid>
             </Box>
 
             <Typography
               variant="h2"
-                  color="primary"
-                  className="gradient-text fashion-verse"
-                  align="center"
-                  fontFamily="Montserrat"
+              color="primary"
+              className="gradient-text fashion-verse"
+              align="center"
+              fontFamily="Montserrat"
             >
               {/* Build your First Digital <br /> Wardrobe */}
               {/* <Typewriter
@@ -502,7 +496,7 @@ export default function Index() {
                     loop: true,
                   }}
                 /> */}
-              375 MINTS REMAINING
+              70 MINTS REMAINING
             </Typography>
             <Typography
               variant="subtitle1"
@@ -517,8 +511,7 @@ export default function Index() {
                     loop: true,
                   }}
                 /> */}
-              Basketball Sneaker with Decentraland
-              Wearability
+              Basketball Sneaker with Decentraland Wearability
             </Typography>
 
             <Grid container direction="row" justifyContent="center">
@@ -532,8 +525,6 @@ export default function Index() {
                 <Image src={Sneaker2} alt="sneaker" />
               </Grid>
             </Grid>
-
-            
           </Grid>
           <Grid
             container
