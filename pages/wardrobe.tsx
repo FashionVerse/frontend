@@ -159,6 +159,12 @@ export default function Wardrobe() {
       }
     }
 
+
+    if(router.query.page) {
+      if(router.query.page == 'metalook'){
+        setActivePage("metalook");
+      }
+    }
     getItems()
       .then((value) => {
         setItems(value);
@@ -187,7 +193,7 @@ export default function Wardrobe() {
     //   .catch((e) => {
     //     enqueueSnackbar(e.message);
     //   });
-  }, []);
+  }, [router.query]);
 
   const [items, setItems] = React.useState(null);
   const [metalooks, setMetalooks] = React.useState(null);
@@ -308,7 +314,7 @@ export default function Wardrobe() {
                 transitionTimingFunction="linear"
                 data={[
                   { label: "VIEW FASHION NFTS", value: "nfts" },
-                  { label: "METALOOK", value: "avatar" },
+                  { label: "METALOOK", value: "metalook" },
                 ]}
                 sx={() => ({
                   backgroundColor: "rgba(0,0,0,0.05)",

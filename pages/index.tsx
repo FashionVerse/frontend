@@ -52,10 +52,16 @@ import Sneaker from "../public/sneaker.png";
 import Sneaker1 from "../public/sneaker1.png";
 import Sneaker2 from "../public/sneaker2.png";
 
+import WornGown from "../public/worn_gown.png";
+import Gown from "../public/gown.png";
+
 import Sweater from "../public/sweater.png";
 import Tux from "../public/tux.png";
 import Dress from "../public/dress.png";
 
+import Metalook1 from "../public/metalook1.png";
+import Metalook2 from "../public/metalook2.png";
+import Metalook3 from "../public/metalook3.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -456,6 +462,118 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
+                  INTRODUCING&nbsp;
+                </Typography>
+                <i>METALOOKS</i>
+              </Typography>
+              <br />
+
+              <Typography
+                variant="h3"
+                color="primary"
+                className="gradient-text fashion-verse"
+                align="center"
+                fontFamily="Montserrat"
+              >
+                {/* Build your First Digital <br /> Wardrobe */}
+                {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+                DRESS YOURSELF WITH DIGITAL FASHION
+              </Typography>
+            </Box>
+
+            <Grid container direction="row" justifyContent="center">
+              <Grid item xs={12} md={4} >
+                <Image src={Metalook1} alt="metalook" />
+              </Grid>
+              
+              <Grid item xs={12} md={6}>
+                <Image src={Metalook3} alt="metalook" height="2000" width="1476" />
+              </Grid>
+            </Grid>
+
+            <Grid container direction="row" justifyContent="center" spacing={4}>
+              <Grid item xs={12} md={3}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    router.push("/drops/evening-wear");
+                  }}
+                >
+                  Purchase your digital fashion piece from the marketplace
+                </Button>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    router.push({
+                      pathname: "/wardrobe",
+                      query: { page: "metalook" },
+                    });
+                  }}
+                >
+                  Head to your virtual wardrobe’s metalook section
+                </Button>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    router.push({
+                      pathname: "/wardrobe",
+                      query: { page: "metalook" },
+                    });
+                  }}
+                >
+                  Submit the photo that you want to dress digitally
+                </Button>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Button
+                  variant="outlined"
+                  onClick={() => {
+                    router.push({
+                      pathname: "/wardrobe",
+                      query: { page: "metalook" },
+                    });
+                  }}
+                >
+                  Receive the metalook within 24 hours in your wardrobe
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* Free Mint */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          <Grid item xs={12} md={12}>
+            <Box
+              justifyContent="center"
+              alignItems="center"
+              sx={{ mx: 16, my: 10 }}
+              className="our-partner"
+            >
+              <Typography variant="h2" className="secondary-heading">
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
                   FREE&nbsp;
                 </Typography>
                 <i>MINT</i>
@@ -541,7 +659,7 @@ export default function Index() {
           </Grid>
         </Grid>
 
-        {/* Brands */}
+        {/* Collabs */}
         <Grid
           container
           direction="row"
