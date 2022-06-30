@@ -485,20 +485,9 @@ export default function Index() {
                 /> */}
                 DRESS YOURSELF WITH DIGITAL FASHION
               </Typography>
-            </Box>
+              <br></br>
 
-            <Grid container direction="row" justifyContent="center">
-              <Grid item xs={12} md={4} >
-                <Image src={Metalook1} alt="metalook" height="1500" width="1107" />
-              </Grid>
-              
-              <Grid item xs={12} md={6}>
-                <Image src={Metalook3} alt="metalook" height="750" width="745" />
-              </Grid>
-            </Grid>
-
-            
-            <Grid
+              <Grid
                 container
                 justifyContent="center"
                 alignItems="center"
@@ -516,7 +505,27 @@ export default function Index() {
                   </Typography>
                 </GradientButton>
               </Grid>
-              
+            </Box>
+
+            <Grid container direction="row" justifyContent="center">
+              <Grid item xs={12} md={4}>
+                <Image
+                  src={Metalook1}
+                  alt="metalook"
+                  height="1500"
+                  width="1107"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Image
+                  src={Metalook3}
+                  alt="metalook"
+                  height="750"
+                  width="745"
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
 
