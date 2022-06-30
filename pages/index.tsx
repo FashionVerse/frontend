@@ -489,65 +489,34 @@ export default function Index() {
 
             <Grid container direction="row" justifyContent="center">
               <Grid item xs={12} md={4} >
-                <Image src={Metalook1} alt="metalook" />
+                <Image src={Metalook1} alt="metalook" height="1500" width="1107" />
               </Grid>
               
               <Grid item xs={12} md={6}>
-                <Image src={Metalook3} alt="metalook" height="2000" width="1476" />
+                <Image src={Metalook3} alt="metalook" height="750" width="745" />
               </Grid>
             </Grid>
 
-            <Grid container direction="row" justifyContent="center" spacing={4}>
-              <Grid item xs={12} md={3}>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    router.push("/drops/evening-wear");
-                  }}
+            
+            <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                padding={3}
+              >
+                <GradientButton
+                  color="primary"
+                  className="exploere-all-btn"
+                  size="large"
+                  sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                  href="/wardrobe?page=metalook"
                 >
-                  Purchase your digital fashion piece from the marketplace
-                </Button>
+                  <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    CREATE YOUR METALOOK
+                  </Typography>
+                </GradientButton>
               </Grid>
-              <Grid item xs={12} md={3}>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    router.push({
-                      pathname: "/wardrobe",
-                      query: { page: "metalook" },
-                    });
-                  }}
-                >
-                  Head to your virtual wardrobe’s metalook section
-                </Button>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    router.push({
-                      pathname: "/wardrobe",
-                      query: { page: "metalook" },
-                    });
-                  }}
-                >
-                  Submit the photo that you want to dress digitally
-                </Button>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    router.push({
-                      pathname: "/wardrobe",
-                      query: { page: "metalook" },
-                    });
-                  }}
-                >
-                  Receive the metalook within 24 hours in your wardrobe
-                </Button>
-              </Grid>
-            </Grid>
+              
           </Grid>
         </Grid>
 
