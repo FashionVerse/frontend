@@ -52,10 +52,16 @@ import Sneaker from "../public/sneaker.png";
 import Sneaker1 from "../public/sneaker1.png";
 import Sneaker2 from "../public/sneaker2.png";
 
+import WornGown from "../public/worn_gown.png";
+import Gown from "../public/gown.png";
+
 import Sweater from "../public/sweater.png";
 import Tux from "../public/tux.png";
 import Dress from "../public/dress.png";
 
+import Metalook1 from "../public/metalook1.png";
+import Metalook2 from "../public/metalook2.png";
+import Metalook3 from "../public/metalook3.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -456,6 +462,96 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
+                  INTRODUCING&nbsp;
+                </Typography>
+                <i>METALOOKS</i>
+              </Typography>
+              <br />
+
+              <Typography
+                variant="h3"
+                color="primary"
+                className="gradient-text fashion-verse"
+                align="center"
+                fontFamily="Montserrat"
+              >
+                {/* Build your First Digital <br /> Wardrobe */}
+                {/* <Typewriter
+                  options={{
+                    strings: [data.brand.description],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /> */}
+                DRESS YOURSELF WITH DIGITAL FASHION
+              </Typography>
+              <br></br>
+
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                padding={3}
+              >
+                <GradientButton
+                  color="primary"
+                  className="exploere-all-btn"
+                  size="large"
+                  sx={{ borderRadius: "16px", px: "36px", py: "16px" }}
+                  href="/wardrobe?page=metalook"
+                >
+                  <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    CREATE YOUR METALOOK
+                  </Typography>
+                </GradientButton>
+              </Grid>
+            </Box>
+
+            <Grid container direction="row" justifyContent="center">
+              <Grid item xs={12} md={4}>
+                <Image
+                  src={Metalook1}
+                  alt="metalook"
+                  height="1500"
+                  width="1107"
+                />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                <Image
+                  src={Metalook3}
+                  alt="metalook"
+                  height="750"
+                  width="745"
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* Free Mint */}
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          className="custom-container second-fold section-spacing common-fold"
+        >
+          <Grid item xs={12} md={12}>
+            <Box
+              justifyContent="center"
+              alignItems="center"
+              sx={{ mx: 16, my: 10 }}
+              className="our-partner"
+            >
+              <Typography variant="h2" className="secondary-heading">
+                <Typography
+                  variant="h2"
+                  color="primary"
+                  component="span"
+                  className="gradient-text"
+                >
                   FREE&nbsp;
                 </Typography>
                 <i>MINT</i>
@@ -541,7 +637,7 @@ export default function Index() {
           </Grid>
         </Grid>
 
-        {/* Brands */}
+        {/* Collabs */}
         <Grid
           container
           direction="row"
