@@ -439,8 +439,8 @@ export default function Index() {
           </Grid>
         </Grid>
 
-        {/* Free Mint */}
-        <Grid
+        {/* Metalooks */}
+        {/* <Grid
           container
           spacing={0}
           direction="row"
@@ -471,18 +471,10 @@ export default function Index() {
               <Typography
                 variant="h3"
                 color="primary"
-                className="gradient-text fashion-verse"
+                className="gradient-text"
                 align="center"
                 fontFamily="Montserrat"
               >
-                {/* Build your First Digital <br /> Wardrobe */}
-                {/* <Typewriter
-                  options={{
-                    strings: [data.brand.description],
-                    autoStart: true,
-                    loop: true,
-                  }}
-                /> */}
                 DRESS YOURSELF WITH DIGITAL FASHION
               </Typography>
               <br></br>
@@ -527,7 +519,7 @@ export default function Index() {
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* Free Mint */}
         <Grid
