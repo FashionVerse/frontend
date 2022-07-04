@@ -440,7 +440,7 @@ export default function Index() {
         </Grid>
 
         {/* Metalooks */}
-        {/* <Grid
+        <Grid
           container
           spacing={0}
           direction="row"
@@ -504,8 +504,6 @@ export default function Index() {
                 <Image
                   src={Metalook1}
                   alt="metalook"
-                  height="1500"
-                  width="1107"
                 />
               </Grid>
 
@@ -513,13 +511,11 @@ export default function Index() {
                 <Image
                   src={Metalook3}
                   alt="metalook"
-                  height="750"
-                  width="745"
                 />
               </Grid>
             </Grid>
           </Grid>
-        </Grid> */}
+        </Grid>
 
         {/* Free Mint */}
         <Grid
