@@ -329,17 +329,18 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
-                  DIGITAL
+                  Your Virtual
                 </Typography>
-                <i>FASHION</i>
+                <i>Closet</i>
               </Typography>
               <Typography
                 sx={{ mt: 3 }}
-                variant="subtitle1"
-                className="sub-heading"
+                variant="h4"
+                // className="sub-heading"
+
               >
                 {/* Build your First Digital <br /> Wardrobe */}
-                For Your Virtual Wardrobe
+                Shop Limitless. Shop Sustainable. Shop Digital Fashion.
               </Typography>
             </Box>
           </Grid>
@@ -440,7 +441,7 @@ export default function Index() {
         </Grid>
 
         {/* Metalooks */}
-        <Grid
+        {/* <Grid
           container
           spacing={0}
           direction="row"
@@ -515,7 +516,7 @@ export default function Index() {
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* Free Mint */}
         <Grid
