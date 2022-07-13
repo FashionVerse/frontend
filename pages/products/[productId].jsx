@@ -265,6 +265,9 @@ export default function Product() {
     );
   }
 
+  console.log("DATA")
+  console.log(data)
+
   return (
     <>
       <NextSeo
