@@ -329,17 +329,18 @@ export default function Index() {
                   component="span"
                   className="gradient-text"
                 >
-                  DIGITAL
+                  Your Virtual
                 </Typography>
-                <i>FASHION</i>
+                <i>Closet</i>
               </Typography>
               <Typography
                 sx={{ mt: 3 }}
-                variant="subtitle1"
-                className="sub-heading"
+                variant="h4"
+                // className="sub-heading"
+
               >
                 {/* Build your First Digital <br /> Wardrobe */}
-                For Your Virtual Wardrobe
+                Shop Limitless. Shop Sustainable. Shop Digital Fashion.
               </Typography>
             </Box>
           </Grid>
@@ -504,8 +505,6 @@ export default function Index() {
                 <Image
                   src={Metalook1}
                   alt="metalook"
-                  height="1500"
-                  width="1107"
                 />
               </Grid>
 
@@ -513,8 +512,6 @@ export default function Index() {
                 <Image
                   src={Metalook3}
                   alt="metalook"
-                  height="750"
-                  width="745"
                 />
               </Grid>
             </Grid>

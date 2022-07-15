@@ -265,6 +265,9 @@ export default function Product() {
     );
   }
 
+  console.log("DATA")
+  console.log(data)
+
   return (
     <>
       <NextSeo
@@ -333,7 +336,14 @@ export default function Product() {
                     objectFit="cover"
                   /> */}
                   <div className="gif-outer" style={{ width: "410px" }}>
-                    <Image
+                    {!data.nft.metadata.gif ? <Image
+                      
+                      src={data.nft.metadata.image}
+                      alt="gif"
+                      width="500px"
+                      height="500px"
+                      objectFit="cover"
+                    /> : <Image
                       sx={{
                         borderRadius: "20px",
                         width: "500px",
@@ -344,7 +354,7 @@ export default function Product() {
                       width="500px"
                       height="500px"
                       objectFit="cover"
-                    />
+                    />}
                   </div>
 
                   <Button

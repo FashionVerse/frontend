@@ -166,8 +166,10 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           <Image
             src={props.nft.image}
             alt="NFT"
-            layout="fill"
-            objectFit="cover"
+            width="100%" 
+            height="100%" 
+            layout="responsive" 
+            objectFit="contain"
           />
         </Box>
         <Stack
