@@ -441,7 +441,7 @@ export default function Index() {
         </Grid>
 
         {/* Metalooks */}
-        <Grid
+        {/* <Grid
           container
           spacing={0}
           direction="row"
@@ -516,7 +516,7 @@ export default function Index() {
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* Free Mint */}
         <Grid
