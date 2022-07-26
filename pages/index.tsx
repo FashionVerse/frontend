@@ -62,6 +62,7 @@ import Dress from "../public/dress.png";
 import Metalook1 from "../public/metalook1.png";
 import Metalook2 from "../public/metalook2.png";
 import Metalook3 from "../public/metalook3.png";
+import Metalook4 from "../public/metalook4.png";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -441,7 +442,7 @@ export default function Index() {
         </Grid>
 
         {/* Metalooks */}
-        {/* <Grid
+        <Grid
           container
           spacing={0}
           direction="row"
@@ -508,15 +509,15 @@ export default function Index() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} style={{ textAlign: "center" }}>
                 <Image
-                  src={Metalook3}
+                  src={Metalook4}
                   alt="metalook"
                 />
               </Grid>
             </Grid>
           </Grid>
-        </Grid> */}
+        </Grid>
 
         {/* Free Mint */}
         <Grid
