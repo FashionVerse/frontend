@@ -77,7 +77,10 @@ function AnimatedButton(props) {
       alert("MetaMask not installed");
     }
   }
+ 
+
   const [isAnimating, setIsAnimating] = useState(0);
+
   return (
     <>
       {/* <motion.button 
@@ -116,7 +119,7 @@ function AnimatedButton(props) {
           width="20"
           height="20"
           fill="currentColor"
-          class="tw-mr-2 tw-animate-spin"
+          className="tw-mr-2 tw-animate-spin"
           viewBox="0 0 1792 1792"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -175,6 +178,36 @@ export default function Product() {
   //     </Box>
   //   );
 
+   // for product slider image change
+    const [currentImg, setcurrentImg] = useState(0);
+    let slideIndex = 1;
+    
+    const plusDivs = (n) => {
+      showDivs(slideIndex += n);
+    }
+
+    const currentDiv = (n)  => {
+      showDivs(slideIndex = n);
+    }
+   const showDivs = (n) => {
+    let i;
+    setcurrentImg(n);
+    let x = document.getElementsByClassName("gif-outer");
+    let items = document.getElementsByClassName("img-thumb");
+    if (currentImg > x.length) {slideIndex = 1}
+    if (currentImg < 1) {slideIndex = x.length}
+     
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+     }
+     
+     for (i = 0; i < items.length; i++) {
+       items[i].className = items[i].className.replace(" solid", "");
+     }
+     x[slideIndex-1].style.display = "block";
+     items[slideIndex-1].className += " solid";
+   };
+ 
   async function getItem(productId) {
     console.log("GETTING ITEMS");
     console.log(productId);
@@ -248,6 +281,37 @@ export default function Product() {
 
   const [data, setData] = useState(null);
 
+  // let slideIndex = 1;
+  // showDivs(slideIndex);
+
+  // function plusDivs(n) {
+  //   showDivs(slideIndex += n);
+  // }
+
+  // function currentDiv(n) {
+  //   showDivs(slideIndex = n);
+  // }
+
+  // function showDivs(n) {
+  //   var i;
+  //   var x = document.getElementsByClassName("mySlides");
+  //   var items = document.getElementsByClassName("img-thumb");
+    
+  //   if (n > x.length) {slideIndex = 1}
+  //   if (n < 1) {slideIndex = x.length}
+    
+  //   for (i = 0; i < x.length; i++) {
+  //     x[i].style.display = "none";
+  //   }
+    
+  //   for (i = 0; i < items.length; i++) {
+  //     items[i].className = items[i].className.replace(" solid", "");
+  //   }
+  //   x[slideIndex-1].style.display = "block";
+  //   items[slideIndex-1].className += " solid";
+  // }
+
+
   if (!data) {
     return (
       <Box
@@ -309,7 +373,7 @@ export default function Product() {
             <Grid item md={6} xs={12} className="product-image-wrapper">
               <div
                 id="product-container"
-                class="tw-shadow-2xl tw-shadow-white/50"
+                className="tw-shadow-2xl tw-shadow-white/50"
                 style={{
                   backgroundColor: "rgba(0,0,0,0.05)",
                   backdropFilter: "blur(5px)",
@@ -337,7 +401,6 @@ export default function Product() {
                   /> */}
                   <div className="gif-outer" style={{ width: "410px" }}>
                     {!data.nft.metadata.gif ? <Image
-                      
                       src={data.nft.metadata.image}
                       alt="gif"
                       width="500px"
@@ -355,6 +418,94 @@ export default function Product() {
                       height="500px"
                       objectFit="cover"
                     />}
+                  </div>
+                 
+                  {data.images !== undefined && data.images !== null && data.images.length !== 0  ?
+                      data.images.map((testData) => {
+                        console.log(testData);
+                        return (
+                          <div className="gif-outer" style={{ width: "410px", display: "none" }}>
+                            <Image
+                              src={testData}
+                              alt="images"
+                              width="500px"
+                              height="500px"
+                              objectFit="cover"
+                              />
+                            </div>
+                            
+                        )
+                      })
+                      :
+                      <>
+                      <div className="gif-outer" style={{ width: "410px", display: "none" }}>
+                        <Image
+                          src={testData}
+                          alt="images"
+                          width="500px"
+                          height="500px"
+                          objectFit="cover"
+                          />
+                        </div>
+                      </>
+                  }
+
+                  <div className="thumnail-outer-wrapper" style={{ width: "100px", position: "absolute", right: "20px", top: "0" }}>
+                  {!data.nft.metadata.gif ? <Image
+                      src={data.nft.metadata.image}
+                      alt="gif"
+                      width="500px"
+                      height="500px"
+                      objectFit="cover"
+                      className="transluz img-thumb"
+                      onClick={() => { currentDiv(1)}}
+                    /> : <Image
+                      sx={{
+                        borderRadius: "20px",
+                        width: "500px",
+                        height: "400px",
+                      }}
+                      src={data.nft.metadata.gif}
+                      alt="gif"
+                      width="500px"
+                      height="500px"
+                      objectFit="cover"
+                      className="transluz img-thumb"
+                      onClick={() => { currentDiv(1)}}
+                    />}
+
+                    {data.images !== undefined && data.images !== null && data.images.length !== 0  ?
+                      data.images.map((testData, index ) => {
+                        console.log(index);
+                        return (
+                            <Image
+                              src={testData}
+                              alt="images"
+                              width="500px"
+                              height="500px"
+                              objectFit="cover"
+                              className="transluz img-thumb"
+                              onClick={() => { currentDiv(index+2)}}
+                              />
+                        )
+                      })
+                      :
+                      <>
+                        <Image
+                          src={testData}
+                          alt="images"
+                          width="500px"
+                          height="500px"
+                          objectFit="cover"
+                          className="transluz img-thumb"
+                          onClick={() => { currentDiv(index+2)}}
+                          />
+                      </>
+                    }
+                    {/* <img src="https://picsum.photos/id/451/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(1)}} />
+                    <img src="https://picsum.photos/id/375/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(2)}}/>
+                    <img src="https://picsum.photos/id/139/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(3)}}/>
+                    <img src="https://picsum.photos/id/20/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(4)}}/> */}
                   </div>
 
                   <Button
