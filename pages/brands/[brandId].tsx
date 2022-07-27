@@ -60,7 +60,6 @@ export default function BrandPage() {
   }
   const arr: FashionItemCardProps[] = [];
   if (data) {
-    console.log("data ", data);
     data.items.map((item) => {
       arr.push({
         id: item._id,
@@ -193,8 +192,6 @@ export default function BrandPage() {
       // </ImageList>
     );
   }
-
-  console.log(data.avatarSrc);
 
   return (
     <>
@@ -403,7 +400,6 @@ export default function BrandPage() {
           >
             {arr.length > 0 ? (
               arr.map((props) => {
-                console.log(props);
                 return (
                   <Grid item xs={12} sm={6} lg={4} key={props.id}>
                     <FashionItemCard {...props} expandable />

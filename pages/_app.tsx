@@ -53,7 +53,6 @@ export default function MyApp(props: any) {
     []
   );
   React.useEffect(() => {
-    // console.log("mode", mode);
     localStorage.setItem("dark-mode", mode);
   }, [mode]);
 

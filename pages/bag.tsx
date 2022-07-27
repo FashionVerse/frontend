@@ -105,7 +105,6 @@ export default function Bag() {
       );
 
     } catch (e){
-      console.log(e);
     }
   }
 
@@ -124,7 +123,6 @@ export default function Bag() {
       );
 
     } catch (e){
-      console.log(e);
     }
   }
 
@@ -154,13 +152,11 @@ export default function Bag() {
     //     arr.push({...item, nft: {...json}, brand: {...brand.data()}, collection: {...collectionDoc.data()}, quantity: id.data().amount})
     //   }
     // }
-    // console.log(arr)
     // const { data, error } = useSWR(process.env.API_URL+'/api/getItemsFromBag?account='+account, fetcher)
 
     // if (error){
 
     //   enqueueSnackbar("Failed to load drops", { variant: "error" });
-    //   console.log("Failed")
     //   }
     //   // const drops: GridCardProps[] = [];
     //   if (data) {
@@ -185,7 +181,6 @@ export default function Bag() {
         process.env.API_URL + "/api/getItemsFromBag?account=" + account
       );
       const itemData = await response.json();
-      console.log(itemData);
 
       itemData.items.map((item) => {
         arr.push({
@@ -208,7 +203,6 @@ export default function Bag() {
       return {...itemData, items: arr}
     } catch {
       // enqueueSnackbar("Failed to load items", { variant: "error" });
-      console.log("Failed");
     }
 
     return {whitelisted: false, isWhiteEnabled: false, items: arr};
@@ -254,8 +248,6 @@ export default function Bag() {
 
           setIsLoading(true);
 
-          console.log("ACCOUNT");
-          console.log(account);
 
            marketContract.methods
             .createMarketSale(nftContract, items, token, amounts)
@@ -354,11 +346,8 @@ export default function Bag() {
     .map((c) => c.price * c.quantity)
     .reduce((a, b) => a + b, 0);
 
-    console.log(data)
 
   function CheckoutCard({ quantity, ...rest }: CheckoutCardProps) {
-    console.log("REST");
-    console.log(rest);
 
     return (
       <>
@@ -446,7 +435,6 @@ export default function Bag() {
                     setData(
                       produce((state) => {
                         const idx = state.findIndex((s) => s.id === rest.id);
-                        console.log(rest);
                         if (state[idx].quantity < rest.available) {
                           state[idx].quantity = state[idx].quantity + 1;
                           const updatedQuantity = state[idx].quantity;

@@ -91,11 +91,9 @@ export default function DropPage() {
   const { data: dropData, error: dropError } = getDrop(dropName);
   if (dropError) {
     // enqueueSnackbar("Failed to load drops", { variant: "error" });
-    console.log("Failed");
   }
   // const drops: GridCardProps[] = [];
   if (dropData) {
-    console.log("drops ", dropData);
     // dropData.drops.forEach((item) => {
     //   drops.push({
     //     topLeftImage: item.gridImages[0],
@@ -199,7 +197,6 @@ export default function DropPage() {
       const itemData = await response.json();
 
       if (itemData) {
-        console.log("items", itemData);
         setItemData(itemData);
         itemData.items.map((item) => {
           items.push({
@@ -216,9 +213,7 @@ export default function DropPage() {
         });
       }
     } catch (e) {
-      console.log(e);
       // enqueueSnackbar("Failed to load items", { variant: "error" });
-      console.log("Failed");
     }
     return items;
   }
@@ -425,7 +420,6 @@ export default function DropPage() {
         methods.setValue("brand", brands);
 
         getItems(dropName).then((value) => {
-          console.log(value);
           setItems(value);
         });
       })
@@ -579,7 +573,6 @@ export default function DropPage() {
 
               {items.length > 0 ? (
                 items.map((props) => {
-                  console.log(props);
                   return (
                     <Grid item xs={12} sm={6} lg={4} key={props.id}>
                       <FashionItemCard {...props} expandable />

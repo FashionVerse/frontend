@@ -151,7 +151,6 @@ export default function Header() {
       const data = await response.json();
       return data;
     } catch (e) {
-      console.log(e);
     }
   }
 
@@ -185,7 +184,6 @@ export default function Header() {
 
       return { items: [] };
     } catch (e) {
-      console.log(e);
     }
   }
 
@@ -205,7 +203,6 @@ export default function Header() {
 
       getDrops().then((dropData) => {
         const drops = [];
-        console.log("drops ", dropData);
         dropData.drops.forEach((drop) => {
           drops.push({
             id: drop._id,

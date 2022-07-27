@@ -78,8 +78,6 @@ export default function Wardrobe() {
           process.env.API_URL + "/api/getNFTs?account=" + account
         );
         const items = await response.json();
-        console.log("ITEMS");
-        console.log(items);
 
         items.map((item) => {
           arr.push({
@@ -109,7 +107,6 @@ export default function Wardrobe() {
           process.env.API_URL + "/api/getMetalook?account=" + account
         );
         const items = await response.json();
-        console.log(items)
 
         items.map((item) => {
           arr.push({
@@ -141,7 +138,6 @@ export default function Wardrobe() {
           process.env.API_URL + "/api/getUploadedMetalook?account=" + account
         );
         const items = await response.json();
-        console.log(items)
 
         items.map((item) => {
           arr.push({

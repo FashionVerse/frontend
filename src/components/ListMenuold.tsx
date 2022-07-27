@@ -24,7 +24,6 @@ const ListMenu = ({ children, ...props }) => {
 
   const handleClose = (href) => {
     {
-      console.log(href + "asd");
     }
     setAnchorEl(null);
     if (href) router.push(href);
@@ -87,7 +86,6 @@ const ListMenu = ({ children, ...props }) => {
                 fontSize: "18px",
               }}
             >
-              {console.log(item.href + "link")}
               {item.label}
             </MenuItem>
           </motion.div>
