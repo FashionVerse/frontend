@@ -157,7 +157,7 @@ export default function Footer() {
 const ABOUT_LINKS = [
   {
     label: "About us",
-    href: "https://www.notion.so/The-FashionVerse-Inc-Community-81d0d0a9e79e4db3964987511170e2c1",
+    href: "https://docs.thefashionverse.io/#introduction",
     id: "asdjas",
   },
   {
