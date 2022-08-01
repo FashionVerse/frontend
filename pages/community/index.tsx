@@ -28,7 +28,6 @@ export default function Brands() {
   // if (error) enqueueSnackbar("Failed to load brands", { variant: "error" });
   const arr: GridCardProps[] = [];
   if (data) {
-    console.log("data ", data);
     data.community.forEach((item) => {
       arr.push({
         topLeftImage: item.gridImages[0],

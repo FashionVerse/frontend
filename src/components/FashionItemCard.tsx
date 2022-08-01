@@ -103,8 +103,6 @@ export default function FashionItemCard(props: FashionItemCardProps) {
           }
         ).catch();
         const content = await rawResponse.json();
-
-        console.log(content);
         enqueueSnackbar("Item added to bag", { variant: "success" });
         window.location.reload();
       } else {

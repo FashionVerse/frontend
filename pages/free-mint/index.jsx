@@ -91,7 +91,6 @@ function AnimatedButton(props) {
               alert("Successfully claimed");
               window.open("/wardrobe","_self")
             }).on('error', async function (error) {
-              console.log("ERROR")
               await fetch(
                 process.env.API_URL + "/api/setClaimed",
                 {
@@ -109,7 +108,6 @@ function AnimatedButton(props) {
               
             });
           } catch {
-            console.log("ERROR2")
             await fetch(
               process.env.API_URL + "/api/setClaimed",
               {

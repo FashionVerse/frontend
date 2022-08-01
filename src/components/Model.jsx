@@ -12,7 +12,6 @@ const Model = (props) => {
   const parseUSDZ = React.useCallback(async () => {
     const exporter = new USDZExporter();
     const arraybuffer = await exporter.parse( gltf.scene );
-    console.log(arraybuffer)
     const blob = new Blob( [ arraybuffer ], { type: 'application/octet-stream' } );
     if(document.getElementById('product-container')){
       // const link = document.getElementById('product-container').appendChild( document.createElement( 'a' ) );
@@ -25,8 +24,6 @@ const Model = (props) => {
       // img.id="button";
       // link.download = 'asset.usdz';
     }
-    console.log(gltf.scene);
-    console.log(blob)
   }, [])
   React.useEffect(() => {
     parseUSDZ()

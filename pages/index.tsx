@@ -119,12 +119,10 @@ export default function Index() {
   const { data: brandData, error: brandError } = getBrands();
   if (brandError) {
     // enqueueSnackbar("Failed to load brands", { variant: "error" });
-    console.log("Failed");
   }
   const brands: GridCardProps[] = [];
   const communities: GridCardProps[] = [];
   if (brandData) {
-    console.log("data ", brandData);
     brandData.brands.forEach((item) => {
       brands.push({
         topLeftImage: item.gridImages[0],
@@ -143,11 +141,9 @@ export default function Index() {
   const { data: communityData, error: communityError } = getCommunity();
   if (communityError) {
     // enqueueSnackbar("Failed to load brands", { variant: "error" });
-    console.log("Failed");
   }
   const community: GridCardProps[] = [];
   if (communityData) {
-    console.log("data ", communityData);
     communityData.community.forEach((item) => {
       communities.push({
         topLeftImage: item.gridImages[0],
@@ -175,11 +171,9 @@ export default function Index() {
   const { data: dropData, error: dropError } = getDrops();
   if (dropError) {
     // enqueueSnackbar("Failed to load drops", { variant: "error" });
-    console.log("Failed");
   }
   const drops: GridCardProps[] = [];
   if (dropData) {
-    console.log("drops ", dropData);
     dropData.drops.forEach((item) => {
       drops.push({
         topLeftImage: item.gridImages[0],

@@ -145,21 +145,21 @@ const RESOURCE_INFO = [
   {
     id: "ajaskas",
     buttonText: "Getting Started",
-    href: "https://www.notion.so/Getting-Started-on-The-FashionVerse-Marketplace-0ef16aa498ab4530a6d19809ed58c706",
+    href: "https://docs.thefashionverse.io/#getting-started",
     description:
       "Learn how to set up your wallet, browse through the platform, and purchase your first piece of digital clothing",
   },
   {
     id: "ajaskas",
     buttonText: "Designer Collaborations",
-    href: "https://www.notion.so/How-can-you-launch-a-collection-with-The-FashionVerse-f636e30a17f343868f13ea0aef6e0bdb",
+    href: "https://docs.thefashionverse.io/launching-with-us",
     description:
       "A fashion designer? Learn more about our collaboration policies and launch your digital brand with us!",
   },
   {
     id: "ajaskas",
     buttonText: "About FashionVerse",
-    href: "https://www.notion.so/The-FashionVerse-Inc-Community-81d0d0a9e79e4db3964987511170e2c1",
+    href: "https://docs.thefashionverse.io/#introduction",
     description: "Find out more about our mission, roadmap, team, and progress",
   },
   {

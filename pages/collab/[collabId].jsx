@@ -71,7 +71,6 @@ function AnimatedButton(props) {
 
         const accounts = await ethereum.enable();
         const account = accounts[0].toLowerCase();
-        console.log(account)
 
         try {
 
@@ -81,12 +80,9 @@ function AnimatedButton(props) {
               alert("Successfully claimed");
               window.open("/wardrobe","_self")
             }).on('error', async function (error) {
-              console.log("ERROR")
-              console.log(error)
               
             });
           } catch(e) {
-              console.log(e)
           }
       } else {
         router.replace("/wallets");
@@ -195,8 +191,6 @@ export default function Product() {
   //   );
 
   async function getItem(collabId) {
-    console.log("GETTING ITEMS");
-    console.log(collabId);
     const response = await fetch(
       process.env.API_URL + "/api/getCollab?id=" + collabId,
       {
@@ -209,9 +203,6 @@ export default function Product() {
     );
 
     const data = await response.json();
-
-    console.log("DATA;")
-    console.log(data)
 
     if (!data)
       return (

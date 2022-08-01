@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/404.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/404.js", "pages/collab/[collabId].jsx", "pages/free-mint/index.jsx"],
   "exclude": ["node_modules"]
 }

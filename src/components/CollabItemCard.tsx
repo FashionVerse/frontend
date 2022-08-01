@@ -100,8 +100,6 @@ export default function CollabItemCard(props: CollabItemCardProps) {
           }
         ).catch();
         const content = await rawResponse.json();
-
-        console.log(content);
         enqueueSnackbar("Item added to bag", { variant: "success" });
         window.location.reload();
       } else {

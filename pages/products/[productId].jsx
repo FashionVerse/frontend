@@ -69,7 +69,6 @@ function AnimatedButton(props) {
         } else {
           setIsAnimating(0);
         }
-        console.log(content);
       } else {
         router.replace("/wallets");
       }
@@ -209,8 +208,6 @@ export default function Product() {
    };
  
   async function getItem(productId) {
-    console.log("GETTING ITEMS");
-    console.log(productId);
     const response = await fetch(
       process.env.API_URL + "/api/getItems?id=" + productId,
       {
@@ -273,7 +270,6 @@ export default function Product() {
     }
     getItem(productId)
       .then((val) => {
-        console.log(val);
         setData(val);
       })
       .catch((e) => {});
@@ -328,9 +324,6 @@ export default function Product() {
       </Box>
     );
   }
-
-  console.log("DATA")
-  console.log(data)
 
   return (
     <>
@@ -422,7 +415,6 @@ export default function Product() {
                  
                   {data.images !== undefined && data.images !== null && data.images.length !== 0  ?
                       data.images.map((testData) => {
-                        console.log(testData);
                         return (
                           <div className="gif-outer" style={{ width: "410px", display: "none" }}>
                             <Image
@@ -438,7 +430,7 @@ export default function Product() {
                       })
                       :
                       <>
-                      <div className="gif-outer" style={{ width: "410px", display: "none" }}>
+                      {/* <div className="gif-outer" style={{ width: "410px", display: "none" }}>
                         <Image
                           src={testData}
                           alt="images"
@@ -446,7 +438,7 @@ export default function Product() {
                           height="500px"
                           objectFit="cover"
                           />
-                        </div>
+                        </div> */}
                       </>
                   }
 
@@ -476,7 +468,6 @@ export default function Product() {
 
                     {data.images !== undefined && data.images !== null && data.images.length !== 0  ?
                       data.images.map((testData, index ) => {
-                        console.log(index);
                         return (
                             <Image
                               src={testData}
@@ -491,7 +482,7 @@ export default function Product() {
                       })
                       :
                       <>
-                        <Image
+                        {/* <Image
                           src={testData}
                           alt="images"
                           width="500px"
@@ -499,7 +490,7 @@ export default function Product() {
                           objectFit="cover"
                           className="transluz img-thumb"
                           onClick={() => { currentDiv(index+2)}}
-                          />
+                          /> */}
                       </>
                     }
                     {/* <img src="https://picsum.photos/id/451/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(1)}} />
