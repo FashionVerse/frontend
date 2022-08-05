@@ -379,6 +379,7 @@ export default function Product() {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    paddingLeft: "50px",
                     justifyContent: "center",
                     borderRadius: "20px",
                     overflow: "hidden",
@@ -442,7 +443,7 @@ export default function Product() {
                       </>
                   }
 
-                  <div className="thumnail-outer-wrapper" style={{ width: "100px", position: "absolute", right: "20px", top: "0" }}>
+                  <div className="thumnail-outer-wrapper" style={{ width: "50px", position: "absolute", left: "0px", top: "0", cursor: "pointer" }}>
                   {!data.nft.metadata.gif ? <Image
                       src={data.nft.metadata.image}
                       alt="gif"
