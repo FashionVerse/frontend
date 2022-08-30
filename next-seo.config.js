@@ -2,7 +2,7 @@ export default {
     openGraph: {
       type: 'website',
       locale: 'en_IE',
-      url: 'https://www.url.ie/',
+      url: 'https://www.thefashionverse.io/',
       site_name: 'SiteName',
     },
     twitter: {

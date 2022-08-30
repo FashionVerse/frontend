@@ -188,6 +188,8 @@ export default function CollabItemCard(props: CollabItemCardProps) {
           {!props.hidePrice && (
             <Stack alignItems="center" direction="row">
               {/* <SiEthereum fontSize="1rem" /> */}
+              {props.price !== "0" ?
+              <>
               <Image
                 width="23px"
                 height="38px"
@@ -198,6 +200,12 @@ export default function CollabItemCard(props: CollabItemCardProps) {
                 {Web3.utils.fromWei(props.price.toString(), "ether")}
                 {/* {props.price.toString()} */}
               </Typography>
+              </> : <>
+              <Typography variant="h6" sx={{ ml: 1 }}>
+                Free
+                {/* {props.price.toString()} */}
+              </Typography></>
+          }
             </Stack>
           )}
           

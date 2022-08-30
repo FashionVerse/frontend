@@ -209,6 +209,7 @@ export default function BrandPage() {
                 variant="subtitle1"
                 className="sub-heading with-small-font"
                 align="center"
+                style={{whiteSpace: 'pre-line'}}
               >
                 {/* Build your First Digital <br /> Wardrobe */}
                 {/* <Typewriter
@@ -218,7 +219,7 @@ export default function BrandPage() {
                     loop: true,
                   }}
                 /> */}
-                {data.community.description}
+                {data.community.description.replace(/\\n/g, '\n')}
               </Typography>
               
                 

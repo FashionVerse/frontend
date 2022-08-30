@@ -174,6 +174,35 @@ export default function Product() {
   const router = useRouter();
   const { collabId } = router.query;
 
+  const [currentImg, setcurrentImg] = useState(0);
+    let slideIndex = 1;
+    
+    const plusDivs = (n) => {
+      showDivs(slideIndex += n);
+    }
+
+    const currentDiv = (n)  => {
+      showDivs(slideIndex = n);
+    }
+   const showDivs = (n) => {
+    let i;
+    setcurrentImg(n);
+    let x = document.getElementsByClassName("gif-outer");
+    let items = document.getElementsByClassName("img-thumb");
+    if (currentImg > x.length) {slideIndex = 1}
+    if (currentImg < 1) {slideIndex = x.length}
+     
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+     }
+     
+     for (i = 0; i < items.length; i++) {
+       items[i].className = items[i].className.replace(" solid", "");
+     }
+     x[slideIndex-1].style.display = "block";
+     items[slideIndex-1].className += " solid";
+   };
+
   // if (!collabId)
   //   return (
   //     <Box
@@ -317,14 +346,14 @@ export default function Product() {
       <NextSeo
         title={"Title"}
         description={"Description"}
-        canonical={"https://www.thefashionverse.io/products/" + collabId + "/"}
+        canonical={"https://www.thefashionverse.io/collab/" + collabId + "/"}
         twitter={{
           handle: "@FashionVerseInc",
           cardType: "summary_large_image",
         }}
       />
       <Head>
-        <title>Product</title>
+        <title>Collab</title>
       </Head>
 
       <Container
@@ -380,18 +409,110 @@ export default function Product() {
                     objectFit="cover"
                   /> */}
                   <div className="gif-outer" style={{ width: "410px" }}>
-                    <Image
-                      sx={{
-                        borderRadius: "20px",
-                        width: "500px",
-                        height: "400px",
-                      }}
+                    {!data.nft.metadata.gif ? <Image
                       src={data.nft.metadata.image}
                       alt="gif"
                       width="500px"
                       height="500px"
                       objectFit="cover"
-                    />
+                    /> : <Image
+                      sx={{
+                        borderRadius: "20px",
+                        width: "500px",
+                        height: "400px",
+                      }}
+                      src={data.nft.metadata.gif}
+                      alt="gif"
+                      width="500px"
+                      height="500px"
+                      objectFit="cover"
+                    />}
+                  </div>
+                 
+                  {data.images !== undefined && data.images !== null && data.images.length !== 0  ?
+                      data.images.map((testData) => {
+                        return (
+                          <div className="gif-outer" style={{ width: "410px", display: "none" }}>
+                            <Image
+                              src={testData}
+                              alt="images"
+                              width="500px"
+                              height="500px"
+                              objectFit="cover"
+                              />
+                            </div>
+                            
+                        )
+                      })
+                      :
+                      <>
+                      {/* <div className="gif-outer" style={{ width: "410px", display: "none" }}>
+                        <Image
+                          src={testData}
+                          alt="images"
+                          width="500px"
+                          height="500px"
+                          objectFit="cover"
+                          />
+                        </div> */}
+                      </>
+                  }
+
+                  <div className="thumnail-outer-wrapper" style={{ width: "50px", position: "absolute", left: "0px", top: "0", cursor: "pointer" }}>
+                  {!data.nft.metadata.gif ? <Image
+                      src={data.nft.metadata.image}
+                      alt="gif"
+                      width="500px"
+                      height="500px"
+                      objectFit="cover"
+                      className="transluz img-thumb"
+                      onClick={() => { currentDiv(1)}}
+                    /> : <Image
+                      sx={{
+                        borderRadius: "20px",
+                        width: "500px",
+                        height: "400px",
+                      }}
+                      src={data.nft.metadata.gif}
+                      alt="gif"
+                      width="500px"
+                      height="500px"
+                      objectFit="cover"
+                      className="transluz img-thumb"
+                      onClick={() => { currentDiv(1)}}
+                    />}
+
+                    {data.images !== undefined && data.images !== null && data.images.length !== 0  ?
+                      data.images.map((testData, index ) => {
+                        return (
+                            <Image
+                              src={testData}
+                              alt="images"
+                              width="500px"
+                              height="500px"
+                              objectFit="cover"
+                              className="transluz img-thumb"
+                              onClick={() => { currentDiv(index+2)}}
+                              />
+                        )
+                      })
+                      :
+                      <>
+                        {/* <Image
+                          src={testData}
+                          alt="images"
+                          width="500px"
+                          height="500px"
+                          objectFit="cover"
+                          className="transluz img-thumb"
+                          onClick={() => { currentDiv(index+2)}}
+                          /> */}
+                      </>
+                    }
+                    {/* <img src="https://picsum.photos/id/451/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(1)}} />
+                    <img src="https://picsum.photos/id/375/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(2)}}/>
+                    <img src="https://picsum.photos/id/139/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(3)}}/>
+                    <img src="https://picsum.photos/id/20/80" alt="" className="transluz img-thumb" onClick={() => { currentDiv(4)}}/> */}
                   </div>
 
                   <Button
